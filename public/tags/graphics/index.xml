@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>graphics on Utsab Karan</title>
+    <link>https://example.com/tags/graphics/</link>
+    <description>Recent content in graphics on Utsab Karan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 11 May 2025 16:20:00 +0530</lastBuildDate>
+    
+	<atom:link href="https://example.com/tags/graphics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>pxl</title>
+      <link>https://example.com/projects/pxl/</link>
+      <pubDate>Sun, 11 May 2025 16:20:00 +0530</pubDate>
+      
+      <guid>https://example.com/projects/pxl/</guid>
+      <description>A software renderer built from scratch in C++ supporting rasterization and basic shading.</description>
+    </item>
+    
+  </channel>
+</rss>

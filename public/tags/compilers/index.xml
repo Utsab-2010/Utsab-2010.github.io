@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>compilers on Utsab Karan</title>
+    <link>https://example.com/tags/compilers/</link>
+    <description>Recent content in compilers on Utsab Karan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 22 Mar 2025 14:30:00 +0530</lastBuildDate>
+    
+	<atom:link href="https://example.com/tags/compilers/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>litelang</title>
+      <link>https://example.com/projects/litelang/</link>
+      <pubDate>Sat, 22 Mar 2025 14:30:00 +0530</pubDate>
+      
+      <guid>https://example.com/projects/litelang/</guid>
+      <description>A dynamically typed scripting language with a tree-walk interpreter, written in C.</description>
+    </item>
+    
+  </channel>
+</rss>

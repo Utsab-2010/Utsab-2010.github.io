@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on Utsab Karan</title>
+    <link>https://example.com/blog/</link>
+    <description>Recent content in Blog on Utsab Karan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 28 Sep 2024 16:30:22 +0000</lastBuildDate>
+    
+	<atom:link href="https://example.com/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Images &amp; Embeds</title>
+      <link>https://example.com/blog/embeds/</link>
+      <pubDate>Sat, 28 Sep 2024 16:30:22 +0000</pubDate>
+      
+      <guid>https://example.com/blog/embeds/</guid>
+      <description>Images Standard Image (Markdown) Image with Title Local Image  Figure Shortcode Hugo&amp;rsquo;s built-in figure shortcode gives more control over captions and linking.
+{{&amp;lt; figure src=&amp;#34;https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&amp;#34; alt=&amp;#34;Mountain landscape&amp;#34; caption=&amp;#34;A panoramic mountain view at golden hour.&amp;#34; width=&amp;#34;100%&amp;#34; &amp;gt;}}   A panoramic mountain view at golden hour.
+   YouTube Embed Using Hugo&amp;rsquo;s built-in youtube shortcode:
+      YouTube with Custom Parameters      </description>
+    </item>
+    
+    <item>
+      <title>Formatting</title>
+      <link>https://example.com/blog/formats/</link>
+      <pubDate>Fri, 10 May 2024 18:20:15 +0000</pubDate>
+      
+      <guid>https://example.com/blog/formats/</guid>
+      <description>Headings Heading 1 Heading 2 Heading 3 Heading 4 Heading 5 Heading 6  Emphasis Regular text, bold text, italic text, bold and italic, strikethrough, and inline code.
+ Table    Language Paradigm Typing     Go Compiled Static   Python Interpreted Dynamic   Rust Compiled Static   JavaScript Interpreted Dynamic     Blockquotes  [!NOTE] — This is a standard note blockquote.</description>
+    </item>
+    
+    <item>
+      <title>Code, Mermaid &amp; Diagrams</title>
+      <link>https://example.com/blog/code/</link>
+      <pubDate>Fri, 22 Mar 2024 14:45:30 +0000</pubDate>
+      
+      <guid>https://example.com/blog/code/</guid>
+      <description>Syntax Highlighting Go package main import &amp;#34;fmt&amp;#34; func fibonacci(n int) int { if n &amp;lt;= 1 { return n } return fibonacci(n-1) + fibonacci(n-2) } func main() { for i := range 10 { fmt.Printf(&amp;#34;F(%d) = %d\n&amp;#34;, i, fibonacci(i)) } } Python def quicksort(arr: list) -&amp;gt; list: if len(arr) &amp;lt;= 1: return arr pivot = arr[len(arr) // 2] left = [x for x in arr if x &amp;lt; pivot] mid = [x for x in arr if x == pivot] right = [x for x in arr if x &amp;gt; pivot] return quicksort(left) + mid + quicksort(right) print(quicksort([3, 6, 8, 10, 1, 2, 1])) Shell #!</description>
+    </item>
+    
+    <item>
+      <title>Math &amp; KaTeX</title>
+      <link>https://example.com/blog/math/</link>
+      <pubDate>Mon, 15 Jan 2024 09:30:00 +0000</pubDate>
+      
+      <guid>https://example.com/blog/math/</guid>
+      <description>Inline Math The quadratic formula is $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$, used to solve any quadratic equation.
+Euler&amp;rsquo;s identity, $e^{i\pi} + 1 = 0$, is considered one of the most beautiful equations in mathematics.
+The Pythagorean theorem states that $a^2 + b^2 = c^2$ for any right triangle.
+ Block Math The Gaussian integral:
+$$ \int_{-\infty}^{\infty} e^{-x^2} , dx = \sqrt{\pi} $$
+Maxwell&amp;rsquo;s equations in differential form:
+$$ \nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0} $$</description>
+    </item>
+    
+  </channel>
+</rss>

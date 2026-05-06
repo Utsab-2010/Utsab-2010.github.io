@@ -1,0 +1,54 @@
+baseURL = 'https://example.com'
+languageCode = 'en-us'
+title = "Utsab Karan"
+theme = "enervoid"
+
+[menus]
+  [[menus.main]]
+    name = 'Blog'
+    url = '/blog/'
+    weight = 10
+
+  [[menus.main]]
+    name = 'Personal'
+    url = '/personal/'
+    weight = 20
+
+  [[menus.main]]
+    name = 'Projects'
+    url = '/projects/'
+    weight = 30
+
+[params]
+  avatar = "https://media.licdn.com/dms/image/v2/D5603AQHgTfvWk-SoFA/profile-displayphoto-crop_800_800/B56ZzXJ.EJH8AI-/0/1773136263436?e=1779926400&v=beta&t=lgPElfy5GliypYRr3yxnLhM1KQKO44W6j5Ui0lxdzH8"
+
+  [[params.socials]]
+      link = "https://github.com/Utsab-2010"
+      icon = "devicon-github-original"
+  [[params.socials]]
+      link = "https://twitter.com/yourx"
+      icon = "devicon-twitter-original"
+   [[params.socials]]
+      link = "https://www.linkedin.com/in/utsab-karan/"
+      icon = "devicon-linkedin-plain"
+    [[params.socials]]
+      link = "https://drive.google.com/file/d/1qDJQ7pKjLs3bD04_0PJ_MyCs6WWIR2gN/view"
+      icon = "fa-solid fa-file-lines" 
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions.passthrough]
+      enable = true
+      [markup.goldmark.extensions.passthrough.delimiters]
+        block = [['$$','$$'], ['\\[','\\]']]
+        inline = [['$','$'], ['\\(','\\)']]
+
+    [markup.goldmark.parser]
+      attribute = true
+
+[markup.highlight]
+  noClasses = true
+  codeFences = true
+  guessSyntax = true
+  tabWidth = 4
+  style = "monokai"

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>formatting on Utsab Karan</title>
+    <link>https://example.com/tags/formatting/</link>
+    <description>Recent content in formatting on Utsab Karan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 10 May 2024 18:20:15 +0000</lastBuildDate>
+    
+	<atom:link href="https://example.com/tags/formatting/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Formatting</title>
+      <link>https://example.com/blog/formats/</link>
+      <pubDate>Fri, 10 May 2024 18:20:15 +0000</pubDate>
+      
+      <guid>https://example.com/blog/formats/</guid>
+      <description>Headings Heading 1 Heading 2 Heading 3 Heading 4 Heading 5 Heading 6  Emphasis Regular text, bold text, italic text, bold and italic, strikethrough, and inline code.
+ Table    Language Paradigm Typing     Go Compiled Static   Python Interpreted Dynamic   Rust Compiled Static   JavaScript Interpreted Dynamic     Blockquotes  [!NOTE] — This is a standard note blockquote.</description>
+    </item>
+    
+    <item>
+      <title>Formatting</title>
+      <link>https://example.com/personal/formats/</link>
+      <pubDate>Fri, 10 May 2024 18:20:15 +0000</pubDate>
+      
+      <guid>https://example.com/personal/formats/</guid>
+      <description>Headings Heading 1 Heading 2 Heading 3 Heading 4 Heading 5 Heading 6  Emphasis Regular text, bold text, italic text, bold and italic, strikethrough, and inline code.
+ Table    Language Paradigm Typing     Go Compiled Static   Python Interpreted Dynamic   Rust Compiled Static   JavaScript Interpreted Dynamic     Blockquotes  [!NOTE] — This is a standard note blockquote.</description>
+    </item>
+    
+  </channel>
+</rss>

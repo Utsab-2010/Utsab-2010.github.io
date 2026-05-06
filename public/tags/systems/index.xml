@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>systems on Utsab Karan</title>
+    <link>https://example.com/tags/systems/</link>
+    <description>Recent content in systems on Utsab Karan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 04 Jan 2025 10:15:00 +0530</lastBuildDate>
+    
+	<atom:link href="https://example.com/tags/systems/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>rustshell</title>
+      <link>https://example.com/projects/project/</link>
+      <pubDate>Sat, 04 Jan 2025 10:15:00 +0530</pubDate>
+      
+      <guid>https://example.com/projects/project/</guid>
+      <description>A minimal POSIX shell written in Rust with piping, redirection, and job control.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>video on Utsab Karan</title>
+    <link>https://example.com/tags/video/</link>
+    <description>Recent content in video on Utsab Karan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 28 Sep 2024 16:30:22 +0000</lastBuildDate>
+    
+	<atom:link href="https://example.com/tags/video/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Images &amp; Embeds</title>
+      <link>https://example.com/blog/embeds/</link>
+      <pubDate>Sat, 28 Sep 2024 16:30:22 +0000</pubDate>
+      
+      <guid>https://example.com/blog/embeds/</guid>
+      <description>Images Standard Image (Markdown) Image with Title Local Image  Figure Shortcode Hugo&amp;rsquo;s built-in figure shortcode gives more control over captions and linking.
+{{&amp;lt; figure src=&amp;#34;https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&amp;#34; alt=&amp;#34;Mountain landscape&amp;#34; caption=&amp;#34;A panoramic mountain view at golden hour.&amp;#34; width=&amp;#34;100%&amp;#34; &amp;gt;}}   A panoramic mountain view at golden hour.
+   YouTube Embed Using Hugo&amp;rsquo;s built-in youtube shortcode:
+      YouTube with Custom Parameters      </description>
+    </item>
+    
+    <item>
+      <title>Images &amp; Embeds</title>
+      <link>https://example.com/personal/embeds/</link>
+      <pubDate>Sat, 28 Sep 2024 16:30:22 +0000</pubDate>
+      
+      <guid>https://example.com/personal/embeds/</guid>
+      <description>Images Standard Image (Markdown) Image with Title Local Image  Figure Shortcode Hugo&amp;rsquo;s built-in figure shortcode gives more control over captions and linking.
+{{&amp;lt; figure src=&amp;#34;https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&amp;#34; alt=&amp;#34;Mountain landscape&amp;#34; caption=&amp;#34;A panoramic mountain view at golden hour.&amp;#34; width=&amp;#34;100%&amp;#34; &amp;gt;}}   A panoramic mountain view at golden hour.
+   YouTube Embed Using Hugo&amp;rsquo;s built-in youtube shortcode:
+      YouTube with Custom Parameters      </description>
+    </item>
+    
+  </channel>
+</rss>

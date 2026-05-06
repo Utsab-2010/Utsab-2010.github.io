@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>katex on Utsab Karan</title>
+    <link>https://example.com/tags/katex/</link>
+    <description>Recent content in katex on Utsab Karan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 15 Jan 2024 09:30:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://example.com/tags/katex/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Math &amp; KaTeX</title>
+      <link>https://example.com/blog/math/</link>
+      <pubDate>Mon, 15 Jan 2024 09:30:00 +0000</pubDate>
+      
+      <guid>https://example.com/blog/math/</guid>
+      <description>Inline Math The quadratic formula is $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$, used to solve any quadratic equation.
+Euler&amp;rsquo;s identity, $e^{i\pi} + 1 = 0$, is considered one of the most beautiful equations in mathematics.
+The Pythagorean theorem states that $a^2 + b^2 = c^2$ for any right triangle.
+ Block Math The Gaussian integral:
+$$ \int_{-\infty}^{\infty} e^{-x^2} , dx = \sqrt{\pi} $$
+Maxwell&amp;rsquo;s equations in differential form:
+$$ \nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0} $$</description>
+    </item>
+    
+    <item>
+      <title>Math &amp; KaTeX</title>
+      <link>https://example.com/personal/math/</link>
+      <pubDate>Mon, 15 Jan 2024 09:30:00 +0000</pubDate>
+      
+      <guid>https://example.com/personal/math/</guid>
+      <description>Inline Math The quadratic formula is $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$, used to solve any quadratic equation.
+Euler&amp;rsquo;s identity, $e^{i\pi} + 1 = 0$, is considered one of the most beautiful equations in mathematics.
+The Pythagorean theorem states that $a^2 + b^2 = c^2$ for any right triangle.
+ Block Math The Gaussian integral:
+$$ \int_{-\infty}^{\infty} e^{-x^2} , dx = \sqrt{\pi} $$
+Maxwell&amp;rsquo;s equations in differential form:
+$$ \nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0} $$</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>go on Utsab Karan</title>
+    <link>https://example.com/tags/go/</link>
+    <description>Recent content in go on Utsab Karan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 01 Jun 2025 11:00:00 +0530</lastBuildDate>
+    
+	<atom:link href="https://example.com/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>forge</title>
+      <link>https://example.com/projects/forge/</link>
+      <pubDate>Sun, 01 Jun 2025 11:00:00 +0530</pubDate>
+      
+      <guid>https://example.com/projects/forge/</guid>
+      <description>A task runner and build tool with a simple declarative config and parallel execution.</description>
+    </item>
+    
+    <item>
+      <title>kv</title>
+      <link>https://example.com/projects/kv/</link>
+      <pubDate>Mon, 17 Feb 2025 09:00:00 +0530</pubDate>
+      
+      <guid>https://example.com/projects/kv/</guid>
+      <description>A persistent key-value store built in Go using a log-structured merge-tree.</description>
+    </item>
+    
+  </channel>
+</rss>
