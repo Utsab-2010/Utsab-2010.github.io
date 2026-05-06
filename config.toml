@@ -10,11 +10,6 @@ theme = "enervoid"
     weight = 10
 
   [[menus.main]]
-    name = 'Personal'
-    url = '/personal/'
-    weight = 20
-
-  [[menus.main]]
     name = 'Projects'
     url = '/projects/'
     weight = 30

@@ -6,8 +6,8 @@
   </div>
 </div>
 {{- else -}}
-<div class="my-7 rounded-sm border border-gray-800/80 bg-black/40 overflow-hidden">
-  <div class="flex items-center justify-between px-4 py-2 border-b border-gray-800/70 bg-[#070709]">
+<div class="my-7 rounded-sm border border-gray-200 dark:border-gray-800/80 bg-[#fdfbf7] dark:bg-black/40 overflow-hidden">
+  <div class="flex items-center justify-between px-4 py-2 border-b border-gray-200 dark:border-gray-800/70 bg-white dark:bg-[#070709]">
     <span class="text-xs uppercase tracking-widest text-gray-500">{{ $lang }}</span>
     <span class="text-xs text-gray-600 font-mono">///</span>
   </div>
@@ -21,7 +21,7 @@
   .codewrap pre,
   .codewrap .chroma { background: transparent !important; margin: 0 !important; }
   .codewrap pre { padding: 0 !important; overflow: visible !important; }
-  .codewrap code { background: transparent !important; border: 0 !important; padding: 0 !important; font-size: 0.95rem; line-height: 1.55; color: rgba(229, 231, 235, 0.92); }
-  .codewrap { background: rgba(0,0,0,0.20); }
+  .codewrap code { background: transparent !important; border: 0 !important; padding: 0 !important; font-size: 0.95rem; line-height: 1.55; color: var(--code-color, inherit); }
+  .codewrap { background: var(--code-bg, transparent); }
 </style>
 {{- end -}}

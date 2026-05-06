@@ -7,11 +7,11 @@
       <div class="sticky top-24">
         <div class="mb-3 text-xs uppercase tracking-widest text-gray-500">Table of Contents</div>
         {{- if .TableOfContents -}}
-        <nav class="toc text-sm text-gray-300 border border-gray-800/70 bg-[#070709] rounded-sm p-4">
+        <nav class="toc text-sm text-gray-700 dark:text-gray-300 border border-gray-200/70 dark:border-gray-200/70 dark:border-gray-200 dark:border-gray-800/70 bg-white dark:bg-[#070709] rounded-sm p-4">
           {{ .TableOfContents }}
         </nav>
         {{- else -}}
-        <div class="text-sm text-gray-500 border border-gray-800/70 bg-[#070709] rounded-sm p-4">
+        <div class="text-sm text-gray-500 border border-gray-200/70 dark:border-gray-200/70 dark:border-gray-200 dark:border-gray-800/70 bg-white dark:bg-[#070709] rounded-sm p-4">
           No headings.
         </div>
         {{- end -}}
@@ -25,22 +25,22 @@
       <!-- Mobile Collapsible TOC -->
       {{- if .TableOfContents -}}
       <div class="mb-6 lg:hidden">
-        <details class="border border-gray-800/70 bg-[#070709] rounded-sm group overflow-hidden">
-          <summary class="cursor-pointer select-none px-5 py-4 text-gray-200 hover:text-white hover:bg-white/5 transition-colors font-semibold flex items-center justify-between">
-            <span class="text-sm uppercase tracking-widest text-indigo-400">Table of Contents</span>
+        <details class="border border-gray-200/70 dark:border-gray-200/70 dark:border-gray-200 dark:border-gray-800/70 bg-white dark:bg-[#070709] rounded-sm group overflow-hidden">
+          <summary class="cursor-pointer select-none px-5 py-4 text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:text-white hover:bg-black/5 dark:hover:bg-black/5 dark:bg-white/5 transition-colors font-semibold flex items-center justify-between">
+            <span class="text-sm uppercase tracking-widest text-indigo-600 dark:text-indigo-400">Table of Contents</span>
             <span class="transform group-open:rotate-180 transition-transform duration-300">
-              <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+              <svg class="w-5 h-5 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             </span>
           </summary>
-          <div class="px-5 pb-5 pt-2 toc text-base text-gray-300 border-t border-gray-800/70">
+          <div class="px-5 pb-5 pt-2 toc text-base text-gray-700 dark:text-gray-300 border-t border-gray-200/70 dark:border-gray-200/70 dark:border-gray-200 dark:border-gray-800/70">
             {{ .TableOfContents }}
           </div>
         </details>
       </div>
       {{- end -}}
 
-      <div class="border border-gray-800/70 bg-[#070709] rounded-sm p-6 sm:p-10">
-        <div class="md-content text-base sm:text-lg leading-relaxed text-gray-300 w-full">
+      <div class="border border-gray-200/70 dark:border-gray-200/70 dark:border-gray-200 dark:border-gray-800/70 bg-white dark:bg-[#070709] rounded-sm p-6 sm:p-10">
+        <div class="md-content text-base sm:text-lg leading-relaxed text-gray-700 dark:text-gray-300 w-full">
           {{ .Content }}
         </div>
       </div>
@@ -52,9 +52,9 @@
   .toc { font-size: 0.95rem; line-height: 1.35; }
   .toc ul { list-style: none; margin: 0; padding-left: 0; }
   .toc li { position: relative; margin: 0.4rem 0; padding-left: 1.25rem; overflow-wrap: anywhere; word-break: break-word; }
-  .toc a { display: block; padding: 0.15rem 0; color: rgba(209, 213, 219, 0.92); text-decoration: none; transition: color 0.2s; }
-  .toc a:hover { color: #fff; text-decoration: underline; text-decoration-color: rgba(99, 102, 241, 0.85); text-underline-offset: 3px; }
-  .toc ul ul { margin: 0.4rem 0 0.4rem 0.35rem; padding-left: 0.9rem; border-left: 1px solid rgba(55, 65, 81, 0.6); }
+  .toc a { display: block; padding: 0.15rem 0; color: var(--toc-link-color); text-decoration: none; transition: color 0.2s; }
+  .toc a:hover { color: var(--toc-link-hover); text-decoration: underline; text-decoration-color: rgba(99, 102, 241, 0.85); text-underline-offset: 3px; }
+  .toc ul ul { margin: 0.4rem 0 0.4rem 0.35rem; padding-left: 0.9rem; border-left: 1px solid var(--border-alpha); }
   .toc ul ul>li { padding-left: 1.75rem; }
   .toc ul ul>li::before { content: "├"; position: absolute; left: 0.35rem; top: 0.2rem; color: rgba(99, 102, 241, 0.75); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
   .toc ul ul>li:last-child::before { content: "└"; }
@@ -66,7 +66,7 @@
   .md-content p { margin-bottom: 1.2rem; }
   .md-content img { margin: 1.5rem auto; border-radius: 0.25rem; }
   .md-content table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
-  .md-content th, .md-content td { padding: 0.5rem; text-align: center; border: 1px solid rgba(55, 65, 81, 0.6); }
+  .md-content th, .md-content td { padding: 0.5rem; text-align: center; border: 1px solid var(--border-alpha); }
   .md-content pre, .md-content code { tab-size: 4; }
 </style>
 {{ end }}

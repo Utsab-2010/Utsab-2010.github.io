@@ -3,7 +3,24 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
   integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
   crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style type="text/tailwindcss">
+  @theme {
+    --color-bg-dark: #070709;
+    --color-bg-light: #fdfbf7;
+  }
+  @custom-variant dark (&:where(.dark, .dark *));
+</style>
 <style>
+  html {
+    --toc-link-color: rgba(55, 65, 81, 0.92);
+    --toc-link-hover: #111827;
+    --border-alpha: rgba(229, 231, 235, 0.8);
+  }
+  html.dark {
+    --toc-link-color: rgba(209, 213, 219, 0.92);
+    --toc-link-hover: #fff;
+    --border-alpha: rgba(55, 65, 81, 0.6);
+  }
   @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap');
 
   .font-jersey {

@@ -1,5 +1,5 @@
 <div class="overflow-x-auto my-6 border border-neutral-800 rounded">
-  <table class="w-full border-collapse bg-neutral-950 text-gray-300 text-[0.95rem] min-w-full"
+  <table class="w-full border-collapse bg-neutral-950 text-gray-700 dark:text-gray-300 text-[0.95rem] min-w-full"
     {{- range $k, $v := .Attributes }}
       {{- if $v }}
         {{- printf " %s=%q" $k $v | safeHTMLAttr }}
@@ -9,7 +9,7 @@
       {{- range .THead }}
         <tr>
           {{- range . }}
-            <th class="px-4 py-3 font-semibold text-left text-gray-200 whitespace-nowrap"
+            <th class="px-4 py-3 font-semibold text-left text-gray-800 dark:text-gray-200 whitespace-nowrap"
               {{- with .Alignment }}
                 {{- printf " style=%q" (printf "text-align: %s" .) | safeHTMLAttr }}
               {{- end -}}
@@ -24,7 +24,7 @@
       {{- range .TBody }}
         <tr class="border-b border-neutral-800 transition-colors hover:bg-neutral-900 last:border-b-0">
           {{- range . }}
-            <td class="px-4 py-3 text-gray-400"
+            <td class="px-4 py-3 text-gray-600 dark:text-gray-400"
               {{- with .Alignment }}
                 {{- printf " style=%q" (printf "text-align: %s" .) | safeHTMLAttr }}
               {{- end -}}

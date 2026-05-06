@@ -3,9 +3,16 @@
 
 <head>
   {{ partial "head.html" . }}
+  <script>
+    if (localStorage.theme === 'light') {
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
 </head>
 
-<body class="min-h-screen flex flex-col bg-black font-jersey text-white text-3xl">
+<body class="min-h-screen flex flex-col bg-[#fdfbf7] dark:bg-black font-jersey text-gray-900 dark:text-white text-3xl">
   <header>
     {{ partial "header.html" . }}
   </header>
