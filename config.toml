@@ -52,3 +52,7 @@ theme = "enervoid"
   guessSyntax = true
   tabWidth = 4
   style = "monokai"
+
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
