@@ -6,22 +6,49 @@
     <description>Recent content in Projects on Utsab Karan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Jun 2025 11:00:00 +0530</lastBuildDate>
+    <lastBuildDate>Tue, 17 Feb 2026 09:00:00 +0530</lastBuildDate>
     
 	<atom:link href="https://example.com/projects/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>forge</title>
-      <link>https://example.com/projects/forge/</link>
-      <pubDate>Sun, 01 Jun 2025 11:00:00 +0530</pubDate>
+      <title>AlphaZero Black-Hole</title>
+      <link>https://example.com/projects/alphazero/</link>
+      <pubDate>Tue, 17 Feb 2026 09:00:00 +0530</pubDate>
       
-      <guid>https://example.com/projects/forge/</guid>
-      <description>A task runner and build tool with a simple declarative config and parallel execution.</description>
+      <guid>https://example.com/projects/alphazero/</guid>
+      <description>An RL Agent trained using AlphaZero framework to play the game of Black-Hole.</description>
     </item>
     
     <item>
-      <title>pxl</title>
+      <title>Diffusion LM</title>
+      <link>https://example.com/projects/dslm/</link>
+      <pubDate>Wed, 17 Dec 2025 09:00:00 +0530</pubDate>
+      
+      <guid>https://example.com/projects/dslm/</guid>
+      <description>Implementing Diffusion on a Small-Language-Model inspired by the Diffusion-LM paper</description>
+    </item>
+    
+    <item>
+      <title>Lightweight Monocular Depth Estimation</title>
+      <link>https://example.com/projects/monodepth/</link>
+      <pubDate>Wed, 05 Nov 2025 09:00:00 +0530</pubDate>
+      
+      <guid>https://example.com/projects/monodepth/</guid>
+      <description>Implementation of a Lightweight monocular depth estimation model</description>
+    </item>
+    
+    <item>
+      <title>BAS Optimization for AV Navigation</title>
+      <link>https://example.com/projects/bas/</link>
+      <pubDate>Tue, 01 Jul 2025 08:45:00 +0530</pubDate>
+      
+      <guid>https://example.com/projects/bas/</guid>
+      <description>My work for the FTP program of implementing the Beetle Antenna Search algorithm for path planning of AVs, under Prof. Ata Jahangir Moshayedi.</description>
+    </item>
+    
+    <item>
+      <title>None</title>
       <link>https://example.com/projects/pxl/</link>
       <pubDate>Sun, 11 May 2025 16:20:00 +0530</pubDate>
       
@@ -30,16 +57,7 @@
     </item>
     
     <item>
-      <title>netwatch</title>
-      <link>https://example.com/projects/netwatch/</link>
-      <pubDate>Sat, 05 Apr 2025 08:45:00 +0530</pubDate>
-      
-      <guid>https://example.com/projects/netwatch/</guid>
-      <description>A lightweight CLI network monitor that tracks latency, packet loss, and bandwidth in real time.</description>
-    </item>
-    
-    <item>
-      <title>litelang</title>
+      <title>None</title>
       <link>https://example.com/projects/litelang/</link>
       <pubDate>Sat, 22 Mar 2025 14:30:00 +0530</pubDate>
       
@@ -48,16 +66,7 @@
     </item>
     
     <item>
-      <title>kv</title>
-      <link>https://example.com/projects/kv/</link>
-      <pubDate>Mon, 17 Feb 2025 09:00:00 +0530</pubDate>
-      
-      <guid>https://example.com/projects/kv/</guid>
-      <description>A persistent key-value store built in Go using a log-structured merge-tree.</description>
-    </item>
-    
-    <item>
-      <title>rustshell</title>
+      <title>none</title>
       <link>https://example.com/projects/project/</link>
       <pubDate>Sat, 04 Jan 2025 10:15:00 +0530</pubDate>
       

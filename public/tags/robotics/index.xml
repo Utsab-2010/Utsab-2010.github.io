@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Robotics on Utsab Karan</title>
+    <link>https://example.com/tags/robotics/</link>
+    <description>Recent content in Robotics on Utsab Karan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 01 Jul 2025 08:45:00 +0530</lastBuildDate>
+    
+	<atom:link href="https://example.com/tags/robotics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>BAS Optimization for AV Navigation</title>
+      <link>https://example.com/projects/bas/</link>
+      <pubDate>Tue, 01 Jul 2025 08:45:00 +0530</pubDate>
+      
+      <guid>https://example.com/projects/bas/</guid>
+      <description>My work for the FTP program of implementing the Beetle Antenna Search algorithm for path planning of AVs, under Prof. Ata Jahangir Moshayedi.</description>
+    </item>
+    
+  </channel>
+</rss>

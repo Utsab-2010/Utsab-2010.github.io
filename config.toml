@@ -14,6 +14,11 @@ theme = "enervoid"
     url = '/projects/'
     weight = 30
 
+  [[menus.main]]
+    name = 'Academic'
+    url = '/academic/'
+    weight = 40
+
 [params]
   avatar = "https://media.licdn.com/dms/image/v2/D5603AQHgTfvWk-SoFA/profile-displayphoto-crop_800_800/B56ZzXJ.EJH8AI-/0/1773136263436?e=1779926400&v=beta&t=lgPElfy5GliypYRr3yxnLhM1KQKO44W6j5Ui0lxdzH8"
 

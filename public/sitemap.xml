@@ -3,48 +3,108 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://example.com/personal/</loc>
-    <lastmod>2026-02-16T14:27:13+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/personal/personal/</loc>
-    <lastmod>2026-02-16T14:27:13+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/</loc>
-    <lastmod>2026-02-16T14:27:13+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/devtools/</loc>
-    <lastmod>2025-06-01T11:00:00+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/projects/forge/</loc>
-    <lastmod>2025-06-01T11:00:00+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/go/</loc>
-    <lastmod>2025-06-01T11:00:00+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/projects/</loc>
-    <lastmod>2025-06-01T11:00:00+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/</loc>
-    <lastmod>2025-06-01T11:00:00+05:30</lastmod>
+    <loc>https://example.com/blog/</loc>
+    <lastmod>2026-02-28T16:30:22+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://example.com/tags/c/</loc>
-    <lastmod>2025-05-11T16:20:00+05:30</lastmod>
+    <lastmod>2026-02-28T16:30:22+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/tags/conference/</loc>
+    <lastmod>2026-02-28T16:30:22+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/blog/first-conference-experience/</loc>
+    <lastmod>2026-02-28T16:30:22+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/tags/personal/</loc>
+    <lastmod>2026-02-28T16:30:22+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/tags/research/</loc>
+    <lastmod>2026-02-28T16:30:22+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/tags/</loc>
+    <lastmod>2026-02-28T16:30:22+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/projects/alphazero/</loc>
+    <lastmod>2026-02-17T09:00:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/projects/</loc>
+    <lastmod>2026-02-17T09:00:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/tags/pytorch/</loc>
+    <lastmod>2026-02-17T09:00:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/tags/reinforcement-learning/</loc>
+    <lastmod>2026-02-17T09:00:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/tags/diffusion/</loc>
+    <lastmod>2025-12-17T09:00:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/projects/dslm/</loc>
+    <lastmod>2025-12-17T09:00:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/tags/nlp/</loc>
+    <lastmod>2025-12-17T09:00:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/tags/transformers/</loc>
+    <lastmod>2025-12-17T09:00:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/tags/computer-vision/</loc>
+    <lastmod>2025-11-05T09:00:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/projects/monodepth/</loc>
+    <lastmod>2025-11-05T09:00:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/tags/monocular-depth-estimation/</loc>
+    <lastmod>2025-11-05T09:00:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/projects/bas/</loc>
+    <lastmod>2025-07-01T08:45:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/tags/optimization/</loc>
+    <lastmod>2025-07-01T08:45:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/tags/robotics/</loc>
+    <lastmod>2025-07-01T08:45:00+05:30</lastmod>
   </url>
   
   <url>
@@ -63,21 +123,6 @@
   </url>
   
   <url>
-    <loc>https://example.com/projects/netwatch/</loc>
-    <lastmod>2025-04-05T08:45:00+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/networking/</loc>
-    <lastmod>2025-04-05T08:45:00+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/python/</loc>
-    <lastmod>2025-04-05T08:45:00+05:30</lastmod>
-  </url>
-  
-  <url>
     <loc>https://example.com/tags/compilers/</loc>
     <lastmod>2025-03-22T14:30:00+05:30</lastmod>
   </url>
@@ -88,22 +133,12 @@
   </url>
   
   <url>
-    <loc>https://example.com/tags/database/</loc>
-    <lastmod>2025-02-17T09:00:00+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/projects/kv/</loc>
-    <lastmod>2025-02-17T09:00:00+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/rust/</loc>
+    <loc>https://example.com/projects/project/</loc>
     <lastmod>2025-01-04T10:15:00+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/projects/project/</loc>
+    <loc>https://example.com/tags/rust/</loc>
     <lastmod>2025-01-04T10:15:00+05:30</lastmod>
   </url>
   
@@ -113,148 +148,13 @@
   </url>
   
   <url>
-    <loc>https://example.com/blog/</loc>
-    <lastmod>2024-09-28T16:30:22+00:00</lastmod>
+    <loc>https://example.com/academic/</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/tags/embeds/</loc>
-    <lastmod>2024-09-28T16:30:22+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/blog/embeds/</loc>
-    <lastmod>2024-09-28T16:30:22+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/personal/embeds/</loc>
-    <lastmod>2024-09-28T16:30:22+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/interactive/</loc>
-    <lastmod>2024-09-28T16:30:22+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/multimedia/</loc>
-    <lastmod>2024-09-28T16:30:22+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/social-media/</loc>
-    <lastmod>2024-09-28T16:30:22+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/video/</loc>
-    <lastmod>2024-09-28T16:30:22+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/documentation/</loc>
-    <lastmod>2024-05-10T18:20:15+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/blog/formats/</loc>
-    <lastmod>2024-05-10T18:20:15+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/personal/formats/</loc>
-    <lastmod>2024-05-10T18:20:15+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/formatting/</loc>
-    <lastmod>2024-05-10T18:20:15+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/markdown/</loc>
-    <lastmod>2024-05-10T18:20:15+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/reference/</loc>
-    <lastmod>2024-05-10T18:20:15+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/typography/</loc>
-    <lastmod>2024-05-10T18:20:15+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/code/</loc>
-    <lastmod>2024-03-22T14:45:30+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/blog/code/</loc>
-    <lastmod>2024-03-22T14:45:30+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/personal/code/</loc>
-    <lastmod>2024-03-22T14:45:30+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/diagrams/</loc>
-    <lastmod>2024-03-22T14:45:30+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/goat/</loc>
-    <lastmod>2024-03-22T14:45:30+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/mermaid/</loc>
-    <lastmod>2024-03-22T14:45:30+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/programming/</loc>
-    <lastmod>2024-03-22T14:45:30+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/syntax-highlighting/</loc>
-    <lastmod>2024-03-22T14:45:30+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/equations/</loc>
-    <lastmod>2024-01-15T09:30:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/katex/</loc>
-    <lastmod>2024-01-15T09:30:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/latex/</loc>
-    <lastmod>2024-01-15T09:30:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/blog/math/</loc>
-    <lastmod>2024-01-15T09:30:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/personal/math/</loc>
-    <lastmod>2024-01-15T09:30:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/mathematics/</loc>
-    <lastmod>2024-01-15T09:30:00+00:00</lastmod>
+    <loc>https://example.com/</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>

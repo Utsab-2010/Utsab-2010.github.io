@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>research on Utsab Karan</title>
+    <link>https://example.com/tags/research/</link>
+    <description>Recent content in research on Utsab Karan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 28 Feb 2026 16:30:22 +0000</lastBuildDate>
+    
+	<atom:link href="https://example.com/tags/research/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>First Conference Experience</title>
+      <link>https://example.com/blog/first-conference-experience/</link>
+      <pubDate>Sat, 28 Feb 2026 16:30:22 +0000</pubDate>
+      
+      <guid>https://example.com/blog/first-conference-experience/</guid>
+      <description>I attended the Indian Control Conference from 17th to 20th December 2025 at IISc, Bangalore. This was my first conference ever — and also my first time in Bangalore. I was there to present a paper I worked on during my summer internship at IIT Bombay (long story, will tell some other time).
+ Arrival &amp;amp; Accommodation  The first thing I did after reaching campus was sort out my accommodation.</description>
+    </item>
+    
+  </channel>
+</rss>

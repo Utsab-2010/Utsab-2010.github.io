@@ -12,7 +12,29 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
   integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
   crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style type="text/tailwindcss">
+  @theme {
+    --color-bg-dark: #070709;
+    --color-bg-light: #fdfbf7;
+  }
+  @custom-variant dark (&:where(.dark, .dark *));
+
+  .md-content h1 { @apply mt-10 mb-4 text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white; }
+  .md-content h2 { @apply mt-8 mb-4 text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white; }
+  .md-content h3 { @apply mt-6 mb-3 text-2xl sm:text-3xl font-semibold text-gray-900 dark:text-white; }
+  .md-content h4 { @apply mt-5 mb-2 text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white; }
+</style>
 <style>
+  html {
+    --toc-link-color: rgba(55, 65, 81, 0.92);
+    --toc-link-hover: #111827;
+    --border-alpha: rgba(229, 231, 235, 0.8);
+  }
+  html.dark {
+    --toc-link-color: rgba(209, 213, 219, 0.92);
+    --toc-link-hover: #fff;
+    --border-alpha: rgba(55, 65, 81, 0.6);
+  }
   @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap');
 
   .font-jersey {
@@ -256,12 +278,19 @@
 </script>
 
 
+  <script>
+    if (localStorage.theme === 'light') {
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
 </head>
 
-<body class="min-h-screen flex flex-col bg-black font-jersey text-white text-3xl">
+<body class="min-h-screen flex flex-col bg-[#fdfbf7] dark:bg-black font-jersey text-gray-900 dark:text-white text-3xl">
   <header>
     <div class="sticky absolute top-0 z-50">
-  <nav class="w-full border-b border-gray-800 bg-[#070709]/95 backdrop-blur-sm text-gray-100">
+  <nav class="w-full border-b border-gray-200 dark:border-gray-800 bg-white/95 dark:bg-[#070709]/95 backdrop-blur-sm text-gray-800 dark:text-gray-100">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="flex items-center justify-between h-16">
         
@@ -270,9 +299,9 @@
           <a href='https://example.com' class="flex items-center gap-3 group" aria-label="Homepage">
 
             <img src='https://media.licdn.com/dms/image/v2/D5603AQHgTfvWk-SoFA/profile-displayphoto-crop_800_800/B56ZzXJ.EJH8AI-/0/1773136263436?e=1779926400&amp;v=beta&amp;t=lgPElfy5GliypYRr3yxnLhM1KQKO44W6j5Ui0lxdzH8' alt="Utsab Karan"
-              class="w-10 h-10 rounded-sm border-2 border-gray-700 object-cover transition-transform duration-300 transform group-hover:scale-105"
+              class="w-10 h-10 rounded-sm border-2 border-gray-300 dark:border-gray-700 object-cover transition-transform duration-300 transform group-hover:scale-105"
               style="animation: border-breathe 4s ease-in-out infinite;" />
-            <span class="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold tracking-wide">
+            <span class="text-gray-900 dark:text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold tracking-wide">
               Utsab Karan
               <span class="inline-block ml-2" style="animation: flicker 1.6s steps(2, end) infinite;">_</span>
             </span>
@@ -288,30 +317,30 @@
 <nav aria-label="Primary" class="w-full">
   <ul
     class="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-2 md:space-y-0 sm:text-lg md:text-xl lg:text-3xl"><li>
-      <a href="/blog/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-200 hover:text-white transition-colors duration-200">
+      <a href="/blog/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
         <span class="relative inline-block">
           <span>Blog</span>
           
           <span
-            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
         </span>
       </a>
     </li><li>
-      <a href="/personal/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-200 hover:text-white transition-colors duration-200">
-        <span class="relative inline-block">
-          <span>Personal</span>
-          
-          <span
-            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
-        </span>
-      </a>
-    </li><li>
-      <a href="/projects/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-200 hover:text-white transition-colors duration-200">
+      <a href="/projects/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
         <span class="relative inline-block">
           <span>Projects</span>
           
           <span
-            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+        </span>
+      </a>
+    </li><li>
+      <a href="/academic/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+        <span class="relative inline-block">
+          <span>Academic</span>
+          
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
         </span>
       </a>
     </li>
@@ -319,13 +348,19 @@
 </nav>
 
           </div>
+          
+          
+          <button id="theme-toggle" class="p-2 rounded-md text-gray-800 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-black/5 dark:bg-white/5 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-colors" aria-label="Toggle Theme">
+            <svg id="theme-toggle-light-icon" class="hidden w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            <svg id="theme-toggle-dark-icon" class="hidden w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+          </button>
 
           
           <div class="md:hidden">
             <button id="nav-toggle" aria-controls="mobile-menu" aria-expanded="false"
               class="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
               aria-label="Open menu">
-              <svg class="h-6 w-6 text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+              <svg class="h-6 w-6 text-gray-800 dark:text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
@@ -342,30 +377,30 @@
 <nav aria-label="Primary" class="w-full">
   <ul
     class="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-2 md:space-y-0 sm:text-lg md:text-xl lg:text-3xl"><li>
-      <a href="/blog/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-200 hover:text-white transition-colors duration-200">
+      <a href="/blog/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
         <span class="relative inline-block">
           <span>Blog</span>
           
           <span
-            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
         </span>
       </a>
     </li><li>
-      <a href="/personal/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-200 hover:text-white transition-colors duration-200">
-        <span class="relative inline-block">
-          <span>Personal</span>
-          
-          <span
-            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
-        </span>
-      </a>
-    </li><li>
-      <a href="/projects/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-200 hover:text-white transition-colors duration-200">
+      <a href="/projects/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
         <span class="relative inline-block">
           <span>Projects</span>
           
           <span
-            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+        </span>
+      </a>
+    </li><li>
+      <a href="/academic/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+        <span class="relative inline-block">
+          <span>Academic</span>
+          
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
         </span>
       </a>
     </li>
@@ -419,11 +454,37 @@
     (function () {
       const btn = document.getElementById('nav-toggle');
       const menu = document.getElementById('mobile-menu');
-      if (!btn || !menu) return;
-      btn.addEventListener('click', () => {
-        const open = menu.classList.toggle('hidden') === false;
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      });
+      if (btn && menu) {
+        btn.addEventListener('click', () => {
+          const open = menu.classList.toggle('hidden') === false;
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      }
+
+      const themeToggleBtn = document.getElementById('theme-toggle');
+      const darkIcon = document.getElementById('theme-toggle-dark-icon');
+      const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+      if (themeToggleBtn) {
+        if (document.documentElement.classList.contains('dark')) {
+            lightIcon.classList.remove('hidden');
+        } else {
+            darkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+      }
     })();
   </script>
 </div>
@@ -432,23 +493,23 @@
 
   <main class="flex-1 w-full">
     <div id="swup" class="swup-transition-fade">
-      <div class="max-w-3xl lg:max-w-6xl xl:max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-10 lg:py-16">
+      <div class="max-w-4xl lg:max-w-[70rem] xl:max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-10 py-10 lg:py-16">
         
 
-<section class="relative border border-gray-200 bg-[#070709] rounded-sm p-8 md:p-12 text-gray-300">
+<section class="relative border border-gray-200 bg-white dark:bg-[#070709] rounded-sm p-8 md:p-12 text-gray-700 dark:text-gray-300">
 
   <div class="flex flex-col-reverse md:flex-row gap-8 items-center md:items-start">
     <div class="flex-1">
       
-      <h1 class="text-2xl sm:text-3xl md:text-4xl font-semibold text-blue-200 mb-6 tracking-wide">
+      <h1 class="text-2xl sm:text-3xl md:text-4xl font-semibold text-blue-800 dark:text-blue-200 mb-6 tracking-wide">
         About Me
         
       </h1>
 
       
-      <div class="space-y-6 sm:text-lg md:text-xl lg:text-2xl leading-relaxed [&_a]:text-blue-200
+      <div class="space-y-6 text-base sm:text-lg md:text-xl leading-relaxed [&_a]:text-blue-800 dark:[&_a]:text-blue-200
                 [&_a]:underline
-                [&_a:hover]:text-blue-100
+                [&_a:hover]:text-blue-900 dark:[&_a:hover]:text-blue-100
                 [&_a]:transition-colors
                 [&_a]:duration-200">
 
@@ -456,7 +517,7 @@
         <p>Hi, I am Utsab. I am third year undergraduate student at IIT Kharagpur pursuing a Dual-Degree (B.Tech + M.Tech) in Electronics and Electrical Communication Engineering.</p>
 <p>I am currently the Head of Vision at AGV.AI, a UG research group under Prof. Debashish Chakravarty in IIT Kharagpur working on autonomous vehicles and robotic systems. I was also fortunate enough to intern under Prof. Leena Vachhani at IIT Bombay this summer.</p>
 <p>I am interested in deep learning theory and optimizations, computer vision, robotics and high-performance computing. Always open to any good learning opportunities!</p>
-<p>Mail: <a href="mailto:utsabkaran2010@gmail.com">utsabkaran2010@gmail.com</a></p>
+<p>Mail: <a href="mailto:utsabkaran2010@gmail.com">utsabkaran2010@gmail.com</a> <a href="https://drive.google.com/file/d/1qDJQ7pKjLs3bD04_0PJ_MyCs6WWIR2gN/view">Resume</a></p>
 
         
 
@@ -465,7 +526,7 @@
     
     
     <div class="shrink-0 md:pt-4">
-      <img src='https://media.licdn.com/dms/image/v2/D5603AQHgTfvWk-SoFA/profile-displayphoto-crop_800_800/B56ZzXJ.EJH8AI-/0/1773136263436?e=1779926400&amp;v=beta&amp;t=lgPElfy5GliypYRr3yxnLhM1KQKO44W6j5Ui0lxdzH8' alt="Profile Picture" class="w-40 h-40 md:w-56 md:h-56 rounded-full border-4 border-gray-700 object-cover shadow-xl" />
+      <img src='https://media.licdn.com/dms/image/v2/D5603AQHgTfvWk-SoFA/profile-displayphoto-crop_800_800/B56ZzXJ.EJH8AI-/0/1773136263436?e=1779926400&amp;v=beta&amp;t=lgPElfy5GliypYRr3yxnLhM1KQKO44W6j5Ui0lxdzH8' alt="Profile Picture" class="w-40 h-40 md:w-56 md:h-56 rounded-full border-4 border-gray-300 dark:border-gray-700 object-cover shadow-xl" />
     </div>
   </div>
 
@@ -477,7 +538,7 @@
   </main>
 
   <footer>
-    <div class="border-t border-gray-800 bg-[#070709] text-gray-400">
+    <div class="border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-[#070709] text-gray-600 dark:text-gray-400">
   <div class="max-w-6xl mx-auto px-4 sm:px-6">
     <div class="flex flex-col md:flex-row items-center justify-between py-6 space-y-4 md:space-y-0">
 
@@ -495,35 +556,35 @@
 
         
         <a href='https://github.com/Utsab-2010' target="_blank" rel="noopener"
-          class="group relative inline-block transition-colors duration-200 hover:text-gray-200">
+          class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
           
           <i class="devicon-github-original"></i>
           <span
-            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
         </a>
         
         <a href='https://twitter.com/yourx' target="_blank" rel="noopener"
-          class="group relative inline-block transition-colors duration-200 hover:text-gray-200">
+          class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
           
           <i class="devicon-twitter-original"></i>
           <span
-            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
         </a>
         
         <a href='https://www.linkedin.com/in/utsab-karan/' target="_blank" rel="noopener"
-          class="group relative inline-block transition-colors duration-200 hover:text-gray-200">
+          class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
           
           <i class="devicon-linkedin-plain"></i>
           <span
-            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
         </a>
         
         <a href='https://drive.google.com/file/d/1qDJQ7pKjLs3bD04_0PJ_MyCs6WWIR2gN/view' target="_blank" rel="noopener"
-          class="group relative inline-block transition-colors duration-200 hover:text-gray-200">
+          class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
           
           <i class="fa-solid fa-file-lines"></i>
           <span
-            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
         </a>
         
 

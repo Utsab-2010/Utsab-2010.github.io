@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PyTorch on Utsab Karan</title>
+    <link>https://example.com/tags/pytorch/</link>
+    <description>Recent content in PyTorch on Utsab Karan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 17 Feb 2026 09:00:00 +0530</lastBuildDate>
+    
+	<atom:link href="https://example.com/tags/pytorch/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>AlphaZero Black-Hole</title>
+      <link>https://example.com/projects/alphazero/</link>
+      <pubDate>Tue, 17 Feb 2026 09:00:00 +0530</pubDate>
+      
+      <guid>https://example.com/projects/alphazero/</guid>
+      <description>An RL Agent trained using AlphaZero framework to play the game of Black-Hole.</description>
+    </item>
+    
+  </channel>
+</rss>

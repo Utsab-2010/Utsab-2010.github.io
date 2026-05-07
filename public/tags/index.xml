@@ -6,35 +6,125 @@
     <description>Recent content in Tags on Utsab Karan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Jun 2025 11:00:00 +0530</lastBuildDate>
+    <lastBuildDate>Sat, 28 Feb 2026 16:30:22 +0000</lastBuildDate>
     
 	<atom:link href="https://example.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>devtools</title>
-      <link>https://example.com/tags/devtools/</link>
-      <pubDate>Sun, 01 Jun 2025 11:00:00 +0530</pubDate>
-      
-      <guid>https://example.com/tags/devtools/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>go</title>
-      <link>https://example.com/tags/go/</link>
-      <pubDate>Sun, 01 Jun 2025 11:00:00 +0530</pubDate>
-      
-      <guid>https://example.com/tags/go/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>c</title>
       <link>https://example.com/tags/c/</link>
-      <pubDate>Sun, 11 May 2025 16:20:00 +0530</pubDate>
+      <pubDate>Sat, 28 Feb 2026 16:30:22 +0000</pubDate>
       
       <guid>https://example.com/tags/c/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>conference</title>
+      <link>https://example.com/tags/conference/</link>
+      <pubDate>Sat, 28 Feb 2026 16:30:22 +0000</pubDate>
+      
+      <guid>https://example.com/tags/conference/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>personal</title>
+      <link>https://example.com/tags/personal/</link>
+      <pubDate>Sat, 28 Feb 2026 16:30:22 +0000</pubDate>
+      
+      <guid>https://example.com/tags/personal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>research</title>
+      <link>https://example.com/tags/research/</link>
+      <pubDate>Sat, 28 Feb 2026 16:30:22 +0000</pubDate>
+      
+      <guid>https://example.com/tags/research/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PyTorch</title>
+      <link>https://example.com/tags/pytorch/</link>
+      <pubDate>Tue, 17 Feb 2026 09:00:00 +0530</pubDate>
+      
+      <guid>https://example.com/tags/pytorch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Reinforcement Learning</title>
+      <link>https://example.com/tags/reinforcement-learning/</link>
+      <pubDate>Tue, 17 Feb 2026 09:00:00 +0530</pubDate>
+      
+      <guid>https://example.com/tags/reinforcement-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Diffusion</title>
+      <link>https://example.com/tags/diffusion/</link>
+      <pubDate>Wed, 17 Dec 2025 09:00:00 +0530</pubDate>
+      
+      <guid>https://example.com/tags/diffusion/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>NLP</title>
+      <link>https://example.com/tags/nlp/</link>
+      <pubDate>Wed, 17 Dec 2025 09:00:00 +0530</pubDate>
+      
+      <guid>https://example.com/tags/nlp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Transformers</title>
+      <link>https://example.com/tags/transformers/</link>
+      <pubDate>Wed, 17 Dec 2025 09:00:00 +0530</pubDate>
+      
+      <guid>https://example.com/tags/transformers/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Computer Vision</title>
+      <link>https://example.com/tags/computer-vision/</link>
+      <pubDate>Wed, 05 Nov 2025 09:00:00 +0530</pubDate>
+      
+      <guid>https://example.com/tags/computer-vision/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Monocular Depth Estimation</title>
+      <link>https://example.com/tags/monocular-depth-estimation/</link>
+      <pubDate>Wed, 05 Nov 2025 09:00:00 +0530</pubDate>
+      
+      <guid>https://example.com/tags/monocular-depth-estimation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Optimization</title>
+      <link>https://example.com/tags/optimization/</link>
+      <pubDate>Tue, 01 Jul 2025 08:45:00 +0530</pubDate>
+      
+      <guid>https://example.com/tags/optimization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Robotics</title>
+      <link>https://example.com/tags/robotics/</link>
+      <pubDate>Tue, 01 Jul 2025 08:45:00 +0530</pubDate>
+      
+      <guid>https://example.com/tags/robotics/</guid>
       <description></description>
     </item>
     
@@ -57,38 +147,11 @@
     </item>
     
     <item>
-      <title>networking</title>
-      <link>https://example.com/tags/networking/</link>
-      <pubDate>Sat, 05 Apr 2025 08:45:00 +0530</pubDate>
-      
-      <guid>https://example.com/tags/networking/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>python</title>
-      <link>https://example.com/tags/python/</link>
-      <pubDate>Sat, 05 Apr 2025 08:45:00 +0530</pubDate>
-      
-      <guid>https://example.com/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>compilers</title>
       <link>https://example.com/tags/compilers/</link>
       <pubDate>Sat, 22 Mar 2025 14:30:00 +0530</pubDate>
       
       <guid>https://example.com/tags/compilers/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>database</title>
-      <link>https://example.com/tags/database/</link>
-      <pubDate>Mon, 17 Feb 2025 09:00:00 +0530</pubDate>
-      
-      <guid>https://example.com/tags/database/</guid>
       <description></description>
     </item>
     
@@ -107,186 +170,6 @@
       <pubDate>Sat, 04 Jan 2025 10:15:00 +0530</pubDate>
       
       <guid>https://example.com/tags/systems/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>embeds</title>
-      <link>https://example.com/tags/embeds/</link>
-      <pubDate>Sat, 28 Sep 2024 16:30:22 +0000</pubDate>
-      
-      <guid>https://example.com/tags/embeds/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>interactive</title>
-      <link>https://example.com/tags/interactive/</link>
-      <pubDate>Sat, 28 Sep 2024 16:30:22 +0000</pubDate>
-      
-      <guid>https://example.com/tags/interactive/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>multimedia</title>
-      <link>https://example.com/tags/multimedia/</link>
-      <pubDate>Sat, 28 Sep 2024 16:30:22 +0000</pubDate>
-      
-      <guid>https://example.com/tags/multimedia/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>social-media</title>
-      <link>https://example.com/tags/social-media/</link>
-      <pubDate>Sat, 28 Sep 2024 16:30:22 +0000</pubDate>
-      
-      <guid>https://example.com/tags/social-media/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>video</title>
-      <link>https://example.com/tags/video/</link>
-      <pubDate>Sat, 28 Sep 2024 16:30:22 +0000</pubDate>
-      
-      <guid>https://example.com/tags/video/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>documentation</title>
-      <link>https://example.com/tags/documentation/</link>
-      <pubDate>Fri, 10 May 2024 18:20:15 +0000</pubDate>
-      
-      <guid>https://example.com/tags/documentation/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>formatting</title>
-      <link>https://example.com/tags/formatting/</link>
-      <pubDate>Fri, 10 May 2024 18:20:15 +0000</pubDate>
-      
-      <guid>https://example.com/tags/formatting/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>markdown</title>
-      <link>https://example.com/tags/markdown/</link>
-      <pubDate>Fri, 10 May 2024 18:20:15 +0000</pubDate>
-      
-      <guid>https://example.com/tags/markdown/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>reference</title>
-      <link>https://example.com/tags/reference/</link>
-      <pubDate>Fri, 10 May 2024 18:20:15 +0000</pubDate>
-      
-      <guid>https://example.com/tags/reference/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>typography</title>
-      <link>https://example.com/tags/typography/</link>
-      <pubDate>Fri, 10 May 2024 18:20:15 +0000</pubDate>
-      
-      <guid>https://example.com/tags/typography/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>code</title>
-      <link>https://example.com/tags/code/</link>
-      <pubDate>Fri, 22 Mar 2024 14:45:30 +0000</pubDate>
-      
-      <guid>https://example.com/tags/code/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>diagrams</title>
-      <link>https://example.com/tags/diagrams/</link>
-      <pubDate>Fri, 22 Mar 2024 14:45:30 +0000</pubDate>
-      
-      <guid>https://example.com/tags/diagrams/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>goat</title>
-      <link>https://example.com/tags/goat/</link>
-      <pubDate>Fri, 22 Mar 2024 14:45:30 +0000</pubDate>
-      
-      <guid>https://example.com/tags/goat/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>mermaid</title>
-      <link>https://example.com/tags/mermaid/</link>
-      <pubDate>Fri, 22 Mar 2024 14:45:30 +0000</pubDate>
-      
-      <guid>https://example.com/tags/mermaid/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>programming</title>
-      <link>https://example.com/tags/programming/</link>
-      <pubDate>Fri, 22 Mar 2024 14:45:30 +0000</pubDate>
-      
-      <guid>https://example.com/tags/programming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>syntax-highlighting</title>
-      <link>https://example.com/tags/syntax-highlighting/</link>
-      <pubDate>Fri, 22 Mar 2024 14:45:30 +0000</pubDate>
-      
-      <guid>https://example.com/tags/syntax-highlighting/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>equations</title>
-      <link>https://example.com/tags/equations/</link>
-      <pubDate>Mon, 15 Jan 2024 09:30:00 +0000</pubDate>
-      
-      <guid>https://example.com/tags/equations/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>katex</title>
-      <link>https://example.com/tags/katex/</link>
-      <pubDate>Mon, 15 Jan 2024 09:30:00 +0000</pubDate>
-      
-      <guid>https://example.com/tags/katex/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>latex</title>
-      <link>https://example.com/tags/latex/</link>
-      <pubDate>Mon, 15 Jan 2024 09:30:00 +0000</pubDate>
-      
-      <guid>https://example.com/tags/latex/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>mathematics</title>
-      <link>https://example.com/tags/mathematics/</link>
-      <pubDate>Mon, 15 Jan 2024 09:30:00 +0000</pubDate>
-      
-      <guid>https://example.com/tags/mathematics/</guid>
       <description></description>
     </item>
     

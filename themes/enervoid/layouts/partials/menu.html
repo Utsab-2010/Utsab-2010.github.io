@@ -22,7 +22,7 @@ Renders a responsive list of menu items with Tailwind classes.
 
     <li>
       <a {{- range $k, $v :=$attrs }} {{- with $v }} {{- printf " %s=%q" $k $v | safeHTMLAttr }} {{- end }} {{- end -}}
-        class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:text-white transition-colors duration-200">
+        class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
         <span class="relative inline-block">
           <span>{{ .Name }}</span>
           <!-- underline grow: uses pseudo-element utilities via Tailwind JIT -->
