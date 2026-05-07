@@ -1,4 +1,4 @@
-baseURL = 'https://example.com'
+baseURL = 'https://utsab-2010.github.io/portfolio/'
 languageCode = 'en-us'
 title = "Utsab Karan"
 theme = "enervoid"
@@ -25,15 +25,15 @@ theme = "enervoid"
   [[params.socials]]
       link = "https://github.com/Utsab-2010"
       icon = "devicon-github-original"
-  [[params.socials]]
-      link = "https://twitter.com/yourx"
-      icon = "devicon-twitter-original"
    [[params.socials]]
       link = "https://www.linkedin.com/in/utsab-karan/"
       icon = "devicon-linkedin-plain"
     [[params.socials]]
+      link = "https://scholar.google.com/citations?user=V0Lvy54AAAAJ&hl=en"
+      icon = "fa-solid fa-graduation-cap" 
+    [[params.socials]]
       link = "https://drive.google.com/file/d/1qDJQ7pKjLs3bD04_0PJ_MyCs6WWIR2gN/view"
-      icon = "fa-solid fa-file-lines" 
+      icon = "fa-solid fa-file-lines"
 
 [markup]
   [markup.goldmark]
