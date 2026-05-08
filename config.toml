@@ -24,7 +24,7 @@ theme = "enervoid"
 
   [params.comments]
     enable = true
-    repo = "Utsab-2010/portfolio" # Replace with your repo name
+    repo = "Utsab-2010/Utsab-2010.github.io" # Updated repo name
     repoId = "R_kgDOSVop4A"                  # Fill this after enabling Discussions
     category = "General"         # Or any other category you prefer
     categoryId = "DIC_kwDOSVop4M4C8gg4"              # Fill this after enabling Discussions
