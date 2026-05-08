@@ -46,8 +46,8 @@ Then came the **Gala Dinner**. I almost couldn’t find the venue because it was
 
 | Prize Distribution | Cultural Event | Flute Performance |
 |---|---|---|
-| ![Prize Distribution](https://lh3.googleusercontent.com/sitesv/AA5AbUAdD0OE9nH6ZvTsX09ZI0-vcHe3CbHiO1ezblQ3N7kjTQscAOwinCI9VnHHnCu68rsAq14uBN_rctyOZOtQigIX0yibwSMODpiRWYmi0UPA_sHJbR3sZDmnChTutGJu9-FH6SeTNE9otDUhIHQ0PMmQY-ELkmrCRoYNPWzPeEJGFe5yS45RhtSfeSQ9gR92Utww8IRez1G6i5KDBybOsa_dUJzllp2YaSxq=w1280) | ![Cultural Event](https://lh3.googleusercontent.com/sitesv/AA5AbUBj8YhAlD-mRcgNbYjhtPBbt0OAA5KSZx_wdVrFL4twLczhUUk-WAH65HP0Z6A8mAWvsRVOgT98VR5GfT2bWX7NnU4aFYwcNWk_G3AXYrgIJpW568p81RVmYmHQ3s7_YELl_MlfzJLQfmouiA16A-NLf2bnxNVLQaYOLLXUOLJQ8Dsavdmt6s167iai2OibuGjHovZGXw6eXvFscR34B6xXS-JTf2e3Vckgoi8=w1280) | ![Pravin Godkhindi Event](https://lh3.googleusercontent.com/sitesv/AA5AbUCDtouULrhezArImB1edv1U_xkyDarOWFYaP-YMvGCatsWmIo2BsJlpaKQMObCryj6NMWf4e7OyEz639cMKDDiPwR7HPLj_jtVFElrwJ3r6tV-28SbPMlesWWSijGSZtWfzxBeTdmquafsHfQCs3oS3i_23neDZqEE6q05WOVg-6Gp-5OXIMn-8NNrXAZo_96ntyh-EgP2aTj-1CsavxLTYbYKQtW6E9KxxsKw=w1280) |
-| *Event Continuation* | ![Classical Music 2](/images/concert.jpg) | ![Event continuation](https://lh3.googleusercontent.com/sitesv/AA5AbUCU0k_Dh8EEfVwMs2CBSoa9deRNE3AIueO51yzVMXGTknKclnRy8DjOfq2tEKTgi-huh2nC8wJkLg-tKUs69R12wL7JY_DFCbLJ_n464UU34RmXRZSuMvP7PzOvmMtIXAF9WUb_6DfGfw5LQmhgXptVZ-nFoTjvcBbo-2OIAW0cxtWaPx8cLzjKs84fYAaby3jlVLlvEcZnhAW4PZC24CkGjqSOt1Cjuf4JHbQ=w1280) |
+| ![Prize Distribution](/images/robot.jpg) | ![Cultural Event](/images/lecture.jpg) | ![Pravin Godkhindi Event](https://lh3.googleusercontent.com/sitesv/AA5AbUCDtouULrhezArImB1edv1U_xkyDarOWFYaP-YMvGCatsWmIo2BsJlpaKQMObCryj6NMWf4e7OyEz639cMKDDiPwR7HPLj_jtVFElrwJ3r6tV-28SbPMlesWWSijGSZtWfzxBeTdmquafsHfQCs3oS3i_23neDZqEE6q05WOVg-6Gp-5OXIMn-8NNrXAZo_96ntyh-EgP2aTj-1CsavxLTYbYKQtW6E9KxxsKw=w1280) |
+| *Event Continuation* | ![Classical Music 2](/images/concert.jpg) | ![Event continuation](/images/concert.jpg) |
 
 
 
