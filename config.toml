@@ -58,7 +58,7 @@ theme = "enervoid"
   codeFences = true
   guessSyntax = true
   tabWidth = 4
-  style = "monokai"
+  style = "dracula"
 
 [caches]
   [caches.images]
