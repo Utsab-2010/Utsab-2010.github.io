@@ -31,7 +31,7 @@ Ofcourse, if the distribution is just some standard distribution like the Gaussi
 
 During training also we like to assume that all the images of our image dataset belong to some joint probability distribution over the variables  and we train our model to learn this ideal distribution from the training data points.
 
-|![data distribution](/blogs/distributions.png)|
+|![data distribution](/blogs/diffusion_tut/distributions.png)|
 |---|
 |Your Model tries to fit the distribution of the dataset|
 
