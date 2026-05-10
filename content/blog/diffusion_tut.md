@@ -33,7 +33,7 @@ During training also we like to assume that all the images of our image dataset 
 
 |![data distribution](/blogs/diffusion_tut/distributions.png)|
 |---|
-|Your Model tries to fit the distribution of the dataset|
+|In this figure, the "good" images of dogs have high values of the pdf whereas the irrelevant images(like the cookie) have low values. Ideally, we would want our trained model to be able to capture these high density regions and generate only the good high probability images accordingly. |
 
 
 
@@ -42,29 +42,48 @@ It is very difficult to arrive at a closed form solution for getting this probab
 
 For a discrete sample space, for example in the case of classification problems, we have fixed set of classes into which we need to segregate an image. So typically what we do is we train the model to take in an input and give a probability mass function over the different classes. Then we choose the class with the highest probability as the identified class of the input.
 
-However in the case of image generation we are dealing with a continuous space  and so the approximated function has to be a pdf over this sample space. How can this be done?
+However in the case of image generation we are dealing with a continuous space  and so the approximated function has to be a probability density function over this sample space. How can this be done?
 
-One naive approach would be to try training a model with a sigmoid in the last layer to get a value between 0 and 1. But there is no guarantee that it will add up to 1 when summed/integrated over the entire sample space. Hence the function will not a be a probability distribution. Hence, the difficulty!
+One naive approach would be to try training a model to give a real value for each possible image pixel combination which sums to 1 over the entire space. But there is no way to ensure the summation property other than to divide the ouput by the sum/integral Z over the sample space; which is computationally infeasible for even moderately sized sample spaces.
 
-The general practice that is followed and works out well is to use NNs to approximate the defining parameters of **already known probability distributions**. For instance, the most standard practice is to use the Gaussian Distribution due to a lot of good properties, which I won't discuss here :)
+$$
+Z = \int_{x} f(x) dx \quad\quad p(x)=\frac{1}{Z} f(x) $$
 
-Therefore, we define the network as  $p_\theta(x) = \mathcal{N}(x; \mu_\theta, \Sigma_\theta)$; a nn with parameters $\theta$ that approximates the $\mu$ and $\Sigma$ of the required multivariate normal distribution.
+The general practice that is followed and works out well is to use NNs to approximate the target distributions using **already known probability distributions** and using the NN to approximate their defining parameters(mean and variance). For instance, the most standard practice is to use the ***Gaussian Distribution*** due to a lot of good properties, which I won't discuss here.
+
+Therefore, we define the network as  
+$$p_\theta(x) = \mathcal{N}(x; \mu_\theta, \Sigma_\theta)
+$$
+A neural network model with parameters $\theta$ that approximates the $\mu$ and $\Sigma$ of the required multivariate normal distribution.
 
 ### Diffusion Denoising Reverse Process
 
-Now in diffusion we don't exactly find the required probability distribution directly. Instead we follow an iterative process of slowly transforming a starting **noisy distribution** into the required final distribution. Why is this done? That discussion won't happen today but a simple explanation would be, its just works better for the practical setup of approximating non-linearities.
+Now in diffusion we don't exactly find the required probability distribution directly. Instead we follow an *iterative process* of slowly transforming a starting **noisy distribution** into the required final distribution. Why is this done? A simple explanation would be, it just works better for the practical scenarios of approximating non-linear functions in high dimensions.
 
-While the theoretical diffusion sampling process (the generative Markov chain) is defined by Gaussian transitions $p_\theta(x_{t-1} | x_t) = \mathcal{N}(x_{t-1}; \mu_\theta, \Sigma_\theta)$, we don't ask the neural network to spit out $\mu$ and $\Sigma$ directly because that's a difficult learning task.
+The theoretical diffusion sampling process (the generative Markov chain) is defined by Gaussian transitions 
+$$
+p_\theta(x_{t-1} | x_t) = \mathcal{N}(x_{t-1}; \mu_\theta(x_t, t), \Sigma_\theta(x_t, t))
+$$
+but in practice we consider a only time-dependent variance $\Sigma_\theta(x_t, t) = \Sigma_t$. Learning the variance is mathematically "heavy" and can make training unstable. Early research found that simply following the same "amount" of noise used in the forward process works remarkably well.
+$$
+p_\theta(x_{t-1} | x_t) = \mathcal{N}(x_{t-1}; \mu_\theta(x_t, t), \Sigma_t)
+$$
+At each step the model takes the previous noisy image $x_t$ and calculates the mean for the previous image $x_{t-1}$ and then samples $x_{t-1}$ from the distribution $\mathcal{N}(\mu_\theta(x_t, t), \Sigma_t)$. 
+
+Now, we don't ask the neural network to spit out $\mu$ directly because that's a difficult learning task.
 
 Instead we use use something called **reparameterisation trick** to get the values. We use the neural network to predict a noise amount $\epsilon_\theta$ and then use that to approximate the $\mu_{\theta}$ value. 
 $$\mu_\theta(x_t, t) = \frac{1}{\sqrt{\alpha_t}} \left( x_t - \frac{\beta_t}{\sqrt{1 - \bar{\alpha}_t}} \epsilon_\theta(x_t, t) \right)$$
-Notice that the model takes in input x_t and t; we will get back to this a bit later. The alpha and beta values are just fixed values depending on the noising schedule that is being followed. 
+Notice that the model takes in input $x_t$ and t; we will get back to this a bit later. The alpha and beta values are just fixed values depending on the noising schedule that is being followed. 
 
-*Why do we do this reparameterisation?* -  Because it makes the training much **more stable** - similar to ResNets teaching networks to predict the change in input instead of the output estimate is easier for the model to learn. If you are curious why then refer to [this paper](https://arxiv.org/pdf/1712.09913).
+*Why do we do this reparameterisation?* -  Because it makes the training much **more stable** - similar to how teaching ResNets to predict the change in input is easier for the model than predicting the output estimate. If you are curious why then refer to [this paper](https://arxiv.org/pdf/1712.09913).
 <!-- ![alt text](image-4.png)
 ![alt text](image-3.png) -->
 
-![diffusion markov chain](/blogs/diffusion_tut/markov_chain.png)
+|![diffusion markov chain](/blogs/diffusion_tut/markov_chain.png)|
+|---|
+|This chain illustrates how we go from a noisy image sample to a more structured one over time steps|
+
 Now given a trained model with parameters $\theta$ , the sampling algorithm for generating an image from the target distribution is as follows:
 
 1. **Initialize:** Start with $x_T \sim \mathcal{N}(0, \mathbf{I})$ (pure white noise).
@@ -75,9 +94,11 @@ Now given a trained model with parameters $\theta$ , the sampling algorithm for 
     - **Update the Image:** Calculate the next step $x_{t-1}$ by adding back a tiny bit of controlled variance ($\sigma_t z$) to keep the process stochastic:$$x_{t-1} = \mu_\theta(x_t, t) + \sigma_t z$$
 3. **Result:** $x_0$ is your generated image.
 
+This **reverse** process is summarised in the image below. The *sample in red* is slowly transformed to a sample from the target distribution over multiple timesteps.
+
 |![prior distribution](/blogs/diffusion_tut/prior_distribution.png)|![distribution transformation](/blogs/diffusion_tut/transformation.png)| 
 |---|---|
-| data distribution | samples from pure noise are slowly tranformed to samples of the target distribution|
+| target data distribution | samples from pure noise are slowly tranformed to samples of the target distribution|
 
 
 This algorithm essentially starts with a single sample from a random distribution and then iteratively transforms the distribution to the target distribution over T steps such that the sample gets transformed to a sample from the target distribution. And since in the target distribution only the coherent samples have high probabilities , the final sample should also be coherent and desirable.
