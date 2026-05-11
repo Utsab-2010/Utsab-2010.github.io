@@ -426,7 +426,7 @@ As you can see the results bear decent resemblance to flowers. Ofcourse with bet
 The intermediate steps(shown below) of the reverse process should give you more clarity on how the image is slowly being generated from pure noise.
 ![generated samples](/blogs/diffusion_tut/denoising_result.png)
 
-You can access the full code on this colab notebook [here](link_to_colab_notebook).
+You can access the full code on this colab notebook [here](https://github.com/Utsab-2010/Blogs-and-Implementations/blob/main/Diffusion/Diffusion_tutorial.ipynb).
 
 Let me know in the comments if any portion needs to be elaborated further. I wanted to discuss conditional generation too but the blog is already quite long. I shall try to take it up in the next one!
 
