@@ -15,8 +15,8 @@ theme = "enervoid"
     weight = 30
 
   [[menus.main]]
-    name = 'Academic'
-    url = '/academic/'
+    name = 'Work'
+    url = '/work/'
     weight = 40
 
 [params]

@@ -1,5 +1,5 @@
 {{ define "main" }}
-<div class="max-w-4xl mx-auto">
+<div class="max-w-6xl mx-auto">
   <article>
     <div class="border border-gray-200 dark:border-gray-800/70 bg-white dark:bg-[#070709] rounded-sm p-6 sm:p-10">
       <div class="md-content text-base sm:text-lg leading-relaxed text-gray-700 dark:text-gray-300 w-full">
@@ -10,24 +10,110 @@
 </div>
 
 <style>
-  .toc { font-size: 0.95rem; line-height: 1.35; }
-  .toc ul { list-style: none; margin: 0; padding-left: 0; }
-  .toc li { position: relative; margin: 0.4rem 0; padding-left: 1.25rem; overflow-wrap: anywhere; word-break: break-word; }
-  .toc a { display: block; padding: 0.15rem 0; color: var(--toc-link-color); text-decoration: none; transition: color 0.2s; }
-  .toc a:hover { color: var(--toc-link-hover); text-decoration: underline; text-decoration-color: rgba(99, 102, 241, 0.85); text-underline-offset: 3px; }
-  .toc ul ul { margin: 0.4rem 0 0.4rem 0.35rem; padding-left: 0.9rem; border-left: 1px solid var(--border-alpha); }
-  .toc ul ul>li { padding-left: 1.75rem; }
-  .toc ul ul>li::before { content: "├"; position: absolute; left: 0.35rem; top: 0.2rem; color: rgba(99, 102, 241, 0.75); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
-  .toc ul ul>li:last-child::before { content: "└"; }
-  .md-content ul, .md-content ol { margin: 1.2rem 0; padding-left: 1.5rem; }
-  .md-content ul { list-style: disc; }
-  .md-content ul ul { list-style: circle; }
-  .md-content ol { list-style: decimal; }
-  .md-content li { margin: 0.4rem 0; }
-  .md-content p { margin-bottom: 1.2rem; }
-  .md-content img { margin: 1.5rem auto; border-radius: 0.25rem; }
-  .md-content table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
-  .md-content th, .md-content td { padding: 0.5rem; text-align: center; border: 1px solid var(--border-alpha); }
-  .md-content pre, .md-content code { tab-size: 4; }
+  .toc {
+    font-size: 0.95rem;
+    line-height: 1.35;
+  }
+
+  .toc ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+  }
+
+  .toc li {
+    position: relative;
+    margin: 0.4rem 0;
+    padding-left: 1.25rem;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .toc a {
+    display: block;
+    padding: 0.15rem 0;
+    color: var(--toc-link-color);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .toc a:hover {
+    color: var(--toc-link-hover);
+    text-decoration: underline;
+    text-decoration-color: rgba(99, 102, 241, 0.85);
+    text-underline-offset: 3px;
+  }
+
+  .toc ul ul {
+    margin: 0.4rem 0 0.4rem 0.35rem;
+    padding-left: 0.9rem;
+    border-left: 1px solid var(--border-alpha);
+  }
+
+  .toc ul ul>li {
+    padding-left: 1.75rem;
+  }
+
+  .toc ul ul>li::before {
+    content: "├";
+    position: absolute;
+    left: 0.35rem;
+    top: 0.2rem;
+    color: rgba(99, 102, 241, 0.75);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  .toc ul ul>li:last-child::before {
+    content: "└";
+  }
+
+  .md-content ul,
+  .md-content ol {
+    margin: 1.2rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .md-content ul {
+    list-style: disc;
+  }
+
+  .md-content ul ul {
+    list-style: circle;
+  }
+
+  .md-content ol {
+    list-style: decimal;
+  }
+
+  .md-content li {
+    margin: 0.4rem 0;
+  }
+
+  .md-content p {
+    margin-bottom: 1.2rem;
+  }
+
+  .md-content img {
+    margin: 1.5rem auto;
+    border-radius: 0.25rem;
+  }
+
+  .md-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+  }
+
+  .md-content th,
+  .md-content td {
+    padding: 0.5rem;
+    text-align: center;
+    border: 1px solid var(--border-alpha);
+  }
+
+  .md-content pre,
+  .md-content code {
+    tab-size: 4;
+  }
 </style>
 {{ end }}
