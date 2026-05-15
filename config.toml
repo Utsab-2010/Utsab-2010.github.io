@@ -39,7 +39,7 @@ theme = "enervoid"
       link = "https://scholar.google.com/citations?user=V0Lvy54AAAAJ&hl=en"
       icon = "fa-solid fa-graduation-cap" 
     [[params.socials]]
-      link = "https://drive.google.com/file/d/1Nm2EJbcWDgw5cYXQ2sr53fHeXOyjsOuN/view?usp=sharing"
+      link = "https://drive.google.com/file/d/1nD8XYHCEp5441g84AbSGrEPbh14eAdB9/view?usp=sharing"
       icon = "fa-solid fa-file-lines"
 
 [markup]
