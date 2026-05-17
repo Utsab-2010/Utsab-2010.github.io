@@ -21,7 +21,7 @@ Here are the topics that we will follow:
 - Diffusion - Forward Process - Generating Training Data
 - Diffusion - Reverse Process - Generating Image from Noise
 - Implementation
-
+---
 ### Images as Samples
 Since diffusion based models rely on the idea of transforming a probability distributions and then sampling from them, it is judicious to first understand how images can be seen as samples from some probability distribution.
 
@@ -31,12 +31,13 @@ Ofcourse, if the distribution is just some standard distribution like the Gaussi
 
 During training also we like to assume that all the images of our image dataset belong to some joint probability distribution over the variables  and we train our model to learn this ideal distribution from the training data points.
 
-|![data distribution](/blogs/diffusion_tut/distributions.png)|
-|---|
-|In this figure, the "good" images of dogs have high values of the pdf whereas the irrelevant images(like the cookie) have low values. Ideally, we would want our trained model to be able to capture these high density regions and generate only the good high probability images accordingly. |
+<figure class="my-8">
+  <img src="/blogs/diffusion_tut/distributions.png" alt="data distribution" class="w-full rounded-sm border border-gray-200 dark:border-gray-800/70">
+  <figcaption class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3"><i>In this figure, the "good" images of dogs have high values of the pdf whereas the irrelevant images(like the cookie) have low values. Ideally, we would want our trained model to be able to capture these high density regions and generate only the good high probability images accordingly.</i></figcaption>
+</figure>
 
 
-
+---
 ### Model as an Approximation
 It is very difficult to arrive at a closed form solution for getting this probability distribution given the very high dimensionality of the sample space. Hence we use neural networks to approximate this distribution function.
 
@@ -56,6 +57,8 @@ $$p_\theta(x) = \mathcal{N}(x; \mu_\theta, \Sigma_\theta)
 $$
 A neural network model with parameters $\theta$ that approximates the $\mu$ and $\Sigma$ of the required multivariate normal distribution.
 
+
+---
 ### Diffusion Denoising Reverse Process
 
 Now in diffusion we don't exactly find the required probability distribution directly. Instead we follow an *iterative process* of slowly transforming a starting **noisy distribution** into the required final distribution. Why is this done? A simple explanation would be, it just works better for the practical scenarios of approximating non-linear functions in high dimensions.
@@ -80,9 +83,10 @@ Notice that the model takes in input $x_t$ and t; we will get back to this a bit
 <!-- ![alt text](image-4.png)
 ![alt text](image-3.png) -->
 
-|![diffusion markov chain](/blogs/diffusion_tut/markov_chain.png)|
-|---|
-|This chain illustrates how we go from a noisy image sample to a more structured one over time steps|
+<figure class="my-8">
+  <img src="/blogs/diffusion_tut/markov_chain.png" alt="diffusion markov chain" class="w-full rounded-sm border border-gray-200 dark:border-gray-800/70">
+  <figcaption class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3"><i>This chain illustrates how we go from a noisy image sample to a more structured one over time steps</i></figcaption>
+</figure>
 
 Now given a trained model with parameters $\theta$ , the sampling algorithm for generating an image from the target distribution is as follows:
 
@@ -96,9 +100,17 @@ Now given a trained model with parameters $\theta$ , the sampling algorithm for 
 
 This **reverse** process is summarised in the image below. The *sample in red* is slowly transformed to a sample from the target distribution over multiple timesteps.
 
-|![prior distribution](/blogs/diffusion_tut/prior_distribution.png)|![distribution transformation](/blogs/diffusion_tut/transformation.png)| 
-|---|---|
-| target data distribution | samples from pure noise are slowly tranformed to samples of the target distribution|
+<div class="flex flex-col sm:flex-row gap-4 sm:gap-6 my-8 items-start">
+  <figure class="w-full sm:w-[48%] m-0">
+    <img src="/blogs/diffusion_tut/prior_distribution.png" alt="prior distribution" class="w-full rounded-sm border border-gray-200 dark:border-gray-800/70">
+    <figcaption class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3"><i>Target Distribution of the data.</i></figcaption>
+  </figure>
+  <figure class="w-full sm:w-[52%] m-0">
+    <img src="/blogs/diffusion_tut/transformation.png" alt="distribution transformation" class="w-full rounded-sm border border-gray-200 dark:border-gray-800/70">
+    <figcaption class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3"><i>Samples(see the red one) from the initial Gaussian distribution are slowly tranformed to samples of the target distribution</i></figcaption>
+  </figure>
+</div>
+
 
 
 This algorithm essentially starts with a single sample from a random distribution and then iteratively transforms the distribution to the target distribution over T steps such that the sample gets transformed to a sample from the target distribution. And since in the target distribution only the coherent samples have high probabilities , the final sample should also be coherent and desirable.
@@ -106,6 +118,7 @@ Note:
 - **Variance Schedule ($\alpha, \bar{\alpha}, \beta$):** These must be the exact same values used during the training (Forward) phase.
 - **Total Steps ($T$):** The number of iterations (e.g., 1000).
 
+---
 ### The Forward (Training) Process
 Now that you understand(hopefully) the process of generation of an image via diffusion, we can discuss how these models can be trained.
 
@@ -115,14 +128,11 @@ Since we were using the trained model to predict the noise of a given image + ti
 
 But we don't do it in any arbitrary manner, rather we do a time-scheduled addition, hence the "t" in the model input.
 
- In the forward process, we generate $x_t$ from the clean image $x_0$ and some sampled noise $\epsilon \sim \mathcal{N}(0, \mathbf{I})$:
+In the forward process, we gradually add Gaussian noise to an image step by step. We control how much noise is added at each step using a variance schedule $\beta_t$. If we define $\alpha_t = 1 - \beta_t$, the single-step transition from $x_{t-1}$ to $x_t$ is defined as:
 
-$$x_t = \sqrt{\bar{\alpha}_t}x_0 + \sqrt{1-\bar{\alpha}_t} \epsilon$$
+$$x_t = \sqrt{\alpha_t} x_{t-1} + \sqrt{1 - \alpha_t} \epsilon, \quad \epsilon \sim \mathcal{N}(0, \mathbf{I})$$
 
-where $\bar{\alpha}_t$ goes from 1 at t=0 to 0 at t=T following some curve(linear, exponential, polynomial, etc). We define  $\alpha_t = 1 - \beta_t$ where $\beta_t$ is called the variance schedule 
- We use a variance schedule $\beta_t$ to gradually add Gaussian noise to a clean image $x_0$.
-
-Using the **reparameterization trick**, we can sample an image $x_t$ at any arbitrary timestep $t$ directly from $x_0$ without iterating through all previous steps:
+If we had to do this iteratively to generate a noisy image at step $t$, it would be very slow during training. Fortunately, we can recursively expand this formula to sample an image $x_t$ at any arbitrary timestep $t$ *directly* from the clean image $x_0$, without iterating through all previous steps:
 
 $$x_t = \sqrt{\bar{\alpha}_t} x_0 + \sqrt{1 - \bar{\alpha}_t} \epsilon, \quad \epsilon \sim \mathcal{N}(0, \mathbf{I})$$
 
@@ -140,16 +150,20 @@ $$\mathcal{L}_{simple}(\theta) = \mathbb{E}_{t, x_0, \epsilon} \left[ \| \epsilo
 
 Mathematically, minimizing the $L_2$ error in noise prediction is equivalent to maximizing the **Evidence Lower Bound (ELBO)** under the assumption that the reverse transitions are Gaussian. In simpler terms: because we assume our "noise" is a Gaussian bell curve, the $L_2$ distance is the most natural way to measure how far our prediction is from the truth.
 #### The Training Algorithm
-1. **Sample** a clean image $x_0$ from your dataset (e.g., a digit from MNIST).
+1. **Sample** a clean image $x_0$ from your dataset.
 2. **Pick a random timestep** $t$ between $1$ and $T$ (e.g., $t=450$ out of $1000$).
 3. **Generate random noise** $\epsilon$ and mix it with $x_0$ using the formula above to create $x_t$.
-4. **Optimize:** Take a gradient descent step to minimize the $L_2$ distance between the predicted noise and actual noise.
+4. Pass the noisy image $x_t$ and the timestep $t$ to the model and get the predicted noise $\epsilon_\theta(x_t, t)$.
+5. Compare the predicted noise with the actual noise $\epsilon$ using Mean Squared Error ($L_2$ norm) and calculate the loss.
+6. **Optimise:** Take a gradient descent step to minimize the loss.
+7. Repeat for a number of epochs.
 
 ---
 
 
 
 ### Implementation
+First define the hyper-parameters and device. I will be using Pytorch for this implementation. I would suggest using a GPU since training on a CPU would take a lot of time. You may use Google Colab or Kaggle notebooks for this.
 
 ```python
 import torch
@@ -158,19 +172,21 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader, ConcatDataset
 from torchvision import datasets, transforms
 
-
-T = 1000  # Total number of diffusion steps
+T = 500  # Total number of diffusion steps
 BETA_START = 0.0001
 BETA_END = 0.02
+
+# Flowers102 are RGB natural images; use a slightly larger size than MNIST
 IMAGE_SIZE = 64
-CHANNELS = 3  
+CHANNELS = 3  # 3 for RGB (Flowers102)
 BATCH_SIZE = 32
-LEARNING_RATE = 3e-4
+LEARNING_RATE = 1e-3
 EPOCHS = 100
 TIME_DIM = 64
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"Using device: {device}")
+
 ```
 
 ```python
@@ -213,9 +229,12 @@ dataloader = get_dataloader()
 
 Before we can train, we need to pre-calculate our "noise schedule." These $\alpha$ and $\beta$ values are the knobs that control how much noise is added at each step. By calculating the cumulative products ($\bar{\alpha}$) upfront, we can jump from a clean image ($x_0$) to a noisy version at any timestep $t$ in a single step, rather than looping $t$ times.
 
-To keep things simple, I'm using the **Flowers102** dataset. It’s small enough to train relatively quickly but complex enough to show that the model is actually learning something interesting. We resize everything to 64x64 and normalize the pixels to the range `[-1, 1]`. This is important because our model will be predicting noise that also lives around that range.
+To keep things simple, I'm using the **Flowers102** dataset. It’s small enough to train relatively quickly but diverse enough to show that the model is actually learning something interesting. We resize everything to 64x64 and normalize the pixels to the range `[-1, 1]`. This is important because our model will be predicting noise that also lives around that range(due to sampling from the standard Gaussian distribution).
 
-![Flower 102 dataset](/blogs/diffusion_tut/flower102.png)
+<figure>
+  <img src="/blogs/diffusion_tut/flower102.png" alt="Flower 102 dataset">
+  <figcaption class="text-center text-sm"><i>A few samples from the Flowers 102 dataset.</i></figcaption>
+</figure>
 
 
 ```python 
@@ -231,7 +250,7 @@ def forward_diffusion_sample(x0, t, device=None):
 
     return xt, noise
 ```
-This function is our **Forward Process**. It takes a clean image and a list of timesteps, then "corrupts" the image by mixing it with random noise. Notice the formula: we scale the clean image down slightly and the noise up, ensuring the variance stays consistent. The model's goal later will be to look at the resulting `xt` and guess exactly what that `noise` was.
+This function is our **Forward Process**. It takes a clean image and a timestep value $t$, then "corrupts" the image by mixing it with random noise at that corresponding timestep $t$ based on the noise schedule $\beta_t$. 
 
 
 ```python
@@ -243,7 +262,9 @@ def get_time_embedding(t, dim):
     emb = torch.cat([sin_emb, cos_emb], dim=-1)
     return emb
 ```
-One tricky part of Diffusion is that the model needs to know **when** it is. Denoising at step $t=999$ (almost pure noise) is very different from denoising at $t=5$ (almost clean). We use **Sinusoidal Positional Encodings**—the same stuff used in Transformers—to turn a single integer $t$ into a rich vector that the neural network can understand.
+As mentioned before the model predicts the noise at a given timestep $t$ from the input noised image. Denoising at step $t=999$ (almost pure noise) is very different from denoising at $t=5$ (almost clean). However we don't just pass the timestep $t$ directly as an integer input to the model. 
+
+Instead a good practice is to encode the timestep $t$ into a vector embedding representation. Here we use **Sinusoidal Positional Encodings**—the same stuff used in Transformers—to turn a single integer $t$ into a rich vector that the neural network can understand.
 
 
 ```python
@@ -332,7 +353,7 @@ class UNet(nn.Module):
 
         return self.out(h)
 ```
-The **U-Net** is the gold standard for image-to-image tasks. It first squeezes the image down to a "bottleneck" to learn high-level features, and then expands it back to the original size. The "skip connections" (where we concatenate features from the encoder to the decoder) are the secret sauce—they allow the model to retain fine-grained details from the original noisy image while the bottleneck focus on the overall structure. I've also added a small `_inject` helper to merge our time embeddings into every layer so the model stays aware of the current timestep.
+The **U-Net** is the gold standard for image-to-image tasks. It first squeezes the image down to a "bottleneck" to learn high-level features, and then expands it back to the original size. The "skip connections" allows the model to retain fine-grained details from the original noisy image while the bottleneck focus on the overall structure. I've also added a small `_inject` helper method to merge our time embeddings into every layer so the model stays aware of the current timestep.
 
 
 ```python
@@ -377,13 +398,13 @@ def train_ddpm(model, dataloader, epochs=EPOCHS):
 The training loop is surprisingly simple once the math is set up. We pick a clean image, pick a random $t$, corrupt the image using our forward function, and ask the U-Net to guess the noise. We then compare the guess to the actual noise using a simple **MSE Loss**. Over time, the U-Net gets better at seeing "through" the noise to identify the underlying patterns.
 
 ```python
-def sample_reverse_process(model, num_images=1):
+def sample_reverse_process(model, num_images=1,no_of_transitions=5):
 
     # Start with pure noise (xT)
     x = torch.randn((num_images, CHANNELS, IMAGE_SIZE, IMAGE_SIZE), device=device)
 
     model.eval()
-
+    sample_transitions = []  # To store intermediate samples for visualization
     with torch.no_grad():
         # Loop backward from T-1 down to 0
         for t in reversed(range(T)):
@@ -411,26 +432,37 @@ def sample_reverse_process(model, num_images=1):
                 # At t=0, the final step is deterministic
                 x = mu_theta
 
+            if t % (T // no_of_transitions) == 0 or t == T-1:
+                sample_transitions.append((x.cpu().clone(), t))  # Store intermediate samples
     # Clamp output to [-1, 1] range
     x = torch.clamp(x, -1., 1.)
-    return x
+    
+    return x,sample_transitions
 ```
 
 Finally, we have the **Reverse Process**. This is where the magic happens. We start with a block of pure, random Gaussian noise and slowly "chip away" at it using our trained model. At each step, the model predicts the noise, we use the math we derived earlier to calculate the "de-noised" mean ($\mu_\theta$), and then we add back a tiny bit of random variance. This randomness is crucial—it's what allows the model to generate a different, unique flower every time even if you started with similar noise.
 
+---
+### Results
 
-I trained it over 100 epochs on a RTX 3060 laptop GPU and got a 97% loss reduction. The following are some results generated by unconditional sampling using the trained model:
+I trained it for 100 epochs on a RTX 3060 laptop GPU and got a 97% loss reduction. The following are some results generated by unconditional sampling using the trained model:
 ![training results](/blogs/diffusion_tut/training_results.png)
-As you can see the results bear decent resemblance to flowers. Ofcourse with better architectures and more compute the obtained results can be further improved.
+As you can see the a lot of the results bear resemblance to flowers. Ofcourse with better architectures and more compute the obtained results can be further improved.
 
-The intermediate steps(shown below) of the reverse process should give you more clarity on how the image is slowly being generated from pure noise.
-![generated samples](/blogs/diffusion_tut/denoising_result.png)
+<figure>
+    <img src="/blogs/diffusion_tut/denoising_result.png" alt="generated samples">
+    <figcaption class="text-center text-sm"><i>The intermediate reverse process steps showing how the image is slowly being generated from pure noise.</i></figcaption>
+</figure>
 
-You can access the full code on this colab notebook [here](https://github.com/Utsab-2010/Blogs-and-Implementations/blob/main/Diffusion/Diffusion_tutorial.ipynb).
+<br>
+
+You can access the full notebook with the code [here](https://github.com/Utsab-2010/Blogs-and-Implementations/blob/main/Diffusion/Diffusion_tutorial.ipynb).
 
 Let me know in the comments if any portion needs to be elaborated further. I wanted to discuss conditional generation too but the blog is already quite long. I shall try to take it up in the next one!
 
 Thanks for reading :)
+
+---
 
 ### Resources
  - [DDPM: Denoising Diffusion Probabilistic Models](https://arxiv.org/abs/2006.11239)

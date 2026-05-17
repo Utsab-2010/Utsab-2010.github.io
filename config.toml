@@ -53,6 +53,9 @@ theme = "enervoid"
     [markup.goldmark.parser]
       attribute = true
 
+    [markup.goldmark.renderer]
+      unsafe = true
+
 [markup.highlight]
   noClasses = true
   codeFences = true
