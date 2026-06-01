@@ -6,7 +6,7 @@ date: 2024-01-01
 ### **Experiences**
 ---
 - *Research Intern* | VAL, IISc Bangalore (May 2026 - Present)
-    - Working on Continual and Curriculum Learning for Vision Models
+    - Working on Data-efficient Deep Learning for Vision Models. Trying to understand the behaviour of image data and how it scales with pruning methods. Also exploring continual learning methods.
 - *Research Intern* | ARMS Lab, IIT Bombay (May 2025 - Aug 2025)
     - Worked on Safe Exploration and Navigation for AGVs
     - Curated human-navigation datasets and implemented trajectories to human agents in Gazebo simulation.
