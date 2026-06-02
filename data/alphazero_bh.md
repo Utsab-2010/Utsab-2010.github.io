@@ -22,29 +22,33 @@ The general structure of this blog will be as follow:
 
 
 ### Introduction to RL
+Reinforcement learning is a subfield of deep learning which focuses on teaching models(termed as agents) by making them interact with some environment. The main idea is very heuristic, the model gets conditioned to perform only those actions which are beneficial to it. 
+
+How is this "benefit" actually defined? This is done with the help of reward functions - a function $R(s, a, s')$ that takes the current state $s$, the action $a$ taken by the agent, and the next state $s'$ , and returns the reward for that action. 
+some the 
+
+//insert RL diagram
+
+As shown above, the agent interacts with the environment, gets some rewards, trains itself based on rewards and repeat. Now while idea is simple in theory, designing reward functions and RL traininig frameworks which cater to our needs is a challenging task.
 
 
-### Rules of Black Hole?
-If you've never heard of Black Hole, don't worry—it's a brilliantly simple yet deeply strategic tile-placement game. Imagine a triangular grid floating in space. 
+### Rules of Black Hole
+Black Hole is a strategic tile-placement game played on a triangular grid. Traditionally it has 6 rows, but to push our AI to its limits, I expanded it to a massive 9-row grid (45 empty spaces).
 
-<!-- ![9-Layer Black Hole Board](images/bh_board_9lvl.png) -->
+#### *How to Play*
+- **The Setup:** Two players each receive 22 tiles numbered 1 to 22. The board starts empty.
+- **The Turn:** Players take turns placing one tile onto any empty spot. You *must* play your tiles in ascending numerical order (1, then 2, then 3, up to 22). 
+- **The Black Hole:** Because 44 tiles are placed onto a 45-space board, exactly one space is left empty at the end. This becomes **The Black Hole**.
 
-Traditionally, the board has 6 rows, but for the sake of pushing our AI to its limits, I expanded it to a massive 9-row triangle, creating 45 empty spaces in total. I'll dive into *why* I made this jump later in the post!
+#### *Scoring*
+The Black Hole "sucks in" neighboring tiles. Scoring is calculated in concentric rings radiating outward from the hole (Ring 1 is immediate neighbors, Ring 2 is the next layer out, etc.).
 
-#### *The Setup and the Turn*
-Here’s how a match unfolds. Two players (let's call them Red and Green) face off, and each gets an identical set of 22 tiles numbered from 1 to 22. 
+**Your goal is to get sucked in as little as possible.** The player whose tiles in Ring 1 have the *lowest sum* wins instantly. Ties are broken by evaluating Ring 2, and so on.
 
-The board starts completely empty. Players take turns placing exactly one tile onto any empty spot on the grid. However, you don't get to choose which tile to play! You are forced to play them in increasing numerical order: on your first turn you play your "1" tile, then your "2", all the way up to "22". Since both players are doing this simultaneously, the board quickly fills up with ascending numbers.
 
-Because there are 45 spaces on our board, and the two players place a combined total of 44 tiles... exactly one space is left totally empty at the end of the game.
+### Google Deepmind's AlphaGo and AlphaZero
 
-This final, lonely void becomes **The Black Hole**. 
 
-Once the Black Hole forms, it begins "sucking in" everything around it. The game is scored in concentric rings radiating outward from the hole. The first ring consists of the immediate neighbors touching the Black Hole. The second ring is the neighbors of those neighbors, and so on.
-
-Your goal? **You want to get sucked in as little as possible.** The player whose tiles surrounding the Black Hole have the *lowest* total sum wins the game. 
-
-First, we tally up the tiles in Ring 1. If Red’s tiles sum to 12 and Green’s sum to 18, Red wins instantly. But what if it’s a tie? Then the gravitational pull extends to Ring 2, and we tally those up to break the tie, continuing outward until a winner is found.
 
 
 

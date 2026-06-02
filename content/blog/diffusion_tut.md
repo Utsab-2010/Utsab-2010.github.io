@@ -146,9 +146,9 @@ We provide the model (usually a U-Net) with the noisy image $x_t$ and the curren
 What is the most simple loss function you can think of that might be used here? We are predicting a continuous value! This is just regression on the noise values. Therefore, a sane choice would be the **Mean Squared Error ($L_2$ norm)** between the true noise $\epsilon$ and the predicted noise $\epsilon_\theta$: 
 $$\mathcal{L}_{simple}(\theta) = \mathbb{E}_{t, x_0, \epsilon} \left[ \| \epsilon - \epsilon_\theta(x_t, t) \|^2 \right]$$
 
-#### Why $L_2$?
+> #### Why $L_2$?
+> Mathematically, minimizing the $L_2$ error in noise prediction is equivalent to maximizing the **Evidence Lower Bound (ELBO)** under the assumption that the reverse transitions are Gaussian. In simpler terms: because we assume our "noise" is a Gaussian bell curve, the $L_2$ distance is the most natural way to measure how far our prediction is from the truth.
 
-Mathematically, minimizing the $L_2$ error in noise prediction is equivalent to maximizing the **Evidence Lower Bound (ELBO)** under the assumption that the reverse transitions are Gaussian. In simpler terms: because we assume our "noise" is a Gaussian bell curve, the $L_2$ distance is the most natural way to measure how far our prediction is from the truth.
 #### The Training Algorithm:
 1. **Sample** a clean image $x_0$ from your dataset.
 2. **Pick a random timestep** $t$ between $1$ and $T$ (e.g., $t=450$ out of $1000$).

@@ -35,7 +35,7 @@ Day 2 began with a plenary session on *Information Markets and Decision Systems*
 
 The foyer of the IDR building had stalls from robotic equipment distributors. There was a live demo of the *Unitree dog*, which was honestly very cool to watch. I also visited the EduTech stall and was surprised by the range of robots they had. They even had a small bot similar to the `F1tenth MuSHR` we use in our research group at IITKGP — except the price tag felt personally offensive.
 
-> I also took this chance to interact with a few professors I had been planning to email for research opportunities before eventually committing to my IITB work. Slightly intimidating, but absolutely worth it.
+I also took this chance to interact with a few professors I had been planning to email for research opportunities before eventually committing to my IITB work. Slightly intimidating, but absolutely worth it.
 
 
 ### Evening & Gala Dinner
