@@ -55,6 +55,9 @@ theme = "enervoid"
 
     [markup.goldmark.renderer]
       unsafe = true
+  [markup.tableOfContents]
+    endLevel = 3
+    startLevel = 2
 
 [markup.highlight]
   noClasses = true
@@ -67,6 +70,3 @@ theme = "enervoid"
   [caches.images]
     dir = ':cacheDir/images'
 
-[markup.tableOfContents]
-  endLevel = 3
-  startLevel = 2
