@@ -66,3 +66,7 @@ theme = "enervoid"
 [caches]
   [caches.images]
     dir = ':cacheDir/images'
+
+[markup.tableOfContents]
+  endLevel = 3
+  startLevel = 2
