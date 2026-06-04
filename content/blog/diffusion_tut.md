@@ -1,8 +1,8 @@
 +++
-title = "An Intuitive Understanding of Diffusion Models"
+title = "An Intuitive Explanation of Diffusion Models"
 date = 2026-05-09T12:42:42+05:30
 tags = ["Diffusion", "Deep Learning"]
-description = "An Intuitive Understanding of Diffusion Models with a hands-on Implementation"
+description = "An Intuitive Explanation of Diffusion Models with a hands-on Implementation"
 +++ 
 
 
@@ -10,10 +10,7 @@ Generative AI has been the buzz and face of AI industry for the last few years. 
 
 This is where diffusion comes in ! One of the most amazing model architectures and training methodologies in modern AI.
 
-Before we dive into the topic, it would be helpful to first break down this very broad topic into some bite sized chunks for easier digestion.
-My intention with this blog will be to give you a **intuitive** overview of both the math and training workflow of diffusion along with a **hands-on implementation** at the end. While I will go over the necessary math involved, I will try my best to explain it in a more intuitive sense rather than rigorous proofs.
-
-It will take a bit of your time but should leave you will good enough clarity regarding the topic.
+My intention with this blog will be to give you a **intuitive** overview of some of the math and the training workflow of diffusion along with a **hands-on implementation** at the end. While I will go over the necessary math involved, it does not even start to cover the entirety of this beautiful topic. However, it should be good enough to get a rough idea of the underlying principles and should(hopefully) motivate you to dive deeper.
 
 Here are the topics that we will follow:
 - Images as Samples of a distribution
@@ -458,7 +455,7 @@ As you can see the a lot of the results bear resemblance to flowers. Ofcourse wi
 
 You can access the full notebook with the code [here](https://github.com/Utsab-2010/Blogs-and-Implementations/blob/main/Diffusion/Diffusion_tutorial.ipynb).
 
-Let me know in the comments if any portion needs to be elaborated further. I wanted to discuss conditional generation too but the blog is already quite long. I shall try to take it up in the next one!
+Let me know in the comments if any portion needs to be elaborated further. I wanted to discuss conditional generation too but I did not want to drag it further. I shall try to take it up in another blog. I also plan to write another  one where we discuss the maths in more detail, deriving the expressions from first principles. 
 
 Thanks for reading :)
 
@@ -467,4 +464,5 @@ Thanks for reading :)
 ### Resources
  - [DDPM: Denoising Diffusion Probabilistic Models](https://arxiv.org/abs/2006.11239)
  - [Simplest Implementation of Diffusion Models \| Emilio’s Blog](https://e-dorigatti.github.io/math/deep%20learning/2023/06/25/diffusion.html)
+ - [Diffusion Models - The AI Summer](https://theaisummer.com/diffusion-models/)
 - A great course on Generative Diffusion and Flow Models - [YouTube](https://www.youtube.com/playlist?list=PL57nT7tSGAAXwjhDYcxEycx5W7YoSrZyt)
