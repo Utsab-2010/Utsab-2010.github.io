@@ -23,10 +23,13 @@ date: 2024-01-01
 
 ### **Achievements**
 ---
-* Rank 15 among 124k candidates in WBJEE 2023
-* Rank 1784 with 99.86 percentile score in JEE Mains 2023
-* Rank 1596 with 99.16 percentile score in JEE Advanced 2023
+* ***2nd*** in Robust Visual Foraging Competition @ **NeurIPS 2025** [[Link](https://neurips.cc/virtual/2025/loc/san-diego/136982)]
+* ***5th*** in Qualification and 7th Globally — Roboracer Sim Racing League @ **CDC-TF 2025** 
+[[Link](https://autodrive-ecosystem.github.io/competitions/roboracer-sim-racing-cdc-tf-2025/)]
 * ***4th*** place in Hardware Modeling in General Championship 2025 [[Link](https://github.com/Utsab-2010/GC-Hamo-2025.git)]
 * ***1st*** in Qualification and 9th Globally — Roboracer Sim Racing League @ **ICRA 2025** [[Link](https://autodrive-ecosystem.github.io/competitions/roboracer-sim-racing-icra-2025/)]
-* ***2nd*** in Robust Visual Foraging Competition @ **NeurIPS 2025** [[Link](https://neurips.cc/virtual/2025/loc/san-diego/136982)]
-* ***5th*** in Qualification and 7th Globally — Roboracer Sim Racing League @ **CDC-TF 2025** [[Link](https://autodrive-ecosystem.github.io/competitions/roboracer-sim-racing-cdc-tf-2025/)]
+
+* Ranked **15** among 124k candidates in WBJEE 2023
+* Ranked **1596** among 190k candidates in JEE Advanced 2023
+* Ranked **1784** among 1.27M candidates in JEE Mains 2023
+

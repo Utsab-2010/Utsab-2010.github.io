@@ -1,9 +1,11 @@
 +++
-title = "An Intuitive Explanation of Diffusion Models"
+title = "Diffusion Models for Dummies: Getting Started"
 date = 2026-05-09T12:42:42+05:30
 tags = ["Diffusion", "Deep Learning"]
 description = "An Intuitive Explanation of Diffusion Models with a hands-on Implementation"
 +++ 
+
+
 
 
 Generative AI has been the buzz and face of AI industry for the last few years. Particularly image and video generative models. How do they models generative an image when given a prompt? But how exactly does a model take in text prompt and transform it into a visual output catering to the context of that prompt?
@@ -97,7 +99,280 @@ Now given a trained model with parameters $\theta$ , the sampling algorithm for 
 
 This **reverse** process is summarised in the image below. The *sample in red* is slowly transformed to a sample from the target distribution over multiple timesteps.
 
-<div class="flex flex-col sm:flex-row gap-4 sm:gap-6 my-8 items-start">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<div class="diffusion-reverse-playground">
+  <div class="reverse-layout">
+    <div class="reverse-visual-side">
+      <div class="canvas-slider-container">
+        <div class="slider-track-wrapper">
+          <span class="axis-label top-label">$t = T$</span>
+          <input type="range" id="reverse-slider" min="0" max="100" value="100" step="1" orient="vertical">
+          <span class="axis-label bottom-label">$t = 0$</span>
+        </div>
+        <canvas id="reverse-canvas" width="400" height="300"></canvas>
+      </div>
+    </div>
+    <div class="reverse-control-side">
+      <h3>Reverse Diffusion: Skewed Modes</h3>
+      <p>Samples($x_T$) from the initial standard Gaussian distribution(top) get slowly transformed into samples($x_0$) of the target distribution(bottom) over $T$ steps.</p>
+      <div class="status-badge">
+        <span id="reverse-step-display">Timestep $t$: 100</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.diffusion-reverse-playground {
+  font-family: 'Cambria Math', system-ui, -apple-system, sans-serif;
+  max-width: 780px;
+  margin: 1.5rem auto;
+  padding: 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.06);
+}
+
+.reverse-layout {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.reverse-visual-side {
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.02);
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.canvas-slider-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.slider-track-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  width: 35px;
+}
+
+#reverse-slider {
+  -webkit-appearance: slider-vertical;
+  appearance: slider-vertical;
+  width: 8px;
+  height: 220px;
+  margin: auto 0;
+  accent-color: #4f46e5;
+  cursor: pointer;
+}
+
+.axis-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+#reverse-canvas {
+  border-radius: 6px;
+  display: block;
+  background: transparent;
+}
+
+.reverse-control-side {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.reverse-control-side h3 {
+  margin: 0 0 0.4rem 0;
+  color: #0f172a;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.reverse-control-side p {
+  font-size: 0.85rem;
+  color: #475569;
+  line-height: 1.5;
+  margin: 0 0 1.2rem 0;
+}
+
+.status-badge {
+  display: inline-block;
+  background: rgba(79, 70, 229, 0.1);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+#reverse-step-display {
+  color: #4f46e5;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 640px) {
+  .reverse-layout {
+    flex-direction: column;
+    text-align: center;
+  }
+  .reverse-control-side {
+    text-align: center;
+    width: 100%;
+  }
+}
+</style>
+
+<script>
+(function initDiffusionSimulation() {
+  const revCanvas = document.getElementById('reverse-canvas');
+  
+  if (!revCanvas) {
+    setTimeout(initDiffusionSimulation, 100);
+    return;
+  }
+
+  const revCtx = revCanvas.getContext('2d');
+  const revSlider = document.getElementById('reverse-slider');
+  const revDisplay = document.getElementById('reverse-step-display');
+
+  const NUM_PARTICLES = 45; 
+  const MAX_STEPS = 100;
+  const trajectories = [];
+  const W = revCanvas.width;
+  const H = revCanvas.height;
+
+  function getGaussian() {
+    let u = 0, v = 0;
+    while(u === 0) u = Math.random(); 
+    while(v === 0) v = Math.random();
+    return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+  }
+
+  for (let p = 0; p < NUM_PARTICLES; p++) {
+    const path = new Array(MAX_STEPS + 1);
+    const targetLeft = Math.random() < 0.75;
+    
+    let currentX = (W / 2) + getGaussian() * 30;
+    path[MAX_STEPS] = currentX;
+
+    for (let t = MAX_STEPS - 1; t >= 0; t--) {
+      let drift = 0;
+      if (t < 75) {
+        const targetX = targetLeft ? (W / 2 - 95) : (W / 2 + 95);
+        drift = (targetX - currentX) * 0.045; 
+      }
+      const noiseScale = 2.4 * Math.sqrt(t / MAX_STEPS + 0.1);
+      currentX += drift + getGaussian() * noiseScale;
+      path[t] = currentX;
+    }
+    
+    trajectories.push({
+      points: path,
+      isRed: p === 7
+    });
+  }
+
+  function gaussianPDF(x, mean, stdDev) {
+    return (1 / (stdDev * Math.sqrt(2 * Math.PI))) * Math.exp(-Math.pow(x - mean, 2) / (2 * Math.pow(stdDev, 2)));
+  }
+
+  function drawSimulation() {
+    revCtx.clearRect(0, 0, W, H);
+    
+    const currentStep = parseInt(revSlider.value);
+    revDisplay.textContent = `Timestep t: ${currentStep}`;
+
+    const paddingY = 40;
+    const usableHeight = H - (paddingY * 2);
+    
+    function getCanvasY(stepValue) {
+      const ratio = (MAX_STEPS - stepValue) / MAX_STEPS;
+      return paddingY + ratio * usableHeight;
+    }
+
+    const activeY = getCanvasY(currentStep);
+
+    revCtx.lineWidth = 1.75;
+    revCtx.strokeStyle = 'rgba(15, 23, 42, 0.25)'; // Darkened slightly for clearer contrast
+    
+    // Top single distribution (t=T) - Amplified multiplier to 2000
+    revCtx.beginPath();
+    for (let x = 0; x < W; x++) {
+      let yCurve = paddingY - (gaussianPDF(x, W / 2, 30) * 2000);
+      if (x === 0) revCtx.moveTo(x, yCurve); else revCtx.lineTo(x, yCurve);
+    }
+    revCtx.stroke();
+
+    // Bottom skewed bimodal distribution (t=0) - Amplified multiplier to 2600
+    revCtx.beginPath();
+    for (let x = 0; x < W; x++) {
+      let pLeft = gaussianPDF(x, W / 2 - 95, 22) * 0.75;
+      let pRight = gaussianPDF(x, W / 2 + 95, 22) * 0.25;
+      
+      let yCurve = (H - paddingY) - ((pLeft + pRight) * 2600);
+      if (x === 0) revCtx.moveTo(x, yCurve); else revCtx.lineTo(x, yCurve);
+    }
+    revCtx.stroke();
+
+    // Active Timestamp Axis
+    revCtx.beginPath();
+    revCtx.strokeStyle = 'rgba(0, 0, 0, 0.05)';
+    revCtx.setLineDash([4, 4]);
+    revCtx.moveTo(0, activeY);
+    revCtx.lineTo(W, activeY);
+    revCtx.stroke();
+    revCtx.setLineDash([]); 
+
+    // Render Particles & Trails
+    trajectories.forEach(tr => {
+      if (tr.isRed) {
+        revCtx.strokeStyle = '#ef4444';
+        revCtx.lineWidth = 2.5;
+      } else {
+        revCtx.strokeStyle = 'rgba(59, 130, 246, 0.2)';
+        revCtx.lineWidth = 1.1;
+      }
+
+      revCtx.beginPath();
+      revCtx.moveTo(tr.points[MAX_STEPS], getCanvasY(MAX_STEPS));
+      for (let s = MAX_STEPS - 1; s >= currentStep; s--) {
+        revCtx.lineTo(tr.points[s], getCanvasY(s));
+      }
+      revCtx.stroke();
+
+      revCtx.beginPath();
+      revCtx.fillStyle = tr.isRed ? '#ef4444' : '#3b82f6';
+      revCtx.arc(tr.points[currentStep], activeY, tr.isRed ? 4.5 : 2.5, 0, 2 * Math.PI);
+      revCtx.fill();
+      if (tr.isRed) {
+        revCtx.strokeStyle = '#ffffff';
+        revCtx.lineWidth = 1;
+        revCtx.stroke();
+      }
+    });
+  }
+
+  revSlider.addEventListener('input', drawSimulation);
+  drawSimulation();
+})();
+</script>
+
+
+<!-- <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 my-8 items-start">
   <figure class="w-full sm:w-[48%] m-0">
     <img src="/blogs/diffusion_tut/prior_distribution.png" alt="prior distribution" class="w-full rounded-sm border border-gray-200 dark:border-gray-800/70">
     <figcaption class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3"><i>Target Distribution of the data.</i></figcaption>
@@ -106,7 +381,7 @@ This **reverse** process is summarised in the image below. The *sample in red* i
     <img src="/blogs/diffusion_tut/transformation.png" alt="distribution transformation" class="w-full rounded-sm border border-gray-200 dark:border-gray-800/70">
     <figcaption class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3"><i>Samples(see the red one) from the initial Gaussian distribution are slowly tranformed to samples of the target distribution</i></figcaption>
   </figure>
-</div>
+</div> -->
 
 
 
@@ -116,7 +391,7 @@ This algorithm essentially starts with a single sample from a random distributio
 - **Total Steps ($T$):** The number of iterations (e.g., 1000). -->
 
 ---
-### The Forward (Training) Process
+### The Forward Process and Training
 Now that you understand(hopefully) the process of generation of an image via diffusion, we can discuss how these models can be trained.
 
 While there has been a multitude of training methods catering to diffusion and similar architectures, I will be going over the most well-known one which was discussed in the foundational paper of DDPM.
@@ -137,6 +412,165 @@ Where:
 - $\bar{\alpha_t} = \prod_{i=1}^t \alpha_i$ (the cumulative product of the noise schedule)
 - $\epsilon$ is the "ground truth" noise we injected.
     
+<div class="diffusion-playground">
+  <div class="playground-layout">
+    <div class="visual-side">
+      <img id="source-img" src="https://picsum.photos/id/1025/300/300" crossorigin="anonymous" alt="Source" style="display:none;">
+      <canvas id="diffusion-canvas" width="300" height="300"></canvas>
+    </div>
+    <div class="control-side">
+      <h3>Interactive Forward Diffusion</h3>
+      <p>Drag the slider to add Forward Gaussian Noise ($q(x_t | x_{t-1})$) to the original image data.</p>
+      <div class="controls">
+        <div class="slider-labels">
+          <span>Original ($x_0$)</span>
+          <span id="step-display">Timestep $t$: 0</span>
+          <span>Pure Noise ($x_T$)</span>
+        </div>
+        <input type="range" id="noise-slider" min="0" max="100" value="0" step="1">
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+.diffusion-playground {
+  font-family: 'Cambria Math', system-ui, -apple-system, sans-serif;
+  max-width: 680px; /* Wider container */
+  margin: 1.5rem auto;
+  padding: 1.2rem; /* Smaller padding */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  /* Translucent background blur effect */
+  background: rgba(255, 255, 255, 1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.06);
+}
+.playground-layout {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+.visual-side {
+  flex-shrink: 0;
+  display: flex;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 6px;
+  border-radius: 10px;
+}
+#diffusion-canvas {
+  border-radius: 6px;
+  display: block;
+  width: 180px; /* Slightly scaled down visual weight */
+  height: 180px;
+}
+.control-side {
+  flex-grow: 1;
+  text-align: left;
+}
+.control-side h3 {
+  margin: 0 0 0.4rem 0;
+  color: #0f172a;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.control-side p {
+  font-size: 0.85rem;
+  color: #475569;
+  line-height: 1.45;
+  margin: 0 0 1.2rem 0;
+}
+.controls {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+#step-display {
+  color: #4f46e5;
+  font-weight: 600;
+}
+#noise-slider {
+  width: 100%;
+  display: block;
+  margin: 0;
+  accent-color: #4f46e5;
+  cursor: pointer;
+}
+/* Responsiveness for mobile screens */
+@media (max-width: 560px) {
+  .playground-layout {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  .control-side {
+    text-align: center;
+    width: 100%;
+  }
+  #diffusion-canvas {
+    width: 220px;
+    height: 220px;
+  }
+}
+</style>
+<script>
+const canvas = document.getElementById('diffusion-canvas');
+const ctx = canvas.getContext('2d');
+const img = document.getElementById('source-img');
+const slider = document.getElementById('noise-slider');
+const stepDisplay = document.getElementById('step-display');
+let originalPixels = null;
+function randomGaussian() {
+  let u = 0, v = 0;
+  while(u === 0) u = Math.random(); 
+  while(v === 0) v = Math.random();
+  return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+}
+function applyNoise() {
+  if (!originalPixels) return;
+  const width = canvas.width;
+  const height = canvas.height;
+  const imgData = ctx.createImageData(width, height);
+  const targetData = imgData.data;
+  const srcData = originalPixels.data;
+  const t = slider.value / 100; 
+  const beta = t; 
+  const alphaBar = 1 - beta;
+  const sqrtAlphaBar = Math.sqrt(alphaBar);
+  const sqrtOneMinusAlphaBar = Math.sqrt(beta);
+  for (let i = 0; i < srcData.length; i += 4) {
+    for (let c = 0; c < 3; c++) {
+      const originalValue = srcData[i + c];
+      const noise = randomGaussian() * 127.5 + 127.5;
+      let mixedValue = (sqrtAlphaBar * originalValue) + (sqrtOneMinusAlphaBar * noise);
+      targetData[i + c] = Math.min(255, Math.max(0, mixedValue));
+    }
+    targetData[i + 3] = 255; 
+  }
+  ctx.putImageData(imgData, 0, 0);
+  stepDisplay.textContent = `Timestep t: ${slider.value}`;
+}
+img.onload = function() {
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  originalPixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  applyNoise();
+};
+if (img.complete) {
+  img.onload();
+}
+slider.addEventListener('input', applyNoise);
+</script>
+
 
 We provide the model (usually a U-Net) with the noisy image $x_t$ and the current timestep $t$. The model's job is to predict the noise $\epsilon$ that was used to corrupt $x_0$. 
 
@@ -144,7 +578,7 @@ What is the most simple loss function you can think of that might be used here? 
 $$\mathcal{L}_{simple}(\theta) = \mathbb{E}_{t, x_0, \epsilon} \left[ \| \epsilon - \epsilon_\theta(x_t, t) \|^2 \right]$$
 
 > #### Why $L_2$?
-> Mathematically, minimizing the $L_2$ error in noise prediction is equivalent to maximizing the **Evidence Lower Bound (ELBO)** under the assumption that the reverse transitions are Gaussian. In simpler terms: because we assume our "noise" is a Gaussian bell curve, the $L_2$ distance is the most natural way to measure how far our prediction is from the truth.
+> Mathematically, minimizing the $L_2$ error in noise prediction is equivalent to maximizing the **Evidence Lower Bound (ELBO)** under the assumption that the reverse transitions are Gaussian. Maximizing the ELBO is what ensures that our approximation of the true distribution is as close as possible to the true distribution.
 
 #### The Training Algorithm:
 1. **Sample** a clean image $x_0$ from your dataset.
@@ -455,7 +889,7 @@ As you can see the a lot of the results bear resemblance to flowers. Ofcourse wi
 
 You can access the full notebook with the code [here](https://github.com/Utsab-2010/Blogs-and-Implementations/blob/main/Diffusion/Diffusion_tutorial.ipynb).
 
-Let me know in the comments if any portion needs to be elaborated further. I wanted to discuss conditional generation too but I did not want to drag it further. I shall try to take it up in another blog. I also plan to write another  one where we discuss the maths in more detail, deriving the expressions from first principles. 
+Let me know in the comments if any portion needs to be elaborated further. I wanted to discuss conditional generation too but I did not want to drag it further. I shall try to take it up in another blog. I also plan to write another one where we discuss the maths in more detail, deriving the expressions from first principles. 
 
 Thanks for reading :)
 
@@ -465,4 +899,5 @@ Thanks for reading :)
  - [DDPM: Denoising Diffusion Probabilistic Models](https://arxiv.org/abs/2006.11239)
  - [Simplest Implementation of Diffusion Models \| Emilio’s Blog](https://e-dorigatti.github.io/math/deep%20learning/2023/06/25/diffusion.html)
  - [Diffusion Models - The AI Summer](https://theaisummer.com/diffusion-models/)
+ - [Lecture Notes on Diffusion Models](http://arxiv.org/abs/2312.10393)
 - A great course on Generative Diffusion and Flow Models - [YouTube](https://www.youtube.com/playlist?list=PL57nT7tSGAAXwjhDYcxEycx5W7YoSrZyt)
