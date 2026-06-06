@@ -237,13 +237,10 @@ This **reverse** process is summarised in the image below. The *sample in red* i
 </style>
 
 <script>
-(function initDiffusionSimulation() {
+function initReverseSimulation() {
   const revCanvas = document.getElementById('reverse-canvas');
-  
-  if (!revCanvas) {
-    setTimeout(initDiffusionSimulation, 100);
-    return;
-  }
+  if (!revCanvas || revCanvas.dataset.initialized) return;
+  revCanvas.dataset.initialized = 'true';
 
   const revCtx = revCanvas.getContext('2d');
   const revSlider = document.getElementById('reverse-slider');
@@ -368,7 +365,8 @@ This **reverse** process is summarised in the image below. The *sample in red* i
 
   revSlider.addEventListener('input', drawSimulation);
   drawSimulation();
-})();
+}
+setInterval(initReverseSimulation, 200);
 </script>
 
 
@@ -524,51 +522,56 @@ Where:
 }
 </style>
 <script>
-const canvas = document.getElementById('diffusion-canvas');
-const ctx = canvas.getContext('2d');
-const img = document.getElementById('source-img');
-const slider = document.getElementById('noise-slider');
-const stepDisplay = document.getElementById('step-display');
-let originalPixels = null;
-function randomGaussian() {
-  let u = 0, v = 0;
-  while(u === 0) u = Math.random(); 
-  while(v === 0) v = Math.random();
-  return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
-}
-function applyNoise() {
-  if (!originalPixels) return;
-  const width = canvas.width;
-  const height = canvas.height;
-  const imgData = ctx.createImageData(width, height);
-  const targetData = imgData.data;
-  const srcData = originalPixels.data;
-  const t = slider.value / 100; 
-  const beta = t; 
-  const alphaBar = 1 - beta;
-  const sqrtAlphaBar = Math.sqrt(alphaBar);
-  const sqrtOneMinusAlphaBar = Math.sqrt(beta);
-  for (let i = 0; i < srcData.length; i += 4) {
-    for (let c = 0; c < 3; c++) {
-      const originalValue = srcData[i + c];
-      const noise = randomGaussian() * 127.5 + 127.5;
-      let mixedValue = (sqrtAlphaBar * originalValue) + (sqrtOneMinusAlphaBar * noise);
-      targetData[i + c] = Math.min(255, Math.max(0, mixedValue));
-    }
-    targetData[i + 3] = 255; 
+function initForwardPlayground() {
+  const canvas = document.getElementById('diffusion-canvas');
+  if (!canvas || canvas.dataset.initialized) return;
+  canvas.dataset.initialized = 'true';
+  const ctx = canvas.getContext('2d');
+  const img = document.getElementById('source-img');
+  const slider = document.getElementById('noise-slider');
+  const stepDisplay = document.getElementById('step-display');
+  let originalPixels = null;
+  function randomGaussian() {
+    let u = 0, v = 0;
+    while(u === 0) u = Math.random(); 
+    while(v === 0) v = Math.random();
+    return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
   }
-  ctx.putImageData(imgData, 0, 0);
-  stepDisplay.textContent = `Timestep t: ${slider.value}`;
+  function applyNoise() {
+    if (!originalPixels) return;
+    const width = canvas.width;
+    const height = canvas.height;
+    const imgData = ctx.createImageData(width, height);
+    const targetData = imgData.data;
+    const srcData = originalPixels.data;
+    const t = slider.value / 100; 
+    const beta = t; 
+    const alphaBar = 1 - beta;
+    const sqrtAlphaBar = Math.sqrt(alphaBar);
+    const sqrtOneMinusAlphaBar = Math.sqrt(beta);
+    for (let i = 0; i < srcData.length; i += 4) {
+      for (let c = 0; c < 3; c++) {
+        const originalValue = srcData[i + c];
+        const noise = randomGaussian() * 127.5 + 127.5;
+        let mixedValue = (sqrtAlphaBar * originalValue) + (sqrtOneMinusAlphaBar * noise);
+        targetData[i + c] = Math.min(255, Math.max(0, mixedValue));
+      }
+      targetData[i + 3] = 255; 
+    }
+    ctx.putImageData(imgData, 0, 0);
+    stepDisplay.textContent = `Timestep t: ${slider.value}`;
+  }
+  img.onload = function() {
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    originalPixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    applyNoise();
+  };
+  if (img.complete) {
+    img.onload();
+  }
+  slider.addEventListener('input', applyNoise);
 }
-img.onload = function() {
-  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-  originalPixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  applyNoise();
-};
-if (img.complete) {
-  img.onload();
-}
-slider.addEventListener('input', applyNoise);
+setInterval(initForwardPlayground, 200);
 </script>
 
 
