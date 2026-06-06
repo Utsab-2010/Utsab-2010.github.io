@@ -118,6 +118,7 @@ This **reverse** process is summarised in the image below. The *sample in red* i
     <div class="reverse-control-side">
       <h3>Reverse Diffusion: Skewed Modes</h3>
       <p>Samples($x_T$) from the initial standard Gaussian distribution(top) get slowly transformed into samples($x_0$) of the target distribution(bottom) over $T$ steps.</p>
+      <p style="font-size: 0.6rem; color: grey; font-style: italic;">(Please reload the page if object not working properly)</p>
       <div class="status-badge">
         <span id="reverse-step-display">Timestep $t$: 100</span>
       </div>
