@@ -1,0 +1,338 @@
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0
+  }
+
+  .stepper {
+    font-size: 14px;
+    color: var(--color-text-primary);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border: 2px solid #8B5CF6;
+    /* Violet border */
+    border-radius: 12px;
+    background: var(--color-background-secondary, rgba(139, 92, 246, 0.03));
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.1);
+  }
+
+  .phase-pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 10px
+  }
+
+  .pill-select {
+    background: #EEEDFE;
+    color: #3C3489
+  }
+
+  .pill-expand {
+    background: #E1F5EE;
+    color: #085041
+  }
+
+  .pill-simulate {
+    background: #FAEEDA;
+    color: #633806
+  }
+
+  .pill-backprop {
+    background: #FAECE7;
+    color: #712B13
+  }
+
+  .pill-result {
+    background: #FEF9C3;
+    color: #854D0E
+  }
+
+  .desc-box {
+    background: var(--color-background-primary, #fff);
+    border: 1px solid var(--color-border-tertiary, #e5e7eb);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 13.5px;
+    color: var(--color-text-secondary);
+    margin-bottom: 16px;
+    line-height: 1.6
+  }
+
+  .dark .desc-box {
+    background: #1f2937;
+    border-color: #374151;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px
+  }
+
+  .nav button {
+    padding: 6px 16px;
+    font-size: 13px;
+    border-radius: 6px;
+    border: 1px solid #8B5CF6;
+    background: transparent;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  .nav button:disabled {
+    opacity: 0.3;
+    cursor: default;
+    border-color: gray;
+  }
+
+  .nav button:hover:not(:disabled) {
+    background: rgba(139, 92, 246, 0.1);
+  }
+
+  .step-counter {
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    font-weight: 600;
+  }
+
+  .dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-border-secondary, #ccc);
+    transition: background 0.2s
+  }
+
+  .dot.active {
+    background: #8B5CF6
+  }
+
+  svg.tree {
+    display: block;
+    width: 100%;
+    overflow: visible;
+    margin-top: 10px;
+  }
+</style>
+
+<div class="stepper">
+  <div class="nav">
+    <button id="btn-prev" onclick="go(-1)" disabled>← prev</button>
+    <button id="btn-next" onclick="go(1)">next →</button>
+    <span class="step-counter" id="step-counter">step 1 / 8</span>
+    <div class="dots" id="dots"></div>
+  </div>
+  <div id="phase-pill" class="phase-pill pill-select">selection</div>
+  <div id="desc" class="desc-box"></div>
+  <svg class="tree" id="tree-svg" viewBox="0 0 640 440"></svg>
+</div>
+
+<script>
+  const S = [
+    {
+      p: "selection", c: "pill-select",
+      d: "Start at the root node. The board is empty, and it is Player 1's turn. MCTS picks an unvisited child to explore. We select slot 0.",
+      n: [{ id: "r", x: 320, y: 40, l: "[ , , , ]", s: "P1 | N=0 W=0", c: "purple", a: 1 }], e: []
+    },
+    {
+      p: "expansion", c: "pill-expand",
+      d: "Expand: we create a child node for every legal move. All 4 slots are open, so 4 children are added to the tree. Each starts with N=0 visits, W=0 wins.",
+      n: [
+        { id: "r", x: 320, y: 40, l: "[ , , , ]", s: "P1 | N=0 W=0", c: "purple" },
+        { id: "c0", x: 100, y: 120, l: "[1, , , ]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "c1", x: 240, y: 120, l: "[ ,1, , ]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "c2", x: 400, y: 120, l: "[ , ,1, ]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "c3", x: 540, y: 120, l: "[ , , ,1]", s: "P2 | N=0 W=0", c: "gray" }
+      ],
+      e: [["r", "c0"], ["r", "c1"], ["r", "c2"], ["r", "c3"]]
+    },
+    {
+      p: "simulation", c: "pill-simulate",
+      d: "Select child c0. From here, we run a random rollout to the end of the game. P2 randomly places coin 2 in slot 1.",
+      n: [
+        { id: "r", x: 320, y: 40, l: "[ , , , ]", s: "P1 | N=0 W=0", c: "purple" },
+        { id: "c0", x: 100, y: 120, l: "[1, , , ]", s: "P2 | N=0 W=0", c: "teal", a: 1 },
+        { id: "c1", x: 240, y: 120, l: "[ ,1, , ]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "c2", x: 400, y: 120, l: "[ , ,1, ]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "c3", x: 540, y: 120, l: "[ , , ,1]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "s1", x: 100, y: 200, l: "[1,2, , ]", s: "P1 moves next", c: "gray" }
+      ],
+      e: [["r", "c0"], ["r", "c1"], ["r", "c2"], ["r", "c3"], ["c0", "s1"]],
+      h: ["c0", "s1"]
+    },
+    {
+      p: "simulation", c: "pill-simulate",
+      d: "Rollout continues: P1 randomly places coin 3 in slot 3. No player has two of their own coins adjacent yet.",
+      n: [
+        { id: "r", x: 320, y: 40, l: "[ , , , ]", s: "P1 | N=0 W=0", c: "purple" },
+        { id: "c0", x: 100, y: 120, l: "[1, , , ]", s: "P2 | N=0 W=0", c: "teal" },
+        { id: "c1", x: 240, y: 120, l: "[ ,1, , ]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "c2", x: 400, y: 120, l: "[ , ,1, ]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "c3", x: 540, y: 120, l: "[ , , ,1]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "s1", x: 100, y: 200, l: "[1,2, , ]", s: "P1 moves next", c: "gray" },
+        { id: "s2", x: 100, y: 280, l: "[1,2, ,1]", s: "P2 moves next", c: "gray" }
+      ],
+      e: [["r", "c0"], ["r", "c1"], ["r", "c2"], ["r", "c3"], ["c0", "s1"], ["s1", "s2"]],
+      h: ["s1", "s2"]
+    },
+    {
+      p: "simulation", c: "pill-simulate",
+      d: "P2 randomly places coin 4 in slot 2. But wait! P2 now has coins in slot 1 and slot 2. Because P2 placed next to itself, P2 loses! Result = +1 win for P1.",
+      n: [
+        { id: "r", x: 320, y: 40, l: "[ , , , ]", s: "P1 | N=0 W=0", c: "purple" },
+        { id: "c0", x: 100, y: 120, l: "[1, , , ]", s: "P2 | N=0 W=0", c: "teal" },
+        { id: "c1", x: 240, y: 120, l: "[ ,1, , ]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "c2", x: 400, y: 120, l: "[ , ,1, ]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "c3", x: 540, y: 120, l: "[ , , ,1]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "s1", x: 100, y: 200, l: "[1,2, , ]", s: "P1 moves next", c: "gray" },
+        { id: "s2", x: 100, y: 280, l: "[1,2, ,1]", s: "P2 moves next", c: "gray" },
+        { id: "s3", x: 100, y: 360, l: "[1,2,2,1]", s: "P2 adjacent → lose", c: "red", a: 1 }
+      ],
+      e: [["r", "c0"], ["r", "c1"], ["r", "c2"], ["r", "c3"], ["c0", "s1"], ["s1", "s2"], ["s2", "s3"]],
+      h: ["s2", "s3"]
+    },
+    {
+      p: "backprop", c: "pill-backprop",
+      d: "Backpropagate: The +1 win for P1 travels up the tree. The simulated nodes are discarded, but c0 gets N=1, W=1. The Root also gets N=1, W=1.",
+      n: [
+        { id: "r", x: 320, y: 40, l: "[ , , , ]", s: "P1 | N=1 W=1", c: "purple", a: 1 },
+        { id: "c0", x: 100, y: 120, l: "[1, , , ]", s: "P2 | N=1 W=1", c: "teal", a: 1 },
+        { id: "c1", x: 240, y: 120, l: "[ ,1, , ]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "c2", x: 400, y: 120, l: "[ , ,1, ]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "c3", x: 540, y: 120, l: "[ , , ,1]", s: "P2 | N=0 W=0", c: "gray" }
+      ],
+      e: [["r", "c0"], ["r", "c1"], ["r", "c2"], ["r", "c3"]],
+      bp: ["c0", "r"]
+    },
+    {
+      p: "selection", c: "pill-select",
+      d: "Iteration 2: Back at the root. Nodes c1, c2, and c3 are unvisited (N=0), so their UCB score is infinite! MCTS forces us to explore them before revisiting c0. We select c1, run a rollout where P1 loses, and backpropagate.",
+      n: [
+        { id: "r", x: 320, y: 40, l: "[ , , , ]", s: "P1 | N=2 W=1", c: "purple", a: 1 },
+        { id: "c0", x: 100, y: 120, l: "[1, , , ]", s: "P2 | N=1 W=1", c: "teal" },
+        { id: "c1", x: 240, y: 120, l: "[ ,1, , ]", s: "P2 | N=1 W=0", c: "coral", a: 1 },
+        { id: "c2", x: 400, y: 120, l: "[ , ,1, ]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "c3", x: 540, y: 120, l: "[ , , ,1]", s: "P2 | N=0 W=0", c: "gray" }
+      ],
+      e: [["r", "c0"], ["r", "c1"], ["r", "c2"], ["r", "c3"]],
+      bp: ["c1", "r"]
+    },
+    {
+      p: "result", c: "pill-result",
+      d: "Fast forward: 10 iterations are complete. We stop searching. AlphaZero picks the move with the highest visit count N (most explored). Slot 1 (c1) was visited 5 times, so it is chosen as the final move!",
+      n: [
+        { id: "r", x: 320, y: 40, l: "[ , , , ]", s: "P1 | N=10 W=6", c: "purple" },
+        { id: "c0", x: 100, y: 120, l: "[1, , , ]", s: "N=2 W=1", c: "teal" },
+        { id: "c1", x: 240, y: 120, l: "[ ,1, , ]", s: "N=4 W=3 ✓", c: "yellow", a: 1 },
+        { id: "c2", x: 400, y: 120, l: "[ , ,1, ]", s: "N=3 W=2", c: "teal" },
+        { id: "c3", x: 540, y: 120, l: "[ , , ,1]", s: "N=1 W=0", c: "coral" }
+      ],
+      e: [["r", "c0"], ["r", "c1"], ["r", "c2"], ["r", "c3"]]
+    }
+  ];
+
+  const C = {
+    purple: { f: "#EEEDFE", s: "#534AB7", t: "#3C3489" },
+    teal: { f: "#E1F5EE", s: "#0F6E56", t: "#085041" },
+    gray: { f: "#F1EFE8", s: "#5F5E5A", t: "#444441" },
+    red: { f: "#FCEBEB", s: "#A32D2D", t: "#791F1F" },
+    yellow: { f: "#FEF9C3", s: "#CA8A04", t: "#854D0E" },
+    coral: { f: "#FAECE7", s: "#993C1D", t: "#712B13" }
+  };
+
+  let cur = 0;
+  const NS = "http://www.w3.org/2000/svg";
+
+  function el(t, a, x) {
+    let e = document.createElementNS(NS, t);
+    for (let [k, v] of Object.entries(a)) e.setAttribute(k, v);
+    if (x !== undefined) e.textContent = x;
+    return e;
+  }
+
+  const render = s => {
+    const svg = document.getElementById("tree-svg");
+    svg.innerHTML = "";
+    let st = S[s], nm = {}, maxY = 0;
+
+    for (let n of st.n) {
+      nm[n.id] = n;
+      maxY = Math.max(maxY, n.y);
+    }
+    svg.setAttribute("viewBox", `0 0 640 ${maxY + 70}`);
+
+    for (let [a, b] of st.e) {
+      let na = nm[a], nb = nm[b];
+      let hl = st.h && st.h[0] === a && st.h[1] === b;
+      let bp = st.bp && ((st.bp[0] === a && st.bp[1] === b) || (st.bp[0] === b && st.bp[1] === a));
+      svg.appendChild(el("line", {
+        x1: na.x, y1: na.y + 30, x2: nb.x, y2: nb.y + 30,
+        stroke: hl ? "#8B5CF6" : bp ? "#D85A30" : "var(--color-border-secondary, #9ca3af)",
+        "stroke-width": hl || bp ? 2 : 1,
+        "stroke-dasharray": bp ? "5 3" : "none"
+      }));
+    }
+
+    for (let n of st.n) {
+      let c = C[n.c] || C.gray;
+      let g = el("g", { style: "cursor:default" });
+      let x = n.x - 60, y = n.y;
+
+      if (n.a) {
+        g.appendChild(el("rect", {
+          x: x - 4, y: y - 4, width: 128, height: 64, rx: 12,
+          fill: c.f, stroke: c.s, "stroke-width": 2, opacity: 0.6
+        }));
+      }
+      g.appendChild(el("rect", {
+        x, y, width: 120, height: 56, rx: 8,
+        fill: c.f, stroke: c.s, "stroke-width": n.a ? 1.5 : 0.5
+      }));
+      g.appendChild(el("text", {
+        x: n.x, y: y + 20, "text-anchor": "middle", "dominant-baseline": "central",
+        fill: c.t, "font-size": "13", "font-weight": "600", "font-family": "var(--font-sans, sans-serif)"
+      }, n.l));
+      g.appendChild(el("text", {
+        x: n.x, y: y + 40, "text-anchor": "middle", "dominant-baseline": "central",
+        fill: c.s, "font-size": "11.5", "font-family": "var(--font-sans, sans-serif)"
+      }, n.s));
+      svg.appendChild(g);
+    }
+
+    document.getElementById("phase-pill").textContent = st.p;
+    document.getElementById("phase-pill").className = "phase-pill " + st.c;
+    document.getElementById("desc").textContent = st.d;
+    document.getElementById("step-counter").textContent = `step ${s + 1} / ${S.length}`;
+    document.getElementById("btn-prev").disabled = s === 0;
+    document.getElementById("btn-next").disabled = s === S.length - 1;
+
+    let dts = document.getElementById("dots");
+    dts.innerHTML = "";
+    for (let i = 0; i < S.length; i++) {
+      let d = document.createElement("div");
+      d.className = "dot" + (i === s ? " active" : "");
+      dts.appendChild(d);
+    }
+  };
+
+  const go = d => { cur = Math.max(0, Math.min(S.length - 1, cur + d)); render(cur); };
+  render(0);
+</script>

@@ -1,0 +1,58 @@
+
+<style>
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+.stepper{font-size:14px;color:var(--color-text-primary);padding:1rem 0}
+.phase-pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:500;margin-bottom:10px}
+.pill-select{background:#EEEDFE;color:#3C3489} .pill-expand{background:#E1F5EE;color:#085041}
+.pill-simulate{background:#FAEEDA;color:#633806} .pill-backprop{background:#FAECE7;color:#712B13}
+.pill-result{background:#EAF3DE;color:#27500A}
+.desc-box{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--color-text-secondary);margin-bottom:14px;line-height:1.6}
+.nav{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.nav button{padding:6px 16px;font-size:13px;border-radius:6px;border:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-primary);cursor:pointer}
+.nav button:disabled{opacity:0.3;cursor:default} .nav button:hover:not(:disabled){background:var(--color-background-secondary)}
+.step-counter{font-size:12px;color:var(--color-text-tertiary)}
+.dots{display:flex;gap:6px;align-items:center}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--color-border-secondary);transition:background 0.2s}
+.dot.active{background:#7F77DD} svg.tree{display:block;width:100%;overflow:visible}
+</style>
+
+<div class="stepper">
+  <div class="nav">
+    <button id="btn-prev" onclick="go(-1)" disabled>← prev</button>
+    <button id="btn-next" onclick="go(1)">next →</button>
+    <span class="step-counter" id="step-counter">step 1 / 8</span>
+    <div class="dots" id="dots"></div>
+  </div>
+  <div id="phase-pill" class="phase-pill pill-select">selection</div>
+  <div id="desc" class="desc-box"></div>
+  <svg class="tree" id="tree-svg" viewBox="0 0 640 320"></svg>
+</div>
+
+<script>
+const S=[
+{p:"selection",c:"pill-select",d:"Start at the root node — board is empty, Player 1 to move. MCTS picks a child using UCB1. Unvisited children have infinite UCB. We select slot 0.",n:[{id:"r",x:320,y:40,l:"[ , , , ]",s:"P1 | N=0 W=0",c:"purple",a:1}],e:[]},
+{p:"expansion",c:"pill-expand",d:"Expand: create a child node for every legal move. All 4 slots open, so 4 children added. Each starts N=0, W=0.",n:[{id:"r",x:320,y:40,l:"[ , , , ]",s:"P1 | N=0 W=0",c:"purple"},{id:"c0",x:100,y:140,l:"[1, , , ]",s:"P2 | N=0 W=0",c:"gray"},{id:"c1",x:240,y:140,l:"[ ,1, , ]",s:"P2 | N=0 W=0",c:"gray"},{id:"c2",x:400,y:140,l:"[ , ,1, ]",s:"P2 | N=0 W=0",c:"gray"},{id:"c3",x:540,y:140,l:"[ , , ,1]",s:"P2 | N=0 W=0",c:"gray"}],e:[["r","c0"],["r","c1"],["r","c2"],["r","c3"]]},
+{p:"simulation",c:"pill-simulate",d:"Select c0. Random rollout: P2 places in slot 1. Slots 0 & 1 are adjacent! P2 placed adjacent coins, so P2 loses. Result = +1 for P1.",n:[{id:"r",x:320,y:40,l:"[ , , , ]",s:"P1 | N=0 W=0",c:"purple"},{id:"c0",x:100,y:140,l:"[1, , , ]",s:"P2 | N=0 W=0",c:"teal",a:1},{id:"c1",x:240,y:140,l:"[ ,1, , ]",s:"P2 | N=0 W=0",c:"gray"},{id:"c2",x:400,y:140,l:"[ , ,1, ]",s:"P2 | N=0 W=0",c:"gray"},{id:"c3",x:540,y:140,l:"[ , , ,1]",s:"P2 | N=0 W=0",c:"gray"},{id:"s1",x:100,y:240,l:"[1,2, , ]",s:"P2 adjacent → lose",c:"red"}],e:[["r","c0"],["r","c1"],["r","c2"],["r","c3"],["c0","s1"]],h:["c0","s1"]},
+{p:"backprop",c:"pill-backprop",d:"Backpropagate: +1 for P1 travels up. c0 gets N=1, W=1. Root gets N=1, W=1.",n:[{id:"r",x:320,y:40,l:"[ , , , ]",s:"P1 | N=1 W=1",c:"purple",a:1},{id:"c0",x:100,y:140,l:"[1, , , ]",s:"P2 | N=1 W=1",c:"teal",a:1},{id:"c1",x:240,y:140,l:"[ ,1, , ]",s:"P2 | N=0 W=0",c:"gray"},{id:"c2",x:400,y:140,l:"[ , ,1, ]",s:"P2 | N=0 W=0",c:"gray"},{id:"c3",x:540,y:140,l:"[ , , ,1]",s:"P2 | N=0 W=0",c:"gray"}],e:[["r","c0"],["r","c1"],["r","c2"],["r","c3"]],bp:["c0","r"]},
+{p:"selection",c:"pill-select",d:"Iteration 2. Back at root. c1, c2, c3 unvisited (UCB=∞). UCB picks unvisited node — select c1.",n:[{id:"r",x:320,y:40,l:"[ , , , ]",s:"P1 | N=1 W=1",c:"purple",a:1},{id:"c0",x:100,y:140,l:"[1, , , ]",s:"P2 | N=1 W=1",c:"teal"},{id:"c1",x:240,y:140,l:"[ ,1, , ]",s:"P2 | N=0 W=0",c:"purple",a:1},{id:"c2",x:400,y:140,l:"[ , ,1, ]",s:"P2 | N=0 W=0",c:"gray"},{id:"c3",x:540,y:140,l:"[ , , ,1]",s:"P2 | N=0 W=0",c:"gray"}],e:[["r","c0"],["r","c1"],["r","c2"],["r","c3"]]},
+{p:"simulation",c:"pill-simulate",d:"Rollout from c1. P2 places slot 0. Coins in 0 & 1 adjacent — P2 loses again. Result = +1 for P1.",n:[{id:"r",x:320,y:40,l:"[ , , , ]",s:"P1 | N=1 W=1",c:"purple"},{id:"c0",x:100,y:140,l:"[1, , , ]",s:"P2 | N=1 W=1",c:"teal"},{id:"c1",x:240,y:140,l:"[ ,1, , ]",s:"P2 | N=0 W=0",c:"purple",a:1},{id:"c2",x:400,y:140,l:"[ , ,1, ]",s:"P2 | N=0 W=0",c:"gray"},{id:"c3",x:540,y:140,l:"[ , , ,1]",s:"P2 | N=0 W=0",c:"gray"},{id:"s2",x:240,y:240,l:"[2,1, , ]",s:"P2 adjacent → lose",c:"red"}],e:[["r","c0"],["r","c1"],["r","c2"],["r","c3"],["c1","s2"]],h:["c1","s2"]},
+{p:"backprop",c:"pill-backprop",d:"Backpropagate: c1 → N=1, W=1. Root → N=2, W=2. Both visited children have W/N = 1.0.",n:[{id:"r",x:320,y:40,l:"[ , , , ]",s:"P1 | N=2 W=2",c:"purple",a:1},{id:"c0",x:100,y:140,l:"[1, , , ]",s:"P2 | N=1 W=1",c:"teal"},{id:"c1",x:240,y:140,l:"[ ,1, , ]",s:"P2 | N=1 W=1",c:"teal",a:1},{id:"c2",x:400,y:140,l:"[ , ,1, ]",s:"P2 | N=0 W=0",c:"gray"},{id:"c3",x:540,y:140,l:"[ , , ,1]",s:"P2 | N=0 W=0",c:"gray"}],e:[["r","c0"],["r","c1"],["r","c2"],["r","c3"]],bp:["c1","r"]},
+{p:"result",c:"pill-result",d:"After many iterations, pick move with highest visit count N. AlphaZero uses this final N distribution as target for policy network.",n:[{id:"r",x:320,y:40,l:"[ , , , ]",s:"P1 | N=4 W=3",c:"purple"},{id:"c0",x:100,y:140,l:"[1, , , ]",s:"N=1 W=1 ✓",c:"teal"},{id:"c1",x:240,y:140,l:"[ ,1, , ]",s:"N=1 W=1 ✓",c:"teal"},{id:"c2",x:400,y:140,l:"[ , ,1, ]",s:"N=1 W=1 ✓",c:"green"},{id:"c3",x:540,y:140,l:"[ , , ,1]",s:"N=1 W=0 ✗",c:"coral"}],e:[["r","c0"],["r","c1"],["r","c2"],["r","c3"]]}
+];
+const C={purple:{f:"#EEEDFE",s:"#534AB7",t:"#3C3489"},teal:{f:"#E1F5EE",s:"#0F6E56",t:"#085041"},gray:{f:"#F1EFE8",s:"#5F5E5A",t:"#444441"},red:{f:"#FCEBEB",s:"#A32D2D",t:"#791F1F"},green:{f:"#EAF3DE",s:"#3B6D11",t:"#27500A"},coral:{f:"#FAECE7",s:"#993C1D",t:"#712B13"}};
+let cur=0; const NS="http://www.w3.org/2000/svg", el=(t,a,x)=>{let e=document.createElementNS(NS,t);for(let[k,v]of Object.entries(a))e.setAttribute(k,v);if(x!==undefined)e.textContent=x;return e};
+const render=s=>{const svg=document.getElementById("tree-svg");svg.innerHTML="";let st=S[s],nm={},maxY=0;
+for(let n of st.n){nm[n.id]=n;maxY=Math.max(maxY,n.y)} svg.setAttribute("viewBox",`0 0 640 ${maxY+80}`);
+for(let[a,b]of st.e){let na=nm[a],nb=nm[b],hl=st.h&&st.h[0]===a&&st.h[1]===b,bp=st.bp&&((st.bp[0]===a&&st.bp[1]===b)||(st.bp[0]===b&&st.bp[1]===a));
+svg.appendChild(el("line",{x1:na.x,y1:na.y+30,x2:nb.x,y2:nb.y+30,stroke:hl?"#EF9F27":bp?"#D85A30":"var(--color-border-secondary)","stroke-width":hl||bp?2:1,"stroke-dasharray":bp?"5 3":"none"}))}
+for(let n of st.n){let c=C[n.c]||C.gray,g=el("g",{style:"cursor:default"}),x=n.x-60,y=n.y;
+if(n.a)g.appendChild(el("rect",{x:x-3,y:y-3,width:126,height:62,rx:11,fill:c.f,stroke:c.s,"stroke-width":2,opacity:0.5}));
+g.appendChild(el("rect",{x,y,width:120,height:56,rx:8,fill:c.f,stroke:c.s,"stroke-width":n.a?1.5:0.5}));
+g.appendChild(el("text",{x:n.x,y:y+20,"text-anchor":"middle","dominant-baseline":"central",fill:c.t,"font-size":"12","font-weight":"500"},n.l));
+g.appendChild(el("text",{x:n.x,y:y+40,"text-anchor":"middle","dominant-baseline":"central",fill:c.s,"font-size":"11"},n.s)); svg.appendChild(g);}
+document.getElementById("phase-pill").textContent=st.p; document.getElementById("phase-pill").className="phase-pill "+st.c;
+document.getElementById("desc").textContent=st.d; document.getElementById("step-counter").textContent=`step ${s+1} / ${S.length}`;
+document.getElementById("btn-prev").disabled=s===0; document.getElementById("btn-next").disabled=s===S.length-1;
+let dts=document.getElementById("dots");dts.innerHTML="";for(let i=0;i<S.length;i++)dts.appendChild(Object.assign(document.createElement("div"),{className:"dot"+(i===s?" active":"")}))};
+const go=d=>{cur=Math.max(0,Math.min(S.length-1,cur+d));render(cur)}; render(0);
+</script>

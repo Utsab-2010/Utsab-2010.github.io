@@ -128,7 +128,7 @@ This **reverse** process is summarised in the image below. The *sample in red* i
 
 <style>
 .diffusion-reverse-playground {
-  font-family: 'Cambria Math', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-sans, sans-serif);
   max-width: 780px;
   margin: 1.5rem auto;
   padding: 1.2rem;
@@ -433,7 +433,7 @@ Where:
 </div>
 <style>
 .diffusion-playground {
-  font-family: 'Cambria Math', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-sans, sans-serif);
   max-width: 680px; /* Wider container */
   margin: 1.5rem auto;
   padding: 1.2rem; /* Smaller padding */
