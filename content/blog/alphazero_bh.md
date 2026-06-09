@@ -84,6 +84,14 @@ MCTS works by randomly sampling the search space. It does many playouts where it
 $$UCB1 = \frac{W}{N} + c\sqrt{\frac{\ln{N_{parent}}}{N}}$$
 where $W$ is the number of wins for a node, $N$ is the number of simulations for a node, and $c$ is the exploration parameter.  
 
+Each MCTS Sampling Iteration involves the following steps:
+1. Selection - Starting at the root(current game state) node, we compute the UCB score for all its children(outcomes of actions) and select the one with the highest score and travel to it. If multiple children have same score, we choose randomly.
+2. Expansion - Once we reach a node that has not been fully expanded(has legal moves which have not been visited), we add it to the tree. 
+3. Simulation - From the expanded node, we simulate the game to the end by randomly selecting moves. 
+4. Backpropagation - Once we reach a terminal state, we backpropagate the result to the root node by updating the statistics of all the nodes visited during the selection and simulation steps. 
+
+
+
 
 
 
