@@ -21,18 +21,21 @@ The general structure of this blog will be as follow:
 - Resources
 
 
-### Introduction to RL
+## Introduction to RL
 Reinforcement learning is a subfield of deep learning which focuses on teaching models(termed as agents) by making them interact with some environment. The main idea is very heuristic, the model gets conditioned to perform only those actions which are beneficial to it. 
 
 How is this "benefit" actually defined? This is done with the help of reward functions - a function $R(s, a, s')$ that takes the current state $s$, the action $a$ taken by the agent, and the next state $s'$ , and returns the reward for that action. 
 some the 
 
-//insert RL diagram
+<figure class="my-8">
+  <img src="/blogs/alphazerobh/RL_process.png" alt="RL Cycle" class="w-80% rounded-sm border border-gray-200 dark:border-gray-800/70">
+  <figcaption class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3"><i>The reinforcement learning cycle.</i></figcaption>
+</figure>
 
 As shown above, the agent interacts with the environment, gets some rewards, trains itself based on rewards and repeat. Now while idea is simple in theory, designing reward functions and RL traininig frameworks which cater to our needs is a challenging task.
 
 
-### Rules of Black Hole
+## Rules of Black Hole
 Black Hole is a strategic tile-placement game played on a triangular grid. Traditionally it has 6 rows, but to push our AI to its limits, I expanded it to a massive 9-row grid (45 empty spaces).
 
 #### *How to Play*
@@ -43,10 +46,13 @@ Black Hole is a strategic tile-placement game played on a triangular grid. Tradi
 #### *Scoring*
 The Black Hole "sucks in" neighboring tiles. Scoring is calculated in concentric rings radiating outward from the hole (Ring 1 is immediate neighbors, Ring 2 is the next layer out, etc.).
 
+<!-- Insert GIF of BlackHole Demo -->
+
+
 **Your goal is to get sucked in as little as possible.** The player whose tiles in Ring 1 have the *lowest sum* wins instantly. Ties are broken by evaluating Ring 2, and so on.
 
 
-### Google Deepmind's AlphaGo and AlphaZero
+## Google Deepmind's AlphaGo and AlphaZero
 
 For most of computing history, game-playing AI was built on a deceptively simple idea: search. The logic goes like this: any game has a defined set of states and transition rules. Given enough time and processing power, you could enumerate all possible futures, assign a value to the terminal state (win/loss/draw), and trace backward to assign a value to every preceding state. The optimal strategy is simply to choose the move that leads to the highest-valued state. This is called minimax algorithm.
 
@@ -71,31 +77,157 @@ AlphaZero, published in 2017, took this further by stripping out the human data 
 
 Within hours of training, AlphaZero surpassed AlphaGo; within days, it exceeded the best classical engines in Go, Chess, and Shogi simultaneously — using the same algorithm for all three!
 
-### Classical Self-Play
+## Classical Self-Play
 
 
-### Monte Carlo Tree Search
+## Monte Carlo Tree Search
 
 The Monte Carlo Tree Search(MCTS) is a heauristic search algorithm which helps us find near optimal moves by partially observing the future from a particular game state. It is method that helps us effectively navigate through the decision trees of problems with very large decision spaces like Go(which has $10^{170}$ possible game states). 
 
-MCTS works by randomly sampling the search space. It does many playouts where it randomly simulates(random decisions) the entire game to the end from its current state. The final result of each playout is then used to update the statistics of the nodes visited during that playout and helps us get an estimate of which nodes lead to better outcomes. Now, the way decisions are made before the random sampling is determined by the the objection function called Upper Confidence Bound (UCB). 
+MCTS works by randomly sampling the search space through playouts. It does many playouts where it randomly simulates(random decisions) the entire game to the end and keeps expanding a temporary game tree from it's root current game state. The final result of each playout is then used to update the statistics of the nodes visited during that playout and helps us get an estimate of which nodes lead to better outcomes. Now, the way decisions are made before the random sampling is determined by the the objection function called Upper Confidence Bound (UCB). 
 
->The UCB1 formula is as follows:
+>The **UCB1 formula** is as follows:
 $$UCB1 = \frac{W}{N} + c\sqrt{\frac{\ln{N_{parent}}}{N}}$$
 where $W$ is the number of wins for a node, $N$ is the number of simulations for a node, and $c$ is the exploration parameter.  
 
 Each MCTS Sampling Iteration involves the following steps:
-1. Selection - Starting at the root(current game state) node, we compute the UCB score for all its children(outcomes of actions) and select the one with the highest score and travel to it. If multiple children have same score, we choose randomly.
-2. Expansion - Once we reach a node that has not been fully expanded(has legal moves which have not been visited), we add it to the tree. 
-3. Simulation - From the expanded node, we simulate the game to the end by randomly selecting moves. 
-4. Backpropagation - Once we reach a terminal state, we backpropagate the result to the root node by updating the statistics of all the nodes visited during the selection and simulation steps. 
+1. **Selection** - Starting at the root(current game state) node, we compute the UCB score for all its children in the current game tree(using the current win-visit stats) and navigate down the current game tree by greedily selecting the node with the highest UCB score. 
+2. **Expansion** - Once we reach a node(during the above traversal) that has not been fully expanded(has legal moves which have not been visited), we expand it by adding one of its unvisited child nodes to the tree(because UCB for the unvisited node is $\infty$). 
+3. **Simulation** - From the expanded node, we simulate the game to the end by randomly selecting moves. 
+4. **Backpropagation** - Once we reach a terminal state, we backpropagate the result to the root node by updating the statistics of all the nodes visited during the selection and simulation steps. 
+
+> #### Note:
+> MCTS iterations involve exploring both the current player's as well the opponents decisions. Alternate layers of the game tree will be formed by the opponent's decisions. Hence, during backpropagation we have to ensure that the win score reflects this difference. For example, if the terminal state results in the current player winning, the player nodes get +1 win score and opponent nodes get -1 win score and vice versa.
 
 
+After some N iterations, the current player makes the move which corresponds to the most visited child node of the root state. The game then moves on to the opponent's turn and the same process is repeated from their perpective with the new game state as the start of a new MCTS tree.
 
-
-
+The following visualization shows the MCTS process on a simple game. Players take turn placing their coins in any of the four available slots. The goal of the game is to not have your coins in adjacent slots. Whoever does that loses the game. 
 
 {{< mcts_stepper >}}
+
+### AlphaZero Framework
+
+The AlphaZero framework combines a modified version of MCTS with a Policy and Value Network. The Policy Network is a neural network that takes the current game state as input and outputs a probability distribution over all possible moves. The Value Network is a neural network that takes the current game state as input and outputs the probability of winning for the current player. The models are made to play multiple games using self-play and the game data is stored is a buffer which is later sampled from to train the networks.
+
+## How AlphaZero Actually Learns
+
+By this point we've covered MCTS and how it builds a search tree to make decisions. Now the question is: how does AlphaZero get *good* at this? How does it go from random play to superhuman strength without ever seeing a single human game?
+
+The answer is a tight feedback loop between a neural network and MCTS — each one making the other better.
+
+---
+
+### The Neural Network
+
+AlphaZero uses a single deep residual network (ResNet, 20 blocks) that takes a board state as input and outputs two things simultaneously:
+
+- **p** — a probability distribution over all legal moves (the *policy head*)
+- **v** — a scalar in [-1, 1] estimating the expected outcome from this position (the *value head*)
+
+The input is an 8×8×119 tensor encoding the current board plus the last 8 plies of history, always oriented from the perspective of the side to move. The history matters because the network needs to detect patterns like repetition or gradual piece development that span multiple moves.
+
+Two heads, one torso. The shared ResNet body extracts general positional features, and the two heads specialize on top of it. This is important — value and policy aren't independent, they share a representation, which means learning to evaluate positions also improves move selection and vice versa.
+
+---
+
+### The Training Loop
+
+Training is a continuous cycle of three things happening in parallel:
+
+**1. Self-play data generation**
+
+The network plays games against itself. At every position $s_t$ in every game, it runs 800 MCTS simulations (more on this below) to produce an improved move distribution $\pi_t$. It then samples a move from $\pi_t$ and plays it. This continues until the game ends with outcome $z \in \{+1, 0, -1\}$.
+
+Every position from the game gets stored in a replay buffer as the tuple $(s_t, \pi_t, z)$ — board state, the MCTS-improved policy, and the final game result. The buffer holds the last 1 million positions, and at most 30 positions are sampled from any single game to avoid overfitting to one game's trajectory.
+
+**2. Gradient descent**
+
+Mini-batches of size 4096 are sampled from the replay buffer and used to minimize the loss function:
+
+$$l = (z - v)^2 - \pi^T \log p + c||\theta||^2$$
+
+Three terms:
+
+- $(z - v)^2$ — mean squared error between the network's value prediction $v$ and the actual game outcome $z$. This trains the value head to be an accurate position evaluator.
+- $-\pi^T \log p$ — cross-entropy between the raw network policy $p$ and the MCTS-improved policy $\pi$. This trains the policy head to replicate what MCTS figured out was actually good.
+- $c||\theta||^2$ — L2 regularization to prevent the weights from blowing up.
+
+SGD with momentum 0.9, initial learning rate 0.2, decayed by 10× at 100k, 300k, 500k, and 700k steps, for a total of 1 million gradient steps.
+
+**3. Continuous update**
+
+Unlike AlphaGo Zero which gated updates behind an evaluation tournament (new model had to beat the old one before becoming the self-play model), AlphaZero just continuously updates a single network. The self-play workers refresh their copy of the network every 1000 training steps. Simpler, and empirically it works fine.
+
+---
+
+### From Raw Policy to Improved Policy: The MCTS Search
+
+This is the core mechanism and worth understanding precisely. At each position during self-play, here's what actually happens:
+
+**Step 1 — Initialize**
+
+The network evaluates the root position, giving prior probabilities $p$ over all legal moves. Before search begins, Dirichlet noise is injected into these root priors:
+
+$$p_{\text{noisy}}(a) = (1 - \varepsilon) \cdot p(a) + \varepsilon \cdot \eta_a, \quad \eta \sim \text{Dir}(0.3)$$
+
+where $\varepsilon = 0.25$. This forces the search to occasionally explore moves the network thinks are weak — without it, the self-play games would be too repetitive and the network would never discover surprising lines. This noise is only applied at the root, not deeper in the tree.
+
+**Step 2 — 800 simulations**
+
+Each simulation traverses the tree from root to a leaf, guided by the PUCT score at each node:
+
+$$\text{Score}(s, a) = Q(s, a) + U(s, a)$$
+
+$$U(s, a) = C_{\text{puct}} \cdot P(s, a) \cdot \frac{\sqrt{\sum_b N(s, b)}}{1 + N(s, a)}$$
+
+- $Q(s, a)$ is the mean value across all previous simulations that went through action $a$ from state $s$ — pure exploitation.
+- $U(s, a)$ is the exploration bonus. It's large when $P(s,a)$ (the network's prior) is high, and decays as $N(s,a)$ grows. Early on, $U$ dominates and the search follows the network's intuition. Over time, $Q$ dominates and the search follows actual simulation results.
+
+When a simulation reaches a leaf node, the network evaluates it to get a value estimate $v$. No random rollout — the value head replaces it entirely. This value is backpropagated up the path, flipping sign at each level (since turns alternate).
+
+**Step 3 — Extract the improved policy**
+
+After 800 simulations, the improved policy $\pi$ is computed from visit counts:
+
+$$\pi(a \mid s) = \frac{N(s, a)^{1/\tau}}{\sum_b N(s, b)^{1/\tau}}$$
+
+Temperature $\tau = 1$ during training (preserving the full distribution), and $\tau \to 0$ during evaluation (collapsing to the most visited move deterministically). The first 30 plies of each training game are sampled stochastically from $\pi$; after that, the argmax is taken.
+
+**Why is $\pi$ better than $p$?**
+
+The raw policy $p$ is the network's immediate intuition about the position — it hasn't looked ahead at all. MCTS with 800 simulations has explored hundreds of continuations, caught tactical traps several moves deep, and adjusted visit counts accordingly. A move that looks fine to the network but leads to a lost position 6 moves later will have low $Q$, get visited less, and end up with low $\pi$. The visit count distribution encodes the network's intuition *corrected by lookahead*.
+
+This is the key insight: **MCTS acts as a policy improvement operator**. It takes the network's raw policy and produces a strictly better one. That better policy is then used as the training target, which improves the network, which improves the next MCTS search, and so on. The two pull each other up iteratively.
+
+---
+
+### Exploration and Game Diversity
+
+A few implementation details that matter more than they seem:
+
+**Dirichlet noise** — covered above. Prevents the search from collapsing into a narrow set of lines during self-play.
+
+**Stochastic vs deterministic moves** — the first 30 plies are sampled from $\pi$ rather than taking the argmax. This ensures the training data covers a wide variety of opening positions rather than always playing the same lines.
+
+**Early resignation** — 80% of games are terminated early when the value head predicts an expected score of ≤5% for one side. This avoids wasting compute grinding out hopeless positions. The remaining 20% are always played to completion to keep the value estimates calibrated near terminal states.
+
+**Game length cap** — maximum 512 plies, after which the game is declared a draw. Without this, degenerate loops could run indefinitely.
+
+---
+
+### The Big Picture
+
+Zooming out, what AlphaZero is doing is using MCTS as a *thinking tool* that's smarter than the network alone, collecting the results of that thinking as training data, and distilling it back into the network's weights. The network provides fast intuition; MCTS provides slow, careful deliberation. Training is the process of making the intuition approximate the deliberation.
+
+After enough iterations of this loop, the network's raw policy gets close enough to the MCTS-improved policy that even without search it plays at a strong level. And with search on top, it's stronger still.
+
+
+
+#### Policy Network and the Modified MCTS
+
+
+
 
 
 
@@ -105,3 +237,4 @@ Each MCTS Sampling Iteration involves the following steps:
 - [Original Paper](https://arxiv.org/abs/1712.01815)
 - [Acquisition of Chess Knowledge in AlphaZero](https://arxiv.org/pdf/2111.09259)
 - [DeepMind's AlphaZero Page](https://deepmind.com/research/publications/alphazero)
+- [MCTS Visualization for TicTacToe](https://vgarciasc.github.io/mcts-viz/)
