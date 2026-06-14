@@ -1,0 +1,286 @@
+<style>
+.diffusion-reverse-playground {
+  font-family: var(--font-sans, sans-serif);
+  max-width: 780px;
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  border: 2px solid #8B5CF6;
+  border-radius: 12px;
+  background: var(--color-background-secondary, rgba(139, 92, 246, 0.03));
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.1);
+  color: var(--color-text-primary);
+}
+
+.dark .diffusion-reverse-playground {
+  background: rgba(139, 92, 246, 0.05);
+}
+
+.reverse-layout {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.reverse-visual-side {
+  flex-shrink: 0;
+  background: var(--color-background-primary, #fff);
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--color-border-tertiary, #e5e7eb);
+}
+
+.dark .reverse-visual-side {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+.canvas-slider-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.slider-track-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  width: 35px;
+}
+
+#reverse-slider {
+  -webkit-appearance: slider-vertical;
+  appearance: slider-vertical;
+  width: 8px;
+  height: 220px;
+  margin: auto 0;
+  accent-color: #8B5CF6;
+  cursor: pointer;
+}
+
+.axis-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-text-secondary, #64748b);
+}
+
+.dark .axis-label {
+  color: #cbd5e1;
+}
+
+#reverse-canvas {
+  border-radius: 6px;
+  display: block;
+  background: transparent;
+}
+
+.reverse-control-side {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.reverse-control-side h3 {
+  margin: 0 0 0.4rem 0;
+  color: var(--color-text-primary, #0f172a);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.dark .reverse-control-side h3 {
+  color: #f1f5f9;
+}
+
+.reverse-control-side p {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary, #475569);
+  line-height: 1.5;
+  margin: 0 0 1.2rem 0;
+}
+
+.dark .reverse-control-side p {
+  color: #cbd5e1;
+}
+
+.status-badge {
+  display: inline-block;
+  background: rgba(139, 92, 246, 0.1);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+#reverse-step-display {
+  color: #8B5CF6;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 640px) {
+  .reverse-layout {
+    flex-direction: column;
+    text-align: center;
+  }
+  .reverse-control-side {
+    text-align: center;
+    width: 100%;
+  }
+}
+</style>
+
+<div class="diffusion-reverse-playground">
+  <div class="reverse-layout">
+    <div class="reverse-visual-side">
+      <div class="canvas-slider-container">
+        <div class="slider-track-wrapper">
+          <span class="axis-label top-label">$t = T$</span>
+          <input type="range" id="reverse-slider" min="0" max="100" value="100" step="1" orient="vertical">
+          <span class="axis-label bottom-label">$t = 0$</span>
+        </div>
+        <canvas id="reverse-canvas" width="400" height="300"></canvas>
+      </div>
+    </div>
+    <div class="reverse-control-side">
+      <h3>Reverse Diffusion: Skewed Modes</h3>
+      <p>Samples($x_T$) from the initial standard Gaussian distribution(top) get slowly transformed into samples($x_0$) of the target distribution(bottom) over $T$ steps.</p>
+      <p style="font-size: 0.6rem; color: var(--color-text-tertiary, grey); font-style: italic;">(Please reload the page if object not working properly)</p>
+      <div class="status-badge">
+        <span id="reverse-step-display">Timestep $t$: 100</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function initReverseSimulation() {
+  const revCanvas = document.getElementById('reverse-canvas');
+  if (!revCanvas || revCanvas.dataset.initialized) return;
+  revCanvas.dataset.initialized = 'true';
+
+  const revCtx = revCanvas.getContext('2d');
+  const revSlider = document.getElementById('reverse-slider');
+  const revDisplay = document.getElementById('reverse-step-display');
+
+  const NUM_PARTICLES = 45; 
+  const MAX_STEPS = 100;
+  const trajectories = [];
+  const W = revCanvas.width;
+  const H = revCanvas.height;
+
+  function getGaussian() {
+    let u = 0, v = 0;
+    while(u === 0) u = Math.random(); 
+    while(v === 0) v = Math.random();
+    return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+  }
+
+  for (let p = 0; p < NUM_PARTICLES; p++) {
+    const path = new Array(MAX_STEPS + 1);
+    const targetLeft = Math.random() < 0.75;
+    
+    let currentX = (W / 2) + getGaussian() * 30;
+    path[MAX_STEPS] = currentX;
+
+    for (let t = MAX_STEPS - 1; t >= 0; t--) {
+      let drift = 0;
+      if (t < 75) {
+        const targetX = targetLeft ? (W / 2 - 95) : (W / 2 + 95);
+        drift = (targetX - currentX) * 0.045; 
+      }
+      const noiseScale = 2.4 * Math.sqrt(t / MAX_STEPS + 0.1);
+      currentX += drift + getGaussian() * noiseScale;
+      path[t] = currentX;
+    }
+    
+    trajectories.push({
+      points: path,
+      isRed: p === 7
+    });
+  }
+
+  function gaussianPDF(x, mean, stdDev) {
+    return (1 / (stdDev * Math.sqrt(2 * Math.PI))) * Math.exp(-Math.pow(x - mean, 2) / (2 * Math.pow(stdDev, 2)));
+  }
+
+  function drawSimulation() {
+    revCtx.clearRect(0, 0, W, H);
+    
+    const currentStep = parseInt(revSlider.value);
+    revDisplay.textContent = `Timestep t: ${currentStep}`;
+
+    const paddingY = 40;
+    const usableHeight = H - (paddingY * 2);
+    
+    function getCanvasY(stepValue) {
+      const ratio = (MAX_STEPS - stepValue) / MAX_STEPS;
+      return paddingY + ratio * usableHeight;
+    }
+
+    const activeY = getCanvasY(currentStep);
+
+    revCtx.lineWidth = 1.75;
+    revCtx.strokeStyle = 'rgba(139, 92, 246, 0.4)'; // Violet tint for distribution lines
+    
+    // Top single distribution (t=T)
+    revCtx.beginPath();
+    for (let x = 0; x < W; x++) {
+      let yCurve = paddingY - (gaussianPDF(x, W / 2, 30) * 2000);
+      if (x === 0) revCtx.moveTo(x, yCurve); else revCtx.lineTo(x, yCurve);
+    }
+    revCtx.stroke();
+
+    // Bottom skewed bimodal distribution (t=0)
+    revCtx.beginPath();
+    for (let x = 0; x < W; x++) {
+      let pLeft = gaussianPDF(x, W / 2 - 95, 22) * 0.75;
+      let pRight = gaussianPDF(x, W / 2 + 95, 22) * 0.25;
+      
+      let yCurve = (H - paddingY) - ((pLeft + pRight) * 2600);
+      if (x === 0) revCtx.moveTo(x, yCurve); else revCtx.lineTo(x, yCurve);
+    }
+    revCtx.stroke();
+
+    // Active Timestamp Axis
+    revCtx.beginPath();
+    revCtx.strokeStyle = 'rgba(139, 92, 246, 0.2)'; // Violet axis
+    revCtx.setLineDash([4, 4]);
+    revCtx.moveTo(0, activeY);
+    revCtx.lineTo(W, activeY);
+    revCtx.stroke();
+    revCtx.setLineDash([]); 
+
+    // Render Particles & Trails
+    trajectories.forEach(tr => {
+      if (tr.isRed) {
+        revCtx.strokeStyle = '#ef4444'; // Keep red for the highlighted trajectory
+        revCtx.lineWidth = 2.5;
+      } else {
+        revCtx.strokeStyle = 'rgba(139, 92, 246, 0.2)'; // Violet trail
+        revCtx.lineWidth = 1.1;
+      }
+
+      revCtx.beginPath();
+      revCtx.moveTo(tr.points[MAX_STEPS], getCanvasY(MAX_STEPS));
+      for (let s = MAX_STEPS - 1; s >= currentStep; s--) {
+        revCtx.lineTo(tr.points[s], getCanvasY(s));
+      }
+      revCtx.stroke();
+
+      revCtx.beginPath();
+      revCtx.fillStyle = tr.isRed ? '#ef4444' : '#8B5CF6';
+      revCtx.arc(tr.points[currentStep], activeY, tr.isRed ? 4.5 : 2.5, 0, 2 * Math.PI);
+      revCtx.fill();
+      if (tr.isRed) {
+        revCtx.strokeStyle = '#ffffff';
+        revCtx.lineWidth = 1;
+        revCtx.stroke();
+      }
+    });
+  }
+
+  revSlider.addEventListener('input', drawSimulation);
+  drawSimulation();
+}
+setInterval(initReverseSimulation, 200);
+</script>
