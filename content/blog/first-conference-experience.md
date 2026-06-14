@@ -1,5 +1,5 @@
 +++
-title = "First Conference Experience"
+title = "ICC 25: My First Conference"
 date = 2026-02-28T16:30:22Z
 tags = ["conference", "personal", "research"]
 description = "My experience attending the Indian Control Conference in Bangalore."
@@ -9,19 +9,29 @@ description = "My experience attending the Indian Control Conference in Bangalor
 I attended the **Indian Control Conference** from 17th to 20th December 2025 at IISc, Bangalore. This was my first conference ever — and also my first time in Bangalore. I was there to present a paper I worked on during my summer internship at IIT Bombay *(long story, will tell some other time)*.
 
 
-### Arrival & Accommodation
+## Arrival & Accommodation
 ---
 The first thing I did after reaching campus was sort out my accommodation. I had applied for financial aid and luckily got a guest house room on campus at a subsidized rate — which honestly felt like a small victory in itself.
 
 Since the conference was starting the next day, I had some time to just walk around and explore the campus. IISc is ridiculously pretty. I also somehow managed to eat at one of the hostel canteens, thanks to two very kind students who got me in using the guest policy. *Peak survival skills unlocked on day one.*
 
-| IISc Campus Details | |
-|---|---|
-| ![IISc Campus 1](https://lh3.googleusercontent.com/sitesv/AA5AbUAWirtGXUmZg2XlsxiFcx1zOpnuTrfPcsH1mYdlf4wjqGdQXd8hffGgk6nTTYFZq-ZyeqkTuHj4dxzDOBNiun78547Nd1ftLPnTo2ioth4Kh2Yl1TPRxQphTLB2xRnnvNbSiQZGOAJtxWdj3HjIdK_VdrZY36ttGCFcUn8ssbzuA3XRmO9c-ej3yfqm9L09BXeSItnRySj65c5jwAHcOQQ19CTGPdcS32hDJKg=w1280) | ![IISc Campus 2](https://lh3.googleusercontent.com/sitesv/AA5AbUDxdNMUKTEA-cKEb3R-f6mQf2X5jDBfpd_SWlJ-wvspQ9KmEPA9RwdcavDgtCUeccCF5-yBdsaA92nDQhl9BO4aJxLdaoeKxYEhZCa4XnOyIXC9rQHdBMnnw9uN7qka-FuR8nQlgSE-qSFc1Y0eip6t_Gfr2XL40f92ySExJ3mcogRjHMN9Fr0I7mCrZ0dGb6ImkVfWZPtp5gALPbaiuFdWspaQxvXw-zkEyp4=w1280) |
-| *IISc Main Building* | ![IISc Main Building](https://lh3.googleusercontent.com/sitesv/AA5AbUD4DmX9nidtQ5Vewuz0Q3UThjFeIZSpSL4pSmuwnW7VgHGsGnxlTWk1q6hUMgnrgQTadlwNlJEfpC1tUeyJ6uSk5YKHCW1h8ZDrIb2vfV3tS48q912_bUQ8MxZSMZ3NprgSKyIOraAlzslNQQaop-gZV_5-ioOG7bkEqJC3qaTjjxKUv2JUAk5C0Z2q3sD704C3NuigVKynNwBlpUir0uB8DGrkFWd9EjxKRsQ=w1280) |
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0;">
+  
+  <figure style="margin: 0;">
+    <img src="/images/idcbuilding.jpg" alt="IDC Building" style="width: 100%; border-radius: 8px;">
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/images/mainbuilding.jpg" alt="Main Building" style="width: 100%; border-radius: 8px;">
+    <figcaption style="text-align: center; font-size: 0.85rem; color: gray; margin-top: 0.5rem;"><i>IISc Campus</i></figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/images/statue.jpg" alt="IISc Main Building" style="width: 100%; border-radius: 8px;">
+    <figcaption style="text-align: center; font-size: 0.85rem; color: gray; margin-top: 0.5rem;"></figcaption>
+  </figure>
+</div>
 
 
-### Workshops & Presentations
+## Workshops & Presentations
 ---
 The reporting time was at **8:30 am** the next day. I registered, got my goodie bag, and started the day with a round of workshop presentations. Honestly, not having been exposed to robotics and AI research outside had me greatly underestimating the kind of work I would see. That assumption did not last very long:
 - A lot of the talks were genuinely impressive.
@@ -38,20 +48,32 @@ The foyer of the IDR building had stalls from robotic equipment distributors. Th
 I also took this chance to interact with a few professors I had been planning to email for research opportunities before eventually committing to my IITB work. Slightly intimidating, but absolutely worth it.
 
 
-### Evening & Gala Dinner
+## Cultural Night and Good Food
 ---
 That evening, there was a prize distribution ceremony followed by a cultural session by Indian flautist **Pravin Godkhindi**. It was superb. After an entire day of technical talks, sitting there listening to live classical flute music felt unexpectedly calming. A really nice way to close the academic intensity of the day.
 
 Then came the **Gala Dinner**. I almost couldn’t find the venue because it was on the other side of the road — you had to use an underground connector from campus to cross over. Very cool infrastructure. Slightly confusing directions. And yes, the food was again ridiculously good. They had everything — veg, non-veg, full spread. Sadly, my hands (and mouth) were too busy to take any pictures.
 
-| Prize Distribution | Cultural Event | Flute Performance |
-|---|---|---|
-| ![Prize Distribution](/images/robot.jpg) | ![Cultural Event](/images/lecture.jpg) | ![Pravin Godkhindi Event](https://lh3.googleusercontent.com/sitesv/AA5AbUCDtouULrhezArImB1edv1U_xkyDarOWFYaP-YMvGCatsWmIo2BsJlpaKQMObCryj6NMWf4e7OyEz639cMKDDiPwR7HPLj_jtVFElrwJ3r6tV-28SbPMlesWWSijGSZtWfzxBeTdmquafsHfQCs3oS3i_23neDZqEE6q05WOVg-6Gp-5OXIMn-8NNrXAZo_96ntyh-EgP2aTj-1CsavxLTYbYKQtW6E9KxxsKw=w1280) |
-| *Event Continuation* | ![Classical Music 2](/images/concert.jpg) | ![Event continuation](/images/concert.jpg) |
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0;">
+  <figure style="margin: 0;">
+    <img src="/images/robot.jpg" alt="Prize Distribution" style="width: 100%; border-radius: 8px;">
+    <figcaption style="text-align: center; font-size: 0.85rem; color: gray; margin-top: 0.5rem;"><i>Bots</i></figcaption>
+  </figure>
+    <figure style="margin: 0;">
+    <img src="/images/concert.jpg" alt="Classical Music 2" style="width: 100%; border-radius: 8px;">
+    <figcaption style="text-align: center; font-size: 0.85rem; color: gray; margin-top: 0.5rem;"><i>Cultural Program</i></figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/images/lecture.jpg" alt="Cultural Event" style="width: 100%; border-radius: 8px;">
+    <figcaption style="text-align: center; font-size: 0.85rem; color: gray; margin-top: 0.5rem;"><i>Guest Seminar</i></figcaption>
+  </figure>
+
+  </figure>
+</div>
 
 
 
-### Final Thoughts
+## Final Thoughts
 ---
 The last day followed a similar pattern — plenary talks and paper presentations. Our slot was the second to last. It went well overall. The audience was a little thin *(end-of-conference effect)*, but no major disasters, so I’m counting that as a win!
 
@@ -63,6 +85,13 @@ Hopefully I’ll be back someday; maybe with more work, more confidence, and a s
 
 *That’s it for this one. See you all again soon!*
 
-| Group Photo | My Presentation |
-|---|---|
-| ![Group Photo](/images/grp.jpg) | ![Final Conference Photo 2](/images/present.jpg) |
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0;">
+  <figure style="margin: 0;">
+    <img src="/images/grp.jpg" alt="Group Photo" style="width: 100%; border-radius: 8px;">
+    <figcaption style="text-align: center; font-size: 0.85rem; color: gray; margin-top: 0.5rem;"><i>Group Photo</i></figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/images/present.jpg" alt="Final Conference Photo 2" style="width: 100%; border-radius: 8px;">
+    <figcaption style="text-align: center; font-size: 0.85rem; color: gray; margin-top: 0.5rem;"><i>My Presentation</i></figcaption>
+  </figure>
+</div>
