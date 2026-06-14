@@ -5,5 +5,6 @@ tags = ["Diffusion", "Deep Learning"]
 description = "Diffusion Models for Dummies: Understanding the Math Behind It"
 +++ 
 
- -- work in progress --
+> #### Incomplete Blog
+> Work in Progress
  

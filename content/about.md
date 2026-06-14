@@ -2,7 +2,7 @@ Hi, I am Utsab. I am third year undergraduate student at IIT Kharagpur pursuing 
 
 I am currently the Head of Vision at AGV.AI, a UG research group under Prof. Debashish Chakravarty in IIT Kharagpur working on autonomous vehicles and robotic systems. I was a robotics intern at the ARMS Lab, IIT Bombay last summer. This summer, I am working with the VAL team at IISc Bangalore.
 
-I am interested in deep learning theory and optimizations, computer vision, robotics and high-performance computing. Always open to any good learning opportunities!
+I am interested in deep learning theory and optimizations, computer vision, robotics and high-performance computing. Always open to good learning opportunities!
 
 
 Mail: [utsabkaran2010@gmail.com](mailto:utsabkaran2010@gmail.com)    [CV/Resume](https://drive.google.com/file/d/1nD8XYHCEp5441g84AbSGrEPbh14eAdB9/view?usp=sharing)
