@@ -5,4 +5,4 @@ I am currently the Head of Vision at AGV.AI, a UG research group under Prof. Deb
 I am interested in deep learning theory and optimizations, computer vision, robotics and high-performance computing. Always open to good learning opportunities!
 
 
-Mail: [utsabkaran2010@gmail.com](mailto:utsabkaran2010@gmail.com)    [CV/Resume](https://drive.google.com/file/d/1nD8XYHCEp5441g84AbSGrEPbh14eAdB9/view?usp=sharing)
+Mail: [utsabkaran2010@gmail.com](mailto:utsabkaran2010@gmail.com)    [CV/Resume](/resume_ukaran.pdf)

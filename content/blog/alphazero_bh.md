@@ -1,6 +1,6 @@
 +++
 title = "AlphaZero: Mastering the game of Black Hole"
-date = 2026-06-14T12:42:42+05:30
+date = 2026-06-14T16:15:42+05:30
 tags = ["Reinforcement Learning", "Game Theory"]
 description = "Implementing AlphaZero for the game of Black Hole"
 +++ 
