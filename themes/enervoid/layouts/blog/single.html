@@ -50,7 +50,7 @@
 
       <div
         class="border border-gray-200/70 dark:border-gray-200/70 dark:border-gray-200 dark:border-gray-800/70 bg-white dark:bg-[#070709] rounded-sm p-6 sm:p-10">
-        <div class="md-content text-base sm:text-lg leading-relaxed text-gray-700 dark:text-gray-300 w-full">
+        <div class="md-content blog-content text-base sm:text-lg leading-relaxed text-gray-700 dark:text-gray-300 w-full">
           {{ .Content }}
         </div>
         {{ partial "comments.html" . }}
@@ -60,6 +60,10 @@
 </div>
 
 <style>
+  .blog-content {
+    font-family: 'Lora', serif;
+  }
+
   .toc {
     font-size: 0.95rem;
     line-height: 1.35;

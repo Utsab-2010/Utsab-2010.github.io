@@ -1,121 +1,141 @@
 <style>
-.diffusion-playground {
-  font-family: var(--font-sans, sans-serif);
-  max-width: 680px;
-  margin: 1.5rem auto;
-  padding: 1.5rem;
-  border: 2px solid #8B5CF6;
-  border-radius: 12px;
-  background: var(--color-background-secondary, rgba(139, 92, 246, 0.03));
-  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.1);
-  color: var(--color-text-primary);
-}
-.dark .diffusion-playground {
-  background: rgba(139, 92, 246, 0.05);
-}
-.playground-layout {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-}
-.visual-side {
-  flex-shrink: 0;
-  display: flex;
-  background: var(--color-background-primary, #fff);
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid var(--color-border-tertiary, #e5e7eb);
-}
-.dark .visual-side {
-  background: #1f2937;
-  border-color: #374151;
-}
-#diffusion-canvas {
-  border-radius: 6px;
-  display: block;
-  width: 180px;
-  height: 180px;
-}
-.control-side {
-  flex-grow: 1;
-  text-align: left;
-}
-.control-side h3 {
-  margin: 0 0 0.4rem 0;
-  color: var(--color-text-primary, #0f172a);
-  font-size: 1.15rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-.dark .control-side h3 {
-  color: #f1f5f9;
-}
-.control-side p {
-  font-size: 0.85rem;
-  color: var(--color-text-secondary, #475569);
-  line-height: 1.45;
-  margin: 0 0 1.2rem 0;
-}
-.dark .control-side p {
-  color: #cbd5e1;
-}
-.controls {
-  background: var(--color-background-primary, #fff);
-  padding: 1rem;
-  border-radius: 8px;
-  border: 1px solid var(--color-border-tertiary, rgba(0, 0, 0, 0.05));
-}
-.dark .controls {
-  background: #1f2937;
-  border-color: #374151;
-}
-.slider-labels {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.75rem;
-  color: var(--color-text-secondary, #64748b);
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-}
-.dark .slider-labels {
-  color: #cbd5e1;
-}
-#step-display {
-  color: #8B5CF6;
-  font-weight: 600;
-}
-#noise-slider {
-  width: 100%;
-  display: block;
-  margin: 0;
-  accent-color: #8B5CF6;
-  cursor: pointer;
-}
-@media (max-width: 560px) {
+  .diffusion-playground {
+    font-family: var(--font-sans, sans-serif);
+    max-width: 680px;
+    margin: 1.5rem auto;
+    padding: 1.5rem;
+    border: 2px solid #8B5CF6;
+    border-radius: 12px;
+    background: var(--color-background-secondary, rgba(139, 92, 246, 0.03));
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.1);
+    color: var(--color-text-primary);
+  }
+
+  .dark .diffusion-playground {
+    background: rgba(139, 92, 246, 0.05);
+  }
+
   .playground-layout {
-    flex-direction: column;
-    text-align: center;
-    gap: 1rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
   }
-  .control-side {
-    text-align: center;
-    width: 100%;
+
+  .visual-side {
+    flex-shrink: 0;
+    display: flex;
+    background: var(--color-background-primary, #fff);
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid var(--color-border-tertiary, #e5e7eb);
   }
+
+  .dark .visual-side {
+    background: #1f2937;
+    border-color: #374151;
+  }
+
   #diffusion-canvas {
-    width: 220px;
-    height: 220px;
+    border-radius: 6px;
+    display: block;
+    width: 180px;
+    height: 180px;
   }
-}
+
+  .control-side {
+    flex-grow: 1;
+    text-align: left;
+  }
+
+  .control-side h3 {
+    margin: 0 0 0.4rem 0;
+    color: var(--color-text-primary, #0f172a);
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .dark .control-side h3 {
+    color: #f1f5f9;
+  }
+
+  .control-side p {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary, #475569);
+    line-height: 1.45;
+    margin: 0 0 1.2rem 0;
+  }
+
+  .dark .control-side p {
+    color: #cbd5e1;
+  }
+
+  .controls {
+    background: var(--color-background-primary, #fff);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-border-tertiary, rgba(0, 0, 0, 0.05));
+  }
+
+  .dark .controls {
+    background: #1f2937;
+    border-color: #374151;
+  }
+
+  .slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--color-text-secondary, #64748b);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .dark .slider-labels {
+    color: #cbd5e1;
+  }
+
+  #step-display {
+    color: #8B5CF6;
+    font-weight: 600;
+  }
+
+  #noise-slider {
+    width: 100%;
+    display: block;
+    margin: 0;
+    accent-color: #8B5CF6;
+    cursor: pointer;
+  }
+
+  @media (max-width: 560px) {
+    .playground-layout {
+      flex-direction: column;
+      text-align: center;
+      gap: 1rem;
+    }
+
+    .control-side {
+      text-align: center;
+      width: 100%;
+    }
+
+    #diffusion-canvas {
+      width: 220px;
+      height: 220px;
+    }
+  }
 </style>
 
 <div class="diffusion-playground">
   <div class="playground-layout">
     <div class="visual-side">
-      <img id="source-img" src="https://picsum.photos/id/1025/300/300" crossorigin="anonymous" alt="Source" style="display:none;">
+      <img id="source-img" src="/blogs/alphazerobh/catto.webp" crossorigin="anonymous" alt="Source"
+        style="display:none;">
       <canvas id="diffusion-canvas" width="300" height="300"></canvas>
     </div>
     <div class="control-side">
-      <h3>Interactive Forward Diffusion</h3>
+      <h3>Forward Diffusion Process</h3>
       <p>Drag the slider to add Forward Gaussian Noise ($q(x_t | x_{t-1})$) to the original image data.</p>
       <div class="controls">
         <div class="slider-labels">
@@ -130,54 +150,54 @@
 </div>
 
 <script>
-function initForwardPlayground() {
-  const canvas = document.getElementById('diffusion-canvas');
-  if (!canvas || canvas.dataset.initialized) return;
-  canvas.dataset.initialized = 'true';
-  const ctx = canvas.getContext('2d');
-  const img = document.getElementById('source-img');
-  const slider = document.getElementById('noise-slider');
-  const stepDisplay = document.getElementById('step-display');
-  let originalPixels = null;
-  function randomGaussian() {
-    let u = 0, v = 0;
-    while(u === 0) u = Math.random(); 
-    while(v === 0) v = Math.random();
-    return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
-  }
-  function applyNoise() {
-    if (!originalPixels) return;
-    const width = canvas.width;
-    const height = canvas.height;
-    const imgData = ctx.createImageData(width, height);
-    const targetData = imgData.data;
-    const srcData = originalPixels.data;
-    const t = slider.value / 100; 
-    const beta = t; 
-    const alphaBar = 1 - beta;
-    const sqrtAlphaBar = Math.sqrt(alphaBar);
-    const sqrtOneMinusAlphaBar = Math.sqrt(beta);
-    for (let i = 0; i < srcData.length; i += 4) {
-      for (let c = 0; c < 3; c++) {
-        const originalValue = srcData[i + c];
-        const noise = randomGaussian() * 127.5 + 127.5;
-        let mixedValue = (sqrtAlphaBar * originalValue) + (sqrtOneMinusAlphaBar * noise);
-        targetData[i + c] = Math.min(255, Math.max(0, mixedValue));
-      }
-      targetData[i + 3] = 255; 
+  function initForwardPlayground() {
+    const canvas = document.getElementById('diffusion-canvas');
+    if (!canvas || canvas.dataset.initialized) return;
+    canvas.dataset.initialized = 'true';
+    const ctx = canvas.getContext('2d');
+    const img = document.getElementById('source-img');
+    const slider = document.getElementById('noise-slider');
+    const stepDisplay = document.getElementById('step-display');
+    let originalPixels = null;
+    function randomGaussian() {
+      let u = 0, v = 0;
+      while (u === 0) u = Math.random();
+      while (v === 0) v = Math.random();
+      return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
     }
-    ctx.putImageData(imgData, 0, 0);
-    stepDisplay.textContent = `Timestep t: ${slider.value}`;
+    function applyNoise() {
+      if (!originalPixels) return;
+      const width = canvas.width;
+      const height = canvas.height;
+      const imgData = ctx.createImageData(width, height);
+      const targetData = imgData.data;
+      const srcData = originalPixels.data;
+      const t = slider.value / 100;
+      const beta = t;
+      const alphaBar = 1 - beta;
+      const sqrtAlphaBar = Math.sqrt(alphaBar);
+      const sqrtOneMinusAlphaBar = Math.sqrt(beta);
+      for (let i = 0; i < srcData.length; i += 4) {
+        for (let c = 0; c < 3; c++) {
+          const originalValue = srcData[i + c];
+          const noise = randomGaussian() * 127.5 + 127.5;
+          let mixedValue = (sqrtAlphaBar * originalValue) + (sqrtOneMinusAlphaBar * noise);
+          targetData[i + c] = Math.min(255, Math.max(0, mixedValue));
+        }
+        targetData[i + 3] = 255;
+      }
+      ctx.putImageData(imgData, 0, 0);
+      stepDisplay.textContent = `Timestep t: ${slider.value}`;
+    }
+    img.onload = function () {
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      originalPixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      applyNoise();
+    };
+    if (img.complete) {
+      img.onload();
+    }
+    slider.addEventListener('input', applyNoise);
   }
-  img.onload = function() {
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    originalPixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    applyNoise();
-  };
-  if (img.complete) {
-    img.onload();
-  }
-  slider.addEventListener('input', applyNoise);
-}
-setInterval(initForwardPlayground, 200);
+  setInterval(initForwardPlayground, 200);
 </script>

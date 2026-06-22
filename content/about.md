@@ -3,7 +3,7 @@ title = "About"
 +++
 
 <div style="font-size: 1.1rem; line-height: 1.7; margin-bottom: 2rem;">
-Hi, I am <strong>Utsab</strong>. I am a fourth-year undergraduate student at <strong>IIT Kharagpur</strong> pursuing a Dual-Degree (B.Tech + M.Tech) in Electronics and Electrical Communication Engineering. As part of my masters curriculum, I shall be specilising in Vision and Intelligent Systems
+Hi, I am <strong>Utsab</strong>. I am a fourth-year undergraduate student at <strong>IIT Kharagpur</strong> pursuing a Dual-Degree (B.Tech + M.Tech) in Electronics and Electrical Communication Engineering. As part of my masters curriculum, I shall be specilising in Vision and Intelligent Systems.
 <br><br>
 <!-- I am currently the <strong>Head of Vision at AGV.AI</strong>, a UG research group under Prof. Debashish Chakravarty at IIT Kharagpur, working on autonomous vehicles and robotic systems. -->
 <!-- I am currently a summer research intern at the Vision and AI Lab, IISc Bangalore working on the data-efficient learning for vision datasets.  -->
@@ -15,10 +15,10 @@ My research interests mainly in the domain of deep learning and optimisation the
 ---
 
 ### 📌 News & Updates
-* **[ May 2026 ]** Started as summer research intern at the Vision and AI Lab, **IISc Bangalore**.
-* **[ Dec 2025 ]** Attended my first conference and presented our paper at the **Indian Control Conference** (ICC '25) held at IISc, Bangalore!
+* **[ May 2026 ]** Started as summer research intern at the [**Vision and AI Lab**](https://val.cds.iisc.ac.in/), IISc Bangalore.
+* **[ Dec 2025 ]** Attended my first conference and presented our paper at the **Indian Control Conference** held at IISc, Bangalore!
 * **[ Nov 2025 ]**  ***2nd*** in Robust Visual Foraging Competition @ **NeurIPS 2025** [[Link](https://neurips.cc/virtual/2025/loc/san-diego/136982)] 
-* **[ May 2025 ]** Joined the **ARMS Lab** at IIT Bombay as a Robotics Summer Intern.
+* **[ May 2025 ]** Joined the [**ARMS Lab**](https://sites.google.com/view/arms-lab/home?authuser=0) at IIT Bombay as a Robotics Summer Intern.
 <!-- * **[ Aug 2024 ]** Promoted to Head of Vision at **AGV.AI**, leading a brilliant team of undergraduate researchers in computer vision and perception. -->
 
 <!-- --- -->
