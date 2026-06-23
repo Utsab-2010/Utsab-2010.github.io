@@ -5,21 +5,124 @@ date: 2024-01-01
 
 ### **Experiences**
 ---
-- *Research Intern* | VAL, IISc Bangalore (May 2026 - Present)
-    - Working on Data-efficient Deep Learning for Vision Models. Trying to understand the behaviour of image data and how it scales with pruning methods. Also exploring continual learning methods.
-- *Research Intern* | ARMS Lab, IIT Bombay (May 2025 - Aug 2025)
-    - Worked on Safe Exploration and Navigation for AGVs
-    - Curated human-navigation datasets and implemented trajectories to human agents in Gazebo simulation.
-    - Developed a topological indoor mapping framework with a coupled planner and controller.
-- *Vision Head* | AGV.AI (April 2024 - Present)
-    - Still working on stuff.
+<div class="relative border-l-2 border-indigo-500/30 pl-6 ml-2 space-y-8 my-8">
+
+  <!-- IISc -->
+  <div class="relative group">
+    <div class="absolute w-3 h-3 bg-indigo-500 rounded-full top-1.5 transition-all duration-300 group-hover:scale-125 group-hover:bg-indigo-400" style="left: -1.95rem; box-shadow: 0 0 0 4px rgba(99,102,241,0.15);"></div>
+    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-1">
+      <h4 class="text-lg font-bold text-gray-900 dark:text-gray-100 m-0" style="margin: 0 !important;">Research Intern</h4>
+      <span class="text-sm font-medium text-indigo-600 dark:text-indigo-400">May 2026 - Present</span>
+    </div>
+    <div class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3">Vision and AI Lab, IISc Bangalore | Guide: Prof. Venkatesh Babu</div>
+    <ul class="list-disc pl-5 space-y-1.5 text-[0.95rem] text-gray-700 dark:text-gray-300">
+      <li>Working on Data-efficient Deep Learning for Vision Models.</li>
+      <li>Trying to understand the behaviour of image data and how it scales with data/compute.</li> 
+      <li>Exploring scalable continual learning methods for vision models.</li>
+    </ul>
+  </div>
+
+  <!-- ARMS Lab -->
+  <div class="relative group">
+    <div class="absolute w-3 h-3 bg-indigo-500 rounded-full top-1.5 transition-all duration-300 group-hover:scale-125 group-hover:bg-indigo-400" style="left: -1.95rem; box-shadow: 0 0 0 4px rgba(99,102,241,0.15);"></div>
+    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-1">
+      <h4 class="text-lg font-bold text-gray-900 dark:text-gray-100 m-0" style="margin: 0 !important;">Research Intern</h4>
+      <span class="text-sm font-medium text-indigo-600 dark:text-indigo-400">May 2025 - Aug 2025</span>
+    </div>
+    <div class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3">ARMS Lab, IIT Bombay | Guide: Prof. Leena Vachhani</div>
+    <ul class="list-disc pl-5 space-y-1.5 text-[0.95rem] text-gray-700 dark:text-gray-300">
+      <li>Worked on Safe Robotic Exploration and Navigation among human crowds.</li>
+      <li>Curated human-navigation datasets and implemented trajectories to human agents in Gazebo simulation.</li>
+      <li>Developed a topological indoor mapping framework with a coupled planner and controller.</li>
+      <li>Implemented and tested  navigation frameworks on the Turtlebot3 hardware.</li>
+    </ul>
+  </div>
+
+  <!-- AGV.AI -->
+  <div class="relative group">
+    <div class="absolute w-3 h-3 bg-indigo-500 rounded-full top-1.5 transition-all duration-300 group-hover:scale-125 group-hover:bg-indigo-400" style="left: -1.95rem; box-shadow: 0 0 0 4px rgba(99,102,241,0.15);"></div>
+    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-1">
+      <h4 class="text-lg font-bold text-gray-900 dark:text-gray-100 m-0" style="margin: 0 !important;">Vision Head</h4>
+      <span class="text-sm font-medium text-indigo-600 dark:text-indigo-400">April 2024 - Present</span>
+    </div>
+    <div class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3">AGV.AI | Guide: Prof. Debashish Chakravarty</div>
+    <ul class="list-disc pl-5 space-y-1.5 text-[0.95rem] text-gray-700 dark:text-gray-300">
+      <li>Leading a the vision vertical of an UG research group working on robotics and autonomous vehicles.</li>
+      <li>Lead a team to compete at the Roboracer Sim Racing League @ CDC-TF 2026 where we secured 7th place globally.</li>
+      <li>Worked on Monocular Depth Estimation and Semantic Segmentation for Edge AI devices.</li>
+      <li>Implemented planning and control pipelines for F1tenth racing simulations.</li>
+      <li>Worked on RL and imitation learning algorithms.</li>
+    </ul>
+  </div>
+
+</div>
 
 ### **Publications**
 ---
-[1] Krutarth Trivedi, **Utsab Karan**, Advaith Sudarshan and Leena Vachhani. Safe Indoor Exploration and Sparse Topological Mapping with Integrated Planning and Control. Presented at the **IEEE Indian Control Conference (ICC)**, Bangalore, Dec 2025. [[*paper*](https://ieeexplore.ieee.org/document/11372284)]
+<div class="space-y-3 my-6">
 
-[2] Moshayedi AJ, Roy AS, **Karan U**, Zhang M, Bassir D. An Integrated Beetle Antennae Search–Enabled Navigation Framework for Omnidirectional AGV Mobile Robots in Unknown Environments. **EAI Endorsed Trans AI Robotics** [Internet]. 2026 Feb. [[*paper*](https://doi.org/10.4108/airo.11438)]
+  <!-- Pub 1 -->
+  <div class="group border border-gray-200 dark:border-gray-800/60 bg-white dark:bg-[#0c0c0e] rounded-lg p-3 sm:p-4 transition-all duration-300 hover:border-indigo-400/40">
+    <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+      <div class="space-y-1">
+        <div class="text-[0.95rem] font-semibold text-gray-900 dark:text-gray-100 leading-snug">Safe Indoor Exploration and Sparse Topological Mapping with Integrated Planning and Control</div>
+        <div class="text-[0.85rem] text-gray-600 dark:text-gray-400">
+          Krutarth Trivedi, <span class="font-semibold text-indigo-500 dark:text-indigo-400">Utsab Karan</span>, Advaith Sudarshan and Leena Vachhani.
+        </div>
+        <div class="text-[0.75rem] font-medium text-gray-500">
+          Presented at the <strong>IEEE Indian Control Conference (ICC)</strong>, Bangalore, Dec 2025.
+        </div>
+      </div>
+      <div class="shrink-0 mt-1 sm:mt-0">
+        <a href="https://ieeexplore.ieee.org/document/11372284" target="_blank" class="inline-flex items-center justify-center px-2.5 py-1 text-[0.7rem] uppercase tracking-wide font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-500/10 rounded-md hover:bg-indigo-100 dark:hover:bg-indigo-500/20 transition-colors border border-indigo-200 dark:border-indigo-500/30 no-underline">
+          <i class="fa-solid fa-file-lines mr-1.5"></i> Paper
+        </a>
+      </div>
+    </div>
+  </div>
 
+  <!-- Pub 2 -->
+  <div class="group border border-gray-200 dark:border-gray-800/60 bg-white dark:bg-[#0c0c0e] rounded-lg p-3 sm:p-4 transition-all duration-300 hover:border-indigo-400/40">
+    <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+      <div class="space-y-1">
+        <div class="text-[0.95rem] font-semibold text-gray-900 dark:text-gray-100 leading-snug">An Integrated Beetle Antennae Search–Enabled Navigation Framework for Omnidirectional AGV Mobile Robots in Unknown Environments</div>
+        <div class="text-[0.85rem] text-gray-600 dark:text-gray-400">
+          Moshayedi AJ, Roy AS, <span class="font-semibold text-indigo-500 dark:text-indigo-400">Karan U</span>, Zhang M, Bassir D.
+        </div>
+        <div class="text-[0.75rem] font-medium text-gray-500">
+          <strong>EAI Endorsed Trans AI Robotics</strong> [Internet]. 2026 Feb.
+        </div>
+      </div>
+      <div class="shrink-0 mt-1 sm:mt-0">
+        <a href="https://doi.org/10.4108/airo.11438" target="_blank" class="inline-flex items-center justify-center px-2.5 py-1 text-[0.7rem] uppercase tracking-wide font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-500/10 rounded-md hover:bg-indigo-100 dark:hover:bg-indigo-500/20 transition-colors border border-indigo-200 dark:border-indigo-500/30 no-underline">
+          <i class="fa-solid fa-file-lines mr-1.5"></i> Paper
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pub 3 -->
+  <div class="group border border-gray-200 dark:border-gray-800/60 bg-white dark:bg-[#0c0c0e] rounded-lg p-3 sm:p-4 transition-all duration-300 hover:border-indigo-400/40">
+    <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+      <div class="space-y-1">
+        <div class="text-[0.95rem] font-semibold text-gray-900 dark:text-gray-100 leading-snug">Visual Robustness and Neural Alignment in a Shared Foraging Task: The Mouse vs. AI Benchmark</div>
+        <div class="text-[0.85rem] text-gray-600 dark:text-gray-400">
+          Schneider, Canzano, Hou, Peng, Deepu, <span class="font-semibold text-indigo-500 dark:text-indigo-400">Karan</span>, et al.
+        </div>
+        <div class="text-[0.75rem] font-medium text-gray-500 flex items-center flex-wrap gap-2">
+          <span><strong>NeurIPS 2026 Evaluations and Datasets Track</strong></span>
+          <span class="inline-flex items-center px-1.5 py-0.5 text-[0.6rem] uppercase tracking-wider font-bold bg-amber-100 text-amber-800 dark:bg-amber-500/10 dark:text-amber-400 border border-amber-200 dark:border-amber-500/20 rounded">Under Review</span>
+        </div>
+      </div>
+      <div class="shrink-0 mt-1 sm:mt-0">
+        <a href="https://openreview.net/forum?id=fhaa8MaD9I" target="_blank" class="inline-flex items-center justify-center px-2.5 py-1 text-[0.7rem] uppercase tracking-wide font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-500/10 rounded-md hover:bg-indigo-100 dark:hover:bg-indigo-500/20 transition-colors border border-indigo-200 dark:border-indigo-500/30 no-underline">
+          <i class="fa-solid fa-file-lines mr-1.5"></i> Paper
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
 
 ### **Achievements**
 ---
