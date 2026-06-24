@@ -164,10 +164,9 @@ Due to noisy training dynamics, I also added an extra criteria of having to win 
 
 ---
 
-### From Raw Policy to Improved Policy: The MCTS Search
+### From Raw Policy to Improved Policy: Guided MCTS
 
-This is the core mechanism and worth understanding precisely. At each position during self-play, here's what actually happens:
-
+The raw policy from the Policy Network is used as a crude guide for the MCTS. We run around 40 simulations for at each move of the game to get the improved Policy. The process is as follows:
 **Step 1 — Initialize**
 
 The network evaluates the root position, giving prior probabilities $p$ over all legal moves. Before search begins, Dirichlet noise is injected into these root priors:
@@ -176,26 +175,29 @@ $$p_{\text{noisy}}(a) = (1 - \varepsilon) \cdot p(a) + \varepsilon \cdot \eta_a,
 
 where $\varepsilon = 0.25$. This forces the search to occasionally explore moves the network thinks are weak — without it, the self-play games would be too repetitive and the network would never discover surprising lines. This noise is only applied at the root, not deeper in the tree.
 
-**Step 2 — 800 simulations**
+**Step 2 — MCTS Simulations**
 
-Each simulation traverses the tree from root to a leaf, guided by the PUCT score at each node:
+Each simulation traverses the tree from root to a leaf, governed by the **PUCT algorithm**. To understand exactly how the search tree is dynamically built, let's trace the first three simulations:
 
-$$\text{Score}(s, a) = Q(s, a) + U(s, a)$$
+* **Simulation 1 (Root Evaluation):** We start at the root node. Because it hasn't been expanded, selection stops immediately. The board state is passed to the neural network, which outputs the **naive policy probabilities** $P(s,a)$ and a **value estimate** $v \in [-1, 1]$. We create child nodes for all valid moves, initialize their priors using the network policy, and backpropagate $v$ to the root, increasing its visit count $N(s)$ to 1. *(Note: To ensure exploration, the Dirichlet noise is injected into these root priors right after this initial evaluation).*
 
-$$U(s, a) = C_{\text{puct}} \cdot P(s, a) \cdot \frac{\sqrt{\sum_b N(s, b)}}{1 + N(s, a)}$$
+* **Simulation 2 (Prior-Driven Selection):** Starting at the root again, we must pick a child using the PUCT score:
+  $$\text{Score}(s, a) = Q(s, a) + C_{\text{puct}} \cdot P(s, a) \cdot \frac{\sqrt{N(s)}}{1 + N(s, a)}$$
+  Since all children currently have 0 visits, $Q(s, a) = 0$. The score is entirely dominated by the network's prior $P(s, a)$. The search blindly trusts the network and selects the move with the highest naive probability. We traverse to this new leaf, evaluate it with the neural network, expand its children, and backpropagate its value $v_{leaf}$ up the tree (flipping the sign at each level since turns alternate).
 
-- $Q(s, a)$ is the mean value across all previous simulations that went through action $a$ from state $s$ — pure exploitation.
-- $U(s, a)$ is the exploration bonus. It's large when $P(s,a)$ (the network's prior) is high, and decays as $N(s,a)$ grows. Early on, $U$ dominates and the search follows the network's intuition. Over time, $Q$ dominates and the search follows actual simulation results.
+* **Simulation 3 (Exploration vs. Exploitation):** Back at the root, the previously selected child now has 1 visit and a non-zero $Q$-value. Its exploration term decreases. We now face a choice:
+  * **Exploit:** If the previous leaf resulted in a highly favorable $Q$-value, its total score might still beat the unvisited siblings. We select it again and dive deeper into that branch.
+  * **Explore:** If the evaluation was poor (negative $Q$), or an unvisited sibling has a highly competitive prior $P(s, a)$, the search pivots and explores a new action.
 
-When a simulation reaches a leaf node, the network evaluates it to get a value estimate $v$. No random rollout — the value head replaces it entirely. This value is backpropagated up the path, flipping sign at each level (since turns alternate).
+This process repeats for N simulations. Early on, the exploration bonus ($U$) dominates and the search follows the network's intuition. Over time, as visits accumulate, the actual simulation results ($Q$) take over. Crucially, **no random rollouts are used**—the neural network's value head replaces them entirely at the leaf nodes.
 
 **Step 3 — Extract the improved policy**
 
-After 800 simulations, the improved policy $\pi$ is computed from visit counts:
+After N simulations, the improved policy $\pi$ is computed from visit counts:
 
 $$\pi(a \mid s) = \frac{N(s, a)^{1/\tau}}{\sum_b N(s, b)^{1/\tau}}$$
 
-Temperature $\tau = 1$ during training (preserving the full distribution), and $\tau \to 0$ during evaluation (collapsing to the most visited move deterministically). The first 30 plies of each training game are sampled stochastically from $\pi$; after that, the argmax is taken.
+Temperature $\tau = 1$ during training (preserving the full distribution), and $\tau \to 0$ during evaluation (collapsing to the most visited move deterministically). 
 
 > #### Why is $\pi$ better than $p$?
 > The raw policy $p$ is the network's immediate intuition about the position — it hasn't looked ahead at all. **MCTS acts as a policy improvement operator** by exploring hundreds of continuations, catching tactical traps several moves deep, and adjusting visit counts accordingly. A move that looks fine to the network but leads to a lost position 6 moves later will have low $Q$, get visited less, and end up with low $\pi$. The visit count distribution encodes the network's intuition *corrected by lookahead*.
