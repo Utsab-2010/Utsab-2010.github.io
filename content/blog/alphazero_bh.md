@@ -1,16 +1,16 @@
 +++
 title = "AlphaZero: Mastering the game of Black Hole"
-date = 2026-06-14T16:15:42+05:30
+date = 2026-06-24T16:15:42+05:30
 tags = ["Reinforcement Learning", "Game Theory"]
 description = "Implementing AlphaZero for the game of Black Hole"
 +++ 
 
 
-> #### Incomplete Blog
-> Work in Progress
+<!-- > #### Incomplete Blog
+> Work in Progress -->
 
-This blog is a detailed insight into one of my favourite projects of creating a superhuman player for the game of Black Hole. This was a passion-project of mine which I had been planning for some time and finally got around to implementing a few months ago. AlphaZero was a pioneering work in the field of Reinforcement Learning and hence my motivation to implement it for a game. 
-
+This blog is a detailed overview of one of my favourite projects of creating a superhuman player for the game of Black Hole. This was a passion-project of mine which I had been planning for some time and finally got around to implementing a few months ago. AlphaZero was a pioneering work in the field of Reinforcement Learning and hence my motivation to implement it for a game. 
+<!-- 
 The general structure of this blog will be as follow:
 - A brief introduction to Reinforcement Learning
 - The game of Black Hole
@@ -19,7 +19,7 @@ The general structure of this blog will be as follow:
 - The Training Pipeline
 - Experiments and Ablations
 - Future Work
-- Resources
+- Resources -->
 
 
 ## Introduction to RL
@@ -204,21 +204,26 @@ Temperature $\tau = 1$ during training (preserving the full distribution), and $
 
 ---
 
-### Some More Implementation Specification
+## Testing the Model
+Now that the model has been trained, we can now test it out against other players. But how to do does the model take decisions? We now have two options, we can use either just the trained policy head to make the decisions given a state $s$, or we can use the MCTS algorithm to derive the improved policy $\pi$ using the trained policy head and value head to make the decisions given a state $s$. 
 
-A few implementation details that matter:
+In the following clip, I am playing against one of the my trained models which is using just the training policy network to make decisions (argmax of the output logits).
 
+<video autoplay loop muted playsinline class="mx-auto rounded-lg shadow-lg" width="600">
+  <source src="/blogs/alphazerobh/alphazero.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
----
-## Experiements and Observations
+As you can see even this simple implementation is quite strong. It can play on par with intermediate level players. One thing to be noted thought is that the model's strategy is entirely deterministic. I had tried a more stochastic inference with top-p sampling but it did not perform that well. I also did not put that many training hours into this which might be the reason it doesn't perform as well as it could have.
 
-
+<!-- --- -->
+<!-- ## Experiements and Observations -->
 ---
 ## Future Work 
 There are still quite a few things I would like to explore with this project(whenever I find time to that is):
-1. Modifying the inference pipeline for improved sampling of actions.
-2. Prepare a elo based ranking setup for comparing different models.
-3. Instead of DQN based Self-play training, use PPO based setup. 
+1. Retrain for more hours for better robustness across stochastic policies.
+2. Modifying the inference pipeline for improved sampling of actions.
+3. Prepare a elo based ranking setup for comparing different models with different configurations e.g mcts vs no-mcts vs random vs human policy.
 
 
 
