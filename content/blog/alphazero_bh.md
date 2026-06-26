@@ -27,7 +27,6 @@ The general structure of this blog will be as follow:
 Reinforcement learning is a subfield of deep learning which focuses on teaching models(termed as agents) by making them interact with some environment. The main idea is very heuristic, the model gets conditioned to perform only those actions which are beneficial to it. 
 
 How is this "benefit" actually defined? This is done with the help of reward functions - a function $R(s, a, s^\prime)$ that takes the current state $s$, the action $a$ taken by the agent, and the next state $s^\prime$ , and returns the reward for that action. 
-some the 
 
 <figure class="my-8">
   <img src="/blogs/alphazerobh/RL_process.png" alt="RL Cycle" class="w-80% rounded-sm border border-gray-200 dark:border-gray-800/70">
