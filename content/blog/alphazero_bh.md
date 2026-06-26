@@ -9,7 +9,8 @@ description = "Implementing AlphaZero for the game of Black Hole"
 <!-- > #### Incomplete Blog
 > Work in Progress -->
 
-This blog is a detailed overview of one of my favourite projects of creating a superhuman player for the game of Black Hole. This was a passion-project of mine which I had been planning for some time and finally got around to implementing a few months ago. AlphaZero was a pioneering work in the field of Reinforcement Learning and hence my motivation to implement it for a game. 
+This blog is a detailed overview of one of my favourite projects of creating a superhuman player for the game of Black Hole. This was a passion-project of mine which I had been planning for some time and finally got around to implementing a few months ago. AlphaZero was a pioneering work in the field of Reinforcement Learning and hence my motivation to implement it for a game. I learnt a lot over the course of doing this and this is my small attempt to explain the theory behind the work and what I tried to do.
+
 <!-- 
 The general structure of this blog will be as follow:
 - A brief introduction to Reinforcement Learning
@@ -25,7 +26,7 @@ The general structure of this blog will be as follow:
 ## Introduction to RL
 Reinforcement learning is a subfield of deep learning which focuses on teaching models(termed as agents) by making them interact with some environment. The main idea is very heuristic, the model gets conditioned to perform only those actions which are beneficial to it. 
 
-How is this "benefit" actually defined? This is done with the help of reward functions - a function $R(s, a, s')$ that takes the current state $s$, the action $a$ taken by the agent, and the next state $s'$ , and returns the reward for that action. 
+How is this "benefit" actually defined? This is done with the help of reward functions - a function $R(s, a, s^\prime)$ that takes the current state $s$, the action $a$ taken by the agent, and the next state $s^\prime$ , and returns the reward for that action. 
 some the 
 
 <figure class="my-8">
@@ -37,7 +38,7 @@ As shown above, the agent interacts with the environment, gets some rewards, tra
 
 
 ## Rules of Black Hole
-Black Hole is a strategic tile-placement game played on a triangular grid. Traditionally it has 6 rows, but to push our AI to its limits, I expanded it to a massive 9-row grid (45 empty spaces).
+Black Hole is a strategic tile-placement game played on a triangular grid. It was designed by the members of the DTU chapter of the Indian Game Theory Society(IGTS). I came across this because of my involvement with my university's chapter of IGTS - the KGPian Game Theory Society. Traditionally it has 6 rows, but to push our AI to its limits, I expanded it to a massive 9-row grid (45 empty spaces).
 
 #### *How to Play*
 - **The Setup:** Two players each receive 22 tiles numbered 1 to 22. The board starts empty.
@@ -61,16 +62,22 @@ For most of computing history, game-playing AI was built on a deceptively simple
 
 <figure class="my-8">
   <img src="/blogs/alphazerobh/computer-science-game-trees-alphabeta.jpg" alt="minimax tree" class="w-80% rounded-sm border border-gray-200 dark:border-gray-800/70">
-  <figcaption class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3"><i>The game of Tic-Tac-Toe represented as a game tree. (source: https://www.yosenspace.com/posts/computer-science-game-trees.html)</i></figcaption>
+  <figcaption class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3"><i>The game of Tic-Tac-Toe represented as a game tree. 
+  <br> (source: https://www.yosenspace.com/posts/computer-science-game-trees.html)</i></figcaption>
 </figure>
 
 Chess engines like Stockfish perfected this approach, checking millions of positions per second, guided by handcrafted evaluation functions tuned by human grandmasters. It worked extraordinarily well, but it required too much human intervention.
 
 But this approach was grossly insufficient for games like Go which had a massive action space for each state, hence a branching factor much larger(~7-8x) than that of chess. And give that the search space grows by the order of branching factor raised to the power of no. Of moves in the game ($b^d$), it's computationally infeasible to find the optimal move for games like Go. 
 
-AlphaGo was the pioneering work which solve this problem. It had a two-part insight. First, a policy network learned to predict which moves strong players would make, dramatically pruning the search tree. Second, a value network learned to estimate the probability of winning from any given board state, replacing handcrafted evaluation. Both networks were trained initially on a dataset of human expert games, and then refined through self-play using reinforcement learning. 
+AlphaGo was the pioneering work which tried to solve this problem. It had a two-part insight. First, a policy network learned to predict which moves strong players would make, dramatically pruning the search tree. Second, a value network learned to estimate the probability of winning from any given board state, replacing handcrafted evaluation. Both networks were trained initially on a dataset of human expert games, and then refined through self-play using reinforcement learning. 
 
 In October 2015, AlphaGo played its first game against the reigning three-time European Champion, Fan Hui. AlphaGo won the first ever match between an AI system and Go professional, scoring 5-0.
+
+<figure class="my-8">
+  <img src="/blogs/alphazerobh/leevsalphago.webp" alt="Lee Sedol vs AlphaGo" class="w-80% rounded-sm border border-gray-200 dark:border-gray-800/70">
+  <figcaption class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3"><i>Lee Sedol vs AlphaGo. <br> (source: https://www.newscientist.com/article/2518450-the-moment-that-kicked-off-the-ai-revolution/)</i></figcaption>
+</figure>
 
 AlphaGo then competed against legendary Go player Lee Sedol — winner of 18 world titles, and widely considered the greatest player of that decade. AlphaGo's 4-1 victory in Seoul, South Korea, in March 2016, sent shockwaves across the globe. It demonstrated that deep learning could internalize strategic intuition that no one had successfully written down.
 
@@ -79,11 +86,20 @@ AlphaZero, published in 2017, took this further by stripping out the human data 
 Within hours of training, AlphaZero surpassed AlphaGo; within days, it exceeded the best classical engines in Go, Chess, and Shogi simultaneously — using the same algorithm for all three!
 
 ## Classical Self-Play
+How does your AI agent learn to play a game without having any prior experience or expert data as reference? The answer is that if creates its own data through self-play and trains on it -- gradually improving its strategy in the process. 
 
+The most basic form of self-play is to make your trainable model play out a large number of games against a frozen version of itself. You store these games into a memory buffer and then use these as data to train your model to understand which strategy is better. You also keep updating your frozen opponent model with newer versions of your main agent as it keeps learning.
+
+Alpha Go also used a similar strategy but instead of starting from scratch (random policy), it was first trained on a ton of expert human games of Go. After that it was trained to further improve its strategic thinking via self-play.
 
 ## Monte Carlo Tree Search
 
 The Monte Carlo Tree Search(MCTS) is a heauristic search algorithm which helps us find near optimal moves by partially observing the future from a particular game state. It is method that helps us effectively navigate through the decision trees of problems with very large decision spaces like Go(which has $10^{170}$ possible game states). 
+
+<figure class="my-8">
+  <img src="/blogs/alphazerobh/mcts.webp" alt="MCTS" class="w-80% rounded-sm border border-gray-200 dark:border-gray-800/70">
+  <figcaption class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3"><i>The four steps of the MCTS algorithm. <br> (source: https://www.geeksforgeeks.org/machine-learning/monte-carlo-tree-search-mcts-in-machine-learning/)</i></figcaption>
+</figure>
 
 MCTS works by randomly sampling the search space through playouts. It does many playouts where it randomly simulates(random decisions) the entire game to the end and keeps expanding a temporary game tree from it's root current game state. The final result of each playout is then used to update the statistics of the nodes visited during that playout and helps us get an estimate of which nodes lead to better outcomes. Now, the way decisions are made before the random sampling is determined by the the objection function called Upper Confidence Bound (UCB). 
 
@@ -97,7 +113,7 @@ Each MCTS Sampling Iteration involves the following steps:
 3. **Simulation** - From the expanded node, we simulate the game to the end by randomly selecting moves. 
 4. **Backpropagation** - Once we reach a terminal state, we backpropagate the result to the root node by updating the statistics of all the nodes visited during the selection and simulation steps. 
 
-> #### Note:
+> **Note**:
 > MCTS iterations involve exploring both the current player's as well the opponents decisions. Alternate layers of the game tree will be formed by the opponent's decisions. Hence, during backpropagation we have to ensure that the win score reflects this difference. For example, if the terminal state results in the current player winning, the player nodes get +1 win score and opponent nodes get -1 win score and vice versa.
 
 
@@ -106,16 +122,14 @@ After some N iterations, the current player makes the move which corresponds to 
 The following visualization shows the MCTS process on a simple game. Players take turn placing their coins in any of the four available slots. The goal of the game is to not have your coins in adjacent slots. Whoever does that loses the game. 
 
 {{< mcts_stepper >}}
-
+<!-- 
 ### AlphaZero Framework
 
-The AlphaZero framework combines a modified version of MCTS with a Policy and Value Network. The Policy Network is a neural network that takes the current game state as input and outputs a probability distribution over all possible moves. The Value Network is a neural network that takes the current game state as input and outputs the probability of winning for the current player. The models are made to play multiple games using self-play and the game data is stored is a buffer which is later sampled from to train the networks.
+The AlphaZero framework combines a modified version of MCTS with a Policy and Value Network. The Policy Network is a neural network that takes the current game state as input and outputs a probability distribution over all possible moves. The Value Network is a neural network that takes the current game state as input and outputs the probability of winning for the current player. The models are made to play multiple games using self-play and the game data is stored is a buffer which is later sampled from to train the networks. -->
 
 ## How AlphaZero Actually Learns
 
-By this point we've covered MCTS and how it builds a search tree to make decisions. Now the question is: how does AlphaZero get *good* at this? How does it go from random play to superhuman strength without ever seeing a single human game?
-
-The answer is a tight feedback loop between a neural network and a modifiedMCTS — each one making the other better.
+By this point we've covered MCTS and how it builds a search tree to make decisions. Now the question is: how does AlphaZero get *good* at this? The answer is a tight feedback loop between a neural network and a modified MCTS — each one making the other better.
 
 ---
 
@@ -129,6 +143,10 @@ AlphaZero uses a single deep residual network (ResNet, 20 blocks) that takes a b
 The input is an tensor encoding the current board plus states from the last few moves (say 4), always oriented from the perspective of the side to move. Having the history helps the network to detect patterns like threefold repetition or gradual piece development although for my implementation I only used the current board state. Having a history seems to be more important for games like chess, however that ablation still needs to be done for the game of Black-Hole.
 
 > #### Network Architecture
+> <figure class="my-8 text-center">
+>   <img src="/blogs/alphazerobh/aznetwork.png" alt="aznetwork" class="rounded-sm border border-gray-200 dark:border-gray-800/70 mx-auto" style="width: 65%;">
+>   <figcaption class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3"><i>The neural network architecture of AlphaZero. <br> (source: https://www.geeksforgeeks.org/machine-learning/monte-carlo-tree-search-mcts-in-machine-learning/)</i></figcaption>
+> </figure>
 > The value and policy outputs are generated by two separate heads. However these heads aren't independent, they share a representation generated by the preceeding residual layers, which means learning to evaluate positions also improves move selection and vice versa. I believe this coupled nature of the heads is one of the key aspects of AlphaZero's success.
 
 ---
@@ -220,10 +238,11 @@ As you can see even this simple implementation is quite strong. It can play on p
 <!-- ## Experiements and Observations -->
 ---
 ## Future Work 
-There are still quite a few things I would like to explore with this project(whenever I find time to that is):
+My implementation was a pretty naive one and there are quite a few things I would like to explore with this project (whenever I find time to that is):
 1. Retrain for more hours for better robustness across stochastic policies.
 2. Modifying the inference pipeline for improved sampling of actions.
 3. Prepare a elo based ranking setup for comparing different models with different configurations e.g mcts vs no-mcts vs random vs human policy.
+4. Try having a history of states as input instead of a single state and observe if that leads to any improvements.
 
 
 
