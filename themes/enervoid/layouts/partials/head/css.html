@@ -14,15 +14,14 @@
   }
   @custom-variant dark (&:where(.dark, .dark *));
 
-  .md-content h1 { @apply mt-10 mb-4 text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white; }
-  .md-content h2 { @apply mt-8 mb-4 text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white; }
-
-  .md-content h3 { @apply mt-6 mb-3 text-2xl sm:text-3xl font-semibold text-gray-900 dark:text-white; }
-  .md-content h4 { @apply mt-5 mb-2 text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white; }
+  .md-content h1 { @apply mt-10 mb-4 text-3xl sm:text-5xl font-bold text-gray-900 dark:text-white leading-tight; }
+  .md-content h2 { @apply mt-8 mb-4 text-2xl sm:text-4xl font-bold text-gray-900 dark:text-white leading-snug; }
+  .md-content h3 { @apply mt-6 mb-3 text-xl sm:text-3xl font-semibold text-gray-900 dark:text-white leading-snug; }
+  .md-content h4 { @apply mt-5 mb-2 text-lg sm:text-2xl font-semibold text-gray-900 dark:text-white; }
   .md-content a { @apply text-indigo-600 dark:text-indigo-400 underline decoration-indigo-600/30 dark:decoration-indigo-400/30 underline-offset-4 transition-all duration-200 hover:decoration-indigo-600 dark:hover:decoration-indigo-400; }
-  .md-content pre { @apply p-4 sm:p-6 my-6 rounded-sm overflow-x-auto bg-[#1e1e1e] border border-gray-200 dark:border-gray-800/70; }
-  .md-content code { @apply font-mono text-sm sm:text-base; }
-  .md-content blockquote { @apply pl-5 py-3 my-6 border-l-3 border-indigo-500 bg-gray-50 dark:bg-gray-800/40 text-gray-700 dark:text-gray-300 italic rounded-r-lg; }
+  .md-content pre { @apply p-3 sm:p-6 my-4 sm:my-6 rounded-sm overflow-x-auto bg-[#1e1e1e] border border-gray-200 dark:border-gray-800/70; }
+  .md-content code { @apply font-mono text-xs sm:text-sm; }
+  .md-content blockquote { @apply pl-4 sm:pl-5 py-2 sm:py-3 my-5 sm:my-6 border-l-3 border-indigo-500 bg-gray-50 dark:bg-gray-800/40 text-gray-700 dark:text-gray-300 italic rounded-r-lg text-[0.95rem] sm:text-base; }
 </style>
 <style>
   html {

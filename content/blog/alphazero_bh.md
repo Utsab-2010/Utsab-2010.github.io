@@ -40,16 +40,16 @@ As shown above, the agent interacts with the environment, gets some rewards, tra
 Black Hole is a strategic tile-placement game played on a triangular grid. It was designed by the members of the DTU chapter of the Indian Game Theory Society(IGTS). I came across this because of my involvement with my university's chapter of IGTS - the KGPian Game Theory Society. Traditionally it has 6 rows, but I had to expand it to 9 rows for more stable training. It has 45 empty spaces in total.
 
 <figure class="my-8 text-center">
-  <img src="/blogs/alphazerobh/blackholetut.png" alt="Black Hole Board" class="rounded-sm border border-gray-200 dark:border-gray-800/70 mx-auto" style="width: 50%;">
+  <img src="/blogs/alphazerobh/blackholetut.png" alt="Black Hole Board" class="rounded-sm border border-gray-200 dark:border-gray-800/70 mx-auto" style="width: 55%;">
   <figcaption class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3"><i>The game of Black Hole</i></figcaption>
 </figure>
 
-#### *How to Play*
+### *How to Play*
 - **The Setup:** Two players each receive 22 tiles numbered 1 to 22. The board starts empty.
 - **The Turn:** Players take turns placing one tile onto any empty spot. You *must* play your tiles in ascending numerical order (1, then 2, then 3, up to 22). 
 - **The Black Hole:** Because 44 tiles are placed onto a 45-space board, exactly one space is left empty at the end. This becomes **The Black Hole**.
 
-#### *Scoring*
+### *Scoring*
 The Black Hole "sucks in" neighboring tiles. Scoring is calculated in concentric rings radiating outward from the hole (Ring 1 is immediate neighbors, Ring 2 is the next layer out, etc.).
 
 <!-- Insert GIF of BlackHole Demo -->

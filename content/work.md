@@ -61,20 +61,22 @@ date: 2024-01-01
 ---
 <div class="space-y-3 my-6">
 
-  <!-- Pub 1 -->
+
+  <!-- Pub 3 -->
   <div class="group border border-gray-200 dark:border-gray-800/60 bg-white dark:bg-[#0c0c0e] rounded-lg p-3 sm:p-4 transition-all duration-300 hover:border-indigo-400/40">
     <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
       <div class="space-y-1">
-        <div class="text-[0.95rem] font-semibold text-gray-900 dark:text-gray-100 leading-snug">Safe Indoor Exploration and Sparse Topological Mapping with Integrated Planning and Control</div>
+        <div class="text-[0.95rem] font-semibold text-gray-900 dark:text-gray-100 leading-snug">Visual Robustness and Neural Alignment in a Shared Foraging Task: The Mouse vs. AI Benchmark</div>
         <div class="text-[0.85rem] text-gray-600 dark:text-gray-400">
-          Krutarth Trivedi, <span class="font-semibold text-indigo-500 dark:text-indigo-400">Utsab Karan</span>, Advaith Sudarshan and Leena Vachhani.
+          Schneider, Canzano, Hou, Peng, Deepu, <span class="font-semibold text-indigo-500 dark:text-indigo-400">Karan</span>, et al.
         </div>
-        <div class="text-[0.75rem] font-medium text-gray-500">
-          Presented at the <strong>IEEE Indian Control Conference (ICC)</strong>, Bangalore, Dec 2025.
+        <div class="text-[0.75rem] font-medium text-gray-500 flex items-center flex-wrap gap-2">
+          <span><strong>NeurIPS 2026 Evaluations and Datasets Track</strong></span>
+          <span class="inline-flex items-center px-1.5 py-0.5 text-[0.6rem] uppercase tracking-wider font-bold bg-amber-100 text-amber-800 dark:bg-amber-500/10 dark:text-amber-400 border border-amber-200 dark:border-amber-500/20 rounded">Under Review</span>
         </div>
       </div>
       <div class="shrink-0 mt-1 sm:mt-0">
-        <a href="https://ieeexplore.ieee.org/document/11372284" target="_blank" class="inline-flex items-center justify-center px-2.5 py-1 text-[0.7rem] uppercase tracking-wide font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-500/10 rounded-md hover:bg-indigo-100 dark:hover:bg-indigo-500/20 transition-colors border border-indigo-200 dark:border-indigo-500/30 no-underline">
+        <a href="https://openreview.net/forum?id=fhaa8MaD9I" target="_blank" class="inline-flex items-center justify-center px-2.5 py-1 text-[0.7rem] uppercase tracking-wide font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-500/10 rounded-md hover:bg-indigo-100 dark:hover:bg-indigo-500/20 transition-colors border border-indigo-200 dark:border-indigo-500/30 no-underline">
           <i class="fa-solid fa-file-lines mr-1.5"></i> Paper
         </a>
       </div>
@@ -101,26 +103,29 @@ date: 2024-01-01
     </div>
   </div>
 
-  <!-- Pub 3 -->
+  
+  
+  <!-- Pub 1 -->
   <div class="group border border-gray-200 dark:border-gray-800/60 bg-white dark:bg-[#0c0c0e] rounded-lg p-3 sm:p-4 transition-all duration-300 hover:border-indigo-400/40">
     <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
       <div class="space-y-1">
-        <div class="text-[0.95rem] font-semibold text-gray-900 dark:text-gray-100 leading-snug">Visual Robustness and Neural Alignment in a Shared Foraging Task: The Mouse vs. AI Benchmark</div>
+        <div class="text-[0.95rem] font-semibold text-gray-900 dark:text-gray-100 leading-snug">Safe Indoor Exploration and Sparse Topological Mapping with Integrated Planning and Control</div>
         <div class="text-[0.85rem] text-gray-600 dark:text-gray-400">
-          Schneider, Canzano, Hou, Peng, Deepu, <span class="font-semibold text-indigo-500 dark:text-indigo-400">Karan</span>, et al.
+          Krutarth Trivedi, <span class="font-semibold text-indigo-500 dark:text-indigo-400">Utsab Karan</span>, Advaith Sudarshan and Leena Vachhani.
         </div>
-        <div class="text-[0.75rem] font-medium text-gray-500 flex items-center flex-wrap gap-2">
-          <span><strong>NeurIPS 2026 Evaluations and Datasets Track</strong></span>
-          <span class="inline-flex items-center px-1.5 py-0.5 text-[0.6rem] uppercase tracking-wider font-bold bg-amber-100 text-amber-800 dark:bg-amber-500/10 dark:text-amber-400 border border-amber-200 dark:border-amber-500/20 rounded">Under Review</span>
+        <div class="text-[0.75rem] font-medium text-gray-500">
+          Presented at the <strong>IEEE Indian Control Conference (ICC)</strong>, Bangalore, Dec 2025.
         </div>
       </div>
       <div class="shrink-0 mt-1 sm:mt-0">
-        <a href="https://openreview.net/forum?id=fhaa8MaD9I" target="_blank" class="inline-flex items-center justify-center px-2.5 py-1 text-[0.7rem] uppercase tracking-wide font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-500/10 rounded-md hover:bg-indigo-100 dark:hover:bg-indigo-500/20 transition-colors border border-indigo-200 dark:border-indigo-500/30 no-underline">
+        <a href="https://ieeexplore.ieee.org/document/11372284" target="_blank" class="inline-flex items-center justify-center px-2.5 py-1 text-[0.7rem] uppercase tracking-wide font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-500/10 rounded-md hover:bg-indigo-100 dark:hover:bg-indigo-500/20 transition-colors border border-indigo-200 dark:border-indigo-500/30 no-underline">
           <i class="fa-solid fa-file-lines mr-1.5"></i> Paper
         </a>
       </div>
     </div>
   </div>
+
+  
 
 </div>
 
