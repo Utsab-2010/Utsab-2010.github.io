@@ -220,7 +220,7 @@ $$\pi(a \mid s) = \frac{N(s, a)^{1/\tau}}{\sum_b N(s, b)^{1/\tau}}$$
 Temperature $\tau = 1$ during training (preserving the full distribution), and $\tau \to 0$ during evaluation (collapsing to the most visited move deterministically). 
 
 > #### Why is $\pi$ better than $p$?
-> The raw policy $p$ is the network's immediate intuition about the position — it hasn't looked ahead at all. **MCTS acts as a policy improvement operator** by exploring hundreds of continuations, catching tactical traps several moves deep, and adjusting visit counts accordingly. A move that looks fine to the network but leads to a lost position 6 moves later will have low $Q$, get visited less, and end up with low $\pi$. The visit count distribution encodes the network's intuition *corrected by lookahead*.
+> The raw policy $p$ is the network's immediate intuition about the position — it hasn't looked ahead at all. **MCTS acts as a policy improvement operator** by exploring hundreds of continuations, catching tactical traps several moves deep, and adjusting visit counts accordingly. A move that looks fine to the network but leads to a lost position 6 moves later will have low $Q$, get visited less, and end up with low $\pi$. The visit count distribution encodes the network's intuition corrected by lookahead.
 
 ---
 
