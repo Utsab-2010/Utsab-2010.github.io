@@ -50,7 +50,8 @@
 
       <div
         class="-mx-4 sm:mx-0 border-y sm:border border-gray-200/70 dark:border-gray-800/70 bg-white dark:bg-[#070709] sm:rounded-sm px-4 py-6 sm:p-10">
-        <div class="md-content blog-content text-[0.95rem] sm:text-lg leading-relaxed sm:leading-relaxed text-gray-700 dark:text-gray-300 w-full">
+        <div
+          class="md-content blog-content text-[0.95rem] sm:text-lg leading-relaxed sm:leading-relaxed text-gray-700 dark:text-gray-300 w-full">
           {{ .Content }}
         </div>
         {{ partial "comments.html" . }}
@@ -63,7 +64,11 @@
   .blog-content {
     font-family: 'Spectral', Georgia, serif;
   }
-  .blog-content h1,
+
+  .blog-content h1 {
+    font-family: 'Playfair Display', serif;
+  }
+
   .blog-content h2,
   .blog-content h3,
   .blog-content h4,
