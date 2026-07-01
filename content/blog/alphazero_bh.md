@@ -96,6 +96,8 @@ The most basic form of self-play is to make your trainable model play out a larg
 
 Alpha Go also used a similar strategy but instead of starting from scratch (random policy), it was first trained on a ton of expert human games of Go. After that it was trained to further improve its strategic thinking via self-play.
 
+---
+
 ## Monte Carlo Tree Search
 
 The Monte Carlo Tree Search(MCTS) is a heauristic search algorithm which helps us find near optimal moves by partially observing the future from a particular game state. It is method that helps us effectively navigate through the decision trees of problems with very large decision spaces like Go(which has $10^{170}$ possible game states). 
@@ -130,6 +132,8 @@ The following visualization shows the MCTS process on a simple game. Players tak
 ### AlphaZero Framework
 
 The AlphaZero framework combines a modified version of MCTS with a Policy and Value Network. The Policy Network is a neural network that takes the current game state as input and outputs a probability distribution over all possible moves. The Value Network is a neural network that takes the current game state as input and outputs the probability of winning for the current player. The models are made to play multiple games using self-play and the game data is stored is a buffer which is later sampled from to train the networks. -->
+
+---
 
 ## How AlphaZero Actually Learns
 
