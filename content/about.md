@@ -2,7 +2,7 @@
 title = "About"
 +++
 
-<div style="font-size: 1.1rem; line-height: 1.7; margin-bottom: 2rem;">
+<div class="text-[15px] sm:text-[1.1rem] leading-[1.7] mb-8">
 Hi, I am <strong>Utsab</strong>. I am a fourth-year undergraduate student at <strong>IIT Kharagpur</strong> pursuing a Dual-Degree (B.Tech + M.Tech) in Electronics and Electrical Communication Engineering. As part of my masters curriculum, I shall be specilising in Vision and Intelligent Systems.
 <br><br>
 <!-- I am currently the <strong>Head of Vision at AGV.AI</strong>, a UG research group under Prof. Debashish Chakravarty at IIT Kharagpur, working on autonomous vehicles and robotic systems. -->
