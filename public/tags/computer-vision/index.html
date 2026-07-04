@@ -11,6 +11,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
   integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
   crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Spectral:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap"
+  rel="stylesheet">
+
 <style type="text/tailwindcss">
   @theme {
     --color-bg-dark: #070709;
@@ -18,26 +24,37 @@
   }
   @custom-variant dark (&:where(.dark, .dark *));
 
-  .md-content h1 { @apply mt-10 mb-4 text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white; }
-  .md-content h2 { @apply mt-8 mb-4 text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white; }
-  .md-content h3 { @apply mt-6 mb-3 text-2xl sm:text-3xl font-semibold text-gray-900 dark:text-white; }
-  .md-content h4 { @apply mt-5 mb-2 text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white; }
+  .md-content h1 { @apply mt-10 mb-4 text-3xl sm:text-5xl font-bold text-gray-900 dark:text-white leading-tight; }
+  .md-content h2 { @apply mt-8 mb-4 text-2xl sm:text-4xl font-bold text-gray-900 dark:text-white leading-snug; }
+  .md-content h3 { @apply mt-6 mb-3 text-xl sm:text-3xl font-semibold text-gray-900 dark:text-white leading-snug; }
+  .md-content h4 { @apply mt-5 mb-2 text-lg sm:text-2xl font-semibold text-gray-900 dark:text-white; }
+  .md-content a { @apply text-indigo-600 dark:text-indigo-400 underline decoration-indigo-600/30 dark:decoration-indigo-400/30 underline-offset-4 transition-all duration-200 hover:decoration-indigo-600 dark:hover:decoration-indigo-400; }
+  .md-content pre { @apply p-3 sm:p-6 my-4 sm:my-6 rounded-sm overflow-x-auto bg-[#1e1e1e] border border-gray-200 dark:border-gray-800/70; }
+  .md-content code { @apply font-mono text-xs sm:text-sm; }
+  .md-content blockquote { @apply pl-4 sm:pl-5 py-2 sm:py-3 my-5 sm:my-6 border-l-3 border-indigo-500 bg-gray-50 dark:bg-gray-800/40 text-gray-700 dark:text-gray-300 rounded-r-lg text-base sm:text-[17px]; }
 </style>
 <style>
   html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
     --toc-link-color: rgba(55, 65, 81, 0.92);
     --toc-link-hover: #111827;
     --border-alpha: rgba(229, 231, 235, 0.8);
   }
+
+  ::selection {
+    background: rgba(99, 102, 241, 0.25);
+    color: inherit;
+  }
+
   html.dark {
     --toc-link-color: rgba(209, 213, 219, 0.92);
     --toc-link-hover: #fff;
     --border-alpha: rgba(55, 65, 81, 0.6);
   }
-  @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap');
 
   .font-jersey {
-
     font-family: "Ubuntu Sans Mono", monospace;
     font-optical-sizing: auto;
     font-style: normal;
@@ -60,16 +77,8 @@
 
   .swup-transition-fade {
     opacity: 1;
-    transition: 300ms ease-in-out;
-  }
-
-  .is-animating .swup-transition-fade {
-    opacity: 0;
-  }
-
-  .swup-transition-fade {
-    opacity: 1;
-    transition: opacity 300ms ease-in-out;
+    will-change: opacity;
+    transition: opacity 150ms ease-out;
   }
 
   html.is-animating .swup-transition-fade {
@@ -84,10 +93,10 @@
     opacity: 0;
   }
 </style>
-
 <script src="https://unpkg.com/swup@4"></script>
 <script src="https://unpkg.com/@swup/preload-plugin@3"></script>
 <script src="https://unpkg.com/@swup/progress-plugin@3"></script>
+<script src="https://unpkg.com/@swup/scripts-plugin@3"></script>
 <script>
   const swup = new Swup({
     containers: ['#swup'],
@@ -98,11 +107,15 @@
 
     plugins: [
       new SwupPreloadPlugin(),
-      new SwupProgressPlugin()
+      new SwupProgressPlugin(),
+      new SwupScriptsPlugin({
+        optin: false
+      })
     ]
   })
   window.swup = swup
 </script>
+
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
@@ -291,16 +304,16 @@
     <div class="sticky absolute top-0 z-50">
   <nav class="w-full border-b border-gray-200 dark:border-gray-800 bg-white/95 dark:bg-[#070709]/95 backdrop-blur-sm text-gray-800 dark:text-gray-100">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="flex items-center justify-between h-16">
+      <div class="flex items-center justify-between h-14">
         
         <div class="flex items-center gap-3">
 
-          <a href='https://example.com' class="flex items-center gap-3 group" aria-label="Homepage">
+          <a href='https://utsab-2010.github.io/' class="flex items-center gap-3 group" aria-label="Homepage">
 
-            <img src='https://media.licdn.com/dms/image/v2/D5603AQHgTfvWk-SoFA/profile-displayphoto-crop_800_800/B56ZzXJ.EJH8AI-/0/1773136263436?e=1779926400&amp;v=beta&amp;t=lgPElfy5GliypYRr3yxnLhM1KQKO44W6j5Ui0lxdzH8' alt="Utsab Karan"
-              class="w-10 h-10 rounded-sm border-2 border-gray-300 dark:border-gray-700 object-cover transition-transform duration-300 transform group-hover:scale-105"
+            <img src='/avatar.png' alt="Utsab Karan"
+              class="w-8 h-8 rounded-sm border-2 border-gray-300 dark:border-gray-700 object-cover transition-transform duration-300 transform group-hover:scale-105"
               style="animation: border-breathe 4s ease-in-out infinite;" />
-            <span class="text-gray-900 dark:text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold tracking-wide">
+            <span class="text-gray-900 dark:text-white text-base sm:text-lg md:text-xl lg:text-2xl font-semibold tracking-wide">
               Utsab Karan
               <span class="inline-block ml-2" style="animation: flicker 1.6s steps(2, end) infinite;">_</span>
             </span>
@@ -315,10 +328,10 @@
 
 <nav aria-label="Primary" class="w-full">
   <ul
-    class="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-2 md:space-y-0 sm:text-lg md:text-xl lg:text-3xl"><li>
+    class="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-2 md:space-y-0 text-base md:text-lg font-medium"><li>
       <a href="/blog/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
         <span class="relative inline-block">
-          <span>Blog</span>
+          <span>Blogs</span>
           
           <span
             class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
@@ -334,9 +347,9 @@
         </span>
       </a>
     </li><li>
-      <a href="/academic/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+      <a href="/work/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
         <span class="relative inline-block">
-          <span>Academic</span>
+          <span>Work</span>
           
           <span
             class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
@@ -375,10 +388,10 @@
 
 <nav aria-label="Primary" class="w-full">
   <ul
-    class="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-2 md:space-y-0 sm:text-lg md:text-xl lg:text-3xl"><li>
+    class="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-2 md:space-y-0 text-base md:text-lg font-medium"><li>
       <a href="/blog/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
         <span class="relative inline-block">
-          <span>Blog</span>
+          <span>Blogs</span>
           
           <span
             class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
@@ -394,9 +407,9 @@
         </span>
       </a>
     </li><li>
-      <a href="/academic/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+      <a href="/work/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
         <span class="relative inline-block">
-          <span>Academic</span>
+          <span>Work</span>
           
           <span
             class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
@@ -499,6 +512,8 @@
   
     <h2><a href="/projects/monodepth/">Lightweight Monocular Depth Estimation</a></h2>
   
+    <h2><a href="/projects/mouse/">Mouse vs AI: NeurIPS 2025 Challenge</a></h2>
+  
 
       </div>
 
@@ -531,14 +546,6 @@
             class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
         </a>
         
-        <a href='https://twitter.com/yourx' target="_blank" rel="noopener"
-          class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
-          
-          <i class="devicon-twitter-original"></i>
-          <span
-            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
-        </a>
-        
         <a href='https://www.linkedin.com/in/utsab-karan/' target="_blank" rel="noopener"
           class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
           
@@ -547,10 +554,26 @@
             class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
         </a>
         
-        <a href='https://drive.google.com/file/d/1qDJQ7pKjLs3bD04_0PJ_MyCs6WWIR2gN/view' target="_blank" rel="noopener"
+        <a href='https://scholar.google.com/citations?user=V0Lvy54AAAAJ&amp;hl=en' target="_blank" rel="noopener"
+          class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
+          
+          <i class="fa-solid fa-graduation-cap"></i>
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        
+        <a href='/resume_ukaran.pdf' target="_blank" rel="noopener"
           class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
           
           <i class="fa-solid fa-file-lines"></i>
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        
+        <a href='https://utsab-2010.github.io/Notes-Host/' target="_blank" rel="noopener"
+          class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
+          
+          <i class="fa-solid fa-pencil"></i>
           <span
             class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
         </a>

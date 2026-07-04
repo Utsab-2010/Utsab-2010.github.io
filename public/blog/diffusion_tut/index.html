@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<link rel="icon" type="image/png" href="/avatar.png">
+<title>Diffusion Models for Dummies: Getting Started</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+  integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Spectral:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap"
+  rel="stylesheet">
+
+<style type="text/tailwindcss">
+  @theme {
+    --color-bg-dark: #070709;
+    --color-bg-light: #fdfbf7;
+  }
+  @custom-variant dark (&:where(.dark, .dark *));
+
+  .md-content h1 { @apply mt-10 mb-4 text-3xl sm:text-5xl font-bold text-gray-900 dark:text-white leading-tight; }
+  .md-content h2 { @apply mt-8 mb-4 text-2xl sm:text-4xl font-bold text-gray-900 dark:text-white leading-snug; }
+  .md-content h3 { @apply mt-6 mb-3 text-xl sm:text-3xl font-semibold text-gray-900 dark:text-white leading-snug; }
+  .md-content h4 { @apply mt-5 mb-2 text-lg sm:text-2xl font-semibold text-gray-900 dark:text-white; }
+  .md-content a { @apply text-indigo-600 dark:text-indigo-400 underline decoration-indigo-600/30 dark:decoration-indigo-400/30 underline-offset-4 transition-all duration-200 hover:decoration-indigo-600 dark:hover:decoration-indigo-400; }
+  .md-content pre { @apply p-3 sm:p-6 my-4 sm:my-6 rounded-sm overflow-x-auto bg-[#1e1e1e] border border-gray-200 dark:border-gray-800/70; }
+  .md-content code { @apply font-mono text-xs sm:text-sm; }
+  .md-content blockquote { @apply pl-4 sm:pl-5 py-2 sm:py-3 my-5 sm:my-6 border-l-3 border-indigo-500 bg-gray-50 dark:bg-gray-800/40 text-gray-700 dark:text-gray-300 rounded-r-lg text-base sm:text-[17px]; }
+</style>
+<style>
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    --toc-link-color: rgba(55, 65, 81, 0.92);
+    --toc-link-hover: #111827;
+    --border-alpha: rgba(229, 231, 235, 0.8);
+  }
+
+  ::selection {
+    background: rgba(99, 102, 241, 0.25);
+    color: inherit;
+  }
+
+  html.dark {
+    --toc-link-color: rgba(209, 213, 219, 0.92);
+    --toc-link-hover: #fff;
+    --border-alpha: rgba(55, 65, 81, 0.6);
+  }
+
+  .font-jersey {
+    font-family: "Ubuntu Sans Mono", monospace;
+    font-optical-sizing: auto;
+    font-style: normal;
+  }
+
+
+  .md-content .katex-display {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+
+  .md-content .katex-display>.katex {
+    display: inline-block;
+    max-width: 100%;
+  }
+
+  .swup-transition-fade {
+    opacity: 1;
+    will-change: opacity;
+    transition: opacity 150ms ease-out;
+  }
+
+  html.is-animating .swup-transition-fade {
+    opacity: 0;
+  }
+
+  html.is-animating {
+    cursor: progress;
+  }
+
+  html.is-leaving .swup-transition-fade {
+    opacity: 0;
+  }
+</style>
+<script src="https://unpkg.com/swup@4"></script>
+<script src="https://unpkg.com/@swup/preload-plugin@3"></script>
+<script src="https://unpkg.com/@swup/progress-plugin@3"></script>
+<script src="https://unpkg.com/@swup/scripts-plugin@3"></script>
+<script>
+  const swup = new Swup({
+    containers: ['#swup'],
+    animationSelector: '[class*="swup-transition-"]',
+    cache: true,
+    preload: true,
+    animateHistoryBrowsing: true,
+
+    plugins: [
+      new SwupPreloadPlugin(),
+      new SwupProgressPlugin(),
+      new SwupScriptsPlugin({
+        optin: false
+      })
+    ]
+  })
+  window.swup = swup
+</script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+  crossorigin="anonymous"></script>
+
+<script>
+  
+
+  
+  const KATEX_CONFIG = {
+    delimiters: [
+      {left: "$$", right: "$$", display: true},
+      {left: "$", right: "$", display: false},
+      {left: "\\[", right: "\\]", display: true},
+      {left: "\\(", right: "\\)", display: false}
+    ],
+    ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+    throwOnError: false
+  };
+
+  
+  function renderKatex() {
+    
+    if (typeof renderMathInElement !== "function") {
+      console.log("⏳ Waiting for KaTeX to load...");
+      return;
+    }
+
+    
+    const contentArea = document.getElementById('swup') || document.body;
+
+    try {
+      renderMathInElement(contentArea, KATEX_CONFIG);
+      console.log("✅ KaTeX rendered successfully");
+    } catch (error) {
+      console.error("❌ KaTeX rendering error:", error);
+    }
+  }
+
+  
+  function renderKatexWithRetry(maxRetries = 10, delay = 100) {
+    let attempts = 0;
+
+    const attempt = () => {
+      if (typeof renderMathInElement === "function") {
+        renderKatex();
+      } else if (attempts < maxRetries) {
+        attempts++;
+        setTimeout(attempt, delay);
+      } else {
+        console.warn("⚠️ KaTeX auto-render not available after", maxRetries, "attempts");
+      }
+    };
+
+    attempt();
+  }
+
+  
+  function setupSwupIntegration() {
+    
+    if (window.swup) {
+      window.swup.hooks.on('page:view', () => {
+        console.log("🔄 Swup transition complete, re-rendering KaTeX...");
+        
+        setTimeout(() => renderKatexWithRetry(3, 50), 50);
+      });
+      console.log("✅ KaTeX-Swup integration ready");
+    } else {
+      
+      setTimeout(setupSwupIntegration, 100);
+    }
+  }
+
+  
+  document.addEventListener("DOMContentLoaded", function () {
+    console.log("🚀 Initializing KaTeX...");
+
+    
+    renderKatexWithRetry();
+
+    
+    setupSwupIntegration();
+  });
+
+  
+  window.renderKatex = renderKatex;
+</script>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+  let initialized = false;
+
+  function renderMermaid() {
+    const contentArea = document.getElementById('swup') || document.body;
+    const mermaidBlocks = contentArea.querySelectorAll('.language-mermaid, .mermaid');
+
+    if (mermaidBlocks.length === 0) {
+      console.log("ℹ️ No mermaid blocks found on this page");
+      return;
+    }
+
+    if (!initialized) {
+      mermaid.initialize({startOnLoad: false, theme: 'dark'});
+      initialized = true;
+    }
+
+    mermaidBlocks.forEach(el => {
+      if (el.dataset.processed === 'true') {
+        const source = el.dataset.mermaidSource;
+        if (source) {
+          el.innerHTML = source;
+          el.removeAttribute('data-processed');
+        }
+      } else {
+        el.dataset.mermaidSource = el.textContent;
+      }
+    });
+
+    mermaid.run({nodes: mermaidBlocks})
+      .then(() => console.log("✅ Mermaid rendered successfully"))
+      .catch(err => console.error("❌ Mermaid rendering error:", err));
+  }
+
+  function renderMermaidWithRetry(maxRetries = 10, delay = 100) {
+    let attempts = 0;
+
+    const attempt = () => {
+      if (typeof mermaid.initialize === "function") {
+        renderMermaid();
+      } else if (attempts < maxRetries) {
+        attempts++;
+        setTimeout(attempt, delay);
+      } else {
+        console.warn("⚠️ Mermaid auto-render not available after", maxRetries, "attempts");
+      }
+    };
+
+    attempt();
+  }
+
+  
+  function setupSwupIntegration() {
+    
+    if (window.swup) {
+      window.swup.hooks.on('page:view', () => {
+        console.log("🔄 Swup transition complete, re-rendering mermaid...");
+        
+        setTimeout(() => renderMermaidWithRetry(3, 50), 50);
+      });
+      console.log("✅ Mermaid-Swup integration ready");
+    } else {
+      
+      setTimeout(setupSwupIntegration, 100);
+    }
+  }
+
+  
+  document.addEventListener("DOMContentLoaded", function () {
+    console.log("🚀 Initializing KaTeX...");
+
+    
+    renderMermaidWithRetry();
+
+    
+    setupSwupIntegration();
+  });
+
+
+
+</script>
+
+
+  <script>
+    if (localStorage.theme === 'light') {
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+</head>
+
+<body class="min-h-screen flex flex-col bg-[#fdfbf7] dark:bg-black font-jersey text-gray-900 dark:text-white text-3xl">
+  <header>
+    <div class="sticky absolute top-0 z-50">
+  <nav class="w-full border-b border-gray-200 dark:border-gray-800 bg-white/95 dark:bg-[#070709]/95 backdrop-blur-sm text-gray-800 dark:text-gray-100">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between h-14">
+        
+        <div class="flex items-center gap-3">
+
+          <a href='https://utsab-2010.github.io/' class="flex items-center gap-3 group" aria-label="Homepage">
+
+            <img src='/avatar.png' alt="Utsab Karan"
+              class="w-8 h-8 rounded-sm border-2 border-gray-300 dark:border-gray-700 object-cover transition-transform duration-300 transform group-hover:scale-105"
+              style="animation: border-breathe 4s ease-in-out infinite;" />
+            <span class="text-gray-900 dark:text-white text-base sm:text-lg md:text-xl lg:text-2xl font-semibold tracking-wide">
+              Utsab Karan
+              <span class="inline-block ml-2" style="animation: flicker 1.6s steps(2, end) infinite;">_</span>
+            </span>
+          </a>
+        </div>
+
+        
+        <div class="flex items-center gap-4">
+          
+          <div class="hidden md:flex items-center">
+            
+
+<nav aria-label="Primary" class="w-full">
+  <ul
+    class="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-2 md:space-y-0 text-base md:text-lg font-medium"><li>
+      <a href="/blog/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+        <span class="relative inline-block">
+          <span>Blogs</span>
+          
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+        </span>
+      </a>
+    </li><li>
+      <a href="/projects/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+        <span class="relative inline-block">
+          <span>Projects</span>
+          
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+        </span>
+      </a>
+    </li><li>
+      <a href="/work/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+        <span class="relative inline-block">
+          <span>Work</span>
+          
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+        </span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+          </div>
+          
+          
+          <button id="theme-toggle" class="p-2 rounded-md text-gray-800 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-black/5 dark:bg-white/5 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-colors" aria-label="Toggle Theme">
+            <svg id="theme-toggle-light-icon" class="hidden w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            <svg id="theme-toggle-dark-icon" class="hidden w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+          </button>
+
+          
+          <div class="md:hidden">
+            <button id="nav-toggle" aria-controls="mobile-menu" aria-expanded="false"
+              class="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              aria-label="Open menu">
+              <svg class="h-6 w-6 text-gray-800 dark:text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      
+      <div id="mobile-menu" class="md:hidden hidden pb-4">
+        
+        
+
+<nav aria-label="Primary" class="w-full">
+  <ul
+    class="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-2 md:space-y-0 text-base md:text-lg font-medium"><li>
+      <a href="/blog/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+        <span class="relative inline-block">
+          <span>Blogs</span>
+          
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+        </span>
+      </a>
+    </li><li>
+      <a href="/projects/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+        <span class="relative inline-block">
+          <span>Projects</span>
+          
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+        </span>
+      </a>
+    </li><li>
+      <a href="/work/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+        <span class="relative inline-block">
+          <span>Work</span>
+          
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+        </span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+      </div>
+    </div>
+  </nav>
+
+  
+  <style>
+    @keyframes flicker {
+      0% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      10% {
+        opacity: 0.2;
+        transform: translateY(-1px);
+      }
+
+      20% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes border-breathe {
+      0% {
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.06);
+      }
+
+      50% {
+        box-shadow: 0 0 18px 6px rgba(99, 102, 241, 0.03);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.06);
+      }
+    }
+  </style>
+
+  
+  <script>
+    (function () {
+      const btn = document.getElementById('nav-toggle');
+      const menu = document.getElementById('mobile-menu');
+      if (btn && menu) {
+        btn.addEventListener('click', () => {
+          const open = menu.classList.toggle('hidden') === false;
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      }
+
+      const themeToggleBtn = document.getElementById('theme-toggle');
+      const darkIcon = document.getElementById('theme-toggle-dark-icon');
+      const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+      if (themeToggleBtn) {
+        if (document.documentElement.classList.contains('dark')) {
+            lightIcon.classList.remove('hidden');
+        } else {
+            darkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+      }
+    })();
+  </script>
+</div>
+
+  </header>
+
+  <main class="flex-1 w-full">
+    <div id="swup" class="swup-transition-fade">
+      <div class="max-w-4xl lg:max-w-[70rem] xl:max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-10 py-10 lg:py-16">
+        
+<div class="max-w-[100rem] mx-auto px-4 sm:px-6">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+
+    
+    <aside class="hidden lg:block lg:col-span-3 xl:col-span-3">
+      <div class="sticky top-24">
+        <div class="mb-3 text-xs uppercase tracking-widest text-gray-500">Table of Contents</div><nav
+          class="toc text-sm text-gray-700 dark:text-gray-300 border border-gray-200/70 dark:border-gray-200/70 dark:border-gray-200 dark:border-gray-800/70 bg-white dark:bg-[#070709] rounded-sm p-4">
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#images-belong-to-a-distribution">Images belong to a Distribution</a></li>
+    <li><a href="#neural-networks-as-an-approximation">Neural Networks as an Approximation</a></li>
+    <li><a href="#diffusion-for-image-generation">Diffusion for Image Generation</a>
+      <ul>
+        <li><a href="#denoising-reverse-process">Denoising Reverse Process</a></li>
+        <li><a href="#the-forward-process-and-training">The Forward Process and Training</a></li>
+      </ul>
+    </li>
+    <li><a href="#implementation">Implementation</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#resources">Resources</a></li>
+  </ul>
+</nav>
+        </nav></div>
+    </aside>
+
+    
+    <article class="col-span-1 lg:col-span-9 xl:col-span-9">
+      <header class="mb-6">
+  <h1 class="text-2xl sm:text-3xl md:text-4xl tracking-wide text-gray-900 dark:text-white">
+    Diffusion Models for Dummies: Getting Started
+  </h1>
+
+  <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm sm:text-base text-gray-600 dark:text-gray-400">
+    <span class="font-mono">May 09, 2026 • 12:42</span>
+    <span class="text-gray-700">/</span>
+    <span class="font-mono">21 min read</span>
+  </div><div class="mt-3 flex flex-wrap gap-2"><a href="/%20tags/diffusion"
+      class="px-2 py-0.5 text-xs sm:text-sm rounded-sm border border-gray-200 dark:border-gray-700/70 text-gray-700 dark:text-gray-300 bg-white dark:bg-black/30 hover:text-gray-900 dark:hover:text-white hover:border-indigo-400/40 transition-colors">
+      #Diffusion
+    </a><a href="/%20tags/deep-learning"
+      class="px-2 py-0.5 text-xs sm:text-sm rounded-sm border border-gray-200 dark:border-gray-700/70 text-gray-700 dark:text-gray-300 bg-white dark:bg-black/30 hover:text-gray-900 dark:hover:text-white hover:border-indigo-400/40 transition-colors">
+      #Deep Learning
+    </a></div></header>
+
+
+      <div class="mb-6 lg:hidden">
+        <details
+          class="border border-gray-200/70 dark:border-gray-200/70 dark:border-gray-200 dark:border-gray-800/70 bg-white dark:bg-[#070709] rounded-sm group overflow-hidden">
+          <summary
+            class="cursor-pointer select-none px-5 py-4 text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-colors font-semibold flex items-center justify-between">
+            <span class="text-sm uppercase tracking-widest text-indigo-600 dark:text-indigo-400">Table of
+              Contents</span>
+            <span class="transform group-open:rotate-180 transition-transform duration-300">
+              <svg class="w-5 h-5 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </span>
+          </summary>
+          <div
+            class="px-5 pb-5 pt-2 toc text-base text-gray-700 dark:text-gray-300 border-t border-gray-200/70 dark:border-gray-200/70 dark:border-gray-200 dark:border-gray-800/70">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#images-belong-to-a-distribution">Images belong to a Distribution</a></li>
+    <li><a href="#neural-networks-as-an-approximation">Neural Networks as an Approximation</a></li>
+    <li><a href="#diffusion-for-image-generation">Diffusion for Image Generation</a>
+      <ul>
+        <li><a href="#denoising-reverse-process">Denoising Reverse Process</a></li>
+        <li><a href="#the-forward-process-and-training">The Forward Process and Training</a></li>
+      </ul>
+    </li>
+    <li><a href="#implementation">Implementation</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#resources">Resources</a></li>
+  </ul>
+</nav>
+          </div>
+        </details>
+      </div><div
+        class="-mx-4 sm:mx-0 border-y sm:border border-gray-200/70 dark:border-gray-800/70 bg-white dark:bg-[#070709] sm:rounded-sm px-4 py-6 sm:p-10">
+        <div
+          class="md-content blog-content text-base sm:text-[19px] leading-relaxed sm:leading-relaxed text-gray-700 dark:text-gray-300 w-full">
+          <p>Generative AI has been the buzz and face of AI industry for the last few years. Particularly image and video generative models. How do they models generative an image when given a prompt? But how exactly does a model take in text prompt and transform it into a visual output catering to the context of that prompt?</p>
+<p>This is where diffusion comes in ! One of the most amazing model architectures and training methodologies in modern AI.</p>
+<p>My intention with this blog will be to give you a <strong>intuitive</strong> overview of some of the math and the training workflow of diffusion along with a <strong>hands-on implementation</strong> at the end. While I will go over the necessary math involved, it does not even start to cover the entirety of this beautiful topic. However, it should be good enough to get a rough idea of the underlying principles and should(hopefully) motivate you to dive deeper.</p>
+<p>Here are the topics that we will follow:</p>
+<ul>
+<li>Images as Samples of a distribution</li>
+<li>A Model as an Approximation for a Distribution</li>
+<li>Diffusion - Forward Process - Generating Training Data</li>
+<li>Diffusion - Reverse Process - Generating Image from Noise</li>
+<li>Implementation</li>
+</ul>
+<hr>
+<h2 id="images-belong-to-a-distribution">Images belong to a Distribution</h2>
+<p>Since diffusion based models rely on the idea of transforming a probability distributions and then sampling from them, it is judicious to first understand how images can be seen as samples from some probability distribution.</p>
+<p>Any image is just a grid of pixels and each pixel is just a tuple of RGB values. If you consider an image to be a set of variables then you can create any image of resolution HxW with <strong>3xHxW independent continuous variables</strong> ranged between 0-255(or some other common scale). For a typical image generator, generating the image is like sampling from a <strong>joint probability distribution</strong> of all these variables.</p>
+<p>Ofcourse, if the distribution is just some standard distribution like the Gaussian then you will just get a noisy incoherent image. But given that the distribution is a relevant and useful one , the kind of images you want will <strong>have high probability densities</strong> and the useless irrelevant ones will have lower.</p>
+<p>During training also we like to assume that all the images of our image dataset belong to some joint probability distribution over the variables  and we train our model to learn this ideal distribution from the training data points.</p>
+<figure class="my-8">
+  <img src="/blogs/diffusion_tut/distributions.png" alt="data distribution" class="w-full rounded-sm border border-gray-200 dark:border-gray-800/70">
+  <figcaption class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3"><i>In this figure, the "good" images of dogs have high values of the pdf whereas the irrelevant images(like the cookie) have low values. Ideally, we would want our trained model to be able to capture these high density regions and generate only the good high probability images accordingly.</i></figcaption>
+</figure>
+<hr>
+<h2 id="neural-networks-as-an-approximation">Neural Networks as an Approximation</h2>
+<p>It is very difficult to arrive at a closed form solution for getting this probability distribution given the very high dimensionality of the sample space. Hence we use neural networks to approximate this distribution function.</p>
+<p>For a discrete sample space, for example in the case of classification problems, we have fixed set of classes into which we need to segregate an image. So typically what we do is we train the model to take in an input and give a probability mass function over the different classes. Then we choose the class with the highest probability as the identified class of the input.</p>
+<p>However in the case of image generation we are dealing with a continuous space  and so the approximated function has to be a probability density function over this sample space. How can this be done?</p>
+<p>One naive approach would be to try training a model to give a real value for each possible image pixel combination which sums to 1 over the entire space. But there is no way to ensure the summation property other than to divide the ouput by the sum/integral Z over the sample space; which is computationally infeasible for even moderately sized sample spaces.</p>
+<p>$$
+Z = \int_{x} f(x) dx \quad\quad p(x)=\frac{1}{Z} f(x) $$</p>
+<p>The general practice that is followed and works out well is to use NNs to approximate the target distributions using <strong>already known probability distributions</strong> and using the NN to approximate their defining parameters(mean and variance). For instance, the most standard practice is to use the <em><strong>Gaussian Distribution</strong></em> due to a lot of good properties, which I won&rsquo;t discuss here.</p>
+<p>Therefore, we define the network as<br>
+$$p_\theta(x) = \mathcal{N}(x; \mu_\theta, \Sigma_\theta)
+$$
+A neural network model with parameters $\theta$ that approximates the $\mu$ and $\Sigma$ of the required multivariate normal distribution.</p>
+<hr>
+<h2 id="diffusion-for-image-generation">Diffusion for Image Generation</h2>
+<h3 id="denoising-reverse-process">Denoising Reverse Process</h3>
+<p>Now in diffusion we don&rsquo;t exactly find the required probability distribution directly. Instead we follow an <em>iterative process</em> of slowly transforming a starting <strong>noisy distribution</strong> into the required final distribution. Why is this done? A simple explanation would be, it just works better for the practical scenarios of approximating non-linear functions in high dimensions.</p>
+<p>The theoretical diffusion sampling process (the generative Markov chain) is defined by Gaussian transitions
+$$
+p_\theta(x_{t-1} | x_t) = \mathcal{N}(x_{t-1}; \mu_\theta(x_t, t), \Sigma_\theta(x_t, t))
+$$
+but in practice we consider a only time-dependent variance $\Sigma_\theta(x_t, t) = \Sigma_t$. Learning the variance is mathematically &ldquo;heavy&rdquo; and can make training unstable. Early research found that simply following the same &ldquo;amount&rdquo; of noise used in the forward process works remarkably well.
+$$
+p_\theta(x_{t-1} | x_t) = \mathcal{N}(x_{t-1}; \mu_\theta(x_t, t), \Sigma_t)
+$$
+At each step the model takes the previous noisy image $x_t$ and calculates the mean for the previous image $x_{t-1}$ and then samples $x_{t-1}$ from the distribution $\mathcal{N}(\mu_\theta(x_t, t), \Sigma_t)$.</p>
+<p>Now, we don&rsquo;t ask the neural network to spit out $\mu$ directly because that&rsquo;s a difficult learning task.</p>
+<p>Instead we use use something called <strong>reparameterisation trick</strong> to get the values. We use the neural network to predict a noise amount $\epsilon_\theta$ and then use that to approximate the $\mu_{\theta}$ value.
+$$\mu_\theta(x_t, t) = \frac{1}{\sqrt{\alpha_t}} \left( x_t - \frac{\beta_t}{\sqrt{1 - \bar{\alpha}_t}} \epsilon_\theta(x_t, t) \right)$$
+Notice that the model takes in input $x_t$ and t; we will get back to this a bit later. The alpha and beta values are just fixed values depending on the noising schedule that is being followed.</p>
+<p><em>Why do we do this reparameterisation?</em> -  Because it makes the training much <strong>more stable</strong> - similar to how teaching ResNets to predict the change in input is easier for the model than predicting the output estimate. If you are curious why then refer to <a href="https://arxiv.org/pdf/1712.09913">this paper</a>.</p>
+<!-- ![alt text](image-4.png)
+![alt text](image-3.png) -->
+<figure class="my-8">
+  <img src="/blogs/diffusion_tut/markov_chain.png" alt="diffusion markov chain" class="w-full rounded-sm border border-gray-200 dark:border-gray-800/70">
+  <figcaption class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3"><i>This chain illustrates how we go from a noisy image sample to a more structured one over time steps</i></figcaption>
+</figure>
+<p>Now given a trained model with parameters $\theta$ , the sampling algorithm for generating an image from the target distribution is as follows:</p>
+<ol>
+<li><strong>Initialize:</strong> Start with $x_T \sim \mathcal{N}(0, \mathbf{I})$ (pure white noise).</li>
+<li><strong>Iterate:</strong> For $t = T, T-1, \dots, 1$:
+<ul>
+<li><strong>Sample random noise:</strong> $z \sim \mathcal{N}(0, \mathbf{I})$ if $t &gt; 1$, else $z = 0$.</li>
+<li><strong>Predict the noise:</strong> Pass the current image $x_t$ and the time step $t$ into your model to get $\epsilon_\theta(x_t, t)$.</li>
+<li><strong>Compute the Mean</strong> ($\mu_\theta$): This is the &ldquo;de-noised&rdquo; version of the current image.$$\mu_\theta(x_t, t) = \frac{1}{\sqrt{\alpha_t}} \left( x_t - \frac{\beta_t}{\sqrt{1 - \bar{\alpha}_t}} \epsilon_\theta(x_t, t) \right)$$</li>
+<li><strong>Update the Image:</strong> Calculate the next step $x_{t-1}$ by adding back a tiny bit of controlled variance ($\sigma_t z$) to keep the process stochastic:$$x_{t-1} = \mu_\theta(x_t, t) + \sigma_t z$$</li>
+</ul>
+</li>
+<li><strong>Result:</strong> $x_0$ is your generated image.</li>
+</ol>
+<p>This <strong>reverse</strong> process is summarised in the image below. The <em>sample in red</em> is slowly transformed to a sample from the target distribution over multiple timesteps.</p>
+<style>
+.diffusion-reverse-playground {
+  font-family: var(--font-sans, sans-serif);
+  max-width: 780px;
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  border: 2px solid #8B5CF6;
+  border-radius: 12px;
+  background: var(--color-background-secondary, rgba(139, 92, 246, 0.03));
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.1);
+  color: var(--color-text-primary);
+}
+
+.dark .diffusion-reverse-playground {
+  background: rgba(139, 92, 246, 0.05);
+}
+
+.reverse-layout {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.reverse-visual-side {
+  flex-shrink: 0;
+  background: var(--color-background-primary, #fff);
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--color-border-tertiary, #e5e7eb);
+}
+
+.dark .reverse-visual-side {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+.canvas-slider-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.slider-track-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  width: 35px;
+}
+
+#reverse-slider {
+  -webkit-appearance: slider-vertical;
+  appearance: slider-vertical;
+  width: 8px;
+  height: 220px;
+  margin: auto 0;
+  accent-color: #8B5CF6;
+  cursor: pointer;
+}
+
+.axis-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-text-secondary, #64748b);
+}
+
+.dark .axis-label {
+  color: #cbd5e1;
+}
+
+#reverse-canvas {
+  border-radius: 6px;
+  display: block;
+  background: transparent;
+}
+
+.reverse-control-side {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.reverse-control-side h3 {
+  margin: 0 0 0.4rem 0;
+  color: var(--color-text-primary, #0f172a);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.dark .reverse-control-side h3 {
+  color: #f1f5f9;
+}
+
+.reverse-control-side p {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary, #475569);
+  line-height: 1.5;
+  margin: 0 0 1.2rem 0;
+}
+
+.dark .reverse-control-side p {
+  color: #cbd5e1;
+}
+
+.status-badge {
+  display: inline-block;
+  background: rgba(139, 92, 246, 0.1);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+#reverse-step-display {
+  color: #8B5CF6;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 640px) {
+  .reverse-layout {
+    flex-direction: column;
+    text-align: center;
+  }
+  .reverse-control-side {
+    text-align: center;
+    width: 100%;
+  }
+}
+</style>
+
+<div class="diffusion-reverse-playground">
+  <div class="reverse-layout">
+    <div class="reverse-visual-side">
+      <div class="canvas-slider-container">
+        <div class="slider-track-wrapper">
+          <span class="axis-label top-label">$t = T$</span>
+          <input type="range" id="reverse-slider" min="0" max="100" value="100" step="1" orient="vertical">
+          <span class="axis-label bottom-label">$t = 0$</span>
+        </div>
+        <canvas id="reverse-canvas" width="400" height="300"></canvas>
+      </div>
+    </div>
+    <div class="reverse-control-side">
+      <h3>Reverse Diffusion: Skewed Modes</h3>
+      <p>Samples($x_T$) from the initial standard Gaussian distribution(top) get slowly transformed into samples($x_0$) of the target distribution(bottom) over $T$ steps.</p>
+      <p style="font-size: 0.6rem; color: var(--color-text-tertiary, grey); font-style: italic;">(Please reload the page if object not working properly)</p>
+      <div class="status-badge">
+        <span id="reverse-step-display">Timestep $t$: 100</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function initReverseSimulation() {
+  const revCanvas = document.getElementById('reverse-canvas');
+  if (!revCanvas || revCanvas.dataset.initialized) return;
+  revCanvas.dataset.initialized = 'true';
+
+  const revCtx = revCanvas.getContext('2d');
+  const revSlider = document.getElementById('reverse-slider');
+  const revDisplay = document.getElementById('reverse-step-display');
+
+  const NUM_PARTICLES = 45; 
+  const MAX_STEPS = 100;
+  const trajectories = [];
+  const W = revCanvas.width;
+  const H = revCanvas.height;
+
+  function getGaussian() {
+    let u = 0, v = 0;
+    while(u === 0) u = Math.random(); 
+    while(v === 0) v = Math.random();
+    return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+  }
+
+  for (let p = 0; p < NUM_PARTICLES; p++) {
+    const path = new Array(MAX_STEPS + 1);
+    const targetLeft = Math.random() < 0.75;
+    
+    let currentX = (W / 2) + getGaussian() * 30;
+    path[MAX_STEPS] = currentX;
+
+    for (let t = MAX_STEPS - 1; t >= 0; t--) {
+      let drift = 0;
+      if (t < 75) {
+        const targetX = targetLeft ? (W / 2 - 95) : (W / 2 + 95);
+        drift = (targetX - currentX) * 0.045; 
+      }
+      const noiseScale = 2.4 * Math.sqrt(t / MAX_STEPS + 0.1);
+      currentX += drift + getGaussian() * noiseScale;
+      path[t] = currentX;
+    }
+    
+    trajectories.push({
+      points: path,
+      isRed: p === 7
+    });
+  }
+
+  function gaussianPDF(x, mean, stdDev) {
+    return (1 / (stdDev * Math.sqrt(2 * Math.PI))) * Math.exp(-Math.pow(x - mean, 2) / (2 * Math.pow(stdDev, 2)));
+  }
+
+  function drawSimulation() {
+    revCtx.clearRect(0, 0, W, H);
+    
+    const currentStep = parseInt(revSlider.value);
+    revDisplay.textContent = `Timestep t: ${currentStep}`;
+
+    const paddingY = 40;
+    const usableHeight = H - (paddingY * 2);
+    
+    function getCanvasY(stepValue) {
+      const ratio = (MAX_STEPS - stepValue) / MAX_STEPS;
+      return paddingY + ratio * usableHeight;
+    }
+
+    const activeY = getCanvasY(currentStep);
+
+    revCtx.lineWidth = 1.75;
+    revCtx.strokeStyle = 'rgba(139, 92, 246, 0.4)'; 
+    
+    
+    revCtx.beginPath();
+    for (let x = 0; x < W; x++) {
+      let yCurve = paddingY - (gaussianPDF(x, W / 2, 30) * 2000);
+      if (x === 0) revCtx.moveTo(x, yCurve); else revCtx.lineTo(x, yCurve);
+    }
+    revCtx.stroke();
+
+    
+    revCtx.beginPath();
+    for (let x = 0; x < W; x++) {
+      let pLeft = gaussianPDF(x, W / 2 - 95, 22) * 0.75;
+      let pRight = gaussianPDF(x, W / 2 + 95, 22) * 0.25;
+      
+      let yCurve = (H - paddingY) - ((pLeft + pRight) * 2600);
+      if (x === 0) revCtx.moveTo(x, yCurve); else revCtx.lineTo(x, yCurve);
+    }
+    revCtx.stroke();
+
+    
+    revCtx.beginPath();
+    revCtx.strokeStyle = 'rgba(139, 92, 246, 0.2)'; 
+    revCtx.setLineDash([4, 4]);
+    revCtx.moveTo(0, activeY);
+    revCtx.lineTo(W, activeY);
+    revCtx.stroke();
+    revCtx.setLineDash([]); 
+
+    
+    trajectories.forEach(tr => {
+      if (tr.isRed) {
+        revCtx.strokeStyle = '#ef4444'; 
+        revCtx.lineWidth = 2.5;
+      } else {
+        revCtx.strokeStyle = 'rgba(139, 92, 246, 0.2)'; 
+        revCtx.lineWidth = 1.1;
+      }
+
+      revCtx.beginPath();
+      revCtx.moveTo(tr.points[MAX_STEPS], getCanvasY(MAX_STEPS));
+      for (let s = MAX_STEPS - 1; s >= currentStep; s--) {
+        revCtx.lineTo(tr.points[s], getCanvasY(s));
+      }
+      revCtx.stroke();
+
+      revCtx.beginPath();
+      revCtx.fillStyle = tr.isRed ? '#ef4444' : '#8B5CF6';
+      revCtx.arc(tr.points[currentStep], activeY, tr.isRed ? 4.5 : 2.5, 0, 2 * Math.PI);
+      revCtx.fill();
+      if (tr.isRed) {
+        revCtx.strokeStyle = '#ffffff';
+        revCtx.lineWidth = 1;
+        revCtx.stroke();
+      }
+    });
+  }
+
+  revSlider.addEventListener('input', drawSimulation);
+  drawSimulation();
+}
+setInterval(initReverseSimulation, 200);
+</script>
+
+<!-- <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 my-8 items-start">
+  <figure class="w-full sm:w-[48%] m-0">
+    <img src="/blogs/diffusion_tut/prior_distribution.png" alt="prior distribution" class="w-full rounded-sm border border-gray-200 dark:border-gray-800/70">
+    <figcaption class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3"><i>Target Distribution of the data.</i></figcaption>
+  </figure>
+  <figure class="w-full sm:w-[52%] m-0">
+    <img src="/blogs/diffusion_tut/transformation.png" alt="distribution transformation" class="w-full rounded-sm border border-gray-200 dark:border-gray-800/70">
+    <figcaption class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3"><i>Samples(see the red one) from the initial Gaussian distribution are slowly tranformed to samples of the target distribution</i></figcaption>
+  </figure>
+</div> -->
+<p>This algorithm essentially starts with a single sample from a random distribution and then iteratively transforms the distribution to the target distribution over T steps such that the sample gets transformed to a sample from the target distribution and since in the target distribution only the coherent samples have high probabilities , the final sample should also be coherent and desirable.</p>
+<!-- Note:
+- **Variance Schedule ($\alpha, \bar{\alpha}, \beta$):** These must be the exact same values used during the training (Forward) phase.
+- **Total Steps ($T$):** The number of iterations (e.g., 1000). -->
+<hr>
+<h3 id="the-forward-process-and-training">The Forward Process and Training</h3>
+<p>Now that you understand(hopefully) the process of generation of an image via diffusion, we can discuss how these models can be trained.</p>
+<p>While there has been a multitude of training methods catering to diffusion and similar architectures, I will be going over the most well-known one which was discussed in the foundational paper of DDPM.</p>
+<p>Since we were using the trained model to predict the noise of a given image + timestamp input, we will need to create data to serve this purpose and train it accordingly with some loss function.  How do we make the training data for this? We make use of any image dataset and start adding noise at different intensities to the given image!</p>
+<p>But we don&rsquo;t do it in any arbitrary manner, rather we do a time-scheduled addition, hence the &ldquo;t&rdquo; in the model input.</p>
+<p>In the forward process, we gradually add Gaussian noise to an image step by step. We control how much noise is added at each step using a variance schedule $\beta_t$. If we define $\alpha_t = 1 - \beta_t$, the single-step transition from $x_{t-1}$ to $x_t$ is defined as:</p>
+<p>$$x_t = \sqrt{\alpha_t} x_{t-1} + \sqrt{1 - \alpha_t} \epsilon, \quad \epsilon \sim \mathcal{N}(0, \mathbf{I})$$</p>
+<p>If we had to do this iteratively to generate a noisy image at step $t$, it would be very slow during training. Fortunately, we can recursively expand this formula to sample an image $x_t$ at any arbitrary timestep $t$ <em>directly</em> from the clean image $x_0$, without iterating through all previous steps:</p>
+<p>$$x_t = \sqrt{\bar{\alpha}_t} x_0 + \sqrt{1 - \bar{\alpha}_t} \epsilon, \quad \epsilon \sim \mathcal{N}(0, \mathbf{I})$$</p>
+<p>Where:</p>
+<ul>
+<li>$\bar{\alpha_t} = \prod_{i=1}^t \alpha_i$ (the cumulative product of the noise schedule)</li>
+<li>$\epsilon$ is the &ldquo;ground truth&rdquo; noise we injected.</li>
+</ul>
+<style>
+  .diffusion-playground {
+    font-family: var(--font-sans, sans-serif);
+    max-width: 680px;
+    margin: 1.5rem auto;
+    padding: 1.5rem;
+    border: 2px solid #8B5CF6;
+    border-radius: 12px;
+    background: var(--color-background-secondary, rgba(139, 92, 246, 0.03));
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.1);
+    color: var(--color-text-primary);
+  }
+
+  .dark .diffusion-playground {
+    background: rgba(139, 92, 246, 0.05);
+  }
+
+  .playground-layout {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .visual-side {
+    flex-shrink: 0;
+    display: flex;
+    background: var(--color-background-primary, #fff);
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid var(--color-border-tertiary, #e5e7eb);
+  }
+
+  .dark .visual-side {
+    background: #1f2937;
+    border-color: #374151;
+  }
+
+  #diffusion-canvas {
+    border-radius: 6px;
+    display: block;
+    width: 180px;
+    height: 180px;
+  }
+
+  .control-side {
+    flex-grow: 1;
+    text-align: left;
+  }
+
+  .control-side h3 {
+    margin: 0 0 0.4rem 0;
+    color: var(--color-text-primary, #0f172a);
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .dark .control-side h3 {
+    color: #f1f5f9;
+  }
+
+  .control-side p {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary, #475569);
+    line-height: 1.45;
+    margin: 0 0 1.2rem 0;
+  }
+
+  .dark .control-side p {
+    color: #cbd5e1;
+  }
+
+  .controls {
+    background: var(--color-background-primary, #fff);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-border-tertiary, rgba(0, 0, 0, 0.05));
+  }
+
+  .dark .controls {
+    background: #1f2937;
+    border-color: #374151;
+  }
+
+  .slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--color-text-secondary, #64748b);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .dark .slider-labels {
+    color: #cbd5e1;
+  }
+
+  #step-display {
+    color: #8B5CF6;
+    font-weight: 600;
+  }
+
+  #noise-slider {
+    width: 100%;
+    display: block;
+    margin: 0;
+    accent-color: #8B5CF6;
+    cursor: pointer;
+  }
+
+  @media (max-width: 560px) {
+    .playground-layout {
+      flex-direction: column;
+      text-align: center;
+      gap: 1rem;
+    }
+
+    .control-side {
+      text-align: center;
+      width: 100%;
+    }
+
+    #diffusion-canvas {
+      width: 220px;
+      height: 220px;
+    }
+  }
+</style>
+
+<div class="diffusion-playground">
+  <div class="playground-layout">
+    <div class="visual-side">
+      <img id="source-img" src="/blogs/alphazerobh/catto.webp" crossorigin="anonymous" alt="Source"
+        style="display:none;">
+      <canvas id="diffusion-canvas" width="300" height="300"></canvas>
+    </div>
+    <div class="control-side">
+      <h3>Forward Diffusion Process</h3>
+      <p>Drag the slider to add Forward Gaussian Noise ($q(x_t | x_{t-1})$) to the original image data.</p>
+      <div class="controls">
+        <div class="slider-labels">
+          <span>Original ($x_0$)</span>
+          <span id="step-display">Timestep $t$: 0</span>
+          <span>Pure Noise ($x_T$)</span>
+        </div>
+        <input type="range" id="noise-slider" min="0" max="100" value="0" step="1">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initForwardPlayground() {
+    const canvas = document.getElementById('diffusion-canvas');
+    if (!canvas || canvas.dataset.initialized) return;
+    canvas.dataset.initialized = 'true';
+    const ctx = canvas.getContext('2d');
+    const img = document.getElementById('source-img');
+    const slider = document.getElementById('noise-slider');
+    const stepDisplay = document.getElementById('step-display');
+    let originalPixels = null;
+    function randomGaussian() {
+      let u = 0, v = 0;
+      while (u === 0) u = Math.random();
+      while (v === 0) v = Math.random();
+      return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+    }
+    function applyNoise() {
+      if (!originalPixels) return;
+      const width = canvas.width;
+      const height = canvas.height;
+      const imgData = ctx.createImageData(width, height);
+      const targetData = imgData.data;
+      const srcData = originalPixels.data;
+      const t = slider.value / 100;
+      const beta = t;
+      const alphaBar = 1 - beta;
+      const sqrtAlphaBar = Math.sqrt(alphaBar);
+      const sqrtOneMinusAlphaBar = Math.sqrt(beta);
+      for (let i = 0; i < srcData.length; i += 4) {
+        for (let c = 0; c < 3; c++) {
+          const originalValue = srcData[i + c];
+          const noise = randomGaussian() * 127.5 + 127.5;
+          let mixedValue = (sqrtAlphaBar * originalValue) + (sqrtOneMinusAlphaBar * noise);
+          targetData[i + c] = Math.min(255, Math.max(0, mixedValue));
+        }
+        targetData[i + 3] = 255;
+      }
+      ctx.putImageData(imgData, 0, 0);
+      stepDisplay.textContent = `Timestep t: ${slider.value}`;
+    }
+    img.onload = function () {
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      originalPixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      applyNoise();
+    };
+    if (img.complete) {
+      img.onload();
+    }
+    slider.addEventListener('input', applyNoise);
+  }
+  setInterval(initForwardPlayground, 200);
+</script>
+<p>We provide the model (usually a U-Net) with the noisy image $x_t$ and the current timestep $t$. The model&rsquo;s job is to predict the noise $\epsilon$ that was used to corrupt $x_0$.</p>
+<p>What is the most simple loss function you can think of that might be used here? We are predicting a continuous value! This is just regression on the noise values. Therefore, a sane choice would be the <strong>Mean Squared Error ($L_2$ norm)</strong> between the true noise $\epsilon$ and the predicted noise $\epsilon_\theta$:
+$$\mathcal{L}_{simple}(\theta) = \mathbb{E}_{t, x_0, \epsilon} \left[ | \epsilon - \epsilon_\theta(x_t, t) |^2 \right]$$</p>
+<blockquote>
+<h4 id="why-l_2">Why $L_2$?</h4>
+<p>Mathematically, minimizing the $L_2$ error in noise prediction is equivalent to maximizing the <strong>Evidence Lower Bound (ELBO)</strong> under the assumption that the reverse transitions are Gaussian. Maximizing the ELBO is what ensures that our approximation of the true distribution is as close as possible to the true distribution.</p>
+</blockquote>
+<h4 id="the-training-algorithm">The Training Algorithm:</h4>
+<ol>
+<li><strong>Sample</strong> a clean image $x_0$ from your dataset.</li>
+<li><strong>Pick a random timestep</strong> $t$ between $1$ and $T$ (e.g., $t=450$ out of $1000$).</li>
+<li><strong>Generate random noise</strong> $\epsilon$ and mix it with $x_0$ using the formula above to create $x_t$.</li>
+<li>Pass the noisy image $x_t$ and the timestep $t$ to the model and get the predicted noise $\epsilon_\theta(x_t, t)$.</li>
+<li>Compare the predicted noise with the actual noise $\epsilon$ using Mean Squared Error ($L_2$ norm) and calculate the loss.</li>
+<li><strong>Optimise:</strong> Take a gradient descent step to minimize the loss.</li>
+<li>Repeat for a number of epochs.</li>
+</ol>
+<hr>
+<h2 id="implementation">Implementation</h2>
+<p>First define the hyper-parameters and device. I will be using Pytorch for this implementation. I would suggest using a GPU since training on a CPU would take a lot of time. You may use Google Colab or Kaggle notebooks for this.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">import</span> torch
+<span style="color:#ff79c6">import</span> torch.nn <span style="color:#ff79c6">as</span> nn
+<span style="color:#ff79c6">import</span> torch.nn.functional <span style="color:#ff79c6">as</span> F
+<span style="color:#ff79c6">from</span> torch.utils.data <span style="color:#ff79c6">import</span> DataLoader, ConcatDataset
+<span style="color:#ff79c6">from</span> torchvision <span style="color:#ff79c6">import</span> datasets, transforms
+
+T <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">500</span>  <span style="color:#6272a4"># Total number of diffusion steps</span>
+BETA_START <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0.0001</span>
+BETA_END <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0.02</span>
+
+<span style="color:#6272a4"># Flowers102 are RGB natural images; use a slightly larger size than MNIST</span>
+IMAGE_SIZE <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">64</span>
+CHANNELS <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">3</span>  <span style="color:#6272a4"># 3 for RGB (Flowers102)</span>
+BATCH_SIZE <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">32</span>
+LEARNING_RATE <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1e-3</span>
+EPOCHS <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">100</span>
+TIME_DIM <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">64</span>
+
+device <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;cuda&#34;</span> <span style="color:#ff79c6">if</span> torch<span style="color:#ff79c6">.</span>cuda<span style="color:#ff79c6">.</span>is_available() <span style="color:#ff79c6">else</span> <span style="color:#f1fa8c">&#34;cpu&#34;</span>
+<span style="color:#ff79c6">print</span>(f<span style="color:#f1fa8c">&#34;Using device: {device}&#34;</span>)
+
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">get_dataloader</span>():
+    transform <span style="color:#ff79c6">=</span> transforms<span style="color:#ff79c6">.</span>Compose([
+        transforms<span style="color:#ff79c6">.</span>Resize((IMAGE_SIZE, IMAGE_SIZE), antialias<span style="color:#ff79c6">=</span>True),
+        transforms<span style="color:#ff79c6">.</span>ToTensor(),
+        transforms<span style="color:#ff79c6">.</span>Normalize((<span style="color:#bd93f9">0.5</span>, <span style="color:#bd93f9">0.5</span>, <span style="color:#bd93f9">0.5</span>), (<span style="color:#bd93f9">0.5</span>, <span style="color:#bd93f9">0.5</span>, <span style="color:#bd93f9">0.5</span>)),
+    ])
+
+    root <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;./data&#34;</span>
+    train_ds <span style="color:#ff79c6">=</span> datasets<span style="color:#ff79c6">.</span>Flowers102(root, split<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;train&#34;</span>, download<span style="color:#ff79c6">=</span>True, transform<span style="color:#ff79c6">=</span>transform)
+    val_ds <span style="color:#ff79c6">=</span> datasets<span style="color:#ff79c6">.</span>Flowers102(root, split<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;val&#34;</span>, download<span style="color:#ff79c6">=</span>True, transform<span style="color:#ff79c6">=</span>transform)
+    dataset <span style="color:#ff79c6">=</span> ConcatDataset([train_ds, val_ds])
+
+    dataloader <span style="color:#ff79c6">=</span> DataLoader(
+        dataset,
+        batch_size<span style="color:#ff79c6">=</span>BATCH_SIZE,
+        shuffle<span style="color:#ff79c6">=</span>True,
+        num_workers<span style="color:#ff79c6">=</span><span style="color:#bd93f9">2</span>,
+        pin_memory<span style="color:#ff79c6">=</span>(device <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#34;cuda&#34;</span>),
+    )
+    <span style="color:#ff79c6">return</span> dataloader
+
+betas <span style="color:#ff79c6">=</span> torch<span style="color:#ff79c6">.</span>linspace(BETA_START, BETA_END, T)<span style="color:#ff79c6">.</span>to(device)
+alphas <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1.0</span> <span style="color:#ff79c6">-</span> betas
+alpha_bars <span style="color:#ff79c6">=</span> torch<span style="color:#ff79c6">.</span>cumprod(alphas, dim<span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span>)
+
+<span style="color:#ff79c6">if</span> device <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#34;cuda&#34;</span>:
+    torch<span style="color:#ff79c6">.</span>cuda<span style="color:#ff79c6">.</span>manual_seed_all(<span style="color:#bd93f9">42</span>)
+    betas <span style="color:#ff79c6">=</span> betas<span style="color:#ff79c6">.</span>to(device)
+    alphas <span style="color:#ff79c6">=</span> alphas<span style="color:#ff79c6">.</span>to(device)
+    alpha_bars <span style="color:#ff79c6">=</span> alpha_bars<span style="color:#ff79c6">.</span>to(device)
+
+sqrt_alpha_bars <span style="color:#ff79c6">=</span> torch<span style="color:#ff79c6">.</span>sqrt(alpha_bars)
+sqrt_one_minus_alpha_bars <span style="color:#ff79c6">=</span> torch<span style="color:#ff79c6">.</span>sqrt(<span style="color:#bd93f9">1.0</span> <span style="color:#ff79c6">-</span> alpha_bars)
+
+dataloader <span style="color:#ff79c6">=</span> get_dataloader()
+</code></pre></div><p>Before we can train, we need to pre-calculate our &ldquo;noise schedule.&rdquo; These $\alpha$ and $\beta$ values are the knobs that control how much noise is added at each step. By calculating the cumulative products ($\bar{\alpha}$) upfront, we can jump from a clean image ($x_0$) to a noisy version at any timestep $t$ in a single step, rather than looping $t$ times.</p>
+<p>To keep things simple, I&rsquo;m using the <strong>Flowers102</strong> dataset. It’s small enough to train relatively quickly but diverse enough to show that the model is actually learning something interesting. We resize everything to 64x64 and normalize the pixels to the range <code>[-1, 1]</code>. This is important because our model will be predicting noise that also lives around that range(due to sampling from the standard Gaussian distribution).</p>
+<figure>
+  <img src="/blogs/diffusion_tut/flower102.png" alt="Flower 102 dataset">
+  <figcaption class="text-center text-sm"><i>A few samples from the Flowers 102 dataset.</i></figcaption>
+</figure>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">forward_diffusion_sample</span>(x0, t, device<span style="color:#ff79c6">=</span>None):
+    <span style="color:#ff79c6">if</span> device <span style="color:#ff79c6">is</span> None:
+        device <span style="color:#ff79c6">=</span> x0<span style="color:#ff79c6">.</span>device
+    t <span style="color:#ff79c6">=</span> t<span style="color:#ff79c6">.</span>to(device)
+
+    s_alpha_bar <span style="color:#ff79c6">=</span> sqrt_alpha_bars<span style="color:#ff79c6">.</span>to(device)[t]<span style="color:#ff79c6">.</span>unsqueeze(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>)<span style="color:#ff79c6">.</span>unsqueeze(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>)<span style="color:#ff79c6">.</span>unsqueeze(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>)
+    s_one_minus_alpha_bar <span style="color:#ff79c6">=</span> sqrt_one_minus_alpha_bars<span style="color:#ff79c6">.</span>to(device)[t]<span style="color:#ff79c6">.</span>unsqueeze(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>)<span style="color:#ff79c6">.</span>unsqueeze(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>)<span style="color:#ff79c6">.</span>unsqueeze(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>)
+    noise <span style="color:#ff79c6">=</span> torch<span style="color:#ff79c6">.</span>randn_like(x0, device<span style="color:#ff79c6">=</span>device)
+    xt <span style="color:#ff79c6">=</span> s_alpha_bar <span style="color:#ff79c6">*</span> x0 <span style="color:#ff79c6">+</span> s_one_minus_alpha_bar <span style="color:#ff79c6">*</span> noise
+
+    <span style="color:#ff79c6">return</span> xt, noise
+</code></pre></div><p>This function is our <strong>Forward Process</strong>. It takes a clean image and a timestep value $t$, then &ldquo;corrupts&rdquo; the image by mixing it with random noise at that corresponding timestep $t$ based on the noise schedule $\beta_t$.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">get_time_embedding</span>(t, dim):
+    <span style="color:#f1fa8c">&#34;&#34;&#34;Sinusoidal Positional Encoding for time.&#34;&#34;&#34;</span>
+    inv_freq <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1.0</span> <span style="color:#ff79c6">/</span> (<span style="color:#bd93f9">10000</span> <span style="color:#ff79c6">**</span> (torch<span style="color:#ff79c6">.</span>arange(<span style="color:#bd93f9">0</span>, dim, <span style="color:#bd93f9">2</span>)<span style="color:#ff79c6">.</span>float() <span style="color:#ff79c6">/</span> dim))
+    sin_emb <span style="color:#ff79c6">=</span> torch<span style="color:#ff79c6">.</span>sin(t<span style="color:#ff79c6">.</span>unsqueeze(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>) <span style="color:#ff79c6">*</span> inv_freq<span style="color:#ff79c6">.</span>to(t<span style="color:#ff79c6">.</span>device))
+    cos_emb <span style="color:#ff79c6">=</span> torch<span style="color:#ff79c6">.</span>cos(t<span style="color:#ff79c6">.</span>unsqueeze(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>) <span style="color:#ff79c6">*</span> inv_freq<span style="color:#ff79c6">.</span>to(t<span style="color:#ff79c6">.</span>device))
+    emb <span style="color:#ff79c6">=</span> torch<span style="color:#ff79c6">.</span>cat([sin_emb, cos_emb], dim<span style="color:#ff79c6">=-</span><span style="color:#bd93f9">1</span>)
+    <span style="color:#ff79c6">return</span> emb
+</code></pre></div><p>As mentioned before the model predicts the noise at a given timestep $t$ from the input noised image. Denoising at step $t=999$ (almost pure noise) is very different from denoising at $t=5$ (almost clean). However we don&rsquo;t just pass the timestep $t$ directly as an integer input to the model.</p>
+<p>Instead a good practice is to encode the timestep $t$ into a vector embedding representation. Here we use <strong>Sinusoidal Positional Encodings</strong>—the same stuff used in Transformers—to turn a single integer $t$ into a rich vector that the neural network can understand.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">_pick_gn_groups</span>(channels: <span style="color:#8be9fd;font-style:italic">int</span>) <span style="color:#ff79c6">-&gt;</span> <span style="color:#8be9fd;font-style:italic">int</span>:
+    <span style="color:#ff79c6">for</span> g <span style="color:#ff79c6">in</span> (<span style="color:#bd93f9">32</span>, <span style="color:#bd93f9">16</span>, <span style="color:#bd93f9">8</span>, <span style="color:#bd93f9">4</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">1</span>):
+        <span style="color:#ff79c6">if</span> channels <span style="color:#ff79c6">%</span> g <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span>:
+            <span style="color:#ff79c6">return</span> g
+    <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">1</span>
+
+
+<span style="color:#ff79c6">class</span> <span style="color:#50fa7b">ResBlock</span>(nn<span style="color:#ff79c6">.</span>Module):
+    <span style="color:#ff79c6">def</span> __init__(self, channels: <span style="color:#8be9fd;font-style:italic">int</span>):
+        <span style="color:#8be9fd;font-style:italic">super</span>()<span style="color:#ff79c6">.</span>__init__()
+        g <span style="color:#ff79c6">=</span> _pick_gn_groups(channels)
+        self<span style="color:#ff79c6">.</span>norm1 <span style="color:#ff79c6">=</span> nn<span style="color:#ff79c6">.</span>GroupNorm(g, channels)
+        self<span style="color:#ff79c6">.</span>conv1 <span style="color:#ff79c6">=</span> nn<span style="color:#ff79c6">.</span>Conv2d(channels, channels, <span style="color:#bd93f9">3</span>, padding<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span>)
+        self<span style="color:#ff79c6">.</span>norm2 <span style="color:#ff79c6">=</span> nn<span style="color:#ff79c6">.</span>GroupNorm(g, channels)
+        self<span style="color:#ff79c6">.</span>conv2 <span style="color:#ff79c6">=</span> nn<span style="color:#ff79c6">.</span>Conv2d(channels, channels, <span style="color:#bd93f9">3</span>, padding<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span>)
+
+    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">forward</span>(self, x):
+        h <span style="color:#ff79c6">=</span> self<span style="color:#ff79c6">.</span>conv1(F<span style="color:#ff79c6">.</span>gelu(self<span style="color:#ff79c6">.</span>norm1(x)))
+        h <span style="color:#ff79c6">=</span> self<span style="color:#ff79c6">.</span>conv2(F<span style="color:#ff79c6">.</span>gelu(self<span style="color:#ff79c6">.</span>norm2(h)))
+        <span style="color:#ff79c6">return</span> x <span style="color:#ff79c6">+</span> h
+</code></pre></div><p>For the &ldquo;brain&rdquo; of our model, we use <strong>Residual Blocks</strong>. If you&rsquo;ve seen ResNets, this looks familiar. The idea is to let the gradient flow easily through the network by adding the input back to the output of the convolutional layers. We also use <strong>Group Normalization</strong> instead of Batch Norm, as it tends to be more stable when working with smaller batch sizes and generative tasks.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">UNet</span>(nn<span style="color:#ff79c6">.</span>Module):
+    <span style="color:#ff79c6">def</span> __init__(self, in_channels, out_channels, time_dim<span style="color:#ff79c6">=</span>TIME_DIM,  base_channels: <span style="color:#8be9fd;font-style:italic">int</span> <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">32</span>):
+        <span style="color:#8be9fd;font-style:italic">super</span>()<span style="color:#ff79c6">.</span>__init__()
+
+        c1, c2 <span style="color:#ff79c6">=</span> base_channels, base_channels <span style="color:#ff79c6">*</span> <span style="color:#bd93f9">2</span>
+
+        time_hidden <span style="color:#ff79c6">=</span> time_dim <span style="color:#ff79c6">*</span> <span style="color:#bd93f9">2</span>
+        self<span style="color:#ff79c6">.</span>time_mlp <span style="color:#ff79c6">=</span> nn<span style="color:#ff79c6">.</span>Sequential(
+            nn<span style="color:#ff79c6">.</span>Linear(time_dim, time_hidden),
+            nn<span style="color:#ff79c6">.</span>GELU(),
+            nn<span style="color:#ff79c6">.</span>Linear(time_hidden, time_hidden),
+            nn<span style="color:#ff79c6">.</span>LayerNorm(time_hidden)
+        )
+        self<span style="color:#ff79c6">.</span>time_to_c1 <span style="color:#ff79c6">=</span> nn<span style="color:#ff79c6">.</span>Linear(time_hidden, c1)
+        self<span style="color:#ff79c6">.</span>time_to_c2 <span style="color:#ff79c6">=</span> nn<span style="color:#ff79c6">.</span>Linear(time_hidden, c2)
+
+
+        <span style="color:#6272a4"># Encoder</span>
+        self<span style="color:#ff79c6">.</span>enc_in <span style="color:#ff79c6">=</span> nn<span style="color:#ff79c6">.</span>Conv2d(in_channels, c1, <span style="color:#bd93f9">3</span>, padding<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span>)
+        self<span style="color:#ff79c6">.</span>enc1 <span style="color:#ff79c6">=</span> ResBlock(c1)
+        self<span style="color:#ff79c6">.</span>down1 <span style="color:#ff79c6">=</span> nn<span style="color:#ff79c6">.</span>Conv2d(c1, c2, <span style="color:#bd93f9">4</span>, stride<span style="color:#ff79c6">=</span><span style="color:#bd93f9">2</span>, padding<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span>)  <span style="color:#6272a4"># 28-&gt;14</span>
+        self<span style="color:#ff79c6">.</span>enc2 <span style="color:#ff79c6">=</span> ResBlock(c2)
+
+        <span style="color:#6272a4"># Bottleneck</span>
+        self<span style="color:#ff79c6">.</span>mid <span style="color:#ff79c6">=</span> ResBlock(c2)
+
+        <span style="color:#6272a4"># Decoder</span>
+        self<span style="color:#ff79c6">.</span>up1 <span style="color:#ff79c6">=</span> nn<span style="color:#ff79c6">.</span>ConvTranspose2d(c2, c1, <span style="color:#bd93f9">4</span>, stride<span style="color:#ff79c6">=</span><span style="color:#bd93f9">2</span>, padding<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span>)  <span style="color:#6272a4"># 14-&gt;28</span>
+        self<span style="color:#ff79c6">.</span>dec1 <span style="color:#ff79c6">=</span> nn<span style="color:#ff79c6">.</span>Sequential(
+            nn<span style="color:#ff79c6">.</span>Conv2d(c1 <span style="color:#ff79c6">+</span> c1, c1, <span style="color:#bd93f9">3</span>, padding<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span>),
+            ResBlock(c1),
+        )
+        self<span style="color:#ff79c6">.</span>out <span style="color:#ff79c6">=</span> nn<span style="color:#ff79c6">.</span>Conv2d(c1, out_channels, <span style="color:#bd93f9">3</span>, padding<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span>)
+
+    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">_inject</span>(self, h, time_cond, time_proj):
+        h <span style="color:#ff79c6">=</span> h <span style="color:#ff79c6">+</span> time_proj(time_cond)<span style="color:#ff79c6">.</span>unsqueeze(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>)<span style="color:#ff79c6">.</span>unsqueeze(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>) <span style="color:#ff79c6">*</span> <span style="color:#bd93f9">0.1</span>
+        <span style="color:#ff79c6">return</span> h
+
+    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">forward</span>(self, x, t):
+        time_emb <span style="color:#ff79c6">=</span> get_time_embedding(t, TIME_DIM)
+        time_cond <span style="color:#ff79c6">=</span> self<span style="color:#ff79c6">.</span>time_mlp(time_emb)
+
+        <span style="color:#6272a4"># Encoder</span>
+        h1 <span style="color:#ff79c6">=</span> self<span style="color:#ff79c6">.</span>enc1(F<span style="color:#ff79c6">.</span>gelu(self<span style="color:#ff79c6">.</span>enc_in(x)))
+        h1 <span style="color:#ff79c6">=</span> self<span style="color:#ff79c6">.</span>_inject(h1, time_cond, self<span style="color:#ff79c6">.</span>time_to_c1)
+
+        h2 <span style="color:#ff79c6">=</span> self<span style="color:#ff79c6">.</span>enc2(F<span style="color:#ff79c6">.</span>gelu(self<span style="color:#ff79c6">.</span>down1(h1)))
+        h2 <span style="color:#ff79c6">=</span> self<span style="color:#ff79c6">.</span>_inject(h2, time_cond, self<span style="color:#ff79c6">.</span>time_to_c2)
+
+        <span style="color:#6272a4"># Bottleneck</span>
+        h <span style="color:#ff79c6">=</span> self<span style="color:#ff79c6">.</span>mid(h2)
+        h <span style="color:#ff79c6">=</span> self<span style="color:#ff79c6">.</span>_inject(h, time_cond, self<span style="color:#ff79c6">.</span>time_to_c2)
+
+        <span style="color:#6272a4"># Decoder</span>
+        h <span style="color:#ff79c6">=</span> F<span style="color:#ff79c6">.</span>gelu(self<span style="color:#ff79c6">.</span>up1(h))
+        h <span style="color:#ff79c6">=</span> self<span style="color:#ff79c6">.</span>dec1(torch<span style="color:#ff79c6">.</span>cat([h, h1], dim<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span>))
+        h <span style="color:#ff79c6">=</span> self<span style="color:#ff79c6">.</span>_inject(h, time_cond, self<span style="color:#ff79c6">.</span>time_to_c1)
+
+        <span style="color:#ff79c6">return</span> self<span style="color:#ff79c6">.</span>out(h)
+</code></pre></div><p>The <strong>U-Net</strong> is the gold standard for image-to-image tasks. It first squeezes the image down to a &ldquo;bottleneck&rdquo; to learn high-level features, and then expands it back to the original size. The &ldquo;skip connections&rdquo; allows the model to retain fine-grained details from the original noisy image while the bottleneck focus on the overall structure. I&rsquo;ve also added a small <code>_inject</code> helper method to merge our time embeddings into every layer so the model stays aware of the current timestep.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">train_ddpm</span>(model, dataloader, epochs<span style="color:#ff79c6">=</span>EPOCHS):
+    optimizer <span style="color:#ff79c6">=</span> torch<span style="color:#ff79c6">.</span>optim<span style="color:#ff79c6">.</span>Adam(model<span style="color:#ff79c6">.</span>parameters(), lr<span style="color:#ff79c6">=</span>LEARNING_RATE)
+    loss_fn <span style="color:#ff79c6">=</span> nn<span style="color:#ff79c6">.</span>MSELoss()
+    scheduler <span style="color:#ff79c6">=</span> torch<span style="color:#ff79c6">.</span>optim<span style="color:#ff79c6">.</span>lr_scheduler<span style="color:#ff79c6">.</span>CosineAnnealingLR(optimizer, T_max<span style="color:#ff79c6">=</span>epochs, eta_min<span style="color:#ff79c6">=</span>LEARNING_RATE <span style="color:#ff79c6">*</span> <span style="color:#bd93f9">0.1</span>)
+    model<span style="color:#ff79c6">.</span>train()
+
+    <span style="color:#ff79c6">for</span> epoch <span style="color:#ff79c6">in</span> <span style="color:#8be9fd;font-style:italic">range</span>(epochs):
+        <span style="color:#ff79c6">for</span> step, batch <span style="color:#ff79c6">in</span> <span style="color:#8be9fd;font-style:italic">enumerate</span>(dataloader):
+            x0, _ <span style="color:#ff79c6">=</span> batch
+            x0 <span style="color:#ff79c6">=</span> x0<span style="color:#ff79c6">.</span>to(device)
+
+            <span style="color:#6272a4"># 1. Randomly sample timesteps t for the entire batch</span>
+            t <span style="color:#ff79c6">=</span> torch<span style="color:#ff79c6">.</span>randint(<span style="color:#bd93f9">0</span>, T, (x0<span style="color:#ff79c6">.</span>shape[<span style="color:#bd93f9">0</span>],), device<span style="color:#ff79c6">=</span>device)<span style="color:#ff79c6">.</span>long()
+
+            <span style="color:#6272a4"># 2. Get the noisy input (xt) and the actual noise (epsilon)</span>
+            xt, noise <span style="color:#ff79c6">=</span> forward_diffusion_sample(x0, t, device<span style="color:#ff79c6">=</span>device)
+
+            <span style="color:#6272a4"># 3. Predict the noise using the U-Net</span>
+            predicted_noise <span style="color:#ff79c6">=</span> model(xt, t)
+
+            <span style="color:#6272a4"># 4. Calculate the loss (L = MSE(noise, predicted_noise))</span>
+            loss <span style="color:#ff79c6">=</span> loss_fn(noise, predicted_noise)
+
+            <span style="color:#6272a4"># 5. Optimization step</span>
+            optimizer<span style="color:#ff79c6">.</span>zero_grad()
+            loss<span style="color:#ff79c6">.</span>backward()
+            optimizer<span style="color:#ff79c6">.</span>step()
+        
+            <span style="color:#ff79c6">if</span> step <span style="color:#ff79c6">%</span> <span style="color:#bd93f9">100</span> <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span>:
+                <span style="color:#ff79c6">print</span>(f<span style="color:#f1fa8c">&#34;Epoch {epoch}/{epochs} | Step {step}/{len(dataloader)} | Loss: {loss.item():.4f}&#34;</span>)
+    
+        scheduler<span style="color:#ff79c6">.</span>step()
+
+        <span style="color:#6272a4"># Optional: Save model checkpoint after each epoch</span>
+        <span style="color:#6272a4"># torch.save(model.state_dict(), f&#34;ddpm_mnist_epoch_{epoch}.pth&#34;)</span>
+
+    <span style="color:#ff79c6">return</span> model
+</code></pre></div><p>The training loop is surprisingly simple once the math is set up. We pick a clean image, pick a random $t$, corrupt the image using our forward function, and ask the U-Net to guess the noise. We then compare the guess to the actual noise using a simple <strong>MSE Loss</strong>. Over time, the U-Net gets better at seeing &ldquo;through&rdquo; the noise to identify the underlying patterns.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">sample_reverse_process</span>(model, num_images<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span>,no_of_transitions<span style="color:#ff79c6">=</span><span style="color:#bd93f9">5</span>):
+
+    <span style="color:#6272a4"># Start with pure noise (xT)</span>
+    x <span style="color:#ff79c6">=</span> torch<span style="color:#ff79c6">.</span>randn((num_images, CHANNELS, IMAGE_SIZE, IMAGE_SIZE), device<span style="color:#ff79c6">=</span>device)
+
+    model<span style="color:#ff79c6">.</span>eval()
+    sample_transitions <span style="color:#ff79c6">=</span> []  <span style="color:#6272a4"># To store intermediate samples for visualization</span>
+    <span style="color:#ff79c6">with</span> torch<span style="color:#ff79c6">.</span>no_grad():
+        <span style="color:#6272a4"># Loop backward from T-1 down to 0</span>
+        <span style="color:#ff79c6">for</span> t <span style="color:#ff79c6">in</span> <span style="color:#8be9fd;font-style:italic">reversed</span>(<span style="color:#8be9fd;font-style:italic">range</span>(T)):
+            t_tensor <span style="color:#ff79c6">=</span> torch<span style="color:#ff79c6">.</span>full((num_images,), t, dtype<span style="color:#ff79c6">=</span>torch<span style="color:#ff79c6">.</span>long, device<span style="color:#ff79c6">=</span>device)
+
+            <span style="color:#6272a4"># 1. Predict the noise (epsilon_theta)</span>
+            predicted_noise <span style="color:#ff79c6">=</span> model(x, t_tensor)
+
+            <span style="color:#6272a4"># 2. DDPM Reverse Diffusion Step Formula (calculates x_{t-1})</span>
+            alpha_t <span style="color:#ff79c6">=</span> alphas[t]
+            alpha_bar_t <span style="color:#ff79c6">=</span> alpha_bars[t]
+
+            <span style="color:#6272a4"># Calculate the predicted mean (mu_theta)</span>
+            mean_part1 <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">/</span> torch<span style="color:#ff79c6">.</span>sqrt(alpha_t)
+            mean_part2 <span style="color:#ff79c6">=</span> (<span style="color:#bd93f9">1</span> <span style="color:#ff79c6">-</span> alpha_t) <span style="color:#ff79c6">/</span> torch<span style="color:#ff79c6">.</span>sqrt(<span style="color:#bd93f9">1</span> <span style="color:#ff79c6">-</span> alpha_bar_t)
+            mu_theta <span style="color:#ff79c6">=</span> mean_part1 <span style="color:#ff79c6">*</span> (x <span style="color:#ff79c6">-</span> mean_part2 <span style="color:#ff79c6">*</span> predicted_noise)
+
+            <span style="color:#6272a4"># 3. Add variance/noise for stochasticity (if t &gt; 0)</span>
+            <span style="color:#ff79c6">if</span> t <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">0</span>:
+                variance <span style="color:#ff79c6">=</span> betas[t]
+                sigma <span style="color:#ff79c6">=</span> torch<span style="color:#ff79c6">.</span>sqrt(variance)
+                z <span style="color:#ff79c6">=</span> torch<span style="color:#ff79c6">.</span>randn_like(x)
+                x <span style="color:#ff79c6">=</span> mu_theta <span style="color:#ff79c6">+</span> sigma <span style="color:#ff79c6">*</span> z
+            <span style="color:#ff79c6">else</span>:
+                <span style="color:#6272a4"># At t=0, the final step is deterministic</span>
+                x <span style="color:#ff79c6">=</span> mu_theta
+
+            <span style="color:#ff79c6">if</span> t <span style="color:#ff79c6">%</span> (T <span style="color:#ff79c6">//</span> no_of_transitions) <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span> <span style="color:#ff79c6">or</span> t <span style="color:#ff79c6">==</span> T<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>:
+                sample_transitions<span style="color:#ff79c6">.</span>append((x<span style="color:#ff79c6">.</span>cpu()<span style="color:#ff79c6">.</span>clone(), t))  <span style="color:#6272a4"># Store intermediate samples</span>
+    <span style="color:#6272a4"># Clamp output to [-1, 1] range</span>
+    x <span style="color:#ff79c6">=</span> torch<span style="color:#ff79c6">.</span>clamp(x, <span style="color:#ff79c6">-</span><span style="color:#bd93f9">1.</span>, <span style="color:#bd93f9">1.</span>)
+    
+    <span style="color:#ff79c6">return</span> x,sample_transitions
+</code></pre></div><p>Finally, we have the <strong>Reverse Process</strong>. This is where the magic happens. We start with a block of pure, random Gaussian noise and slowly &ldquo;chip away&rdquo; at it using our trained model. At each step, the model predicts the noise, we use the math we derived earlier to calculate the &ldquo;de-noised&rdquo; mean ($\mu_\theta$), and then we add back a tiny bit of random variance. This randomness is crucial—it&rsquo;s what allows the model to generate a different, unique flower every time even if you started with similar noise.</p>
+<hr>
+<h2 id="results">Results</h2>
+<p>I trained it for 100 epochs on a RTX 3060 laptop GPU and got a 97% loss reduction. The following are some results generated by unconditional sampling using the trained model:
+<figure class="my-6 flex flex-col items-center">
+  <img class="block mx-auto rounded-md border border-gray-200 dark:border-gray-800/70 bg-white dark:bg-black/20" src="/blogs/diffusion_tut/training_results.png" loading="lazy"
+    decoding="async" alt="training results"></figure>
+
+As you can see the a lot of the results bear resemblance to flowers. Ofcourse with better architectures and more compute the obtained results can be further improved.</p>
+<figure>
+    <img src="/blogs/diffusion_tut/denoising_result.png" alt="generated samples">
+    <figcaption class="text-center text-sm"><i>The intermediate reverse process steps showing how the image is slowly being generated from pure noise.</i></figcaption>
+</figure>
+<br>
+<p>You can access the full notebook with the code <a href="https://github.com/Utsab-2010/Blogs-and-Implementations/blob/main/Diffusion/Diffusion_tutorial.ipynb">here</a>.</p>
+<p>Let me know in the comments if any portion needs to be elaborated further. I wanted to discuss conditional generation too but I did not want to drag it further. I shall try to take it up in another blog. I also plan to write another one where we discuss the maths in more detail, deriving the expressions from first principles.</p>
+<p>Thanks for reading :)</p>
+<hr>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://arxiv.org/abs/2006.11239">DDPM: Denoising Diffusion Probabilistic Models</a></li>
+<li><a href="https://e-dorigatti.github.io/math/deep%20learning/2023/06/25/diffusion.html">Simplest Implementation of Diffusion Models | Emilio’s Blog</a></li>
+<li><a href="https://theaisummer.com/diffusion-models/">Diffusion Models - The AI Summer</a></li>
+<li><a href="http://arxiv.org/abs/2312.10393">Lecture Notes on Diffusion Models</a></li>
+<li>A great course on Generative Diffusion and Flow Models - <a href="https://www.youtube.com/playlist?list=PL57nT7tSGAAXwjhDYcxEycx5W7YoSrZyt">YouTube</a></li>
+</ul>
+
+        </div>
+        
+<section class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+  <div class="mb-6">
+    <h3 class="text-xl font-bold text-gray-900 dark:text-white">Comments</h3>
+    <p class="text-sm text-gray-600 dark:text-gray-400">Join the discussion via GitHub.</p>
+  </div>
+  <script src="https://giscus.app/client.js"
+          data-repo="Utsab-2010/Utsab-2010.github.io"
+          data-repo-id="R_kgDOSVop4A"
+          data-category="General"
+          data-category-id="DIC_kwDOSVop4M4C8gg4"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="bottom"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          crossorigin="anonymous"
+          async>
+  </script>
+
+  <script>
+    function updateGiscusTheme() {
+      const theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+      const iframe = document.querySelector('iframe.giscus-frame');
+      if (!iframe) return;
+      iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: theme } } }, 'https://giscus.app');
+    }
+
+    
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+          updateGiscusTheme();
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, { attributes: true });
+    
+    
+    window.addEventListener('message', (event) => {
+      if (event.origin !== 'https://giscus.app') return;
+      if (!(typeof event.data === 'object' && event.data.giscus)) return;
+      updateGiscusTheme();
+    });
+  </script>
+</section>
+
+
+      </div>
+    </article>
+  </div>
+</div>
+
+<style>
+  .blog-content {
+    font-family: 'Spectral', Georgia, serif;
+  }
+
+  .blog-content h1,
+  .blog-content h2,
+  .blog-content h3,
+  .blog-content h4,
+  .blog-content h5,
+  .blog-content h6,
+  .blog-content p,
+  .blog-content li,
+  .blog-content blockquote {
+    font-family: 'Spectral', Georgia, serif;
+  }
+
+  .toc {
+    font-size: 0.95rem;
+    line-height: 1.35;
+  }
+
+  .toc ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+  }
+
+  .toc li {
+    position: relative;
+    margin: 0.4rem 0;
+    padding-left: 1.25rem;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .toc a {
+    display: block;
+    padding: 0.15rem 0;
+    color: var(--toc-link-color);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .toc a:hover {
+    color: var(--toc-link-hover);
+    text-decoration: underline;
+    text-decoration-color: rgba(99, 102, 241, 0.85);
+    text-underline-offset: 3px;
+  }
+
+  .toc ul ul {
+    margin: 0.4rem 0 0.4rem 0.35rem;
+    padding-left: 0.9rem;
+    border-left: 1px solid var(--border-alpha);
+  }
+
+  .toc ul ul>li {
+    padding-left: 1.75rem;
+  }
+
+  .toc ul ul>li::before {
+    content: "├";
+    position: absolute;
+    left: 0.35rem;
+    top: 0.2rem;
+    color: rgba(99, 102, 241, 0.75);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  .toc ul ul>li:last-child::before {
+    content: "└";
+  }
+
+  .md-content ul,
+  .md-content ol {
+    margin: 1.2rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .md-content ul {
+    list-style: disc;
+  }
+
+  .md-content ul ul {
+    list-style: circle;
+  }
+
+  .md-content ol {
+    list-style: decimal;
+  }
+
+  .md-content li {
+    margin: 0.4rem 0;
+  }
+
+  .md-content p {
+    margin-bottom: 1.2rem;
+  }
+
+  .md-content img {
+    margin: 1.5rem auto;
+    border-radius: 0.25rem;
+  }
+
+  .md-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+  }
+
+  .md-content th,
+  .md-content td {
+    padding: 0.5rem;
+    text-align: center;
+    border: 1px solid var(--border-alpha);
+  }
+
+  .md-content pre,
+  .md-content code {
+    tab-size: 4;
+  }
+</style>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-[#070709] text-gray-600 dark:text-gray-400">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between py-6 space-y-4 md:space-y-0">
+
+      
+      <div class="text-sm sm:text-base md:text-lg">
+        <span class="relative inline-block">
+          © 2026 Utsab Karan. All rights reserved. <br>
+          Made with <a href="https://gohugo.io" target="_blank">Hugo</a> | <a
+            href="https://github.com/Enerhim/enervoid-theme" target="_blank">Enervoid</a>
+        </span>
+      </div>
+
+      
+      <div class="flex items-center space-x-6 text-sm sm:text-base md:text-lg">
+
+        
+        <a href='https://github.com/Utsab-2010' target="_blank" rel="noopener"
+          class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
+          
+          <i class="devicon-github-original"></i>
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        
+        <a href='https://www.linkedin.com/in/utsab-karan/' target="_blank" rel="noopener"
+          class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
+          
+          <i class="devicon-linkedin-plain"></i>
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        
+        <a href='https://scholar.google.com/citations?user=V0Lvy54AAAAJ&amp;hl=en' target="_blank" rel="noopener"
+          class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
+          
+          <i class="fa-solid fa-graduation-cap"></i>
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        
+        <a href='/resume_ukaran.pdf' target="_blank" rel="noopener"
+          class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
+          
+          <i class="fa-solid fa-file-lines"></i>
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        
+        <a href='https://utsab-2010.github.io/Notes-Host/' target="_blank" rel="noopener"
+          class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
+          
+          <i class="fa-solid fa-pencil"></i>
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  </footer>
+</body>
+
+</html>

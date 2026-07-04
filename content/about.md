@@ -15,11 +15,15 @@ My research interests mainly lie in the domain of deep learning and optimisation
 ---
 
 ### 📌 News & Updates
+<div class="text-[15px] sm:text-[1.1rem] leading-[1.7]">
+
 * **[ May 2026 ]** Started as summer research intern at the [**Vision and AI Lab**](https://val.cds.iisc.ac.in/), IISc Bangalore.
 * **[ Dec 2025 ]** Attended my first conference and presented our paper at the **Indian Control Conference** held at IISc, Bangalore!
 * **[ Nov 2025 ]**  ***2nd*** in Robust Visual Foraging Competition @ **NeurIPS 2025** [[Link](https://neurips.cc/virtual/2025/loc/san-diego/136982)] 
 * **[ May 2025 ]** Joined the [**ARMS Lab**](https://sites.google.com/view/arms-lab/home?authuser=0) at IIT Bombay as a Robotics Summer Intern.
 <!-- * **[ Aug 2024 ]** Promoted to Head of Vision at **AGV.AI**, leading a brilliant team of undergraduate researchers in computer vision and perception. -->
+
+</div>
 
 <!-- --- -->
 <!-- 

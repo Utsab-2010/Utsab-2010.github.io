@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Monocular Depth Estimation on Utsab Karan</title>
-    <link>https://example.com/tags/monocular-depth-estimation/</link>
+    <link>https://utsab-2010.github.io/tags/monocular-depth-estimation/</link>
     <description>Recent content in Monocular Depth Estimation on Utsab Karan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 05 Nov 2025 09:00:00 +0530</lastBuildDate>
     
-	<atom:link href="https://example.com/tags/monocular-depth-estimation/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://utsab-2010.github.io/tags/monocular-depth-estimation/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Lightweight Monocular Depth Estimation</title>
-      <link>https://example.com/projects/monodepth/</link>
+      <link>https://utsab-2010.github.io/projects/monodepth/</link>
       <pubDate>Wed, 05 Nov 2025 09:00:00 +0530</pubDate>
       
-      <guid>https://example.com/projects/monodepth/</guid>
+      <guid>https://utsab-2010.github.io/projects/monodepth/</guid>
       <description>Implementation of a Lightweight monocular depth estimation model</description>
     </item>
     

@@ -3,167 +3,181 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://example.com/blog/</loc>
+    <loc>https://utsab-2010.github.io/blog/alphazero_bh/</loc>
+    <lastmod>2026-06-24T16:15:42+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://utsab-2010.github.io/blog/</loc>
+    <lastmod>2026-06-24T16:15:42+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://utsab-2010.github.io/tags/game-theory/</loc>
+    <lastmod>2026-06-24T16:15:42+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://utsab-2010.github.io/tags/reinforcement-learning/</loc>
+    <lastmod>2026-06-24T16:15:42+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://utsab-2010.github.io/tags/</loc>
+    <lastmod>2026-06-24T16:15:42+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://utsab-2010.github.io/tags/deep-learning/</loc>
+    <lastmod>2026-05-09T12:42:42+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://utsab-2010.github.io/tags/diffusion/</loc>
+    <lastmod>2026-05-09T12:42:42+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://utsab-2010.github.io/blog/diffusion_tut/</loc>
+    <lastmod>2026-05-09T12:42:42+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://utsab-2010.github.io/tags/arduino/</loc>
+    <lastmod>2026-04-11T16:20:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://utsab-2010.github.io/projects/hamo26/</loc>
+    <lastmod>2026-04-11T16:20:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://utsab-2010.github.io/projects/</loc>
+    <lastmod>2026-04-11T16:20:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://utsab-2010.github.io/tags/robotics/</loc>
+    <lastmod>2026-04-11T16:20:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://utsab-2010.github.io/tags/conference/</loc>
     <lastmod>2026-02-28T16:30:22+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/tags/c/</loc>
+    <loc>https://utsab-2010.github.io/blog/first-conference-experience/</loc>
     <lastmod>2026-02-28T16:30:22+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/tags/conference/</loc>
+    <loc>https://utsab-2010.github.io/tags/personal/</loc>
     <lastmod>2026-02-28T16:30:22+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/blog/first-conference-experience/</loc>
+    <loc>https://utsab-2010.github.io/tags/research/</loc>
     <lastmod>2026-02-28T16:30:22+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/tags/personal/</loc>
-    <lastmod>2026-02-28T16:30:22+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/research/</loc>
-    <lastmod>2026-02-28T16:30:22+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/</loc>
-    <lastmod>2026-02-28T16:30:22+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/projects/alphazero/</loc>
+    <loc>https://utsab-2010.github.io/projects/alphazero/</loc>
     <lastmod>2026-02-17T09:00:00+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/projects/</loc>
+    <loc>https://utsab-2010.github.io/tags/pytorch/</loc>
     <lastmod>2026-02-17T09:00:00+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/tags/pytorch/</loc>
-    <lastmod>2026-02-17T09:00:00+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/reinforcement-learning/</loc>
-    <lastmod>2026-02-17T09:00:00+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/diffusion/</loc>
+    <loc>https://utsab-2010.github.io/projects/dslm/</loc>
     <lastmod>2025-12-17T09:00:00+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/projects/dslm/</loc>
+    <loc>https://utsab-2010.github.io/tags/nlp/</loc>
     <lastmod>2025-12-17T09:00:00+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/tags/nlp/</loc>
+    <loc>https://utsab-2010.github.io/tags/transformers/</loc>
     <lastmod>2025-12-17T09:00:00+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/tags/transformers/</loc>
-    <lastmod>2025-12-17T09:00:00+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/computer-vision/</loc>
+    <loc>https://utsab-2010.github.io/tags/computer-vision/</loc>
     <lastmod>2025-11-05T09:00:00+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/projects/monodepth/</loc>
+    <loc>https://utsab-2010.github.io/projects/monodepth/</loc>
     <lastmod>2025-11-05T09:00:00+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/tags/monocular-depth-estimation/</loc>
+    <loc>https://utsab-2010.github.io/tags/monocular-depth-estimation/</loc>
     <lastmod>2025-11-05T09:00:00+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/projects/bas/</loc>
+    <loc>https://utsab-2010.github.io/projects/mouse/</loc>
+    <lastmod>2025-10-04T10:15:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://utsab-2010.github.io/projects/bas/</loc>
     <lastmod>2025-07-01T08:45:00+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/tags/optimization/</loc>
+    <loc>https://utsab-2010.github.io/tags/optimization/</loc>
     <lastmod>2025-07-01T08:45:00+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/tags/robotics/</loc>
-    <lastmod>2025-07-01T08:45:00+05:30</lastmod>
+    <loc>https://utsab-2010.github.io/projects/hamo25/</loc>
+    <lastmod>2025-03-11T16:20:00+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/tags/c&#43;&#43;/</loc>
-    <lastmod>2025-05-11T16:20:00+05:30</lastmod>
+    <loc>https://utsab-2010.github.io/projects/gap-ros/</loc>
+    <lastmod>2025-01-25T09:00:00+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/tags/graphics/</loc>
-    <lastmod>2025-05-11T16:20:00+05:30</lastmod>
+    <loc>https://utsab-2010.github.io/tags/ros/</loc>
+    <lastmod>2025-01-25T09:00:00+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/projects/pxl/</loc>
-    <lastmod>2025-05-11T16:20:00+05:30</lastmod>
+    <loc>https://utsab-2010.github.io/tags/controls/</loc>
+    <lastmod>2024-10-22T14:30:00+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/tags/compilers/</loc>
-    <lastmod>2025-03-22T14:30:00+05:30</lastmod>
+    <loc>https://utsab-2010.github.io/projects/purepursuit/</loc>
+    <lastmod>2024-10-22T14:30:00+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/projects/litelang/</loc>
-    <lastmod>2025-03-22T14:30:00+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/projects/project/</loc>
-    <lastmod>2025-01-04T10:15:00+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/rust/</loc>
-    <lastmod>2025-01-04T10:15:00+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/systems/</loc>
-    <lastmod>2025-01-04T10:15:00+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/academic/</loc>
+    <loc>https://utsab-2010.github.io/</loc>
     <lastmod>2024-01-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/</loc>
+    <loc>https://utsab-2010.github.io/work/</loc>
     <lastmod>2024-01-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/about/</loc>
-    <priority>0</priority>
+    <loc>https://utsab-2010.github.io/about/</loc>
   </url>
   
   <url>
-    <loc>https://example.com/categories/</loc>
+    <loc>https://utsab-2010.github.io/categories/</loc>
   </url>
   
 </urlset>

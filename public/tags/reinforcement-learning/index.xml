@@ -2,22 +2,40 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Reinforcement Learning on Utsab Karan</title>
-    <link>https://example.com/tags/reinforcement-learning/</link>
+    <link>https://utsab-2010.github.io/tags/reinforcement-learning/</link>
     <description>Recent content in Reinforcement Learning on Utsab Karan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Feb 2026 09:00:00 +0530</lastBuildDate>
+    <lastBuildDate>Wed, 24 Jun 2026 16:15:42 +0530</lastBuildDate>
     
-	<atom:link href="https://example.com/tags/reinforcement-learning/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://utsab-2010.github.io/tags/reinforcement-learning/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>AlphaZero: Mastering the game of Black Hole</title>
+      <link>https://utsab-2010.github.io/blog/alphazero_bh/</link>
+      <pubDate>Wed, 24 Jun 2026 16:15:42 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/blog/alphazero_bh/</guid>
+      <description>#### Incomplete Blog  Work in Progress -- This blog is a detailed overview of one of my favourite projects of creating a superhuman player for the game of Black Hole. This was a passion-project of mine which I had been planning for some time and finally got around to implementing a few months ago. AlphaZero was a pioneering work in the field of Reinforcement Learning and hence my motivation to implement it for a game.</description>
+    </item>
+    
+    <item>
       <title>AlphaZero Black-Hole</title>
-      <link>https://example.com/projects/alphazero/</link>
+      <link>https://utsab-2010.github.io/projects/alphazero/</link>
       <pubDate>Tue, 17 Feb 2026 09:00:00 +0530</pubDate>
       
-      <guid>https://example.com/projects/alphazero/</guid>
+      <guid>https://utsab-2010.github.io/projects/alphazero/</guid>
       <description>An RL Agent trained using AlphaZero framework to play the game of Black-Hole.</description>
+    </item>
+    
+    <item>
+      <title>Mouse vs AI: NeurIPS 2025 Challenge</title>
+      <link>https://utsab-2010.github.io/projects/mouse/</link>
+      <pubDate>Sat, 04 Oct 2025 10:15:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/projects/mouse/</guid>
+      <description>Our work for the Mouse vs AI: Robust Visual Foraging Competition @ NeurIPS 2025. We got 2nd place!</description>
     </item>
     
   </channel>

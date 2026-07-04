@@ -30,17 +30,22 @@ theme = "enervoid"
     categoryId = "DIC_kwDOSVop4M4C8gg4"              # Fill this after enabling Discussions
 
   [[params.socials]]
+      name = "GitHub"
       link = "https://github.com/Utsab-2010"
       icon = "devicon-github-original"
    [[params.socials]]
+      name = "LinkedIn"
       link = "https://www.linkedin.com/in/utsab-karan/"
       icon = "devicon-linkedin-plain"
     [[params.socials]]
+      name = "Google Scholar"
       link = "https://scholar.google.com/citations?user=V0Lvy54AAAAJ&hl=en"
       icon = "fa-solid fa-graduation-cap" 
     [[params.socials]]
+      name = "CV / Resume"
       link = "/resume_ukaran.pdf"
       icon = "fa-solid fa-file-lines"
+    
 
 [markup]
   [markup.goldmark]

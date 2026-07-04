@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ROS on Utsab Karan</title>
+    <link>https://utsab-2010.github.io/tags/ros/</link>
+    <description>Recent content in ROS on Utsab Karan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 25 Jan 2025 09:00:00 +0530</lastBuildDate>
+    
+	<atom:link href="https://utsab-2010.github.io/tags/ros/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Postion Estimation from Lidar Gaps</title>
+      <link>https://utsab-2010.github.io/projects/gap-ros/</link>
+      <pubDate>Sat, 25 Jan 2025 09:00:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/projects/gap-ros/</guid>
+      <description>A ROS package estimating object dynamic object postions from 2d lidar using constant velocity and acceleration models.</description>
+    </item>
+    
+    <item>
+      <title>Pure Pursuit Controller - F1Tenth</title>
+      <link>https://utsab-2010.github.io/projects/purepursuit/</link>
+      <pubDate>Tue, 22 Oct 2024 14:30:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/projects/purepursuit/</guid>
+      <description>A pure pursuit controller for autonomous racing F1Tenth simulation environment.</description>
+    </item>
+    
+  </channel>
+</rss>

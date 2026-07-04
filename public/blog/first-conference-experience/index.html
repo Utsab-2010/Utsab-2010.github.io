@@ -5,12 +5,18 @@
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
 <link rel="icon" type="image/png" href="/avatar.png">
-<title>First Conference Experience</title>
+<title>ICC 25: My First Conference</title>
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
   integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
   crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Spectral:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap"
+  rel="stylesheet">
+
 <style type="text/tailwindcss">
   @theme {
     --color-bg-dark: #070709;
@@ -18,26 +24,37 @@
   }
   @custom-variant dark (&:where(.dark, .dark *));
 
-  .md-content h1 { @apply mt-10 mb-4 text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white; }
-  .md-content h2 { @apply mt-8 mb-4 text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white; }
-  .md-content h3 { @apply mt-6 mb-3 text-2xl sm:text-3xl font-semibold text-gray-900 dark:text-white; }
-  .md-content h4 { @apply mt-5 mb-2 text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white; }
+  .md-content h1 { @apply mt-10 mb-4 text-3xl sm:text-5xl font-bold text-gray-900 dark:text-white leading-tight; }
+  .md-content h2 { @apply mt-8 mb-4 text-2xl sm:text-4xl font-bold text-gray-900 dark:text-white leading-snug; }
+  .md-content h3 { @apply mt-6 mb-3 text-xl sm:text-3xl font-semibold text-gray-900 dark:text-white leading-snug; }
+  .md-content h4 { @apply mt-5 mb-2 text-lg sm:text-2xl font-semibold text-gray-900 dark:text-white; }
+  .md-content a { @apply text-indigo-600 dark:text-indigo-400 underline decoration-indigo-600/30 dark:decoration-indigo-400/30 underline-offset-4 transition-all duration-200 hover:decoration-indigo-600 dark:hover:decoration-indigo-400; }
+  .md-content pre { @apply p-3 sm:p-6 my-4 sm:my-6 rounded-sm overflow-x-auto bg-[#1e1e1e] border border-gray-200 dark:border-gray-800/70; }
+  .md-content code { @apply font-mono text-xs sm:text-sm; }
+  .md-content blockquote { @apply pl-4 sm:pl-5 py-2 sm:py-3 my-5 sm:my-6 border-l-3 border-indigo-500 bg-gray-50 dark:bg-gray-800/40 text-gray-700 dark:text-gray-300 rounded-r-lg text-base sm:text-[17px]; }
 </style>
 <style>
   html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
     --toc-link-color: rgba(55, 65, 81, 0.92);
     --toc-link-hover: #111827;
     --border-alpha: rgba(229, 231, 235, 0.8);
   }
+
+  ::selection {
+    background: rgba(99, 102, 241, 0.25);
+    color: inherit;
+  }
+
   html.dark {
     --toc-link-color: rgba(209, 213, 219, 0.92);
     --toc-link-hover: #fff;
     --border-alpha: rgba(55, 65, 81, 0.6);
   }
-  @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap');
 
   .font-jersey {
-
     font-family: "Ubuntu Sans Mono", monospace;
     font-optical-sizing: auto;
     font-style: normal;
@@ -60,16 +77,8 @@
 
   .swup-transition-fade {
     opacity: 1;
-    transition: 300ms ease-in-out;
-  }
-
-  .is-animating .swup-transition-fade {
-    opacity: 0;
-  }
-
-  .swup-transition-fade {
-    opacity: 1;
-    transition: opacity 300ms ease-in-out;
+    will-change: opacity;
+    transition: opacity 150ms ease-out;
   }
 
   html.is-animating .swup-transition-fade {
@@ -84,10 +93,10 @@
     opacity: 0;
   }
 </style>
-
 <script src="https://unpkg.com/swup@4"></script>
 <script src="https://unpkg.com/@swup/preload-plugin@3"></script>
 <script src="https://unpkg.com/@swup/progress-plugin@3"></script>
+<script src="https://unpkg.com/@swup/scripts-plugin@3"></script>
 <script>
   const swup = new Swup({
     containers: ['#swup'],
@@ -98,11 +107,15 @@
 
     plugins: [
       new SwupPreloadPlugin(),
-      new SwupProgressPlugin()
+      new SwupProgressPlugin(),
+      new SwupScriptsPlugin({
+        optin: false
+      })
     ]
   })
   window.swup = swup
 </script>
+
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
@@ -291,16 +304,16 @@
     <div class="sticky absolute top-0 z-50">
   <nav class="w-full border-b border-gray-200 dark:border-gray-800 bg-white/95 dark:bg-[#070709]/95 backdrop-blur-sm text-gray-800 dark:text-gray-100">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="flex items-center justify-between h-16">
+      <div class="flex items-center justify-between h-14">
         
         <div class="flex items-center gap-3">
 
-          <a href='https://example.com' class="flex items-center gap-3 group" aria-label="Homepage">
+          <a href='https://utsab-2010.github.io/' class="flex items-center gap-3 group" aria-label="Homepage">
 
-            <img src='https://media.licdn.com/dms/image/v2/D5603AQHgTfvWk-SoFA/profile-displayphoto-crop_800_800/B56ZzXJ.EJH8AI-/0/1773136263436?e=1779926400&amp;v=beta&amp;t=lgPElfy5GliypYRr3yxnLhM1KQKO44W6j5Ui0lxdzH8' alt="Utsab Karan"
-              class="w-10 h-10 rounded-sm border-2 border-gray-300 dark:border-gray-700 object-cover transition-transform duration-300 transform group-hover:scale-105"
+            <img src='/avatar.png' alt="Utsab Karan"
+              class="w-8 h-8 rounded-sm border-2 border-gray-300 dark:border-gray-700 object-cover transition-transform duration-300 transform group-hover:scale-105"
               style="animation: border-breathe 4s ease-in-out infinite;" />
-            <span class="text-gray-900 dark:text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold tracking-wide">
+            <span class="text-gray-900 dark:text-white text-base sm:text-lg md:text-xl lg:text-2xl font-semibold tracking-wide">
               Utsab Karan
               <span class="inline-block ml-2" style="animation: flicker 1.6s steps(2, end) infinite;">_</span>
             </span>
@@ -315,10 +328,10 @@
 
 <nav aria-label="Primary" class="w-full">
   <ul
-    class="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-2 md:space-y-0 sm:text-lg md:text-xl lg:text-3xl"><li>
+    class="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-2 md:space-y-0 text-base md:text-lg font-medium"><li>
       <a href="/blog/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
         <span class="relative inline-block">
-          <span>Blog</span>
+          <span>Blogs</span>
           
           <span
             class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
@@ -334,9 +347,9 @@
         </span>
       </a>
     </li><li>
-      <a href="/academic/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+      <a href="/work/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
         <span class="relative inline-block">
-          <span>Academic</span>
+          <span>Work</span>
           
           <span
             class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
@@ -375,10 +388,10 @@
 
 <nav aria-label="Primary" class="w-full">
   <ul
-    class="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-2 md:space-y-0 sm:text-lg md:text-xl lg:text-3xl"><li>
+    class="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-2 md:space-y-0 text-base md:text-lg font-medium"><li>
       <a href="/blog/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
         <span class="relative inline-block">
-          <span>Blog</span>
+          <span>Blogs</span>
           
           <span
             class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
@@ -394,9 +407,9 @@
         </span>
       </a>
     </li><li>
-      <a href="/academic/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+      <a href="/work/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
         <span class="relative inline-block">
-          <span>Academic</span>
+          <span>Work</span>
           
           <span
             class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
@@ -494,23 +507,20 @@
     <div id="swup" class="swup-transition-fade">
       <div class="max-w-4xl lg:max-w-[70rem] xl:max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-10 py-10 lg:py-16">
         
-<div class="max-w-[90rem] mx-auto">
+<div class="max-w-[100rem] mx-auto px-4 sm:px-6">
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-    
+
     
     <aside class="hidden lg:block lg:col-span-3 xl:col-span-3">
       <div class="sticky top-24">
-        <div class="mb-3 text-xs uppercase tracking-widest text-gray-500">Table of Contents</div><nav class="toc text-sm text-gray-700 dark:text-gray-300 border border-gray-200/70 dark:border-gray-200/70 dark:border-gray-200 dark:border-gray-800/70 bg-white dark:bg-[#070709] rounded-sm p-4">
+        <div class="mb-3 text-xs uppercase tracking-widest text-gray-500">Table of Contents</div><nav
+          class="toc text-sm text-gray-700 dark:text-gray-300 border border-gray-200/70 dark:border-gray-200/70 dark:border-gray-200 dark:border-gray-800/70 bg-white dark:bg-[#070709] rounded-sm p-4">
           <nav id="TableOfContents">
   <ul>
-    <li>
-      <ul>
-        <li><a href="#arrival--accommodation">Arrival &amp; Accommodation</a></li>
-        <li><a href="#workshops--presentations">Workshops &amp; Presentations</a></li>
-        <li><a href="#evening--gala-dinner">Evening &amp; Gala Dinner</a></li>
-        <li><a href="#final-thoughts">Final Thoughts</a></li>
-      </ul>
-    </li>
+    <li><a href="#arrival--accommodation">Arrival &amp; Accommodation</a></li>
+    <li><a href="#workshops--presentations">Workshops &amp; Presentations</a></li>
+    <li><a href="#cultural-night-and-good-food">Cultural Night and Good Food</a></li>
+    <li><a href="#final-thoughts">Final Thoughts</a></li>
   </ul>
 </nav>
         </nav></div>
@@ -520,7 +530,7 @@
     <article class="col-span-1 lg:col-span-9 xl:col-span-9">
       <header class="mb-6">
   <h1 class="text-2xl sm:text-3xl md:text-4xl tracking-wide text-gray-900 dark:text-white">
-    First Conference Experience
+    ICC 25: My First Conference
   </h1>
 
   <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm sm:text-base text-gray-600 dark:text-gray-400">
@@ -540,65 +550,55 @@
 
 
       <div class="mb-6 lg:hidden">
-        <details class="border border-gray-200/70 dark:border-gray-200/70 dark:border-gray-200 dark:border-gray-800/70 bg-white dark:bg-[#070709] rounded-sm group overflow-hidden">
-          <summary class="cursor-pointer select-none px-5 py-4 text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-colors font-semibold flex items-center justify-between">
-            <span class="text-sm uppercase tracking-widest text-indigo-600 dark:text-indigo-400">Table of Contents</span>
+        <details
+          class="border border-gray-200/70 dark:border-gray-200/70 dark:border-gray-200 dark:border-gray-800/70 bg-white dark:bg-[#070709] rounded-sm group overflow-hidden">
+          <summary
+            class="cursor-pointer select-none px-5 py-4 text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-colors font-semibold flex items-center justify-between">
+            <span class="text-sm uppercase tracking-widest text-indigo-600 dark:text-indigo-400">Table of
+              Contents</span>
             <span class="transform group-open:rotate-180 transition-transform duration-300">
-              <svg class="w-5 h-5 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+              <svg class="w-5 h-5 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
             </span>
           </summary>
-          <div class="px-5 pb-5 pt-2 toc text-base text-gray-700 dark:text-gray-300 border-t border-gray-200/70 dark:border-gray-200/70 dark:border-gray-200 dark:border-gray-800/70">
+          <div
+            class="px-5 pb-5 pt-2 toc text-base text-gray-700 dark:text-gray-300 border-t border-gray-200/70 dark:border-gray-200/70 dark:border-gray-200 dark:border-gray-800/70">
             <nav id="TableOfContents">
   <ul>
-    <li>
-      <ul>
-        <li><a href="#arrival--accommodation">Arrival &amp; Accommodation</a></li>
-        <li><a href="#workshops--presentations">Workshops &amp; Presentations</a></li>
-        <li><a href="#evening--gala-dinner">Evening &amp; Gala Dinner</a></li>
-        <li><a href="#final-thoughts">Final Thoughts</a></li>
-      </ul>
-    </li>
+    <li><a href="#arrival--accommodation">Arrival &amp; Accommodation</a></li>
+    <li><a href="#workshops--presentations">Workshops &amp; Presentations</a></li>
+    <li><a href="#cultural-night-and-good-food">Cultural Night and Good Food</a></li>
+    <li><a href="#final-thoughts">Final Thoughts</a></li>
   </ul>
 </nav>
           </div>
         </details>
-      </div><div class="border border-gray-200/70 dark:border-gray-200/70 dark:border-gray-200 dark:border-gray-800/70 bg-white dark:bg-[#070709] rounded-sm p-6 sm:p-10">
-        <div class="md-content text-base sm:text-lg leading-relaxed text-gray-700 dark:text-gray-300 w-full">
+      </div><div
+        class="-mx-4 sm:mx-0 border-y sm:border border-gray-200/70 dark:border-gray-800/70 bg-white dark:bg-[#070709] sm:rounded-sm px-4 py-6 sm:p-10">
+        <div
+          class="md-content blog-content text-base sm:text-[19px] leading-relaxed sm:leading-relaxed text-gray-700 dark:text-gray-300 w-full">
           <p>I attended the <strong>Indian Control Conference</strong> from 17th to 20th December 2025 at IISc, Bangalore. This was my first conference ever — and also my first time in Bangalore. I was there to present a paper I worked on during my summer internship at IIT Bombay <em>(long story, will tell some other time)</em>.</p>
-<hr>
-<h3 id="arrival--accommodation">Arrival &amp; Accommodation</h3>
+<h2 id="arrival--accommodation">Arrival &amp; Accommodation</h2>
 <hr>
 <p>The first thing I did after reaching campus was sort out my accommodation. I had applied for financial aid and luckily got a guest house room on campus at a subsidized rate — which honestly felt like a small victory in itself.</p>
 <p>Since the conference was starting the next day, I had some time to just walk around and explore the campus. IISc is ridiculously pretty. I also somehow managed to eat at one of the hostel canteens, thanks to two very kind students who got me in using the guest policy. <em>Peak survival skills unlocked on day one.</em></p>
-<table>
-<thead>
-<tr>
-<th>IISc Campus Details</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><figure class="my-6 flex flex-col items-center">
-  <img class="block mx-auto rounded-md border border-gray-200 dark:border-gray-800/70 bg-white dark:bg-black/20" src="https://lh3.googleusercontent.com/sitesv/AA5AbUAWirtGXUmZg2XlsxiFcx1zOpnuTrfPcsH1mYdlf4wjqGdQXd8hffGgk6nTTYFZq-ZyeqkTuHj4dxzDOBNiun78547Nd1ftLPnTo2ioth4Kh2Yl1TPRxQphTLB2xRnnvNbSiQZGOAJtxWdj3HjIdK_VdrZY36ttGCFcUn8ssbzuA3XRmO9c-ej3yfqm9L09BXeSItnRySj65c5jwAHcOQQ19CTGPdcS32hDJKg=w1280" loading="lazy"
-    decoding="async" alt="IISc Campus 1"></figure>
-</td>
-<td><figure class="my-6 flex flex-col items-center">
-  <img class="block mx-auto rounded-md border border-gray-200 dark:border-gray-800/70 bg-white dark:bg-black/20" src="https://lh3.googleusercontent.com/sitesv/AA5AbUDxdNMUKTEA-cKEb3R-f6mQf2X5jDBfpd_SWlJ-wvspQ9KmEPA9RwdcavDgtCUeccCF5-yBdsaA92nDQhl9BO4aJxLdaoeKxYEhZCa4XnOyIXC9rQHdBMnnw9uN7qka-FuR8nQlgSE-qSFc1Y0eip6t_Gfr2XL40f92ySExJ3mcogRjHMN9Fr0I7mCrZ0dGb6ImkVfWZPtp5gALPbaiuFdWspaQxvXw-zkEyp4=w1280" loading="lazy"
-    decoding="async" alt="IISc Campus 2"></figure>
-</td>
-</tr>
-<tr>
-<td><em>IISc Main Building</em></td>
-<td><figure class="my-6 flex flex-col items-center">
-  <img class="block mx-auto rounded-md border border-gray-200 dark:border-gray-800/70 bg-white dark:bg-black/20" src="https://lh3.googleusercontent.com/sitesv/AA5AbUD4DmX9nidtQ5Vewuz0Q3UThjFeIZSpSL4pSmuwnW7VgHGsGnxlTWk1q6hUMgnrgQTadlwNlJEfpC1tUeyJ6uSk5YKHCW1h8ZDrIb2vfV3tS48q912_bUQ8MxZSMZ3NprgSKyIOraAlzslNQQaop-gZV_5-ioOG7bkEqJC3qaTjjxKUv2JUAk5C0Z2q3sD704C3NuigVKynNwBlpUir0uB8DGrkFWd9EjxKRsQ=w1280" loading="lazy"
-    decoding="async" alt="IISc Main Building"></figure>
-</td>
-</tr>
-</tbody>
-</table>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0;">
+  <figure style="margin: 0;">
+    <img src="/images/idcbuilding.jpg" alt="IDC Building" style="width: 100%; border-radius: 8px;">
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/images/mainbuilding.jpg" alt="Main Building" style="width: 100%; border-radius: 8px;">
+    <figcaption style="text-align: center; font-size: 0.85rem; color: gray; margin-top: 0.5rem;"><i>IISc Campus</i></figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/images/statue.jpg" alt="IISc Main Building" style="width: 100%; border-radius: 8px;">
+    <figcaption style="text-align: center; font-size: 0.85rem; color: gray; margin-top: 0.5rem;"></figcaption>
+  </figure>
+</div>
+<h2 id="workshops--presentations">Workshops &amp; Presentations</h2>
 <hr>
-<h3 id="workshops--presentations">Workshops &amp; Presentations</h3>
 <p>The reporting time was at <strong>8:30 am</strong> the next day. I registered, got my goodie bag, and started the day with a round of workshop presentations. Honestly, not having been exposed to robotics and AI research outside had me greatly underestimating the kind of work I would see. That assumption did not last very long:</p>
 <ul>
 <li>A lot of the talks were genuinely impressive.</li>
@@ -611,105 +611,223 @@
 <li><strong>Multi-Agent Systems</strong></li>
 </ol>
 <p>The foyer of the IDR building had stalls from robotic equipment distributors. There was a live demo of the <em>Unitree dog</em>, which was honestly very cool to watch. I also visited the EduTech stall and was surprised by the range of robots they had. They even had a small bot similar to the <code>F1tenth MuSHR</code> we use in our research group at IITKGP — except the price tag felt personally offensive.</p>
-<blockquote>
 <p>I also took this chance to interact with a few professors I had been planning to email for research opportunities before eventually committing to my IITB work. Slightly intimidating, but absolutely worth it.</p>
-</blockquote>
-<hr>
-<h3 id="evening--gala-dinner">Evening &amp; Gala Dinner</h3>
+<h2 id="cultural-night-and-good-food">Cultural Night and Good Food</h2>
 <hr>
 <p>That evening, there was a prize distribution ceremony followed by a cultural session by Indian flautist <strong>Pravin Godkhindi</strong>. It was superb. After an entire day of technical talks, sitting there listening to live classical flute music felt unexpectedly calming. A really nice way to close the academic intensity of the day.</p>
 <p>Then came the <strong>Gala Dinner</strong>. I almost couldn’t find the venue because it was on the other side of the road — you had to use an underground connector from campus to cross over. Very cool infrastructure. Slightly confusing directions. And yes, the food was again ridiculously good. They had everything — veg, non-veg, full spread. Sadly, my hands (and mouth) were too busy to take any pictures.</p>
-<table>
-<thead>
-<tr>
-<th>Prize Distribution</th>
-<th>Cultural Event</th>
-<th>Flute Performance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><figure class="my-6 flex flex-col items-center">
-  <img class="block mx-auto rounded-md border border-gray-200 dark:border-gray-800/70 bg-white dark:bg-black/20" src="https://lh3.googleusercontent.com/sitesv/AA5AbUAdD0OE9nH6ZvTsX09ZI0-vcHe3CbHiO1ezblQ3N7kjTQscAOwinCI9VnHHnCu68rsAq14uBN_rctyOZOtQigIX0yibwSMODpiRWYmi0UPA_sHJbR3sZDmnChTutGJu9-FH6SeTNE9otDUhIHQ0PMmQY-ELkmrCRoYNPWzPeEJGFe5yS45RhtSfeSQ9gR92Utww8IRez1G6i5KDBybOsa_dUJzllp2YaSxq=w1280" loading="lazy"
-    decoding="async" alt="Prize Distribution"></figure>
-</td>
-<td><figure class="my-6 flex flex-col items-center">
-  <img class="block mx-auto rounded-md border border-gray-200 dark:border-gray-800/70 bg-white dark:bg-black/20" src="https://lh3.googleusercontent.com/sitesv/AA5AbUBj8YhAlD-mRcgNbYjhtPBbt0OAA5KSZx_wdVrFL4twLczhUUk-WAH65HP0Z6A8mAWvsRVOgT98VR5GfT2bWX7NnU4aFYwcNWk_G3AXYrgIJpW568p81RVmYmHQ3s7_YELl_MlfzJLQfmouiA16A-NLf2bnxNVLQaYOLLXUOLJQ8Dsavdmt6s167iai2OibuGjHovZGXw6eXvFscR34B6xXS-JTf2e3Vckgoi8=w1280" loading="lazy"
-    decoding="async" alt="Cultural Event"></figure>
-</td>
-<td><figure class="my-6 flex flex-col items-center">
-  <img class="block mx-auto rounded-md border border-gray-200 dark:border-gray-800/70 bg-white dark:bg-black/20" src="https://lh3.googleusercontent.com/sitesv/AA5AbUCDtouULrhezArImB1edv1U_xkyDarOWFYaP-YMvGCatsWmIo2BsJlpaKQMObCryj6NMWf4e7OyEz639cMKDDiPwR7HPLj_jtVFElrwJ3r6tV-28SbPMlesWWSijGSZtWfzxBeTdmquafsHfQCs3oS3i_23neDZqEE6q05WOVg-6Gp-5OXIMn-8NNrXAZo_96ntyh-EgP2aTj-1CsavxLTYbYKQtW6E9KxxsKw=w1280" loading="lazy"
-    decoding="async" alt="Pravin Godkhindi Event"></figure>
-</td>
-</tr>
-<tr>
-<td><em>Event Continuation</em></td>
-<td><figure class="my-6 flex flex-col items-center">
-  <img class="block mx-auto rounded-md border border-gray-200 dark:border-gray-800/70 bg-white dark:bg-black/20" src="/images/concert.jpg" loading="lazy"
-    decoding="async" alt="Classical Music 2"></figure>
-</td>
-<td><figure class="my-6 flex flex-col items-center">
-  <img class="block mx-auto rounded-md border border-gray-200 dark:border-gray-800/70 bg-white dark:bg-black/20" src="https://lh3.googleusercontent.com/sitesv/AA5AbUCU0k_Dh8EEfVwMs2CBSoa9deRNE3AIueO51yzVMXGTknKclnRy8DjOfq2tEKTgi-huh2nC8wJkLg-tKUs69R12wL7JY_DFCbLJ_n464UU34RmXRZSuMvP7PzOvmMtIXAF9WUb_6DfGfw5LQmhgXptVZ-nFoTjvcBbo-2OIAW0cxtWaPx8cLzjKs84fYAaby3jlVLlvEcZnhAW4PZC24CkGjqSOt1Cjuf4JHbQ=w1280" loading="lazy"
-    decoding="async" alt="Event continuation"></figure>
-</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3 id="final-thoughts">Final Thoughts</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0;">
+  <figure style="margin: 0;">
+    <img src="/images/robot.jpg" alt="Prize Distribution" style="width: 100%; border-radius: 8px;">
+    <figcaption style="text-align: center; font-size: 0.85rem; color: gray; margin-top: 0.5rem;"><i>Bots</i></figcaption>
+  </figure>
+    <figure style="margin: 0;">
+    <img src="/images/concert.jpg" alt="Classical Music 2" style="width: 100%; border-radius: 8px;">
+    <figcaption style="text-align: center; font-size: 0.85rem; color: gray; margin-top: 0.5rem;"><i>Cultural Program</i></figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/images/lecture.jpg" alt="Cultural Event" style="width: 100%; border-radius: 8px;">
+    <figcaption style="text-align: center; font-size: 0.85rem; color: gray; margin-top: 0.5rem;"><i>Guest Seminar</i></figcaption>
+  </figure>
+  </figure>
+</div>
+<h2 id="final-thoughts">Final Thoughts</h2>
 <hr>
 <p>The last day followed a similar pattern — plenary talks and paper presentations. Our slot was the second to last. It went well overall. The audience was a little thin <em>(end-of-conference effect)</em>, but no major disasters, so I’m counting that as a win!</p>
 <p>All in all, it was a great first conference experience.</p>
 <p>I met a lot of people working in the field, saw some genuinely solid research, and came back with fresh motivation to keep pushing toward a career in research. I also travelled alone to a new city for the first time - <strong>small but meaningful milestone</strong>. My return flight was early the next morning. I left Bangalore tired, slightly overwhelmed, but very happy.</p>
 <p>Hopefully I’ll be back someday; maybe with more work, more confidence, and a slightly bigger audience.</p>
 <p><em>That’s it for this one. See you all again soon!</em></p>
-<table>
-<thead>
-<tr>
-<th>Group Photo</th>
-<th>My Presentation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><figure class="my-6 flex flex-col items-center">
-  <img class="block mx-auto rounded-md border border-gray-200 dark:border-gray-800/70 bg-white dark:bg-black/20" src="/images/grp.jpg" loading="lazy"
-    decoding="async" alt="Group Photo"></figure>
-</td>
-<td><figure class="my-6 flex flex-col items-center">
-  <img class="block mx-auto rounded-md border border-gray-200 dark:border-gray-800/70 bg-white dark:bg-black/20" src="/images/present.jpg" loading="lazy"
-    decoding="async" alt="Final Conference Photo 2"></figure>
-</td>
-</tr>
-</tbody>
-</table>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0;">
+  <figure style="margin: 0;">
+    <img src="/images/grp.jpg" alt="Group Photo" style="width: 100%; border-radius: 8px;">
+    <figcaption style="text-align: center; font-size: 0.85rem; color: gray; margin-top: 0.5rem;"><i>Group Photo</i></figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/images/present.jpg" alt="Final Conference Photo 2" style="width: 100%; border-radius: 8px;">
+    <figcaption style="text-align: center; font-size: 0.85rem; color: gray; margin-top: 0.5rem;"><i>My Presentation</i></figcaption>
+  </figure>
+</div>
 
         </div>
+        
+<section class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+  <div class="mb-6">
+    <h3 class="text-xl font-bold text-gray-900 dark:text-white">Comments</h3>
+    <p class="text-sm text-gray-600 dark:text-gray-400">Join the discussion via GitHub.</p>
+  </div>
+  <script src="https://giscus.app/client.js"
+          data-repo="Utsab-2010/Utsab-2010.github.io"
+          data-repo-id="R_kgDOSVop4A"
+          data-category="General"
+          data-category-id="DIC_kwDOSVop4M4C8gg4"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="bottom"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          crossorigin="anonymous"
+          async>
+  </script>
+
+  <script>
+    function updateGiscusTheme() {
+      const theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+      const iframe = document.querySelector('iframe.giscus-frame');
+      if (!iframe) return;
+      iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: theme } } }, 'https://giscus.app');
+    }
+
+    
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+          updateGiscusTheme();
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, { attributes: true });
+    
+    
+    window.addEventListener('message', (event) => {
+      if (event.origin !== 'https://giscus.app') return;
+      if (!(typeof event.data === 'object' && event.data.giscus)) return;
+      updateGiscusTheme();
+    });
+  </script>
+</section>
+
+
       </div>
     </article>
   </div>
 </div>
 
 <style>
-  .toc { font-size: 0.95rem; line-height: 1.35; }
-  .toc ul { list-style: none; margin: 0; padding-left: 0; }
-  .toc li { position: relative; margin: 0.4rem 0; padding-left: 1.25rem; overflow-wrap: anywhere; word-break: break-word; }
-  .toc a { display: block; padding: 0.15rem 0; color: var(--toc-link-color); text-decoration: none; transition: color 0.2s; }
-  .toc a:hover { color: var(--toc-link-hover); text-decoration: underline; text-decoration-color: rgba(99, 102, 241, 0.85); text-underline-offset: 3px; }
-  .toc ul ul { margin: 0.4rem 0 0.4rem 0.35rem; padding-left: 0.9rem; border-left: 1px solid var(--border-alpha); }
-  .toc ul ul>li { padding-left: 1.75rem; }
-  .toc ul ul>li::before { content: "├"; position: absolute; left: 0.35rem; top: 0.2rem; color: rgba(99, 102, 241, 0.75); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
-  .toc ul ul>li:last-child::before { content: "└"; }
-  .md-content ul, .md-content ol { margin: 1.2rem 0; padding-left: 1.5rem; }
-  .md-content ul { list-style: disc; }
-  .md-content ul ul { list-style: circle; }
-  .md-content ol { list-style: decimal; }
-  .md-content li { margin: 0.4rem 0; }
-  .md-content p { margin-bottom: 1.2rem; }
-  .md-content img { margin: 1.5rem auto; border-radius: 0.25rem; }
-  .md-content table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
-  .md-content th, .md-content td { padding: 0.5rem; text-align: center; border: 1px solid var(--border-alpha); }
-  .md-content pre, .md-content code { tab-size: 4; }
+  .blog-content {
+    font-family: 'Spectral', Georgia, serif;
+  }
+
+  .blog-content h1,
+  .blog-content h2,
+  .blog-content h3,
+  .blog-content h4,
+  .blog-content h5,
+  .blog-content h6,
+  .blog-content p,
+  .blog-content li,
+  .blog-content blockquote {
+    font-family: 'Spectral', Georgia, serif;
+  }
+
+  .toc {
+    font-size: 0.95rem;
+    line-height: 1.35;
+  }
+
+  .toc ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+  }
+
+  .toc li {
+    position: relative;
+    margin: 0.4rem 0;
+    padding-left: 1.25rem;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .toc a {
+    display: block;
+    padding: 0.15rem 0;
+    color: var(--toc-link-color);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .toc a:hover {
+    color: var(--toc-link-hover);
+    text-decoration: underline;
+    text-decoration-color: rgba(99, 102, 241, 0.85);
+    text-underline-offset: 3px;
+  }
+
+  .toc ul ul {
+    margin: 0.4rem 0 0.4rem 0.35rem;
+    padding-left: 0.9rem;
+    border-left: 1px solid var(--border-alpha);
+  }
+
+  .toc ul ul>li {
+    padding-left: 1.75rem;
+  }
+
+  .toc ul ul>li::before {
+    content: "├";
+    position: absolute;
+    left: 0.35rem;
+    top: 0.2rem;
+    color: rgba(99, 102, 241, 0.75);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  .toc ul ul>li:last-child::before {
+    content: "└";
+  }
+
+  .md-content ul,
+  .md-content ol {
+    margin: 1.2rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .md-content ul {
+    list-style: disc;
+  }
+
+  .md-content ul ul {
+    list-style: circle;
+  }
+
+  .md-content ol {
+    list-style: decimal;
+  }
+
+  .md-content li {
+    margin: 0.4rem 0;
+  }
+
+  .md-content p {
+    margin-bottom: 1.2rem;
+  }
+
+  .md-content img {
+    margin: 1.5rem auto;
+    border-radius: 0.25rem;
+  }
+
+  .md-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+  }
+
+  .md-content th,
+  .md-content td {
+    padding: 0.5rem;
+    text-align: center;
+    border: 1px solid var(--border-alpha);
+  }
+
+  .md-content pre,
+  .md-content code {
+    tab-size: 4;
+  }
 </style>
 
       </div>
@@ -743,14 +861,6 @@
             class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
         </a>
         
-        <a href='https://twitter.com/yourx' target="_blank" rel="noopener"
-          class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
-          
-          <i class="devicon-twitter-original"></i>
-          <span
-            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
-        </a>
-        
         <a href='https://www.linkedin.com/in/utsab-karan/' target="_blank" rel="noopener"
           class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
           
@@ -759,10 +869,26 @@
             class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
         </a>
         
-        <a href='https://drive.google.com/file/d/1qDJQ7pKjLs3bD04_0PJ_MyCs6WWIR2gN/view' target="_blank" rel="noopener"
+        <a href='https://scholar.google.com/citations?user=V0Lvy54AAAAJ&amp;hl=en' target="_blank" rel="noopener"
+          class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
+          
+          <i class="fa-solid fa-graduation-cap"></i>
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        
+        <a href='/resume_ukaran.pdf' target="_blank" rel="noopener"
           class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
           
           <i class="fa-solid fa-file-lines"></i>
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        
+        <a href='https://utsab-2010.github.io/Notes-Host/' target="_blank" rel="noopener"
+          class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
+          
+          <i class="fa-solid fa-pencil"></i>
           <span
             class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
         </a>

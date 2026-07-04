@@ -2,76 +2,94 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Projects on Utsab Karan</title>
-    <link>https://example.com/projects/</link>
+    <link>https://utsab-2010.github.io/projects/</link>
     <description>Recent content in Projects on Utsab Karan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Feb 2026 09:00:00 +0530</lastBuildDate>
+    <lastBuildDate>Sat, 11 Apr 2026 16:20:00 +0530</lastBuildDate>
     
-	<atom:link href="https://example.com/projects/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://utsab-2010.github.io/projects/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Hardware Modelling 2026</title>
+      <link>https://utsab-2010.github.io/projects/hamo26/</link>
+      <pubDate>Sat, 11 Apr 2026 16:20:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/projects/hamo26/</guid>
+      <description>Our submission for the Hardware Modelling General Championship 2026 at IIT KGP. We secured 3rd place(kinda :p).</description>
+    </item>
+    
+    <item>
       <title>AlphaZero Black-Hole</title>
-      <link>https://example.com/projects/alphazero/</link>
+      <link>https://utsab-2010.github.io/projects/alphazero/</link>
       <pubDate>Tue, 17 Feb 2026 09:00:00 +0530</pubDate>
       
-      <guid>https://example.com/projects/alphazero/</guid>
+      <guid>https://utsab-2010.github.io/projects/alphazero/</guid>
       <description>An RL Agent trained using AlphaZero framework to play the game of Black-Hole.</description>
     </item>
     
     <item>
       <title>Diffusion LM</title>
-      <link>https://example.com/projects/dslm/</link>
+      <link>https://utsab-2010.github.io/projects/dslm/</link>
       <pubDate>Wed, 17 Dec 2025 09:00:00 +0530</pubDate>
       
-      <guid>https://example.com/projects/dslm/</guid>
+      <guid>https://utsab-2010.github.io/projects/dslm/</guid>
       <description>Implementing Diffusion on a Small-Language-Model inspired by the Diffusion-LM paper</description>
     </item>
     
     <item>
       <title>Lightweight Monocular Depth Estimation</title>
-      <link>https://example.com/projects/monodepth/</link>
+      <link>https://utsab-2010.github.io/projects/monodepth/</link>
       <pubDate>Wed, 05 Nov 2025 09:00:00 +0530</pubDate>
       
-      <guid>https://example.com/projects/monodepth/</guid>
+      <guid>https://utsab-2010.github.io/projects/monodepth/</guid>
       <description>Implementation of a Lightweight monocular depth estimation model</description>
     </item>
     
     <item>
+      <title>Mouse vs AI: NeurIPS 2025 Challenge</title>
+      <link>https://utsab-2010.github.io/projects/mouse/</link>
+      <pubDate>Sat, 04 Oct 2025 10:15:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/projects/mouse/</guid>
+      <description>Our work for the Mouse vs AI: Robust Visual Foraging Competition @ NeurIPS 2025. We got 2nd place!</description>
+    </item>
+    
+    <item>
       <title>BAS Optimization for AV Navigation</title>
-      <link>https://example.com/projects/bas/</link>
+      <link>https://utsab-2010.github.io/projects/bas/</link>
       <pubDate>Tue, 01 Jul 2025 08:45:00 +0530</pubDate>
       
-      <guid>https://example.com/projects/bas/</guid>
+      <guid>https://utsab-2010.github.io/projects/bas/</guid>
       <description>My work for the FTP program of implementing the Beetle Antenna Search algorithm for path planning of AVs, under Prof. Ata Jahangir Moshayedi.</description>
     </item>
     
     <item>
-      <title>None</title>
-      <link>https://example.com/projects/pxl/</link>
-      <pubDate>Sun, 11 May 2025 16:20:00 +0530</pubDate>
+      <title>Hardware Modelling 2025</title>
+      <link>https://utsab-2010.github.io/projects/hamo25/</link>
+      <pubDate>Tue, 11 Mar 2025 16:20:00 +0530</pubDate>
       
-      <guid>https://example.com/projects/pxl/</guid>
-      <description>A software renderer built from scratch in C++ supporting rasterization and basic shading.</description>
+      <guid>https://utsab-2010.github.io/projects/hamo25/</guid>
+      <description>Our submission for the Hardware Modelling General Championship 2025 at IIT KGP. We secured 4th place.</description>
     </item>
     
     <item>
-      <title>None</title>
-      <link>https://example.com/projects/litelang/</link>
-      <pubDate>Sat, 22 Mar 2025 14:30:00 +0530</pubDate>
+      <title>Postion Estimation from Lidar Gaps</title>
+      <link>https://utsab-2010.github.io/projects/gap-ros/</link>
+      <pubDate>Sat, 25 Jan 2025 09:00:00 +0530</pubDate>
       
-      <guid>https://example.com/projects/litelang/</guid>
-      <description>A dynamically typed scripting language with a tree-walk interpreter, written in C.</description>
+      <guid>https://utsab-2010.github.io/projects/gap-ros/</guid>
+      <description>A ROS package estimating object dynamic object postions from 2d lidar using constant velocity and acceleration models.</description>
     </item>
     
     <item>
-      <title>none</title>
-      <link>https://example.com/projects/project/</link>
-      <pubDate>Sat, 04 Jan 2025 10:15:00 +0530</pubDate>
+      <title>Pure Pursuit Controller - F1Tenth</title>
+      <link>https://utsab-2010.github.io/projects/purepursuit/</link>
+      <pubDate>Tue, 22 Oct 2024 14:30:00 +0530</pubDate>
       
-      <guid>https://example.com/projects/project/</guid>
-      <description>A minimal POSIX shell written in Rust with piping, redirection, and job control.</description>
+      <guid>https://utsab-2010.github.io/projects/purepursuit/</guid>
+      <description>A pure pursuit controller for autonomous racing F1Tenth simulation environment.</description>
     </item>
     
   </channel>
