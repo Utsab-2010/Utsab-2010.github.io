@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Game Theory on Utsab Karan</title>
+    <link>https://utsab-2010.github.io/tags/game-theory/</link>
+    <description>Recent content in Game Theory on Utsab Karan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 24 Jun 2026 16:15:42 +0530</lastBuildDate>
+    
+	<atom:link href="https://utsab-2010.github.io/tags/game-theory/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>AlphaZero: Mastering the game of Black Hole</title>
+      <link>https://utsab-2010.github.io/blog/alphazero_bh/</link>
+      <pubDate>Wed, 24 Jun 2026 16:15:42 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/blog/alphazero_bh/</guid>
+      <description>#### Incomplete Blog  Work in Progress -- This blog is a detailed overview of one of my favourite projects of creating a superhuman player for the game of Black Hole. This was a passion-project of mine which I had been planning for some time and finally got around to implementing a few months ago. AlphaZero was a pioneering work in the field of Reinforcement Learning and hence my motivation to implement it for a game.</description>
+    </item>
+    
+  </channel>
+</rss>

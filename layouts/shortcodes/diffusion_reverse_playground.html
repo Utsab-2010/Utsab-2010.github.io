@@ -27,6 +27,8 @@
   padding: 12px;
   border-radius: 10px;
   border: 1px solid var(--color-border-tertiary, #e5e7eb);
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .dark .reverse-visual-side {
@@ -39,6 +41,8 @@
   flex-direction: row;
   align-items: center;
   gap: 12px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .slider-track-wrapper {
@@ -74,6 +78,10 @@
   border-radius: 6px;
   display: block;
   background: transparent;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  min-width: 0;
 }
 
 .reverse-control-side {
@@ -118,6 +126,10 @@
 }
 
 @media (max-width: 640px) {
+  .diffusion-reverse-playground {
+    padding: 1rem;
+    margin: 1rem auto;
+  }
   .reverse-layout {
     flex-direction: column;
     text-align: center;

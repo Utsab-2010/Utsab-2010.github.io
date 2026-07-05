@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Robotics on Utsab Karan</title>
+    <link>https://utsab-2010.github.io/tags/robotics/</link>
+    <description>Recent content in Robotics on Utsab Karan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 11 Apr 2026 16:20:00 +0530</lastBuildDate>
+    
+	<atom:link href="https://utsab-2010.github.io/tags/robotics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hardware Modelling 2026</title>
+      <link>https://utsab-2010.github.io/projects/hamo26/</link>
+      <pubDate>Sat, 11 Apr 2026 16:20:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/projects/hamo26/</guid>
+      <description>Our submission for the Hardware Modelling General Championship 2026 at IIT KGP. We secured 3rd place(kinda :p).</description>
+    </item>
+    
+    <item>
+      <title>BAS Optimization for AV Navigation</title>
+      <link>https://utsab-2010.github.io/projects/bas/</link>
+      <pubDate>Tue, 01 Jul 2025 08:45:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/projects/bas/</guid>
+      <description>My work for the FTP program of implementing the Beetle Antenna Search algorithm for path planning of AVs, under Prof. Ata Jahangir Moshayedi.</description>
+    </item>
+    
+    <item>
+      <title>Hardware Modelling 2025</title>
+      <link>https://utsab-2010.github.io/projects/hamo25/</link>
+      <pubDate>Tue, 11 Mar 2025 16:20:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/projects/hamo25/</guid>
+      <description>Our submission for the Hardware Modelling General Championship 2025 at IIT KGP. We secured 4th place.</description>
+    </item>
+    
+    <item>
+      <title>Postion Estimation from Lidar Gaps</title>
+      <link>https://utsab-2010.github.io/projects/gap-ros/</link>
+      <pubDate>Sat, 25 Jan 2025 09:00:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/projects/gap-ros/</guid>
+      <description>A ROS package estimating object dynamic object postions from 2d lidar using constant velocity and acceleration models.</description>
+    </item>
+    
+    <item>
+      <title>Pure Pursuit Controller - F1Tenth</title>
+      <link>https://utsab-2010.github.io/projects/purepursuit/</link>
+      <pubDate>Tue, 22 Oct 2024 14:30:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/projects/purepursuit/</guid>
+      <description>A pure pursuit controller for autonomous racing F1Tenth simulation environment.</description>
+    </item>
+    
+  </channel>
+</rss>

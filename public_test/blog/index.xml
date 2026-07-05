@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blogs on Utsab Karan</title>
+    <link>https://utsab-2010.github.io/blog/</link>
+    <description>Recent content in Blogs on Utsab Karan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 24 Jun 2026 16:15:42 +0530</lastBuildDate>
+    
+	<atom:link href="https://utsab-2010.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>AlphaZero: Mastering the game of Black Hole</title>
+      <link>https://utsab-2010.github.io/blog/alphazero_bh/</link>
+      <pubDate>Wed, 24 Jun 2026 16:15:42 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/blog/alphazero_bh/</guid>
+      <description>#### Incomplete Blog  Work in Progress -- This blog is a detailed overview of one of my favourite projects of creating a superhuman player for the game of Black Hole. This was a passion-project of mine which I had been planning for some time and finally got around to implementing a few months ago. AlphaZero was a pioneering work in the field of Reinforcement Learning and hence my motivation to implement it for a game.</description>
+    </item>
+    
+    <item>
+      <title>Diffusion Models for Dummies: Getting Started</title>
+      <link>https://utsab-2010.github.io/blog/diffusion_tut/</link>
+      <pubDate>Sat, 09 May 2026 12:42:42 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/blog/diffusion_tut/</guid>
+      <description>Generative AI has been the buzz and face of AI industry for the last few years. Particularly image and video generative models. How do they models generative an image when given a prompt? But how exactly does a model take in text prompt and transform it into a visual output catering to the context of that prompt?
+This is where diffusion comes in ! One of the most amazing model architectures and training methodologies in modern AI.</description>
+    </item>
+    
+    <item>
+      <title>ICC 25: My First Conference</title>
+      <link>https://utsab-2010.github.io/blog/first-conference-experience/</link>
+      <pubDate>Sat, 28 Feb 2026 16:30:22 +0000</pubDate>
+      
+      <guid>https://utsab-2010.github.io/blog/first-conference-experience/</guid>
+      <description>I attended the Indian Control Conference from 17th to 20th December 2025 at IISc, Bangalore. This was my first conference ever — and also my first time in Bangalore. I was there to present a paper I worked on during my summer internship at IIT Bombay (long story, will tell some other time).
+Arrival &amp;amp; Accommodation  The first thing I did after reaching campus was sort out my accommodation. I had applied for financial aid and luckily got a guest house room on campus at a subsidized rate — which honestly felt like a small victory in itself.</description>
+    </item>
+    
+  </channel>
+</rss>

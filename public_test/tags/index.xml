@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Utsab Karan</title>
+    <link>https://utsab-2010.github.io/tags/</link>
+    <description>Recent content in Tags on Utsab Karan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 24 Jun 2026 16:15:42 +0530</lastBuildDate>
+    
+	<atom:link href="https://utsab-2010.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Game Theory</title>
+      <link>https://utsab-2010.github.io/tags/game-theory/</link>
+      <pubDate>Wed, 24 Jun 2026 16:15:42 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/tags/game-theory/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Reinforcement Learning</title>
+      <link>https://utsab-2010.github.io/tags/reinforcement-learning/</link>
+      <pubDate>Wed, 24 Jun 2026 16:15:42 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/tags/reinforcement-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Deep Learning</title>
+      <link>https://utsab-2010.github.io/tags/deep-learning/</link>
+      <pubDate>Sat, 09 May 2026 12:42:42 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/tags/deep-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Diffusion</title>
+      <link>https://utsab-2010.github.io/tags/diffusion/</link>
+      <pubDate>Sat, 09 May 2026 12:42:42 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/tags/diffusion/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Arduino</title>
+      <link>https://utsab-2010.github.io/tags/arduino/</link>
+      <pubDate>Sat, 11 Apr 2026 16:20:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/tags/arduino/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Robotics</title>
+      <link>https://utsab-2010.github.io/tags/robotics/</link>
+      <pubDate>Sat, 11 Apr 2026 16:20:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/tags/robotics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>conference</title>
+      <link>https://utsab-2010.github.io/tags/conference/</link>
+      <pubDate>Sat, 28 Feb 2026 16:30:22 +0000</pubDate>
+      
+      <guid>https://utsab-2010.github.io/tags/conference/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>personal</title>
+      <link>https://utsab-2010.github.io/tags/personal/</link>
+      <pubDate>Sat, 28 Feb 2026 16:30:22 +0000</pubDate>
+      
+      <guid>https://utsab-2010.github.io/tags/personal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>research</title>
+      <link>https://utsab-2010.github.io/tags/research/</link>
+      <pubDate>Sat, 28 Feb 2026 16:30:22 +0000</pubDate>
+      
+      <guid>https://utsab-2010.github.io/tags/research/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PyTorch</title>
+      <link>https://utsab-2010.github.io/tags/pytorch/</link>
+      <pubDate>Tue, 17 Feb 2026 09:00:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/tags/pytorch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>NLP</title>
+      <link>https://utsab-2010.github.io/tags/nlp/</link>
+      <pubDate>Wed, 17 Dec 2025 09:00:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/tags/nlp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Transformers</title>
+      <link>https://utsab-2010.github.io/tags/transformers/</link>
+      <pubDate>Wed, 17 Dec 2025 09:00:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/tags/transformers/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Computer Vision</title>
+      <link>https://utsab-2010.github.io/tags/computer-vision/</link>
+      <pubDate>Wed, 05 Nov 2025 09:00:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/tags/computer-vision/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Monocular Depth Estimation</title>
+      <link>https://utsab-2010.github.io/tags/monocular-depth-estimation/</link>
+      <pubDate>Wed, 05 Nov 2025 09:00:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/tags/monocular-depth-estimation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Optimization</title>
+      <link>https://utsab-2010.github.io/tags/optimization/</link>
+      <pubDate>Tue, 01 Jul 2025 08:45:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/tags/optimization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ROS</title>
+      <link>https://utsab-2010.github.io/tags/ros/</link>
+      <pubDate>Sat, 25 Jan 2025 09:00:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/tags/ros/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Controls</title>
+      <link>https://utsab-2010.github.io/tags/controls/</link>
+      <pubDate>Tue, 22 Oct 2024 14:30:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/tags/controls/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

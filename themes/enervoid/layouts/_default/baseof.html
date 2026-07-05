@@ -19,7 +19,7 @@
 
   <main class="flex-1 w-full">
     <div id="swup" class="swup-transition-fade">
-      <div class="max-w-4xl lg:max-w-[70rem] xl:max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-10 py-10 lg:py-16">
+      <div class="{{ if eq .Section `blog` }}max-w-4xl lg:max-w-[88rem] xl:max-w-[110rem]{{ else }}max-w-4xl lg:max-w-[70rem] xl:max-w-[90rem]{{ end }} mx-auto px-5 sm:px-8 lg:px-10 py-10 lg:py-16">
         {{ block "main" . }}{{ end }}
       </div>
 

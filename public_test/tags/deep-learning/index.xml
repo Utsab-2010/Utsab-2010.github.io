@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Deep Learning on Utsab Karan</title>
+    <link>https://utsab-2010.github.io/tags/deep-learning/</link>
+    <description>Recent content in Deep Learning on Utsab Karan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 09 May 2026 12:42:42 +0530</lastBuildDate>
+    
+	<atom:link href="https://utsab-2010.github.io/tags/deep-learning/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Diffusion Models for Dummies: Getting Started</title>
+      <link>https://utsab-2010.github.io/blog/diffusion_tut/</link>
+      <pubDate>Sat, 09 May 2026 12:42:42 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/blog/diffusion_tut/</guid>
+      <description>Generative AI has been the buzz and face of AI industry for the last few years. Particularly image and video generative models. How do they models generative an image when given a prompt? But how exactly does a model take in text prompt and transform it into a visual output catering to the context of that prompt?
+This is where diffusion comes in ! One of the most amazing model architectures and training methodologies in modern AI.</description>
+    </item>
+    
+  </channel>
+</rss>

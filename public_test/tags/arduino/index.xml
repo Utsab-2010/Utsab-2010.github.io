@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Arduino on Utsab Karan</title>
+    <link>https://utsab-2010.github.io/tags/arduino/</link>
+    <description>Recent content in Arduino on Utsab Karan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 11 Apr 2026 16:20:00 +0530</lastBuildDate>
+    
+	<atom:link href="https://utsab-2010.github.io/tags/arduino/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hardware Modelling 2026</title>
+      <link>https://utsab-2010.github.io/projects/hamo26/</link>
+      <pubDate>Sat, 11 Apr 2026 16:20:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/projects/hamo26/</guid>
+      <description>Our submission for the Hardware Modelling General Championship 2026 at IIT KGP. We secured 3rd place(kinda :p).</description>
+    </item>
+    
+    <item>
+      <title>Hardware Modelling 2025</title>
+      <link>https://utsab-2010.github.io/projects/hamo25/</link>
+      <pubDate>Tue, 11 Mar 2025 16:20:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/projects/hamo25/</guid>
+      <description>Our submission for the Hardware Modelling General Championship 2025 at IIT KGP. We secured 4th place.</description>
+    </item>
+    
+  </channel>
+</rss>

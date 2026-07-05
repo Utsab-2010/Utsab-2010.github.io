@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Utsab Karan</title>
+    <link>https://utsab-2010.github.io/</link>
+    <description>Recent content on Utsab Karan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 01 Jan 2024 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://utsab-2010.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>AlphaZero: Mastering the game of Black Hole</title>
+      <link>https://utsab-2010.github.io/blog/alphazero_bh/</link>
+      <pubDate>Wed, 24 Jun 2026 16:15:42 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/blog/alphazero_bh/</guid>
+      <description>#### Incomplete Blog  Work in Progress -- This blog is a detailed overview of one of my favourite projects of creating a superhuman player for the game of Black Hole. This was a passion-project of mine which I had been planning for some time and finally got around to implementing a few months ago. AlphaZero was a pioneering work in the field of Reinforcement Learning and hence my motivation to implement it for a game.</description>
+    </item>
+    
+    <item>
+      <title>Diffusion Models for Dummies: Getting Started</title>
+      <link>https://utsab-2010.github.io/blog/diffusion_tut/</link>
+      <pubDate>Sat, 09 May 2026 12:42:42 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/blog/diffusion_tut/</guid>
+      <description>Generative AI has been the buzz and face of AI industry for the last few years. Particularly image and video generative models. How do they models generative an image when given a prompt? But how exactly does a model take in text prompt and transform it into a visual output catering to the context of that prompt?
+This is where diffusion comes in ! One of the most amazing model architectures and training methodologies in modern AI.</description>
+    </item>
+    
+    <item>
+      <title>Hardware Modelling 2026</title>
+      <link>https://utsab-2010.github.io/projects/hamo26/</link>
+      <pubDate>Sat, 11 Apr 2026 16:20:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/projects/hamo26/</guid>
+      <description>Our submission for the Hardware Modelling General Championship 2026 at IIT KGP. We secured 3rd place(kinda :p).</description>
+    </item>
+    
+    <item>
+      <title>ICC 25: My First Conference</title>
+      <link>https://utsab-2010.github.io/blog/first-conference-experience/</link>
+      <pubDate>Sat, 28 Feb 2026 16:30:22 +0000</pubDate>
+      
+      <guid>https://utsab-2010.github.io/blog/first-conference-experience/</guid>
+      <description>I attended the Indian Control Conference from 17th to 20th December 2025 at IISc, Bangalore. This was my first conference ever — and also my first time in Bangalore. I was there to present a paper I worked on during my summer internship at IIT Bombay (long story, will tell some other time).
+Arrival &amp;amp; Accommodation  The first thing I did after reaching campus was sort out my accommodation. I had applied for financial aid and luckily got a guest house room on campus at a subsidized rate — which honestly felt like a small victory in itself.</description>
+    </item>
+    
+    <item>
+      <title>AlphaZero Black-Hole</title>
+      <link>https://utsab-2010.github.io/projects/alphazero/</link>
+      <pubDate>Tue, 17 Feb 2026 09:00:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/projects/alphazero/</guid>
+      <description>An RL Agent trained using AlphaZero framework to play the game of Black-Hole.</description>
+    </item>
+    
+    <item>
+      <title>Diffusion LM</title>
+      <link>https://utsab-2010.github.io/projects/dslm/</link>
+      <pubDate>Wed, 17 Dec 2025 09:00:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/projects/dslm/</guid>
+      <description>Implementing Diffusion on a Small-Language-Model inspired by the Diffusion-LM paper</description>
+    </item>
+    
+    <item>
+      <title>Lightweight Monocular Depth Estimation</title>
+      <link>https://utsab-2010.github.io/projects/monodepth/</link>
+      <pubDate>Wed, 05 Nov 2025 09:00:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/projects/monodepth/</guid>
+      <description>Implementation of a Lightweight monocular depth estimation model</description>
+    </item>
+    
+    <item>
+      <title>Mouse vs AI: NeurIPS 2025 Challenge</title>
+      <link>https://utsab-2010.github.io/projects/mouse/</link>
+      <pubDate>Sat, 04 Oct 2025 10:15:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/projects/mouse/</guid>
+      <description>Our work for the Mouse vs AI: Robust Visual Foraging Competition @ NeurIPS 2025. We got 2nd place!</description>
+    </item>
+    
+    <item>
+      <title>BAS Optimization for AV Navigation</title>
+      <link>https://utsab-2010.github.io/projects/bas/</link>
+      <pubDate>Tue, 01 Jul 2025 08:45:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/projects/bas/</guid>
+      <description>My work for the FTP program of implementing the Beetle Antenna Search algorithm for path planning of AVs, under Prof. Ata Jahangir Moshayedi.</description>
+    </item>
+    
+    <item>
+      <title>Hardware Modelling 2025</title>
+      <link>https://utsab-2010.github.io/projects/hamo25/</link>
+      <pubDate>Tue, 11 Mar 2025 16:20:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/projects/hamo25/</guid>
+      <description>Our submission for the Hardware Modelling General Championship 2025 at IIT KGP. We secured 4th place.</description>
+    </item>
+    
+    <item>
+      <title>Postion Estimation from Lidar Gaps</title>
+      <link>https://utsab-2010.github.io/projects/gap-ros/</link>
+      <pubDate>Sat, 25 Jan 2025 09:00:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/projects/gap-ros/</guid>
+      <description>A ROS package estimating object dynamic object postions from 2d lidar using constant velocity and acceleration models.</description>
+    </item>
+    
+    <item>
+      <title>Pure Pursuit Controller - F1Tenth</title>
+      <link>https://utsab-2010.github.io/projects/purepursuit/</link>
+      <pubDate>Tue, 22 Oct 2024 14:30:00 +0530</pubDate>
+      
+      <guid>https://utsab-2010.github.io/projects/purepursuit/</guid>
+      <description>A pure pursuit controller for autonomous racing F1Tenth simulation environment.</description>
+    </item>
+    
+    <item>
+      <title>Work</title>
+      <link>https://utsab-2010.github.io/work/</link>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://utsab-2010.github.io/work/</guid>
+      <description>Experiences   Research Intern May 2026 - Present  Vision and AI Lab, IISc Bangalore | Guide: Prof. Venkatesh Babu Working on Data-efficient Deep Learning for Vision Models. Trying to understand the behaviour of image data and how it scales with data/compute. Exploring scalable continual learning methods for vision models.    Research Intern May 2025 - Aug 2025  ARMS Lab, IIT Bombay | Guide: Prof. Leena Vachhani Worked on Safe Robotic Exploration and Navigation among human crowds.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://utsab-2010.github.io/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://utsab-2010.github.io/about/</guid>
+      <description>Hi, I am Utsab. I am a fourth-year undergraduate student at IIT Kharagpur pursuing a Dual-Degree (B.Tech + M.Tech) in Electronics and Electrical Communication Engineering. As part of my masters curriculum, I shall be specilising in Vision and Intelligent Systems. Head of Vision at AGV.AI, a UG research group under Prof. Debashish Chakravarty at IIT Kharagpur, working on autonomous vehicles and robotic systems. -- My research interests mainly lie in the domain of deep learning and optimisation theory, computer vision and robotics especially works with strong theoritical foundations.</description>
+    </item>
+    
+  </channel>
+</rss>

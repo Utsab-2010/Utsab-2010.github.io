@@ -45,7 +45,10 @@ theme = "enervoid"
       name = "CV / Resume"
       link = "/resume_ukaran.pdf"
       icon = "fa-solid fa-file-lines"
-    
+    [[params.socials]]
+      name = "My Notes"
+      link = "https://utsab-2010.github.io/Notes-Host/"
+      icon = "fa-solid fa-pencil"
 
 [markup]
   [markup.goldmark]

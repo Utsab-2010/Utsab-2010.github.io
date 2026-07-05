@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<link rel="icon" type="image/png" href="/avatar.png">
+<title>AlphaZero: Mastering the game of Black Hole</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+  integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Spectral:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap"
+  rel="stylesheet">
+
+<style type="text/tailwindcss">
+  @theme {
+    --color-bg-dark: #070709;
+    --color-bg-light: #fdfbf7;
+  }
+  @custom-variant dark (&:where(.dark, .dark *));
+
+  .md-content h1 { @apply mt-10 mb-4 text-3xl sm:text-5xl font-bold text-gray-900 dark:text-white leading-tight; }
+  .md-content h2 { @apply mt-8 mb-4 text-2xl sm:text-4xl font-bold text-gray-900 dark:text-white leading-snug; }
+  .md-content h3 { @apply mt-6 mb-3 text-xl sm:text-3xl font-semibold text-gray-900 dark:text-white leading-snug; }
+  .md-content h4 { @apply mt-5 mb-2 text-lg sm:text-2xl font-semibold text-gray-900 dark:text-white; }
+  .md-content a { @apply text-indigo-600 dark:text-indigo-400 underline decoration-indigo-600/30 dark:decoration-indigo-400/30 underline-offset-4 transition-all duration-200 hover:decoration-indigo-600 dark:hover:decoration-indigo-400; }
+  .md-content pre { @apply p-3 sm:p-6 my-4 sm:my-6 rounded-sm overflow-x-auto bg-[#1e1e1e] border border-gray-200 dark:border-gray-800/70; }
+  .md-content code { @apply font-mono text-xs sm:text-sm; }
+  .md-content blockquote { @apply pl-4 sm:pl-5 py-2 sm:py-3 my-5 sm:my-6 border-l-3 border-indigo-500 bg-gray-50 dark:bg-gray-800/40 text-gray-700 dark:text-gray-300 rounded-r-lg text-base sm:text-[17px]; }
+</style>
+<style>
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    --toc-link-color: rgba(55, 65, 81, 0.92);
+    --toc-link-hover: #111827;
+    --border-alpha: rgba(229, 231, 235, 0.8);
+  }
+
+  ::selection {
+    background: rgba(99, 102, 241, 0.25);
+    color: inherit;
+  }
+
+  html.dark {
+    --toc-link-color: rgba(209, 213, 219, 0.92);
+    --toc-link-hover: #fff;
+    --border-alpha: rgba(55, 65, 81, 0.6);
+  }
+
+  .font-jersey {
+    font-family: "Ubuntu Sans Mono", monospace;
+    font-optical-sizing: auto;
+    font-style: normal;
+  }
+
+
+  .md-content .katex-display {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+
+  .md-content .katex-display>.katex {
+    display: inline-block;
+    max-width: 100%;
+  }
+
+  .swup-transition-fade {
+    opacity: 1;
+    will-change: opacity;
+    transition: opacity 150ms ease-out;
+  }
+
+  html.is-animating .swup-transition-fade {
+    opacity: 0;
+  }
+
+  html.is-animating {
+    cursor: progress;
+  }
+
+  html.is-leaving .swup-transition-fade {
+    opacity: 0;
+  }
+</style>
+<script src="https://unpkg.com/swup@4"></script>
+<script src="https://unpkg.com/@swup/preload-plugin@3"></script>
+<script src="https://unpkg.com/@swup/progress-plugin@3"></script>
+<script src="https://unpkg.com/@swup/scripts-plugin@3"></script>
+<script>
+  const swup = new Swup({
+    containers: ['#swup'],
+    animationSelector: '[class*="swup-transition-"]',
+    cache: true,
+    preload: true,
+    animateHistoryBrowsing: true,
+
+    plugins: [
+      new SwupPreloadPlugin(),
+      new SwupProgressPlugin(),
+      new SwupScriptsPlugin({
+        optin: false
+      })
+    ]
+  })
+  window.swup = swup
+</script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+  crossorigin="anonymous"></script>
+
+<script>
+  
+
+  
+  const KATEX_CONFIG = {
+    delimiters: [
+      {left: "$$", right: "$$", display: true},
+      {left: "$", right: "$", display: false},
+      {left: "\\[", right: "\\]", display: true},
+      {left: "\\(", right: "\\)", display: false}
+    ],
+    ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+    throwOnError: false
+  };
+
+  
+  function renderKatex() {
+    
+    if (typeof renderMathInElement !== "function") {
+      console.log("⏳ Waiting for KaTeX to load...");
+      return;
+    }
+
+    
+    const contentArea = document.getElementById('swup') || document.body;
+
+    try {
+      renderMathInElement(contentArea, KATEX_CONFIG);
+      console.log("✅ KaTeX rendered successfully");
+    } catch (error) {
+      console.error("❌ KaTeX rendering error:", error);
+    }
+  }
+
+  
+  function renderKatexWithRetry(maxRetries = 10, delay = 100) {
+    let attempts = 0;
+
+    const attempt = () => {
+      if (typeof renderMathInElement === "function") {
+        renderKatex();
+      } else if (attempts < maxRetries) {
+        attempts++;
+        setTimeout(attempt, delay);
+      } else {
+        console.warn("⚠️ KaTeX auto-render not available after", maxRetries, "attempts");
+      }
+    };
+
+    attempt();
+  }
+
+  
+  function setupSwupIntegration() {
+    
+    if (window.swup) {
+      window.swup.hooks.on('page:view', () => {
+        console.log("🔄 Swup transition complete, re-rendering KaTeX...");
+        
+        setTimeout(() => renderKatexWithRetry(3, 50), 50);
+      });
+      console.log("✅ KaTeX-Swup integration ready");
+    } else {
+      
+      setTimeout(setupSwupIntegration, 100);
+    }
+  }
+
+  
+  document.addEventListener("DOMContentLoaded", function () {
+    console.log("🚀 Initializing KaTeX...");
+
+    
+    renderKatexWithRetry();
+
+    
+    setupSwupIntegration();
+  });
+
+  
+  window.renderKatex = renderKatex;
+</script>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+  let initialized = false;
+
+  function renderMermaid() {
+    const contentArea = document.getElementById('swup') || document.body;
+    const mermaidBlocks = contentArea.querySelectorAll('.language-mermaid, .mermaid');
+
+    if (mermaidBlocks.length === 0) {
+      console.log("ℹ️ No mermaid blocks found on this page");
+      return;
+    }
+
+    if (!initialized) {
+      mermaid.initialize({startOnLoad: false, theme: 'dark'});
+      initialized = true;
+    }
+
+    mermaidBlocks.forEach(el => {
+      if (el.dataset.processed === 'true') {
+        const source = el.dataset.mermaidSource;
+        if (source) {
+          el.innerHTML = source;
+          el.removeAttribute('data-processed');
+        }
+      } else {
+        el.dataset.mermaidSource = el.textContent;
+      }
+    });
+
+    mermaid.run({nodes: mermaidBlocks})
+      .then(() => console.log("✅ Mermaid rendered successfully"))
+      .catch(err => console.error("❌ Mermaid rendering error:", err));
+  }
+
+  function renderMermaidWithRetry(maxRetries = 10, delay = 100) {
+    let attempts = 0;
+
+    const attempt = () => {
+      if (typeof mermaid.initialize === "function") {
+        renderMermaid();
+      } else if (attempts < maxRetries) {
+        attempts++;
+        setTimeout(attempt, delay);
+      } else {
+        console.warn("⚠️ Mermaid auto-render not available after", maxRetries, "attempts");
+      }
+    };
+
+    attempt();
+  }
+
+  
+  function setupSwupIntegration() {
+    
+    if (window.swup) {
+      window.swup.hooks.on('page:view', () => {
+        console.log("🔄 Swup transition complete, re-rendering mermaid...");
+        
+        setTimeout(() => renderMermaidWithRetry(3, 50), 50);
+      });
+      console.log("✅ Mermaid-Swup integration ready");
+    } else {
+      
+      setTimeout(setupSwupIntegration, 100);
+    }
+  }
+
+  
+  document.addEventListener("DOMContentLoaded", function () {
+    console.log("🚀 Initializing KaTeX...");
+
+    
+    renderMermaidWithRetry();
+
+    
+    setupSwupIntegration();
+  });
+
+
+
+</script>
+
+
+  <script>
+    if (localStorage.theme === 'light') {
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+</head>
+
+<body class="min-h-screen flex flex-col bg-[#fdfbf7] dark:bg-black font-jersey text-gray-900 dark:text-white text-3xl">
+  <header>
+    <div class="sticky absolute top-0 z-50">
+  <nav class="w-full border-b border-gray-200 dark:border-gray-800 bg-white/95 dark:bg-[#070709]/95 backdrop-blur-sm text-gray-800 dark:text-gray-100">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between h-14">
+        
+        <div class="flex items-center gap-3">
+
+          <a href='https://utsab-2010.github.io/' class="flex items-center gap-3 group" aria-label="Homepage">
+
+            <img src='/avatar.png' alt="Utsab Karan"
+              class="w-8 h-8 rounded-sm border-2 border-gray-300 dark:border-gray-700 object-cover transition-transform duration-300 transform group-hover:scale-105"
+              style="animation: border-breathe 4s ease-in-out infinite;" />
+            <span class="text-gray-900 dark:text-white text-base sm:text-lg md:text-xl lg:text-2xl font-semibold tracking-wide">
+              Utsab Karan
+              <span class="inline-block ml-2" style="animation: flicker 1.6s steps(2, end) infinite;">_</span>
+            </span>
+          </a>
+        </div>
+
+        
+        <div class="flex items-center gap-4">
+          
+          <div class="hidden md:flex items-center">
+            
+
+<nav aria-label="Primary" class="w-full">
+  <ul
+    class="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-2 md:space-y-0 text-base md:text-lg font-medium"><li>
+      <a href="/blog/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+        <span class="relative inline-block">
+          <span>Blogs</span>
+          
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+        </span>
+      </a>
+    </li><li>
+      <a href="/projects/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+        <span class="relative inline-block">
+          <span>Projects</span>
+          
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+        </span>
+      </a>
+    </li><li>
+      <a href="/work/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+        <span class="relative inline-block">
+          <span>Work</span>
+          
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+        </span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+          </div>
+          
+          
+          <button id="theme-toggle" class="p-2 rounded-md text-gray-800 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-black/5 dark:bg-white/5 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-colors" aria-label="Toggle Theme">
+            <svg id="theme-toggle-light-icon" class="hidden w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            <svg id="theme-toggle-dark-icon" class="hidden w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+          </button>
+
+          
+          <div class="md:hidden">
+            <button id="nav-toggle" aria-controls="mobile-menu" aria-expanded="false"
+              class="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              aria-label="Open menu">
+              <svg class="h-6 w-6 text-gray-800 dark:text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      
+      <div id="mobile-menu" class="md:hidden hidden pb-4">
+        
+        
+
+<nav aria-label="Primary" class="w-full">
+  <ul
+    class="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-2 md:space-y-0 text-base md:text-lg font-medium"><li>
+      <a href="/blog/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+        <span class="relative inline-block">
+          <span>Blogs</span>
+          
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+        </span>
+      </a>
+    </li><li>
+      <a href="/projects/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+        <span class="relative inline-block">
+          <span>Projects</span>
+          
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+        </span>
+      </a>
+    </li><li>
+      <a href="/work/"class="group inline-flex items-center px-3 py-2 rounded-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+        <span class="relative inline-block">
+          <span>Work</span>
+          
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+        </span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+      </div>
+    </div>
+  </nav>
+
+  
+  <style>
+    @keyframes flicker {
+      0% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      10% {
+        opacity: 0.2;
+        transform: translateY(-1px);
+      }
+
+      20% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes border-breathe {
+      0% {
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.06);
+      }
+
+      50% {
+        box-shadow: 0 0 18px 6px rgba(99, 102, 241, 0.03);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.06);
+      }
+    }
+  </style>
+
+  
+  <script>
+    (function () {
+      const btn = document.getElementById('nav-toggle');
+      const menu = document.getElementById('mobile-menu');
+      if (btn && menu) {
+        btn.addEventListener('click', () => {
+          const open = menu.classList.toggle('hidden') === false;
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      }
+
+      const themeToggleBtn = document.getElementById('theme-toggle');
+      const darkIcon = document.getElementById('theme-toggle-dark-icon');
+      const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+      if (themeToggleBtn) {
+        if (document.documentElement.classList.contains('dark')) {
+            lightIcon.classList.remove('hidden');
+        } else {
+            darkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+      }
+    })();
+  </script>
+</div>
+
+  </header>
+
+  <main class="flex-1 w-full">
+    <div id="swup" class="swup-transition-fade">
+      <div class="max-w-4xl lg:max-w-[82rem] xl:max-w-[100rem] mx-auto px-5 sm:px-8 lg:px-10 py-10 lg:py-16">
+        
+<div class="max-w-[100rem] mx-auto px-4 sm:px-6">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+
+    
+    <aside class="hidden lg:block lg:col-span-3 xl:col-span-3">
+      <div class="sticky top-24">
+        <div class="mb-3 text-xs uppercase tracking-widest text-gray-500">Table of Contents</div><nav
+          class="toc text-sm text-gray-700 dark:text-gray-300 border border-gray-200/70 dark:border-gray-200/70 dark:border-gray-200 dark:border-gray-800/70 bg-white dark:bg-[#070709] rounded-sm p-4">
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction-to-rl">Introduction to RL</a></li>
+    <li><a href="#rules-of-black-hole">Rules of Black Hole</a>
+      <ul>
+        <li><a href="#how-to-play"><em>How to Play</em></a></li>
+        <li><a href="#scoring"><em>Scoring</em></a></li>
+      </ul>
+    </li>
+    <li><a href="#google-deepminds-alphago-and-alphazero">Google Deepmind&rsquo;s AlphaGo and AlphaZero</a></li>
+    <li><a href="#classical-self-play">Classical Self-Play</a></li>
+    <li><a href="#monte-carlo-tree-search">Monte Carlo Tree Search</a></li>
+    <li><a href="#how-alphazero-actually-learns">How AlphaZero Actually Learns</a>
+      <ul>
+        <li><a href="#the-neural-network">The Neural Network</a></li>
+        <li><a href="#the-training-loop">The Training Loop</a></li>
+        <li><a href="#from-raw-policy-to-improved-policy-guided-mcts">From Raw Policy to Improved Policy: Guided MCTS</a></li>
+      </ul>
+    </li>
+    <li><a href="#testing-the-model">Testing the Model</a></li>
+    <li><a href="#future-work">Future Work</a></li>
+    <li><a href="#resources">Resources</a></li>
+  </ul>
+</nav>
+        </nav></div>
+    </aside>
+
+    
+    <article class="col-span-1 lg:col-span-9 xl:col-span-9">
+      <header class="mb-6">
+  <h1 class="text-2xl sm:text-3xl md:text-4xl tracking-wide text-gray-900 dark:text-white">
+    AlphaZero: Mastering the game of Black Hole
+  </h1>
+
+  <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm sm:text-base text-gray-600 dark:text-gray-400">
+    <span class="font-mono">Jun 24, 2026 • 16:15</span>
+    <span class="text-gray-700">/</span>
+    <span class="font-mono">27 min read</span>
+  </div><div class="mt-3 flex flex-wrap gap-2"><a href="/%20tags/reinforcement-learning"
+      class="px-2 py-0.5 text-xs sm:text-sm rounded-sm border border-gray-200 dark:border-gray-700/70 text-gray-700 dark:text-gray-300 bg-white dark:bg-black/30 hover:text-gray-900 dark:hover:text-white hover:border-indigo-400/40 transition-colors">
+      #Reinforcement Learning
+    </a><a href="/%20tags/game-theory"
+      class="px-2 py-0.5 text-xs sm:text-sm rounded-sm border border-gray-200 dark:border-gray-700/70 text-gray-700 dark:text-gray-300 bg-white dark:bg-black/30 hover:text-gray-900 dark:hover:text-white hover:border-indigo-400/40 transition-colors">
+      #Game Theory
+    </a></div></header>
+
+
+      <div class="mb-6 lg:hidden">
+        <details
+          class="border border-gray-200/70 dark:border-gray-200/70 dark:border-gray-200 dark:border-gray-800/70 bg-white dark:bg-[#070709] rounded-sm group overflow-hidden">
+          <summary
+            class="cursor-pointer select-none px-5 py-4 text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-colors font-semibold flex items-center justify-between">
+            <span class="text-sm uppercase tracking-widest text-indigo-600 dark:text-indigo-400">Table of
+              Contents</span>
+            <span class="transform group-open:rotate-180 transition-transform duration-300">
+              <svg class="w-5 h-5 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </span>
+          </summary>
+          <div
+            class="px-5 pb-5 pt-2 toc text-base text-gray-700 dark:text-gray-300 border-t border-gray-200/70 dark:border-gray-200/70 dark:border-gray-200 dark:border-gray-800/70">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction-to-rl">Introduction to RL</a></li>
+    <li><a href="#rules-of-black-hole">Rules of Black Hole</a>
+      <ul>
+        <li><a href="#how-to-play"><em>How to Play</em></a></li>
+        <li><a href="#scoring"><em>Scoring</em></a></li>
+      </ul>
+    </li>
+    <li><a href="#google-deepminds-alphago-and-alphazero">Google Deepmind&rsquo;s AlphaGo and AlphaZero</a></li>
+    <li><a href="#classical-self-play">Classical Self-Play</a></li>
+    <li><a href="#monte-carlo-tree-search">Monte Carlo Tree Search</a></li>
+    <li><a href="#how-alphazero-actually-learns">How AlphaZero Actually Learns</a>
+      <ul>
+        <li><a href="#the-neural-network">The Neural Network</a></li>
+        <li><a href="#the-training-loop">The Training Loop</a></li>
+        <li><a href="#from-raw-policy-to-improved-policy-guided-mcts">From Raw Policy to Improved Policy: Guided MCTS</a></li>
+      </ul>
+    </li>
+    <li><a href="#testing-the-model">Testing the Model</a></li>
+    <li><a href="#future-work">Future Work</a></li>
+    <li><a href="#resources">Resources</a></li>
+  </ul>
+</nav>
+          </div>
+        </details>
+      </div><div
+        class="-mx-4 sm:mx-0 border-y sm:border border-gray-200/70 dark:border-gray-800/70 bg-white dark:bg-[#070709] sm:rounded-sm px-4 py-6 sm:p-10">
+        <div
+          class="md-content blog-content text-base sm:text-[19px] leading-relaxed sm:leading-relaxed text-gray-700 dark:text-gray-300 w-full">
+          <!-- > #### Incomplete Blog
+> Work in Progress -->
+<p>This blog is a detailed overview of one of my favourite projects of creating a superhuman player for the game of Black Hole. This was a passion-project of mine which I had been planning for some time and finally got around to implementing a few months ago. AlphaZero was a pioneering work in the field of Reinforcement Learning and hence my motivation to implement it for a game. I learnt a lot over the course of doing this and this is my small attempt to explain the theory behind the work and what I tried to do.</p>
+<!-- 
+The general structure of this blog will be as follow:
+- A brief introduction to Reinforcement Learning
+- The game of Black Hole
+- Intro to AlphaZero
+- Monte Carlo Tree Search 
+- The Training Pipeline
+- Experiments and Ablations
+- Future Work
+- Resources -->
+<h2 id="introduction-to-rl">Introduction to RL</h2>
+<p>Reinforcement learning is a subfield of deep learning which focuses on teaching models(termed as agents) by making them interact with some environment. The main idea is very heuristic, the model gets conditioned to perform only those actions which are beneficial to it.</p>
+<p>How is this &ldquo;benefit&rdquo; actually defined? This is done with the help of reward functions - a function $R(s, a, s^\prime)$ that takes the current state $s$, the action $a$ taken by the agent, and the next state $s^\prime$ , and returns the reward for that action.</p>
+<figure class="my-8">
+  <img src="/blogs/alphazerobh/RL_process.png" alt="RL Cycle" class="w-80% rounded-sm border border-gray-200 dark:border-gray-800/70">
+  <figcaption class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3"><i>The reinforcement learning cycle.</i></figcaption>
+</figure>
+<p>As shown above, the agent interacts with the environment, gets some rewards, trains itself based on rewards and repeat. Now while idea is simple in theory, designing reward functions and RL traininig frameworks which cater to our needs is a challenging task.</p>
+<h2 id="rules-of-black-hole">Rules of Black Hole</h2>
+<p>Black Hole is a strategic tile-placement game played on a triangular grid. It was designed by the members of the DTU chapter of the Indian Game Theory Society(IGTS). I came across this because of my involvement with my university&rsquo;s chapter of IGTS - the KGPian Game Theory Society. Traditionally it has 6 rows, but I had to expand it to 9 rows for more stable training. It has 45 empty spaces in total.</p>
+<figure class="my-8 text-center">
+  <img src="/blogs/alphazerobh/blackholetut.png" alt="Black Hole Board" class="rounded-sm border border-gray-200 dark:border-gray-800/70 mx-auto" style="width: 55%;">
+  <figcaption class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3"><i>The game of Black Hole</i></figcaption>
+</figure>
+<h3 id="how-to-play"><em>How to Play</em></h3>
+<ul>
+<li><strong>The Setup:</strong> Two players each receive 22 tiles numbered 1 to 22. The board starts empty.</li>
+<li><strong>The Turn:</strong> Players take turns placing one tile onto any empty spot. You <em>must</em> play your tiles in ascending numerical order (1, then 2, then 3, up to 22).</li>
+<li><strong>The Black Hole:</strong> Because 44 tiles are placed onto a 45-space board, exactly one space is left empty at the end. This becomes <strong>The Black Hole</strong>.</li>
+</ul>
+<h3 id="scoring"><em>Scoring</em></h3>
+<p>The Black Hole &ldquo;sucks in&rdquo; neighboring tiles. Scoring is calculated in concentric rings radiating outward from the hole (Ring 1 is immediate neighbors, Ring 2 is the next layer out, etc.).</p>
+<!-- Insert GIF of BlackHole Demo -->
+<p><strong>Your goal is to get sucked in as little as possible.</strong> The player whose tiles in Ring 1 have the <em>lowest sum</em> wins instantly. Ties are broken by evaluating Ring 2, and so on.</p>
+<h2 id="google-deepminds-alphago-and-alphazero">Google Deepmind&rsquo;s AlphaGo and AlphaZero</h2>
+<p>For most of computing history, game-playing AI was built on a deceptively simple idea: search. The logic goes like this: any game has a defined set of states and transition rules. Given enough time and processing power, you could enumerate all possible futures, assign a value to the terminal state (win/loss/draw), and trace backward to assign a value to every preceding state. The optimal strategy is simply to choose the move that leads to the highest-valued state. This is called minimax algorithm.</p>
+<!-- add game state diagram for the  -->
+<figure class="my-8">
+  <img src="/blogs/alphazerobh/computer-science-game-trees-alphabeta.jpg" alt="minimax tree" class="w-80% rounded-sm border border-gray-200 dark:border-gray-800/70">
+  <figcaption class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3"><i>The game of Tic-Tac-Toe represented as a game tree. 
+  <br> (source: https://www.yosenspace.com/posts/computer-science-game-trees.html)</i></figcaption>
+</figure>
+<p>Chess engines like Stockfish perfected this approach, checking millions of positions per second, guided by handcrafted evaluation functions tuned by human grandmasters. It worked extraordinarily well, but it required too much human intervention.</p>
+<p>But this approach was grossly insufficient for games like Go which had a massive action space for each state, hence a branching factor much larger(~7-8x) than that of chess. And give that the search space grows by the order of branching factor raised to the power of no. Of moves in the game ($b^d$), it&rsquo;s computationally infeasible to find the optimal move for games like Go.</p>
+<p>AlphaGo was the pioneering work which tried to solve this problem. It had a two-part insight. First, a policy network learned to predict which moves strong players would make, dramatically pruning the search tree. Second, a value network learned to estimate the probability of winning from any given board state, replacing handcrafted evaluation. Both networks were trained initially on a dataset of human expert games, and then refined through self-play using reinforcement learning.</p>
+<p>In October 2015, AlphaGo played its first game against the reigning three-time European Champion, Fan Hui. AlphaGo won the first ever match between an AI system and Go professional, scoring 5-0.</p>
+<figure class="my-8">
+  <img src="/blogs/alphazerobh/leevsalphago.webp" alt="Lee Sedol vs AlphaGo" class="w-80% rounded-sm border border-gray-200 dark:border-gray-800/70">
+  <figcaption class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3"><i>Lee Sedol vs AlphaGo. <br> (source: https://www.newscientist.com/article/2518450-the-moment-that-kicked-off-the-ai-revolution/)</i></figcaption>
+</figure>
+<p>AlphaGo then competed against legendary Go player Lee Sedol — winner of 18 world titles, and widely considered the greatest player of that decade. AlphaGo&rsquo;s 4-1 victory in Seoul, South Korea, in March 2016, sent shockwaves across the globe. It demonstrated that deep learning could internalize strategic intuition that no one had successfully written down.</p>
+<p>AlphaZero, published in 2017, took this further by stripping out the human data entirely. There were no expert games and no domain-specific heuristics - just the rules of the game and time to play itself. It achieved this with the help of a modified Monte Carlo Tree Search Algorithm paired with its Policy and Value Networks which essentially guided the exploration and search process.</p>
+<p>Within hours of training, AlphaZero surpassed AlphaGo; within days, it exceeded the best classical engines in Go, Chess, and Shogi simultaneously — using the same algorithm for all three!</p>
+<h2 id="classical-self-play">Classical Self-Play</h2>
+<p>How does your AI agent learn to play a game without having any prior experience or expert data as reference? The answer is that if creates its own data through self-play and trains on it &ndash; gradually improving its strategy in the process.</p>
+<p>The most basic form of self-play is to make your trainable model play out a large number of games against a frozen version of itself. You store these games into a memory buffer and then use these as data to train your model to understand which strategy is better. You also keep updating your frozen opponent model with newer versions of your main agent as it keeps learning.</p>
+<p>Alpha Go also used a similar strategy but instead of starting from scratch (random policy), it was first trained on a ton of expert human games of Go. After that it was trained to further improve its strategic thinking via self-play.</p>
+<hr>
+<h2 id="monte-carlo-tree-search">Monte Carlo Tree Search</h2>
+<p>The Monte Carlo Tree Search(MCTS) is a heauristic search algorithm which helps us find near optimal moves by partially observing the future from a particular game state. It is method that helps us effectively navigate through the decision trees of problems with very large decision spaces like Go(which has $10^{170}$ possible game states).</p>
+<figure class="my-8">
+  <img src="/blogs/alphazerobh/mcts.webp" alt="MCTS" class="w-80% rounded-sm border border-gray-200 dark:border-gray-800/70">
+  <figcaption class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3"><i>The four steps of the MCTS algorithm. <br> (source: https://www.geeksforgeeks.org/machine-learning/monte-carlo-tree-search-mcts-in-machine-learning/)</i></figcaption>
+</figure>
+<p>MCTS works by randomly sampling the search space through playouts. It does many playouts where it randomly simulates(random decisions) the entire game to the end and keeps expanding a temporary game tree from it&rsquo;s root current game state. The final result of each playout is then used to update the statistics of the nodes visited during that playout and helps us get an estimate of which nodes lead to better outcomes. Now, the way decisions are made before the random sampling is determined by the the objection function called Upper Confidence Bound (UCB).</p>
+<blockquote>
+<p>The <strong>UCB1 formula</strong> is as follows:
+$$UCB1 = \frac{W}{N} + c\sqrt{\frac{\ln{N_{parent}}}{N}}$$
+where $W$ is the number of wins for a node, $N$ is the number of simulations for a node, and $c$ is the exploration parameter.</p>
+</blockquote>
+<p>Each MCTS Sampling Iteration involves the following steps:</p>
+<ol>
+<li><strong>Selection</strong> - Starting at the root(current game state) node, we compute the UCB score for all its children in the current game tree(using the current win-visit stats) and navigate down the current game tree by greedily selecting the node with the highest UCB score.</li>
+<li><strong>Expansion</strong> - Once we reach a node(during the above traversal) that has not been fully expanded(has legal moves which have not been visited), we expand it by adding one of its unvisited child nodes to the tree(because UCB for the unvisited node is $\infty$).</li>
+<li><strong>Simulation</strong> - From the expanded node, we simulate the game to the end by randomly selecting moves.</li>
+<li><strong>Backpropagation</strong> - Once we reach a terminal state, we backpropagate the result to the root node by updating the statistics of all the nodes visited during the selection and simulation steps.</li>
+</ol>
+<blockquote>
+<p><strong>Note</strong>:
+MCTS iterations involve exploring both the current player&rsquo;s as well the opponents decisions. Alternate layers of the game tree will be formed by the opponent&rsquo;s decisions. Hence, during backpropagation we have to ensure that the win score reflects this difference. For example, if the terminal state results in the current player winning, the player nodes get +1 win score and opponent nodes get -1 win score and vice versa.</p>
+</blockquote>
+<p>After some N iterations, the current player makes the move which corresponds to the most visited child node of the root state. The game then moves on to the opponent&rsquo;s turn and the same process is repeated from their perpective with the new game state as the start of a new MCTS tree.</p>
+<p>The following visualization shows the MCTS process on a simple game. Players take turn placing their coins in any of the four available slots. The goal of the game is to not have your coins in adjacent slots. Whoever does that loses the game.</p>
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0
+  }
+
+  .stepper {
+    font-size: 14px;
+    color: var(--color-text-primary);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border: 2px solid #8B5CF6;
+     
+    border-radius: 12px;
+    background: var(--color-background-secondary, rgba(139, 92, 246, 0.03));
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.1);
+  }
+
+  .phase-pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 10px
+  }
+
+  .pill-select {
+    background: #EEEDFE;
+    color: #3C3489
+  }
+
+  .pill-expand {
+    background: #E1F5EE;
+    color: #085041
+  }
+
+  .pill-simulate {
+    background: #FAEEDA;
+    color: #633806
+  }
+
+  .pill-backprop {
+    background: #FAECE7;
+    color: #712B13
+  }
+
+  .pill-result {
+    background: #FEF9C3;
+    color: #854D0E
+  }
+
+  .desc-box {
+    background: var(--color-background-primary, #fff);
+    border: 1px solid var(--color-border-tertiary, #e5e7eb);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 13.5px;
+    color: var(--color-text-secondary);
+    margin-bottom: 16px;
+    line-height: 1.6
+  }
+
+  .dark .desc-box {
+    background: #1f2937;
+    border-color: #374151;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px
+  }
+
+  .nav button {
+    padding: 6px 16px;
+    font-size: 13px;
+    border-radius: 6px;
+    border: 1px solid #8B5CF6;
+    background: transparent;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  .nav button:disabled {
+    opacity: 0.3;
+    cursor: default;
+    border-color: gray;
+  }
+
+  .nav button:hover:not(:disabled) {
+    background: rgba(139, 92, 246, 0.1);
+  }
+
+  .step-counter {
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    font-weight: 600;
+  }
+
+  .dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-border-secondary, #ccc);
+    transition: background 0.2s
+  }
+
+  .dot.active {
+    background: #8B5CF6
+  }
+
+  svg.tree {
+    display: block;
+    width: 100%;
+    overflow: visible;
+    margin-top: 10px;
+  }
+</style>
+
+<div class="stepper">
+  <div class="nav">
+    <button id="btn-prev" onclick="go(-1)" disabled>← prev</button>
+    <button id="btn-next" onclick="go(1)">next →</button>
+    <span class="step-counter" id="step-counter">step 1 / 8</span>
+    <div class="dots" id="dots"></div>
+  </div>
+  <div id="phase-pill" class="phase-pill pill-select">selection</div>
+  <div id="desc" class="desc-box"></div>
+  <svg class="tree" id="tree-svg" viewBox="0 0 640 440"></svg>
+</div>
+
+<script>
+  const S = [
+    {
+      p: "selection", c: "pill-select",
+      d: "Start at the root node. The board is empty, and it is Player 1's turn. MCTS picks an unvisited child to explore. We select slot 0.",
+      n: [{ id: "r", x: 320, y: 40, l: "[ , , , ]", s: "P1 | N=0 W=0", c: "purple", a: 1 }], e: []
+    },
+    {
+      p: "expansion", c: "pill-expand",
+      d: "Expand: we create a child node for every legal move. All 4 slots are open, so 4 children are added to the tree. Each starts with N=0 visits, W=0 wins.",
+      n: [
+        { id: "r", x: 320, y: 40, l: "[ , , , ]", s: "P1 | N=0 W=0", c: "purple" },
+        { id: "c0", x: 100, y: 120, l: "[1, , , ]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "c1", x: 240, y: 120, l: "[ ,1, , ]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "c2", x: 400, y: 120, l: "[ , ,1, ]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "c3", x: 540, y: 120, l: "[ , , ,1]", s: "P2 | N=0 W=0", c: "gray" }
+      ],
+      e: [["r", "c0"], ["r", "c1"], ["r", "c2"], ["r", "c3"]]
+    },
+    {
+      p: "simulation", c: "pill-simulate",
+      d: "Select child c0. From here, we run a random rollout to the end of the game. P2 randomly places coin 2 in slot 1.",
+      n: [
+        { id: "r", x: 320, y: 40, l: "[ , , , ]", s: "P1 | N=0 W=0", c: "purple" },
+        { id: "c0", x: 100, y: 120, l: "[1, , , ]", s: "P2 | N=0 W=0", c: "teal", a: 1 },
+        { id: "c1", x: 240, y: 120, l: "[ ,1, , ]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "c2", x: 400, y: 120, l: "[ , ,1, ]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "c3", x: 540, y: 120, l: "[ , , ,1]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "s1", x: 100, y: 200, l: "[1,2, , ]", s: "P1 moves next", c: "gray" }
+      ],
+      e: [["r", "c0"], ["r", "c1"], ["r", "c2"], ["r", "c3"], ["c0", "s1"]],
+      h: ["c0", "s1"]
+    },
+    {
+      p: "simulation", c: "pill-simulate",
+      d: "Rollout continues: P1 randomly places coin 3 in slot 3. No player has two of their own coins adjacent yet.",
+      n: [
+        { id: "r", x: 320, y: 40, l: "[ , , , ]", s: "P1 | N=0 W=0", c: "purple" },
+        { id: "c0", x: 100, y: 120, l: "[1, , , ]", s: "P2 | N=0 W=0", c: "teal" },
+        { id: "c1", x: 240, y: 120, l: "[ ,1, , ]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "c2", x: 400, y: 120, l: "[ , ,1, ]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "c3", x: 540, y: 120, l: "[ , , ,1]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "s1", x: 100, y: 200, l: "[1,2, , ]", s: "P1 moves next", c: "gray" },
+        { id: "s2", x: 100, y: 280, l: "[1,2, ,1]", s: "P2 moves next", c: "gray" }
+      ],
+      e: [["r", "c0"], ["r", "c1"], ["r", "c2"], ["r", "c3"], ["c0", "s1"], ["s1", "s2"]],
+      h: ["s1", "s2"]
+    },
+    {
+      p: "simulation", c: "pill-simulate",
+      d: "P2 randomly places coin 4 in slot 2. But wait! P2 now has coins in slot 1 and slot 2. Because P2 placed next to itself, P2 loses! Result = +1 win for P1.",
+      n: [
+        { id: "r", x: 320, y: 40, l: "[ , , , ]", s: "P1 | N=0 W=0", c: "purple" },
+        { id: "c0", x: 100, y: 120, l: "[1, , , ]", s: "P2 | N=0 W=0", c: "teal" },
+        { id: "c1", x: 240, y: 120, l: "[ ,1, , ]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "c2", x: 400, y: 120, l: "[ , ,1, ]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "c3", x: 540, y: 120, l: "[ , , ,1]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "s1", x: 100, y: 200, l: "[1,2, , ]", s: "P1 moves next", c: "gray" },
+        { id: "s2", x: 100, y: 280, l: "[1,2, ,1]", s: "P2 moves next", c: "gray" },
+        { id: "s3", x: 100, y: 360, l: "[1,2,2,1]", s: "P2 adjacent → lose", c: "red", a: 1 }
+      ],
+      e: [["r", "c0"], ["r", "c1"], ["r", "c2"], ["r", "c3"], ["c0", "s1"], ["s1", "s2"], ["s2", "s3"]],
+      h: ["s2", "s3"]
+    },
+    {
+      p: "backprop", c: "pill-backprop",
+      d: "Backpropagate: The +1 win for P1 travels up the tree. Root (a P1 node) gets W=+1. However, c0 (a P2 node) gets W=-1, since P1's win is P2's loss!",
+      n: [
+        { id: "r", x: 320, y: 40, l: "[ , , , ]", s: "P1 | N=1 W=1", c: "purple", a: 1 },
+        { id: "c0", x: 100, y: 120, l: "[1, , , ]", s: "P2 | N=1 W=-1", c: "teal", a: 1 },
+        { id: "c1", x: 240, y: 120, l: "[ ,1, , ]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "c2", x: 400, y: 120, l: "[ , ,1, ]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "c3", x: 540, y: 120, l: "[ , , ,1]", s: "P2 | N=0 W=0", c: "gray" }
+      ],
+      e: [["r", "c0"], ["r", "c1"], ["r", "c2"], ["r", "c3"]],
+      bp: [["c0", "r"]]
+    },
+    {
+      p: "selection", c: "pill-select",
+      d: "Iteration 2: Nodes c1, c2, and c3 are unvisited (N=0). We select c1, run a rollout where P1 loses, and backpropagate. Since P1 lost, c1 (P2 node) gets W=+1, and Root (P1 node) gets W=-1!",
+      n: [
+        { id: "r", x: 320, y: 40, l: "[ , , , ]", s: "P1 | N=2 W=0", c: "purple", a: 1 },
+        { id: "c0", x: 100, y: 120, l: "[1, , , ]", s: "P2 | N=1 W=-1", c: "teal" },
+        { id: "c1", x: 240, y: 120, l: "[ ,1, , ]", s: "P2 | N=1 W=1", c: "coral", a: 1 },
+        { id: "c2", x: 400, y: 120, l: "[ , ,1, ]", s: "P2 | N=0 W=0", c: "gray" },
+        { id: "c3", x: 540, y: 120, l: "[ , , ,1]", s: "P2 | N=0 W=0", c: "gray" }
+      ],
+      e: [["r", "c0"], ["r", "c1"], ["r", "c2"], ["r", "c3"]],
+      bp: [["c1", "r"]]
+    },
+    {
+      p: "selection", c: "pill-select",
+      d: "Iterations 3 & 4: MCTS visits the remaining unexplored nodes. Now, all 1st layer states have been visited exactly once! Notice how W values alternate signs based on whose turn the node represents.",
+      n: [
+        { id: "r", x: 320, y: 40, l: "[ , , , ]", s: "P1 | N=4 W=0", c: "purple", a: 1 },
+        { id: "c0", x: 100, y: 120, l: "[1, , , ]", s: "P2 | N=1 W=-1", c: "teal" },
+        { id: "c1", x: 240, y: 120, l: "[ ,1, , ]", s: "P2 | N=1 W=1", c: "coral" },
+        { id: "c2", x: 400, y: 120, l: "[ , ,1, ]", s: "P2 | N=1 W=-1", c: "teal" },
+        { id: "c3", x: 540, y: 120, l: "[ , , ,1]", s: "P2 | N=1 W=1", c: "coral" }
+      ],
+      e: [["r", "c0"], ["r", "c1"], ["r", "c2"], ["r", "c3"]]
+    },
+    {
+      p: "expansion", c: "pill-expand",
+      d: "Iteration 5: No nodes have infinite UCB. P1 evaluates its children. Since c0 and c2 are P2 nodes, P1 wants to pick the child where P2's score is LOWEST (W=-1). MCTS picks c0 and expands it!",
+      n: [
+        { id: "r", x: 320, y: 40, l: "[ , , , ]", s: "P1 | N=4 W=0", c: "purple" },
+        { id: "c0", x: 100, y: 120, l: "[1, , , ]", s: "P2 | N=1 W=-1", c: "teal", a: 1 },
+        { id: "c1", x: 240, y: 120, l: "[ ,1, , ]", s: "P2 | N=1 W=1", c: "coral" },
+        { id: "c2", x: 400, y: 120, l: "[ , ,1, ]", s: "P2 | N=1 W=-1", c: "teal" },
+        { id: "c3", x: 540, y: 120, l: "[ , , ,1]", s: "P2 | N=1 W=1", c: "coral" },
+        { id: "c0_0", x: 40, y: 200, l: "[1,2, , ]", s: "P1 | N=0 W=0", c: "gray" },
+        { id: "c0_1", x: 160, y: 200, l: "[1, ,2, ]", s: "P1 | N=0 W=0", c: "gray" }
+      ],
+      e: [["r", "c0"], ["r", "c1"], ["r", "c2"], ["r", "c3"], ["c0", "c0_0"], ["c0", "c0_1"]]
+    },
+    {
+      p: "backprop", c: "pill-backprop",
+      d: "MCTS selects the new 2nd layer node, runs a rollout (P1 wins), and backpropagates. The 2nd layer node (P1) gets +1, c0 (P2) gets -1, and Root (P1) gets +1!",
+      n: [
+        { id: "r", x: 320, y: 40, l: "[ , , , ]", s: "P1 | N=5 W=1", c: "purple", a: 1 },
+        { id: "c0", x: 100, y: 120, l: "[1, , , ]", s: "P2 | N=2 W=-2", c: "teal", a: 1 },
+        { id: "c1", x: 240, y: 120, l: "[ ,1, , ]", s: "P2 | N=1 W=1", c: "coral" },
+        { id: "c2", x: 400, y: 120, l: "[ , ,1, ]", s: "P2 | N=1 W=-1", c: "teal" },
+        { id: "c3", x: 540, y: 120, l: "[ , , ,1]", s: "P2 | N=1 W=1", c: "coral" },
+        { id: "c0_0", x: 40, y: 200, l: "[1,2, , ]", s: "P1 | N=1 W=1", c: "teal", a: 1 },
+        { id: "c0_1", x: 160, y: 200, l: "[1, ,2, ]", s: "P1 | N=0 W=0", c: "gray" }
+      ],
+      e: [["r", "c0"], ["r", "c1"], ["r", "c2"], ["r", "c3"], ["c0", "c0_0"], ["c0", "c0_1"]],
+      bp: [["c0_0", "c0"], ["c0", "r"]]
+    },
+    {
+      p: "result", c: "pill-result",
+      d: "After 7 iterations, the tree has expanded deeply. AlphaZero selects the 1st layer node with the HIGHEST visit count (N) for its actual move. c0 was visited 3 times, so it is the winner!",
+      n: [
+        { id: "r", x: 320, y: 40, l: "[ , , , ]", s: "P1 | N=7 W=1", c: "purple" },
+        { id: "c0", x: 100, y: 120, l: "[1, , , ]", s: "N=3 W=-1 ✓", c: "yellow", a: 1 },
+        { id: "c1", x: 240, y: 120, l: "[ ,1, , ]", s: "N=1 W=1", c: "coral" },
+        { id: "c2", x: 400, y: 120, l: "[ , ,1, ]", s: "N=2 W=-2", c: "teal" },
+        { id: "c3", x: 540, y: 120, l: "[ , , ,1]", s: "N=1 W=1", c: "coral" },
+        { id: "c0_0", x: 40, y: 200, l: "[1,2, , ]", s: "N=1 W=1", c: "teal" },
+        { id: "c0_1", x: 160, y: 200, l: "[1, ,2, ]", s: "N=1 W=-1", c: "coral" },
+        { id: "c2_0", x: 400, y: 200, l: "[2, ,1, ]", s: "N=1 W=1", c: "teal" }
+      ],
+      e: [["r", "c0"], ["r", "c1"], ["r", "c2"], ["r", "c3"], ["c0", "c0_0"], ["c0", "c0_1"], ["c2", "c2_0"]]
+    }
+  ];
+
+  const C = {
+    purple: { f: "#EEEDFE", s: "#534AB7", t: "#3C3489" },
+    teal: { f: "#E1F5EE", s: "#0F6E56", t: "#085041" },
+    gray: { f: "#F1EFE8", s: "#5F5E5A", t: "#444441" },
+    red: { f: "#FCEBEB", s: "#A32D2D", t: "#791F1F" },
+    yellow: { f: "#FEF9C3", s: "#CA8A04", t: "#854D0E" },
+    coral: { f: "#FAECE7", s: "#993C1D", t: "#712B13" }
+  };
+
+  let cur = 0;
+  const NS = "http://www.w3.org/2000/svg";
+
+  function el(t, a, x) {
+    let e = document.createElementNS(NS, t);
+    for (let [k, v] of Object.entries(a)) e.setAttribute(k, v);
+    if (x !== undefined) e.textContent = x;
+    return e;
+  }
+
+  const render = s => {
+    const svg = document.getElementById("tree-svg");
+    svg.innerHTML = "";
+    let st = S[s], nm = {}, maxY = 0;
+
+    for (let n of st.n) {
+      nm[n.id] = n;
+      maxY = Math.max(maxY, n.y);
+    }
+    svg.setAttribute("viewBox", `0 0 640 ${maxY + 70}`);
+
+    for (let [a, b] of st.e) {
+      let na = nm[a], nb = nm[b];
+      let hl = st.h && st.h[0] === a && st.h[1] === b;
+      let bp = st.bp && st.bp.some(p => (p[0] === a && p[1] === b) || (p[0] === b && p[1] === a));
+      svg.appendChild(el("line", {
+        x1: na.x, y1: na.y + 30, x2: nb.x, y2: nb.y + 30,
+        stroke: hl ? "#8B5CF6" : bp ? "#D85A30" : "var(--color-border-secondary, #9ca3af)",
+        "stroke-width": hl || bp ? 2 : 1,
+        "stroke-dasharray": bp ? "5 3" : "none"
+      }));
+    }
+
+    for (let n of st.n) {
+      let c = C[n.c] || C.gray;
+      let g = el("g", { style: "cursor:default" });
+      let x = n.x - 45, y = n.y; 
+
+      if (n.a) {
+        g.appendChild(el("rect", {
+          x: x - 4, y: y - 4, width: 98, height: 64, rx: 12,
+          fill: c.f, stroke: c.s, "stroke-width": 2, opacity: 0.6
+        }));
+      }
+      g.appendChild(el("rect", {
+        x, y, width: 90, height: 56, rx: 8,
+        fill: c.f, stroke: c.s, "stroke-width": n.a ? 1.5 : 0.5
+      }));
+      g.appendChild(el("text", {
+        x: n.x, y: y + 20, "text-anchor": "middle", "dominant-baseline": "central",
+        fill: c.t, "font-size": "12", "font-weight": "600", "font-family": "var(--font-sans, sans-serif)"
+      }, n.l));
+      g.appendChild(el("text", {
+        x: n.x, y: y + 40, "text-anchor": "middle", "dominant-baseline": "central",
+        fill: c.s, "font-size": "10.5", "font-family": "var(--font-sans, sans-serif)"
+      }, n.s));
+      svg.appendChild(g);
+    }
+
+    document.getElementById("phase-pill").textContent = st.p;
+    document.getElementById("phase-pill").className = "phase-pill " + st.c;
+    document.getElementById("desc").textContent = st.d;
+    document.getElementById("step-counter").textContent = `step ${s + 1} / ${S.length}`;
+    document.getElementById("btn-prev").disabled = s === 0;
+    document.getElementById("btn-next").disabled = s === S.length - 1;
+
+    let dts = document.getElementById("dots");
+    dts.innerHTML = "";
+    for (let i = 0; i < S.length; i++) {
+      let d = document.createElement("div");
+      d.className = "dot" + (i === s ? " active" : "");
+      dts.appendChild(d);
+    }
+  };
+
+  const go = d => { cur = Math.max(0, Math.min(S.length - 1, cur + d)); render(cur); };
+  render(0);
+</script>
+<!-- 
+### AlphaZero Framework
+
+The AlphaZero framework combines a modified version of MCTS with a Policy and Value Network. The Policy Network is a neural network that takes the current game state as input and outputs a probability distribution over all possible moves. The Value Network is a neural network that takes the current game state as input and outputs the probability of winning for the current player. The models are made to play multiple games using self-play and the game data is stored is a buffer which is later sampled from to train the networks. -->
+<hr>
+<h2 id="how-alphazero-actually-learns">How AlphaZero Actually Learns</h2>
+<p>By this point we&rsquo;ve covered MCTS and how it builds a search tree to make decisions. Now the question is: how does AlphaZero get <em>good</em> at this? The answer is a tight feedback loop between a neural network and a modified MCTS — each one making the other better.</p>
+<h3 id="the-neural-network">The Neural Network</h3>
+<p>AlphaZero uses a single deep residual network (ResNet, 20 blocks) that takes a board state as input and outputs two things simultaneously:</p>
+<ul>
+<li><strong>p</strong> — a probability distribution over all legal moves (the <em>policy head</em>)</li>
+<li><strong>v</strong> — a scalar in [-1, 1] estimating the expected outcome from this position (the <em>value head</em>)</li>
+</ul>
+<p>The input is an tensor encoding the current board plus states from the last few moves (say 4), always oriented from the perspective of the side to move. Having the history helps the network to detect patterns like threefold repetition or gradual piece development although for my implementation I only used the current board state. Having a history seems to be more important for games like chess, however that ablation still needs to be done for the game of Black-Hole.</p>
+<blockquote>
+<h4 id="network-architecture">Network Architecture</h4>
+<figure class="my-8 text-center">
+  <img src="/blogs/alphazerobh/aznetwork.png" alt="aznetwork" class="rounded-sm border border-gray-200 dark:border-gray-800/70 mx-auto" style="width: 65%;">
+  <figcaption class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3"><i>The neural network architecture of AlphaZero (source: https://arxiv.org/pdf/2111.09259)</i></figcaption>
+</figure>
+The value and policy outputs are generated by two separate heads. However these heads aren't independent, they share a representation generated by the preceeding residual layers, which means learning to evaluate positions also improves move selection and vice versa. I believe this coupled nature of the heads is one of the key aspects of AlphaZero's success.
+</blockquote>
+<hr>
+<h3 id="the-training-loop">The Training Loop</h3>
+<p>Training is a continuous cycle of three things happening in parallel:</p>
+<h4 id="1-self-play-data-generation">1. Self-play data generation</h4>
+<p>The network plays games against itself. At every position $s_t$ in every game, it runs N (100 for Black-Hole) MCTS simulations to produce an improved move distribution $\pi_t$. It then samples a move from $\pi_t$ and plays it. This continues until the game ends with outcome $z \in {+1, 0, -1}$.</p>
+<p>Every position from the game gets stored in a replay buffer as the tuple $(s_t, \pi_t, z)$ — board state, the MCTS-improved policy, and the final game result. The buffer holds the last 4K positions. Now to speed up the data collection, we run multiple self-play games in parallel every iteration and then store the data from all of these in the buffer.</p>
+<h4 id="2-gradient-updates">2. Gradient Updates</h4>
+<p>Mini-batches of size 512 are sampled from the replay buffer and used to minimize the loss function:</p>
+<p>$$l = (z - v)^2 - \pi^T \log p + c||\theta||^2$$</p>
+<p>Three terms:</p>
+<ul>
+<li>$(z - v)^2$ : Mean Squared Error between the network&rsquo;s value prediction $v$ and the actual game outcome $z$. This trains the value head to be an accurate position evaluator.</li>
+<li>$-\pi^T \log p$ : Cross-entropy between the raw network policy $p$ and the MCTS-improved policy $\pi$. This guides the policy head to output better action probabilities, ones that are closer to what MCTS determined to be good. Equivalent to minimizing the KL-divergence between $p$ and $\pi$.</li>
+<li>$c||\theta||^2$ : L2 regularization to prevent the weights from blowing up.</li>
+</ul>
+<p>SGD with momentum 0.9, initial learning rate 0.2, decayed by 10× at 100k, 300k, 500k, and 700k steps, for a total of 1 million gradient steps.</p>
+<h4 id="3-dynamically-improving-matchups">3. Dynamically Improving Matchups</h4>
+<p>Every 10 iterations, we do a few evaluation run between the current model and the previous best model. If the avg win-rate of the current model is greater than 60%(55% in the original paper), we update the previous best model to be the current model.</p>
+<p>Due to noisy training dynamics, I also added an extra criteria of having to win for atleast 5 consecutive evaluations for the opponent to get replaced.</p>
+<hr>
+<h3 id="from-raw-policy-to-improved-policy-guided-mcts">From Raw Policy to Improved Policy: Guided MCTS</h3>
+<p>The raw policy from the Policy Network is used as a crude guide for the MCTS. We run around 40 simulations for at each move of the game to get the improved Policy. The process is as follows:
+<strong>Step 1 — Initialize</strong></p>
+<p>The network evaluates the root position, giving prior probabilities $p$ over all legal moves. Before search begins, Dirichlet noise is injected into these root priors:</p>
+<p>$$p_{\text{noisy}}(a) = (1 - \varepsilon) \cdot p(a) + \varepsilon \cdot \eta_a, \quad \eta \sim \text{Dir}(0.3)$$</p>
+<p>where $\varepsilon = 0.25$. This forces the search to occasionally explore moves the network thinks are weak — without it, the self-play games would be too repetitive and the network would never discover surprising lines. This noise is only applied at the root, not deeper in the tree.</p>
+<p><strong>Step 2 — MCTS Simulations</strong></p>
+<p>Each simulation traverses the tree from root to a leaf, governed by the <strong>PUCT algorithm</strong>. To understand exactly how the search tree is dynamically built, let&rsquo;s trace the first three simulations:</p>
+<ul>
+<li>
+<p><strong>Simulation 1 (Root Evaluation):</strong> We start at the root node. Because it hasn&rsquo;t been expanded, selection stops immediately. The board state is passed to the neural network, which outputs the <strong>naive policy probabilities</strong> $P(s,a)$ and a <strong>value estimate</strong> $v \in [-1, 1]$. We create child nodes for all valid moves, initialize their priors using the network policy, and backpropagate $v$ to the root, increasing its visit count $N(s)$ to 1. <em>(Note: To ensure exploration, the Dirichlet noise is injected into these root priors right after this initial evaluation).</em></p>
+</li>
+<li>
+<p><strong>Simulation 2 (Prior-Driven Selection):</strong> Starting at the root again, we must pick a child using the PUCT score:
+$$\text{Score}(s, a) = Q(s, a) + C_{\text{puct}} \cdot P(s, a) \cdot \frac{\sqrt{N(s)}}{1 + N(s, a)}$$
+Since all children currently have 0 visits, $Q(s, a) = 0$. The score is entirely dominated by the network&rsquo;s prior $P(s, a)$. The search blindly trusts the network and selects the move with the highest naive probability. We traverse to this new leaf, evaluate it with the neural network, expand its children, and backpropagate its value $v_{leaf}$ up the tree (flipping the sign at each level since turns alternate).</p>
+</li>
+<li>
+<p><strong>Simulation 3 (Exploration vs. Exploitation):</strong> Back at the root, the previously selected child now has 1 visit and a non-zero $Q$-value. Its exploration term decreases. We now face a choice:</p>
+<ul>
+<li><strong>Exploit:</strong> If the previous leaf resulted in a highly favorable $Q$-value, its total score might still beat the unvisited siblings. We select it again and dive deeper into that branch.</li>
+<li><strong>Explore:</strong> If the evaluation was poor (negative $Q$), or an unvisited sibling has a highly competitive prior $P(s, a)$, the search pivots and explores a new action.</li>
+</ul>
+</li>
+</ul>
+<p>This process repeats for N simulations. Early on, the exploration bonus ($U$) dominates and the search follows the network&rsquo;s intuition. Over time, as visits accumulate, the actual simulation results ($Q$) take over. Crucially, <strong>no random rollouts are used</strong>—the neural network&rsquo;s value head replaces them entirely at the leaf nodes.</p>
+<p><strong>Step 3 — Extract the improved policy</strong></p>
+<p>After N simulations, the improved policy $\pi$ is computed from visit counts:</p>
+<p>$$\pi(a \mid s) = \frac{N(s, a)^{1/\tau}}{\sum_b N(s, b)^{1/\tau}}$$</p>
+<p>Temperature $\tau = 1$ during training (preserving the full distribution), and $\tau \to 0$ during evaluation (collapsing to the most visited move deterministically).</p>
+<blockquote>
+<h4 id="why-is-pi-better-than-p">Why is $\pi$ better than $p$?</h4>
+<p>The raw policy $p$ is the network&rsquo;s immediate intuition about the position — it hasn&rsquo;t looked ahead at all. <strong>MCTS acts as a policy improvement operator</strong> by exploring hundreds of continuations, catching tactical traps several moves deep, and adjusting visit counts accordingly. A move that looks fine to the network but leads to a lost position 6 moves later will have low $Q$, get visited less, and end up with low $\pi$. The visit count distribution encodes the network&rsquo;s intuition corrected by lookahead.</p>
+</blockquote>
+<hr>
+<h2 id="testing-the-model">Testing the Model</h2>
+<p>Now that the model has been trained, we can now test it out against other players. But how to do does the model take decisions? We now have two options, we can use either just the trained policy head to make the decisions given a state $s$, or we can use the MCTS algorithm to derive the improved policy $\pi$ using the trained policy head and value head to make the decisions given a state $s$.</p>
+<p>In the following clip, I am playing against one of the my trained models which is using just the training policy network to make decisions (argmax of the output logits).</p>
+<video autoplay loop muted playsinline class="mx-auto rounded-lg shadow-lg" width="600">
+  <source src="/blogs/alphazerobh/alphazero.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<p>As you can see even this simple implementation is quite strong. It can play on par with intermediate level players. One thing to be noted thought is that the model&rsquo;s strategy is entirely deterministic. I had tried a more stochastic inference with top-p sampling but it did not perform that well. I also did not put that many training hours into this which might be the reason it doesn&rsquo;t perform as well as it could have.</p>
+<!-- --- -->
+<!-- ## Experiements and Observations -->
+<hr>
+<h2 id="future-work">Future Work</h2>
+<p>My implementation was a pretty naive one and there are quite a few things I would like to explore with this project (whenever I find time to that is):</p>
+<ol>
+<li>Retrain for more hours for better robustness across stochastic policies.</li>
+<li>Modifying the inference pipeline for improved sampling of actions.</li>
+<li>Prepare a elo based ranking setup for comparing different models with different configurations e.g mcts vs no-mcts vs random vs human policy.</li>
+<li>Try having a history of states as input instead of a single state and observe if that leads to any improvements.</li>
+</ol>
+<p>Thank you for reading. Please let me know if you have any suggestions or questions!</p>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://github.com/Utsab-2010/RL-Black-Hole.git">Project Repository</a></li>
+<li><a href="https://arxiv.org/abs/1712.01815">AlphaGo Paper</a></li>
+<li><a href="https://arxiv.org/pdf/2111.09259">Acquisition of Chess Knowledge in AlphaZero</a></li>
+<li><a href="https://deepmind.com/research/publications/alphazero">DeepMind&rsquo;s AlphaZero Page</a></li>
+<li><a href="https://vgarciasc.github.io/mcts-viz/">MCTS Visualization for TicTacToe</a></li>
+</ul>
+
+        </div>
+        
+<section class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+  <div class="mb-6">
+    <h3 class="text-xl font-bold text-gray-900 dark:text-white">Comments</h3>
+    <p class="text-sm text-gray-600 dark:text-gray-400">Join the discussion via GitHub.</p>
+  </div>
+  <script src="https://giscus.app/client.js"
+          data-repo="Utsab-2010/Utsab-2010.github.io"
+          data-repo-id="R_kgDOSVop4A"
+          data-category="General"
+          data-category-id="DIC_kwDOSVop4M4C8gg4"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="bottom"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          crossorigin="anonymous"
+          async>
+  </script>
+
+  <script>
+    function updateGiscusTheme() {
+      const theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+      const iframe = document.querySelector('iframe.giscus-frame');
+      if (!iframe) return;
+      iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: theme } } }, 'https://giscus.app');
+    }
+
+    
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+          updateGiscusTheme();
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, { attributes: true });
+    
+    
+    window.addEventListener('message', (event) => {
+      if (event.origin !== 'https://giscus.app') return;
+      if (!(typeof event.data === 'object' && event.data.giscus)) return;
+      updateGiscusTheme();
+    });
+  </script>
+</section>
+
+
+      </div>
+    </article>
+  </div>
+</div>
+
+<style>
+  .blog-content {
+    font-family: 'Spectral', Georgia, serif;
+  }
+
+  .blog-content h1,
+  .blog-content h2,
+  .blog-content h3,
+  .blog-content h4,
+  .blog-content h5,
+  .blog-content h6,
+  .blog-content p,
+  .blog-content li,
+  .blog-content blockquote {
+    font-family: 'Spectral', Georgia, serif;
+  }
+
+  .toc {
+    font-size: 0.95rem;
+    line-height: 1.35;
+  }
+
+  .toc ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+  }
+
+  .toc li {
+    position: relative;
+    margin: 0.4rem 0;
+    padding-left: 1.25rem;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .toc a {
+    display: block;
+    padding: 0.15rem 0;
+    color: var(--toc-link-color);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .toc a:hover {
+    color: var(--toc-link-hover);
+    text-decoration: underline;
+    text-decoration-color: rgba(99, 102, 241, 0.85);
+    text-underline-offset: 3px;
+  }
+
+  .toc ul ul {
+    margin: 0.4rem 0 0.4rem 0.35rem;
+    padding-left: 0.9rem;
+    border-left: 1px solid var(--border-alpha);
+  }
+
+  .toc ul ul>li {
+    padding-left: 1.75rem;
+  }
+
+  .toc ul ul>li::before {
+    content: "├";
+    position: absolute;
+    left: 0.35rem;
+    top: 0.2rem;
+    color: rgba(99, 102, 241, 0.75);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  .toc ul ul>li:last-child::before {
+    content: "└";
+  }
+
+  .md-content ul,
+  .md-content ol {
+    margin: 1.2rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .md-content ul {
+    list-style: disc;
+  }
+
+  .md-content ul ul {
+    list-style: circle;
+  }
+
+  .md-content ol {
+    list-style: decimal;
+  }
+
+  .md-content li {
+    margin: 0.4rem 0;
+  }
+
+  .md-content p {
+    margin-bottom: 1.2rem;
+  }
+
+  .md-content img {
+    margin: 1.5rem auto;
+    border-radius: 0.25rem;
+  }
+
+  .md-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+  }
+
+  .md-content th,
+  .md-content td {
+    padding: 0.5rem;
+    text-align: center;
+    border: 1px solid var(--border-alpha);
+  }
+
+  .md-content pre,
+  .md-content code {
+    tab-size: 4;
+  }
+</style>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-[#070709] text-gray-600 dark:text-gray-400">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between py-6 space-y-4 md:space-y-0">
+
+      
+      <div class="text-sm sm:text-base md:text-lg">
+        <span class="relative inline-block">
+          © 2026 Utsab Karan. All rights reserved. <br>
+          Made with <a href="https://gohugo.io" target="_blank">Hugo</a> | <a
+            href="https://github.com/Enerhim/enervoid-theme" target="_blank">Enervoid</a>
+        </span>
+      </div>
+
+      
+      <div class="flex items-center space-x-6 text-sm sm:text-base md:text-lg">
+
+        
+        <a href='https://github.com/Utsab-2010' target="_blank" rel="noopener" title="GitHub"
+          class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
+          <i class="devicon-github-original"></i>
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+          
+          
+          
+          <span class="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 scale-90 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-150 ease-out bg-gray-900 dark:bg-gray-800 text-white dark:text-gray-100 text-[11px] font-medium py-1 px-2.5 rounded shadow-lg border border-gray-700/30 whitespace-nowrap">
+            GitHub
+          </span>
+          
+        </a>
+        
+        <a href='https://www.linkedin.com/in/utsab-karan/' target="_blank" rel="noopener" title="LinkedIn"
+          class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
+          <i class="devicon-linkedin-plain"></i>
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+          
+          
+          
+          <span class="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 scale-90 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-150 ease-out bg-gray-900 dark:bg-gray-800 text-white dark:text-gray-100 text-[11px] font-medium py-1 px-2.5 rounded shadow-lg border border-gray-700/30 whitespace-nowrap">
+            LinkedIn
+          </span>
+          
+        </a>
+        
+        <a href='https://scholar.google.com/citations?user=V0Lvy54AAAAJ&amp;hl=en' target="_blank" rel="noopener" title="Google Scholar"
+          class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+          
+          
+          
+          <span class="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 scale-90 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-150 ease-out bg-gray-900 dark:bg-gray-800 text-white dark:text-gray-100 text-[11px] font-medium py-1 px-2.5 rounded shadow-lg border border-gray-700/30 whitespace-nowrap">
+            Google Scholar
+          </span>
+          
+        </a>
+        
+        <a href='/resume_ukaran.pdf' target="_blank" rel="noopener" title="CV / Resume"
+          class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
+          <i class="fa-solid fa-file-lines"></i>
+          <span
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+          
+          
+          
+          <span class="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 scale-90 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-150 ease-out bg-gray-900 dark:bg-gray-800 text-white dark:text-gray-100 text-[11px] font-medium py-1 px-2.5 rounded shadow-lg border border-gray-700/30 whitespace-nowrap">
+            CV / Resume
+          </span>
+          
+        </a>
+        
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  </footer>
+</body>
+
+</html>

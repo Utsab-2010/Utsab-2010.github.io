@@ -22,6 +22,7 @@ The general structure of this blog will be as follow:
 - Future Work
 - Resources -->
 
+---
 
 ## Introduction to RL
 Reinforcement learning is a subfield of deep learning which focuses on teaching models(termed as agents) by making them interact with some environment. The main idea is very heuristic, the model gets conditioned to perform only those actions which are beneficial to it. 
@@ -35,6 +36,7 @@ How is this "benefit" actually defined? This is done with the help of reward fun
 
 As shown above, the agent interacts with the environment, gets some rewards, trains itself based on rewards and repeat. Now while idea is simple in theory, designing reward functions and RL traininig frameworks which cater to our needs is a challenging task.
 
+---
 
 ## Rules of Black Hole
 Black Hole is a strategic tile-placement game played on a triangular grid. It was designed by the members of the DTU chapter of the Indian Game Theory Society(IGTS). I came across this because of my involvement with my university's chapter of IGTS - the KGPian Game Theory Society. Traditionally it has 6 rows, but I had to expand it to 9 rows for more stable training. It has 45 empty spaces in total.
@@ -57,6 +59,7 @@ The Black Hole "sucks in" neighboring tiles. Scoring is calculated in concentric
 
 **Your goal is to get sucked in as little as possible.** The player whose tiles in Ring 1 have the *lowest sum* wins instantly. Ties are broken by evaluating Ring 2, and so on.
 
+---
 
 ## Google Deepmind's AlphaGo and AlphaZero
 
@@ -88,6 +91,8 @@ AlphaGo then competed against legendary Go player Lee Sedol — winner of 18 wor
 AlphaZero, published in 2017, took this further by stripping out the human data entirely. There were no expert games and no domain-specific heuristics - just the rules of the game and time to play itself. It achieved this with the help of a modified Monte Carlo Tree Search Algorithm paired with its Policy and Value Networks which essentially guided the exploration and search process. 
 
 Within hours of training, AlphaZero surpassed AlphaGo; within days, it exceeded the best classical engines in Go, Chess, and Shogi simultaneously — using the same algorithm for all three!
+
+---
 
 ## Classical Self-Play
 How does your AI agent learn to play a game without having any prior experience or expert data as reference? The answer is that if creates its own data through self-play and trains on it -- gradually improving its strategy in the process. 
