@@ -3,7 +3,7 @@ title = "About"
 +++
 
 <div class="text-[15px] sm:text-[1.1rem] leading-[1.7] mb-8">
-Hi, I am <strong>Utsab</strong>. I am a fourth-year undergraduate student at <strong>IIT Kharagpur</strong> pursuing a Dual-Degree (B.Tech + M.Tech) in Electronics and Electrical Communication Engineering. As part of my masters curriculum, I shall be specilising in Vision and Intelligent Systems.
+Hi, I am <strong>Utsab</strong>. I am a fourth-year undergraduate student at <strong>IIT Kharagpur</strong> pursuing a Dual-Degree (B.Tech + M.Tech) in Electronics and Electrical Communication Engineering, with my Master's specialization in Vision and Intelligent Systems.
 <br><br>
 <!-- I am currently the <strong>Head of Vision at AGV.AI</strong>, a UG research group under Prof. Debashish Chakravarty at IIT Kharagpur, working on autonomous vehicles and robotic systems. -->
 <!-- I am currently a summer research intern at the Vision and AI Lab, IISc Bangalore working on the data-efficient learning for vision datasets.  -->

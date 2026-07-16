@@ -1,7 +1,7 @@
 +++
 title = "ICC 25: My First Conference"
 date = 2026-02-28T16:30:22Z
-tags = ["conference", "personal", "research"]
+tags = ["Personal", "Research"]
 description = "My experience attending the Indian Control Conference in Bangalore."
 +++
 

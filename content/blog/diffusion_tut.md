@@ -1,7 +1,7 @@
 +++
 title = "Diffusion Models for Dummies: Getting Started"
 date = 2026-05-09T12:42:42+05:30
-tags = ["Diffusion", "Deep Learning"]
+tags = ["Diffusion", "Deep-Learning"]
 description = "An Intuitive Explanation of Diffusion Models with a hands-on Implementation"
 +++ 
 

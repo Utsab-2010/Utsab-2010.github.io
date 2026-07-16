@@ -1,6 +1,6 @@
 {{ define "main" }}
 
-<section class="relative border border-gray-200 bg-white dark:bg-[#070709] rounded-sm p-8 md:p-12 text-gray-700 dark:text-gray-300">
+<section class="relative border border-card-border bg-card-bg rounded-sm p-8 md:p-12 text-gray-700 dark:text-gray-300">
 
   <!-- Profile Picture (Floated Right) -->
   <img src='{{ with site.Params.avatar }}{{ . | relURL }}{{ else }}{{ "/images/avatar.jpg" | relURL }}{{ end }}' 
@@ -8,14 +8,14 @@
        class="float-none md:float-right block mx-auto md:mx-0 w-40 h-40 md:w-56 md:h-56 md:ml-8 md:mt-4 mb-6 md:mb-4 rounded-full border-4 border-gray-300 dark:border-gray-700 object-cover shadow-xl" />
 
   <!-- Heading -->
-  <h1 class="text-2xl sm:text-3xl md:text-4xl font-semibold text-blue-800 dark:text-blue-200 mb-6 tracking-wide text-center md:text-left">
+  <h1 class="text-2xl sm:text-3xl md:text-4xl font-semibold text-accent mb-6 tracking-wide text-center md:text-left">
     About Me
   </h1>
 
   <!-- Content -->
-  <div class="space-y-6 text-base sm:text-lg md:text-xl leading-relaxed [&_a]:text-blue-800 dark:[&_a]:text-blue-200
+  <div class="space-y-6 text-base sm:text-lg md:text-xl leading-relaxed [&_a]:text-accent
             [&_a]:underline
-            [&_a:hover]:text-blue-900 dark:[&_a:hover]:text-blue-100
+            [&_a:hover]:text-accent-hover
             [&_a]:transition-colors
             [&_a]:duration-200">
     {{ with site.GetPage "page" "about.md"}}

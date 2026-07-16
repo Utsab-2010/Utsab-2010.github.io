@@ -92,13 +92,13 @@
 
 <figure class="my-8">
   <blockquote
-    class="relative rounded-xl border border-white/[0.07] bg-[#fdfbf7] dark:bg-black/40 px-5 py-4 text-gray-700 dark:text-gray-300 transition-shadow duration-200 hover:shadow-[0_0_0_1px_rgba(167,139,250,0.12)]">
+    class="relative rounded-xl border border-card-border bg-blockquote-bg px-5 py-4 text-blockquote-text transition-shadow duration-200 hover:shadow-[0_0_0_1px_var(--accent-mute)]">
 
     <span class="absolute inset-y-3 left-0 w-0.5 rounded-full bg-violet-400/40"></span>
     <span class="absolute right-4 top-2.5 select-none font-mono text-[0.6rem] tracking-widest text-gray-900 dark:text-white/10">///</span>
 
     <div
-      class="font-mono text-sm leading-relaxed [&_code]:rounded [&_code]:bg-black/5 dark:[&_code]:bg-white/5 [&_code]:px-1.5 [&_code]:py-0.5 [&_em]:text-violet-300/80 [&_p]:mb-2 [&_p:last-child]:mb-0 [&_strong]:text-gray-900 dark:[&_strong]:text-white">
+      class="text-sm leading-relaxed [&_code]:rounded [&_code]:bg-black/5 dark:[&_code]:bg-white/5 [&_code]:px-1.5 [&_code]:py-0.5 [&_em]:text-violet-300/80 [&_p]:mb-2 [&_p:last-child]:mb-0 [&_strong]:text-gray-900 dark:[&_strong]:text-white">
       {{ .Text | safeHTML }}
     </div>
 
@@ -115,13 +115,13 @@
 
 <figure class="my-8">
   <blockquote
-    class="relative rounded-xl border border-white/[0.07] bg-[#fdfbf7] dark:bg-black/40 px-5 py-4 text-gray-700 dark:text-gray-300 transition-shadow duration-200 hover:shadow-[0_0_0_1px_rgba(96,165,250,0.08)]">
+    class="relative rounded-xl border border-card-border bg-blockquote-bg px-5 py-4 text-blockquote-text transition-shadow duration-200 hover:shadow-[0_0_0_1px_var(--accent-mute)]">
 
     <span class="absolute inset-y-3 left-0 w-0.5 rounded-full bg-blue-400/20"></span>
     <span class="absolute right-4 top-2.5 select-none font-mono text-[0.6rem] tracking-widest text-gray-900 dark:text-white/10">///</span>
 
     <div
-      class="font-mono text-sm leading-relaxed [&_code]:rounded [&_code]:bg-black/5 dark:[&_code]:bg-white/5 [&_code]:px-1.5 [&_code]:py-0.5 [&_em]:text-gray-600 dark:[&_em]:text-gray-400 [&_p]:mb-2 [&_p:last-child]:mb-0 [&_strong]:text-gray-900 dark:[&_strong]:text-white">
+      class="text-sm leading-relaxed [&_code]:rounded [&_code]:bg-black/5 dark:[&_code]:bg-white/5 [&_code]:px-1.5 [&_code]:py-0.5 [&_em]:text-gray-600 dark:[&_em]:text-gray-400 [&_p]:mb-2 [&_p:last-child]:mb-0 [&_strong]:text-gray-900 dark:[&_strong]:text-white">
       {{ .Text | safeHTML }}
     </div>
   </blockquote>
