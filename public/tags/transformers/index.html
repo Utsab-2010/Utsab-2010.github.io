@@ -19,39 +19,307 @@
 
 <style type="text/tailwindcss">
   @theme {
-    --color-bg-dark: #070709;
-    --color-bg-light: #fdfbf7;
+     
+    --color-bg-light: var(--bg-light);
+    --color-bg-dark: var(--bg-dark);
+    --color-accent: var(--accent);
+    --color-accent-hover: var(--accent-hover);
+    --color-nav-bg: var(--nav-bg);
+    --color-nav-border: var(--nav-border);
+    --color-nav-text: var(--nav-text);
+    --color-card-bg: var(--card-bg);
+    --color-card-border: var(--card-border);
+    --color-text-heading: var(--text-heading);
+    --color-text-body: var(--text-body);
+    --color-blockquote-bg: var(--blockquote-bg);
+    --color-blockquote-text: var(--blockquote-text);
   }
   @custom-variant dark (&:where(.dark, .dark *));
 
-  .md-content h1 { @apply mt-10 mb-4 text-3xl sm:text-5xl font-bold text-gray-900 dark:text-white leading-tight; }
-  .md-content h2 { @apply mt-8 mb-4 text-2xl sm:text-4xl font-bold text-gray-900 dark:text-white leading-snug; }
-  .md-content h3 { @apply mt-6 mb-3 text-xl sm:text-3xl font-semibold text-gray-900 dark:text-white leading-snug; }
-  .md-content h4 { @apply mt-5 mb-2 text-lg sm:text-2xl font-semibold text-gray-900 dark:text-white; }
-  .md-content a { @apply text-indigo-600 dark:text-indigo-400 underline decoration-indigo-600/30 dark:decoration-indigo-400/30 underline-offset-4 transition-all duration-200 hover:decoration-indigo-600 dark:hover:decoration-indigo-400; }
-  .md-content pre { @apply p-3 sm:p-6 my-4 sm:my-6 rounded-sm overflow-x-auto bg-[#1e1e1e] border border-gray-200 dark:border-gray-800/70; }
+  .md-content h1 { @apply mt-10 mb-4 text-3xl sm:text-5xl font-bold leading-tight; color: var(--text-heading); }
+  .md-content h2 { @apply mt-8 mb-4 text-2xl sm:text-4xl font-bold leading-snug; color: var(--text-heading); }
+  .md-content h3 { @apply mt-6 mb-3 text-xl sm:text-3xl font-semibold leading-snug; color: var(--text-heading); }
+  .md-content h4 { @apply mt-5 mb-2 text-lg sm:text-2xl font-semibold; color: var(--text-heading); }
+  
+  .md-content a { 
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--accent-mute);
+    transition: all 0.20s ease-out;
+  }
+  .md-content a:hover {
+    color: var(--accent-hover);
+    text-decoration-color: var(--accent-hover);
+  }
+  
+  .md-content pre { 
+    @apply p-3 sm:p-6 my-4 sm:my-6 rounded-sm overflow-x-auto; 
+    background-color: var(--code-bg);
+    border: 1px solid var(--code-border);
+  }
   .md-content code { @apply font-mono text-xs sm:text-sm; }
-  .md-content blockquote { @apply pl-4 sm:pl-5 py-2 sm:py-3 my-5 sm:my-6 border-l-3 border-indigo-500 bg-gray-50 dark:bg-gray-800/40 text-gray-700 dark:text-gray-300 rounded-r-lg text-base sm:text-[17px]; }
+  .md-content :not(pre) > code {
+    @apply px-1.5 py-0.5 rounded text-xs sm:text-sm font-mono;
+    background-color: var(--tag-bg);
+    color: var(--tag-text);
+    border: 1px solid var(--tag-border);
+  }
+
+   
+  .chroma { color: var(--text-body); background-color: transparent; }
+  .chroma .line { display: flex; }
+  .chroma .cl { flex: 1; }
+
+   
+  .chroma .k, .chroma .kc, .chroma .kd, .chroma .kn, .chroma .kp, .chroma .kr, .chroma .kt {
+    color: #991b1b;
+    font-weight: 600;
+  }
+   
+  .chroma .nf, .chroma .fm {
+    color: #1e40af;
+    font-weight: 600;
+  }
+   
+  .chroma .nc {
+    color: #047857;
+    font-weight: 600;
+  }
+   
+  .chroma .nb, .chroma .bp {
+    color: #7e22ce;
+  }
+   
+  .chroma .s, .chroma .sa, .chroma .sb, .chroma .sc, .chroma .dl, .chroma .sd,
+  .chroma .s2, .chroma .se, .chroma .sh, .chroma .si, .chroma .sx, .chroma .sr,
+  .chroma .s1, .chroma .ss {
+    color: #15803d;
+  }
+   
+  .chroma .m, .chroma .mb, .chroma .mf, .chroma .mh, .chroma .mi, .chroma .il, .chroma .mo {
+    color: #c2410c;
+  }
+   
+  .chroma .c, .chroma .ch, .chroma .cm, .chroma .c1, .chroma .cs, .chroma .cp, .chroma .cpf {
+    color: #64748b;
+    font-style: italic;
+  }
+   
+  .chroma .o, .chroma .ow {
+    color: #334155;
+    font-weight: 500;
+  }
+  .chroma .p {
+    color: #475569;
+  }
+   
+  .chroma .nd {
+    color: #b45309;
+  }
+   
+  .chroma .n, .chroma .na, .chroma .nv, .chroma .vc, .chroma .vg, .chroma .vi, .chroma .vm {
+    color: var(--text-body);
+  }
+
+   
+  html.dark .chroma { color: #f8f8f2; }
+  html.dark .chroma .k,
+  html.dark .chroma .kc,
+  html.dark .chroma .kd,
+  html.dark .chroma .kn,
+  html.dark .chroma .kp,
+  html.dark .chroma .kr,
+  html.dark .chroma .kt { color: #ff79c6; }
+  html.dark .chroma .nf,
+  html.dark .chroma .fm { color: #50fa7b; }
+  html.dark .chroma .nc { color: #8be9fd; }
+  html.dark .chroma .nb,
+  html.dark .chroma .bp { color: #bd93f9; }
+  html.dark .chroma .s,
+  html.dark .chroma .sa,
+  html.dark .chroma .sb,
+  html.dark .chroma .sc,
+  html.dark .chroma .dl,
+  html.dark .chroma .sd,
+  html.dark .chroma .s2,
+  html.dark .chroma .se,
+  html.dark .chroma .sh,
+  html.dark .chroma .si,
+  html.dark .chroma .sx,
+  html.dark .chroma .sr,
+  html.dark .chroma .s1,
+  html.dark .chroma .ss { color: #f1fa8c; }
+  html.dark .chroma .m,
+  html.dark .chroma .mb,
+  html.dark .chroma .mf,
+  html.dark .chroma .mh,
+  html.dark .chroma .mi,
+  html.dark .chroma .il,
+  html.dark .chroma .mo { color: #bd93f9; }
+  html.dark .chroma .c,
+  html.dark .chroma .ch,
+  html.dark .chroma .cm,
+  html.dark .chroma .c1,
+  html.dark .chroma .cs,
+  html.dark .chroma .cp,
+  html.dark .chroma .cpf { color: #6272a4; }
+  html.dark .chroma .o,
+  html.dark .chroma .ow,
+  html.dark .chroma .p { color: #f8f8f2; }
+  html.dark .chroma .nd { color: #ffb86c; }
+  html.dark .chroma .n,
+  html.dark .chroma .na,
+  html.dark .chroma .nv,
+  html.dark .chroma .vc,
+  html.dark .chroma .vg,
+  html.dark .chroma .vi,
+  html.dark .chroma .vm { color: #f8f8f2; }
+  
+  .md-content blockquote { 
+    @apply pl-4 sm:pl-5 py-2 sm:py-3 my-5 sm:my-6 rounded-r-lg text-base sm:text-[17px]; 
+    border-left: 3px solid var(--accent);
+    background-color: var(--blockquote-bg);
+    color: var(--blockquote-text);
+  }
+
+   
+  .tag-badge {
+    display: inline-block;
+    padding: 0.125rem 0.5rem;
+    font-size: 0.75rem;
+    border-radius: 0.125rem;
+    border: 1px solid var(--tag-border);
+    background-color: var(--tag-bg);
+    color: var(--tag-text);
+    transition: all 0.2s ease;
+  }
+  @media (min-width: 640px) {
+    .tag-badge {
+      font-size: 0.875rem;
+    }
+  }
+  a.tag-badge:hover {
+    color: var(--tag-text-hover) !important;
+    border-color: var(--tag-border-hover) !important;
+    background-color: var(--tag-bg-hover);
+  }
 </style>
 <style>
   html {
+     
+
+     
+    --bg-light: #E8ECD7;
+     
+    --card-bg: #fbfcf2;
+     
+    --card-border: rgba(185, 199, 152, 0.45);
+     
+
+    --text-heading: #121F0D;
+     
+    --text-body: #2D3528;
+     
+
+     
+    --accent: #526531;
+     
+    --accent-mute: rgba(82, 101, 49, 0.25);
+    --accent-hover: #30401C;
+     
+
+     
+    --code-bg: #FAF9F5;
+    --code-border: rgba(185, 199, 152, 0.4);
+
+     
+    --blockquote-bg: #FCFAF2;
+    --blockquote-text: #2D3528;
+
+     
+    --tag-bg: #FAF9F5;
+    --tag-bg-hover: rgba(82, 101, 49, 0.08);
+    --tag-border: rgba(185, 199, 152, 0.5);
+    --tag-text: #526531;
+    --tag-text-hover: #121F0D;
+    --tag-border-hover: #526531;
+
+     
+    --nav-bg: #dadfc7;
+     
+    --nav-border: rgba(185, 199, 152, 0.45);
+    --nav-text: #30401C;
+     
+
+     
+    --toc-link-color: rgba(48, 64, 28, 0.85);
+    --toc-link-hover: #121F0D;
+
+     
+    --border-alpha: rgba(185, 199, 152, 0.5);
+
+     
+    --selection-bg: rgba(82, 101, 49, 0.15);
+
+     
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    --toc-link-color: rgba(55, 65, 81, 0.92);
-    --toc-link-hover: #111827;
-    --border-alpha: rgba(229, 231, 235, 0.8);
-  }
-
-  ::selection {
-    background: rgba(99, 102, 241, 0.25);
-    color: inherit;
   }
 
   html.dark {
+     
+    --bg-dark: #070709;
+    --card-bg: #121316;
+    --card-border: rgba(55, 65, 81, 0.6);
+
+    --text-heading: #ffffff;
+    --text-body: #f3f4f6;
+
+     
+    --accent: #818cf8;
+     
+    --accent-mute: rgba(129, 140, 248, 0.3);
+    --accent-hover: #a5b4fc;
+     
+
+     
+    --code-bg: #1e1e1e;
+    --code-border: rgba(55, 65, 81, 0.7);
+
+     
+    --blockquote-bg: rgba(31, 41, 55, 0.4);
+    --blockquote-text: #d1d5db;
+
+     
+    --tag-bg: rgba(0, 0, 0, 0.3);
+    --tag-bg-hover: rgba(129, 140, 248, 0.1);
+    --tag-border: rgba(55, 65, 81, 0.7);
+    --tag-text: #d1d5db;
+    --tag-text-hover: #ffffff;
+    --tag-border-hover: rgba(129, 140, 248, 0.4);
+
+     
+    --nav-bg: rgba(7, 7, 9, 0.95);
+    --nav-border: rgba(55, 65, 81, 0.6);
+    --nav-text: #f3f4f6;
+     
+
+     
     --toc-link-color: rgba(209, 213, 219, 0.92);
     --toc-link-hover: #fff;
+
+     
     --border-alpha: rgba(55, 65, 81, 0.6);
+
+     
+    --selection-bg: rgba(129, 140, 248, 0.3);
+  }
+
+  ::selection {
+    background: var(--selection-bg);
+    color: inherit;
   }
 
   .font-jersey {
@@ -299,10 +567,10 @@
   </script>
 </head>
 
-<body class="min-h-screen flex flex-col bg-[#fdfbf7] dark:bg-black font-jersey text-gray-900 dark:text-white text-3xl">
+<body class="min-h-screen flex flex-col bg-bg-light dark:bg-bg-dark font-jersey text-gray-900 dark:text-white text-3xl">
   <header>
     <div class="sticky absolute top-0 z-50">
-  <nav class="w-full border-b border-gray-200 dark:border-gray-800 bg-white/95 dark:bg-[#070709]/95 backdrop-blur-sm text-gray-800 dark:text-gray-100">
+  <nav class="w-full border-b border-nav-border bg-nav-bg backdrop-blur-sm text-nav-text">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="flex items-center justify-between h-14">
         
@@ -311,8 +579,7 @@
           <a href='https://utsab-2010.github.io/' class="flex items-center gap-3 group" aria-label="Homepage">
 
             <img src='/avatar.png' alt="Utsab Karan"
-              class="w-8 h-8 rounded-sm border-2 border-gray-300 dark:border-gray-700 object-cover transition-transform duration-300 transform group-hover:scale-105"
-              style="animation: border-breathe 4s ease-in-out infinite;" />
+              class="w-8 h-8 rounded-sm border-2 border-gray-300 dark:border-gray-700 object-cover transition-transform duration-300 transform group-hover:scale-105" />
             <span class="text-gray-900 dark:text-white text-base sm:text-lg md:text-xl lg:text-2xl font-semibold tracking-wide">
               Utsab Karan
               <span class="inline-block ml-2" style="animation: flicker 1.6s steps(2, end) infinite;">_</span>
@@ -334,7 +601,7 @@
           <span>Blogs</span>
           
           <span
-            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-accent transition-all duration-300 group-hover:w-full"></span>
         </span>
       </a>
     </li><li>
@@ -343,7 +610,7 @@
           <span>Projects</span>
           
           <span
-            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-accent transition-all duration-300 group-hover:w-full"></span>
         </span>
       </a>
     </li><li>
@@ -352,7 +619,7 @@
           <span>Work</span>
           
           <span
-            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-accent transition-all duration-300 group-hover:w-full"></span>
         </span>
       </a>
     </li>
@@ -362,7 +629,7 @@
           </div>
           
           
-          <button id="theme-toggle" class="p-2 rounded-md text-gray-800 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-black/5 dark:bg-white/5 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-colors" aria-label="Toggle Theme">
+          <button id="theme-toggle" class="p-2 rounded-md text-gray-800 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-black/5 dark:bg-white/5 focus:outline-none focus:ring-2 focus:ring-accent transition-colors" aria-label="Toggle Theme">
             <svg id="theme-toggle-light-icon" class="hidden w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
             <svg id="theme-toggle-dark-icon" class="hidden w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
           </button>
@@ -370,7 +637,7 @@
           
           <div class="md:hidden">
             <button id="nav-toggle" aria-controls="mobile-menu" aria-expanded="false"
-              class="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              class="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-accent"
               aria-label="Open menu">
               <svg class="h-6 w-6 text-gray-800 dark:text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor" aria-hidden="true">
@@ -394,7 +661,7 @@
           <span>Blogs</span>
           
           <span
-            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-accent transition-all duration-300 group-hover:w-full"></span>
         </span>
       </a>
     </li><li>
@@ -403,7 +670,7 @@
           <span>Projects</span>
           
           <span
-            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-accent transition-all duration-300 group-hover:w-full"></span>
         </span>
       </a>
     </li><li>
@@ -412,7 +679,7 @@
           <span>Work</span>
           
           <span
-            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-accent transition-all duration-300 group-hover:w-full"></span>
         </span>
       </a>
     </li>
@@ -446,19 +713,7 @@
       }
     }
 
-    @keyframes border-breathe {
-      0% {
-        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.06);
-      }
 
-      50% {
-        box-shadow: 0 0 18px 6px rgba(99, 102, 241, 0.03);
-      }
-
-      100% {
-        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.06);
-      }
-    }
   </style>
 
   
@@ -505,7 +760,8 @@
 
   <main class="flex-1 w-full">
     <div id="swup" class="swup-transition-fade">
-      <div class="max-w-4xl lg:max-w-[70rem] xl:max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-10 py-10 lg:py-16">
+      <div
+        class="max-w-4xl lg:max-w-[70rem] xl:max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-10 py-10 lg:py-16">
         
   <h1>Transformers</h1>
   
@@ -519,7 +775,7 @@
   </main>
 
   <footer>
-    <div class="border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-[#070709] text-gray-600 dark:text-gray-400">
+    <div class="border-t border-nav-border bg-nav-bg text-gray-600 dark:text-gray-400">
   <div class="max-w-6xl mx-auto px-4 sm:px-6">
     <div class="flex flex-col md:flex-row items-center justify-between py-6 space-y-4 md:space-y-0">
 
@@ -536,44 +792,74 @@
       <div class="flex items-center space-x-6 text-sm sm:text-base md:text-lg">
 
         
-        <a href='https://github.com/Utsab-2010' target="_blank" rel="noopener"
+        <a href='https://github.com/Utsab-2010' target="_blank" rel="noopener" title="GitHub"
           class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
-          
           <i class="devicon-github-original"></i>
           <span
-            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-accent transition-all duration-300 group-hover:w-full"></span>
+          
+          
+          
+          <span class="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 scale-90 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-150 ease-out bg-gray-900 dark:bg-gray-800 text-white dark:text-gray-100 text-[11px] font-medium py-1 px-2.5 rounded shadow-lg border border-gray-700/30 whitespace-nowrap">
+            GitHub
+          </span>
+          
         </a>
         
-        <a href='https://www.linkedin.com/in/utsab-karan/' target="_blank" rel="noopener"
+        <a href='https://www.linkedin.com/in/utsab-karan/' target="_blank" rel="noopener" title="LinkedIn"
           class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
-          
           <i class="devicon-linkedin-plain"></i>
           <span
-            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-accent transition-all duration-300 group-hover:w-full"></span>
+          
+          
+          
+          <span class="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 scale-90 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-150 ease-out bg-gray-900 dark:bg-gray-800 text-white dark:text-gray-100 text-[11px] font-medium py-1 px-2.5 rounded shadow-lg border border-gray-700/30 whitespace-nowrap">
+            LinkedIn
+          </span>
+          
         </a>
         
-        <a href='https://scholar.google.com/citations?user=V0Lvy54AAAAJ&amp;hl=en' target="_blank" rel="noopener"
+        <a href='https://scholar.google.com/citations?user=V0Lvy54AAAAJ&amp;hl=en' target="_blank" rel="noopener" title="Google Scholar"
           class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
-          
           <i class="fa-solid fa-graduation-cap"></i>
           <span
-            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-accent transition-all duration-300 group-hover:w-full"></span>
+          
+          
+          
+          <span class="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 scale-90 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-150 ease-out bg-gray-900 dark:bg-gray-800 text-white dark:text-gray-100 text-[11px] font-medium py-1 px-2.5 rounded shadow-lg border border-gray-700/30 whitespace-nowrap">
+            Google Scholar
+          </span>
+          
         </a>
         
-        <a href='/resume_ukaran.pdf' target="_blank" rel="noopener"
+        <a href='/resume_ukaran.pdf' target="_blank" rel="noopener" title="CV / Resume"
           class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
-          
           <i class="fa-solid fa-file-lines"></i>
           <span
-            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-accent transition-all duration-300 group-hover:w-full"></span>
+          
+          
+          
+          <span class="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 scale-90 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-150 ease-out bg-gray-900 dark:bg-gray-800 text-white dark:text-gray-100 text-[11px] font-medium py-1 px-2.5 rounded shadow-lg border border-gray-700/30 whitespace-nowrap">
+            CV / Resume
+          </span>
+          
         </a>
         
-        <a href='https://utsab-2010.github.io/Notes-Host/' target="_blank" rel="noopener"
+        <a href='https://utsab-2010.github.io/Notes-Host/' target="_blank" rel="noopener" title="My Notes"
           class="group relative inline-block transition-colors duration-200 hover:text-gray-800 dark:text-gray-200">
-          
           <i class="fa-solid fa-pencil"></i>
           <span
-            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+            class="absolute left-0 -bottom-1 h-[2px] w-0 bg-accent transition-all duration-300 group-hover:w-full"></span>
+          
+          
+          
+          <span class="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 scale-90 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-150 ease-out bg-gray-900 dark:bg-gray-800 text-white dark:text-gray-100 text-[11px] font-medium py-1 px-2.5 rounded shadow-lg border border-gray-700/30 whitespace-nowrap">
+            My Notes
+          </span>
+          
         </a>
         
 

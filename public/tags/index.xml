@@ -12,7 +12,7 @@
     
     
     <item>
-      <title>Game Theory</title>
+      <title>Game-Theory</title>
       <link>https://utsab-2010.github.io/tags/game-theory/</link>
       <pubDate>Wed, 24 Jun 2026 16:15:42 +0530</pubDate>
       
@@ -21,7 +21,7 @@
     </item>
     
     <item>
-      <title>Reinforcement Learning</title>
+      <title>Reinforcement-Learning</title>
       <link>https://utsab-2010.github.io/tags/reinforcement-learning/</link>
       <pubDate>Wed, 24 Jun 2026 16:15:42 +0530</pubDate>
       
@@ -30,7 +30,7 @@
     </item>
     
     <item>
-      <title>Deep Learning</title>
+      <title>Deep-Learning</title>
       <link>https://utsab-2010.github.io/tags/deep-learning/</link>
       <pubDate>Sat, 09 May 2026 12:42:42 +0530</pubDate>
       
@@ -66,16 +66,7 @@
     </item>
     
     <item>
-      <title>conference</title>
-      <link>https://utsab-2010.github.io/tags/conference/</link>
-      <pubDate>Sat, 28 Feb 2026 16:30:22 +0000</pubDate>
-      
-      <guid>https://utsab-2010.github.io/tags/conference/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>personal</title>
+      <title>Personal</title>
       <link>https://utsab-2010.github.io/tags/personal/</link>
       <pubDate>Sat, 28 Feb 2026 16:30:22 +0000</pubDate>
       
@@ -84,7 +75,7 @@
     </item>
     
     <item>
-      <title>research</title>
+      <title>Research</title>
       <link>https://utsab-2010.github.io/tags/research/</link>
       <pubDate>Sat, 28 Feb 2026 16:30:22 +0000</pubDate>
       

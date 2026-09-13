@@ -68,7 +68,7 @@ theme = "enervoid"
     startLevel = 2
 
 [markup.highlight]
-  noClasses = true
+  noClasses = false
   codeFences = true
   guessSyntax = true
   tabWidth = 4

@@ -51,6 +51,122 @@
     border: 1px solid var(--code-border);
   }
   .md-content code { @apply font-mono text-xs sm:text-sm; }
+  .md-content :not(pre) > code {
+    @apply px-1.5 py-0.5 rounded text-xs sm:text-sm font-mono;
+    background-color: var(--tag-bg);
+    color: var(--tag-text);
+    border: 1px solid var(--tag-border);
+  }
+
+  /* --- CHROMA SYNTAX HIGHLIGHTING (LIGHT & DARK MODE) --- */
+  .chroma { color: var(--text-body); background-color: transparent; }
+  .chroma .line { display: flex; }
+  .chroma .cl { flex: 1; }
+
+  /* Keywords & Declarations */
+  .chroma .k, .chroma .kc, .chroma .kd, .chroma .kn, .chroma .kp, .chroma .kr, .chroma .kt {
+    color: #991b1b;
+    font-weight: 600;
+  }
+  /* Functions & Methods */
+  .chroma .nf, .chroma .fm {
+    color: #1e40af;
+    font-weight: 600;
+  }
+  /* Classes, Interfaces, Types */
+  .chroma .nc {
+    color: #047857;
+    font-weight: 600;
+  }
+  /* Builtins & Special Identifiers */
+  .chroma .nb, .chroma .bp {
+    color: #7e22ce;
+  }
+  /* Strings & Characters */
+  .chroma .s, .chroma .sa, .chroma .sb, .chroma .sc, .chroma .dl, .chroma .sd,
+  .chroma .s2, .chroma .se, .chroma .sh, .chroma .si, .chroma .sx, .chroma .sr,
+  .chroma .s1, .chroma .ss {
+    color: #15803d;
+  }
+  /* Numbers */
+  .chroma .m, .chroma .mb, .chroma .mf, .chroma .mh, .chroma .mi, .chroma .il, .chroma .mo {
+    color: #c2410c;
+  }
+  /* Comments */
+  .chroma .c, .chroma .ch, .chroma .cm, .chroma .c1, .chroma .cs, .chroma .cp, .chroma .cpf {
+    color: #64748b;
+    font-style: italic;
+  }
+  /* Operators & Punctuation */
+  .chroma .o, .chroma .ow {
+    color: #334155;
+    font-weight: 500;
+  }
+  .chroma .p {
+    color: #475569;
+  }
+  /* Decorators */
+  .chroma .nd {
+    color: #b45309;
+  }
+  /* Identifiers / Default text */
+  .chroma .n, .chroma .na, .chroma .nv, .chroma .vc, .chroma .vg, .chroma .vi, .chroma .vm {
+    color: var(--text-body);
+  }
+
+  /* Dark Mode Overrides for Chroma */
+  html.dark .chroma { color: #f8f8f2; }
+  html.dark .chroma .k,
+  html.dark .chroma .kc,
+  html.dark .chroma .kd,
+  html.dark .chroma .kn,
+  html.dark .chroma .kp,
+  html.dark .chroma .kr,
+  html.dark .chroma .kt { color: #ff79c6; }
+  html.dark .chroma .nf,
+  html.dark .chroma .fm { color: #50fa7b; }
+  html.dark .chroma .nc { color: #8be9fd; }
+  html.dark .chroma .nb,
+  html.dark .chroma .bp { color: #bd93f9; }
+  html.dark .chroma .s,
+  html.dark .chroma .sa,
+  html.dark .chroma .sb,
+  html.dark .chroma .sc,
+  html.dark .chroma .dl,
+  html.dark .chroma .sd,
+  html.dark .chroma .s2,
+  html.dark .chroma .se,
+  html.dark .chroma .sh,
+  html.dark .chroma .si,
+  html.dark .chroma .sx,
+  html.dark .chroma .sr,
+  html.dark .chroma .s1,
+  html.dark .chroma .ss { color: #f1fa8c; }
+  html.dark .chroma .m,
+  html.dark .chroma .mb,
+  html.dark .chroma .mf,
+  html.dark .chroma .mh,
+  html.dark .chroma .mi,
+  html.dark .chroma .il,
+  html.dark .chroma .mo { color: #bd93f9; }
+  html.dark .chroma .c,
+  html.dark .chroma .ch,
+  html.dark .chroma .cm,
+  html.dark .chroma .c1,
+  html.dark .chroma .cs,
+  html.dark .chroma .cp,
+  html.dark .chroma .cpf { color: #6272a4; }
+  html.dark .chroma .o,
+  html.dark .chroma .ow,
+  html.dark .chroma .p { color: #f8f8f2; }
+  html.dark .chroma .nd { color: #ffb86c; }
+  html.dark .chroma .n,
+  html.dark .chroma .na,
+  html.dark .chroma .nv,
+  html.dark .chroma .vc,
+  html.dark .chroma .vg,
+  html.dark .chroma .vi,
+  html.dark .chroma .vm { color: #f8f8f2; }
   
   .md-content blockquote { 
     @apply pl-4 sm:pl-5 py-2 sm:py-3 my-5 sm:my-6 rounded-r-lg text-base sm:text-[17px]; 
