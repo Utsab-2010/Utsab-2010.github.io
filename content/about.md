@@ -3,7 +3,7 @@ title = "About"
 +++
 
 <div class="text-[15px] sm:text-[1.1rem] leading-[1.7] mb-8">
-Hi, I am <strong>Utsab</strong>. I am a fourth-year <strong>Integrated Master's(Dual-Degree)</strong> student at the <strong>EECE Department, IIT Kharagpur</strong> specializing in Vision and Intelligent Systems. I am currently working under the supervision of <a href="https://subhadip-1.github.io/" style="font-weight: 600;">Prof. Subhadip Mukherjee</a> (IITKGP).
+Hi, I am <strong>Utsab</strong>. I am a fourth-year <strong>Integrated Masters(Dual-Degree)</strong> student at the <strong>EECE Department, IIT Kharagpur</strong> specializing in Vision and Intelligent Systems. I am currently working under the supervision of <a href="https://subhadip-1.github.io/" style="font-weight: 600;">Prof. Subhadip Mukherjee</a> (IITKGP).
 <br><br>
 <!-- I am currently the <strong>Head of Vision at AGV.AI</strong>, a UG research group under Prof. Debashish Chakravarty at IIT Kharagpur, working on autonomous vehicles and robotic systems. -->
 <!-- I am currently a summer research intern at the Vision and AI Lab, IISc Bangalore working on the data-efficient learning for vision datasets.  -->
