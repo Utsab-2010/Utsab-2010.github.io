@@ -2,61 +2,6 @@
 title: "Work"
 date: 2024-01-01
 ---
-
-### **Experiences**
----
-<div class="relative border-l-2 border-accent/30 pl-6 ml-2 space-y-8 my-8">
-
-  <!-- IISc -->
-  <div class="relative group">
-    <div class="absolute w-3 h-3 bg-accent rounded-full top-1.5 transition-all duration-300 group-hover:scale-125 group-hover:bg-accent" style="left: -1.95rem; box-shadow: 0 0 0 4px var(--accent-mute);"></div>
-    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-1">
-      <h4 class="text-lg font-bold text-gray-900 dark:text-gray-100 m-0" style="margin: 0 !important;">Research Intern</h4>
-      <span class="text-sm font-medium text-accent">May 2026 - Present</span>
-    </div>
-    <div class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3">Vision and AI Lab, IISc Bangalore | Guide: Prof. Venkatesh Babu</div>
-    <ul class="list-disc pl-5 space-y-1.5 text-[0.95rem] text-gray-700 dark:text-gray-300">
-      <li>Working on Data-efficient Deep Learning for Vision Models.</li>
-      <li>Trying to understand the behaviour of image data and how it scales with data/compute.</li> 
-      <li>Exploring scalable continual learning methods for vision models.</li>
-    </ul>
-  </div>
-
-  <!-- ARMS Lab -->
-  <div class="relative group">
-    <div class="absolute w-3 h-3 bg-accent rounded-full top-1.5 transition-all duration-300 group-hover:scale-125 group-hover:bg-accent" style="left: -1.95rem; box-shadow: 0 0 0 4px var(--accent-mute);"></div>
-    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-1">
-      <h4 class="text-lg font-bold text-gray-900 dark:text-gray-100 m-0" style="margin: 0 !important;">Research Intern</h4>
-      <span class="text-sm font-medium text-accent">May 2025 - Dec 2025</span>
-    </div>
-    <div class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3">ARMS Lab, IIT Bombay | Guide: Prof. Leena Vachhani</div>
-    <ul class="list-disc pl-5 space-y-1.5 text-[0.95rem] text-gray-700 dark:text-gray-300">
-      <li>Worked on Safe Robotic Exploration and Navigation among human crowds.</li>
-      <li>Curated human-navigation datasets and implemented trajectories to human agents in Gazebo simulation.</li>
-      <li>Developed a topological indoor mapping framework with a coupled planner and controller.</li>
-      <li>Implemented and tested  navigation frameworks on the Turtlebot3 hardware.</li>
-    </ul>
-  </div>
-
-  <!-- AGV.AI -->
-  <div class="relative group">
-    <div class="absolute w-3 h-3 bg-accent rounded-full top-1.5 transition-all duration-300 group-hover:scale-125 group-hover:bg-accent" style="left: -1.95rem; box-shadow: 0 0 0 4px var(--accent-mute);"></div>
-    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-1">
-      <h4 class="text-lg font-bold text-gray-900 dark:text-gray-100 m-0" style="margin: 0 !important;">Undergraduate Researcher</h4>
-      <span class="text-sm font-medium text-accent">April 2024 - Present</span>
-    </div>
-    <div class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3">AGV.AI | Guide: Prof. Debashish Chakravarty</div>
-    <ul class="list-disc pl-5 space-y-1.5 text-[0.95rem] text-gray-700 dark:text-gray-300">
-      <li>Served as the Head of Vision(2026-27), leading the vision vertical of a group of UG researchers working on robotics and autonomous vehicles.</li>
-      <li>Lead a team to compete at the Roboracer Sim Racing League @ CDC-TF 2026 where we secured 7th place globally.</li>
-      <li>Worked on Monocular Depth Estimation and Semantic Segmentation for Edge AI devices.</li>
-      <li>Implemented planning and control pipelines for F1tenth racing simulations.</li>
-      <li>Worked on RL and imitation learning algorithms.</li>
-    </ul>
-  </div>
-
-</div>
-
 ### **Publications**
 ---
 <div class="space-y-3 my-6">
@@ -71,7 +16,7 @@ date: 2024-01-01
         </div>
         <div class="text-[0.75rem] font-medium text-gray-500 flex items-center flex-wrap gap-2">
           <span><strong>NeurIPS 2026 Evaluations and Datasets Track</strong></span>
-          <span class="inline-flex items-center px-1.5 py-0.5 text-[0.6rem] uppercase tracking-wider font-bold bg-amber-100 text-amber-800 dark:bg-amber-500/10 dark:text-amber-400 border border-amber-200 dark:border-amber-500/20 rounded">Under Review</span>
+          <span class="inline-flex items-center px-1.5 py-0.5 text-[0.6rem] uppercase tracking-wider font-bold bg-amber-100 text-amber-800 dark:bg-amber-500/10 dark:text-amber-400 border border-amber-200 dark:border-amber-500/20 rounded">Accepted</span>
         </div>
       </div>
       <div class="shrink-0 mt-1 sm:mt-0">
@@ -127,6 +72,65 @@ date: 2024-01-01
   
 
 </div>
+
+### **Experiences**
+---
+<div class="relative border-l-2 border-accent/30 pl-6 ml-2 space-y-8 my-8">
+
+  <!-- IISc -->
+  <div class="relative group">
+    <div class="absolute w-3 h-3 bg-accent rounded-full top-1.5 transition-all duration-300 group-hover:scale-125 group-hover:bg-accent" style="left: -1.95rem; box-shadow: 0 0 0 4px var(--accent-mute);"></div>
+    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-1">
+      <h4 class="text-lg font-bold text-gray-900 dark:text-gray-100 m-0" style="margin: 0 !important;">Research Intern</h4>
+      <span class="text-sm font-medium text-accent">May 2026 - Present</span>
+    </div>
+    <div class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3">Vision and AI Lab, IISc Bangalore | Guide: Prof. Venkatesh Babu</div>
+    <ul class="list-disc pl-5 space-y-1.5 text-[0.95rem] text-gray-700 dark:text-gray-300">
+      <li>Read wayyy too many papers from LLM Scaling to Learning Theory to understand the trade-offs between data, compute and model size.</li>
+      <li>Working on a holistic approach to data-efficient recipes for training Deep Learning Models</li>
+      <li>Implemented pruning techniques from literature and designed experiments to understand the effects of pruning on model performance and generalization.</li>
+      <!-- <k> -->
+      <!-- <li>Experimented  -->
+      <!-- <li>Trying to understand the behaviour of image data and how it scales with data/compute.</li> 
+      <li>Exploring scalable continual learning methods for vision models.</li> -->
+    </ul>
+  </div>
+
+  <!-- ARMS Lab -->
+  <div class="relative group">
+    <div class="absolute w-3 h-3 bg-accent rounded-full top-1.5 transition-all duration-300 group-hover:scale-125 group-hover:bg-accent" style="left: -1.95rem; box-shadow: 0 0 0 4px var(--accent-mute);"></div>
+    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-1">
+      <h4 class="text-lg font-bold text-gray-900 dark:text-gray-100 m-0" style="margin: 0 !important;">Research Intern</h4>
+      <span class="text-sm font-medium text-accent">May 2025 - Dec 2025</span>
+    </div>
+    <div class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3">ARMS Lab, IIT Bombay | Guide: Prof. Leena Vachhani</div>
+    <ul class="list-disc pl-5 space-y-1.5 text-[0.95rem] text-gray-700 dark:text-gray-300">
+      <li>Worked on Safe Robotic Exploration and Navigation among human crowds.</li>
+      <li>Curated human-navigation datasets and implemented trajectories to human agents in Gazebo simulation.</li>
+      <li>Developed a topological indoor mapping framework with a coupled planner and controller.</li>
+      <li>Implemented and tested  navigation frameworks on the Turtlebot3 hardware.</li>
+    </ul>
+  </div>
+
+  <!-- AGV.AI -->
+  <div class="relative group">
+    <div class="absolute w-3 h-3 bg-accent rounded-full top-1.5 transition-all duration-300 group-hover:scale-125 group-hover:bg-accent" style="left: -1.95rem; box-shadow: 0 0 0 4px var(--accent-mute);"></div>
+    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-1">
+      <h4 class="text-lg font-bold text-gray-900 dark:text-gray-100 m-0" style="margin: 0 !important;">Undergraduate Researcher</h4>
+      <span class="text-sm font-medium text-accent">April 2024 - Present</span>
+    </div>
+    <div class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3">AGV.AI | Guide: Prof. Debashish Chakravarty</div>
+    <ul class="list-disc pl-5 space-y-1.5 text-[0.95rem] text-gray-700 dark:text-gray-300">
+      <li>Served as the Head of Vision (2026-27), leading the vision vertical of a group of UG researchers working on robotics and autonomous vehicles.</li>
+      <li>Lead a team to compete at the Roboracer Sim Racing League @ CDC-TF 2026 where we secured 7th place globally.</li>
+      <li>Worked on Monocular Depth Estimation and Semantic Segmentation for Edge AI devices.</li>
+      <li>Implemented planning and control pipelines for F1tenth racing simulations.</li>
+      <li>Worked on RL and imitation learning algorithms.</li>
+    </ul>
+  </div>
+
+</div>
+
 
 ### **Achievements**
 ---
