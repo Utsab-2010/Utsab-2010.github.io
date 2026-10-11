@@ -36,7 +36,8 @@ date: 2024-01-01
           Moshayedi AJ, Roy AS, <span class="font-semibold text-accent">Karan U</span>, Zhang M, Bassir D.
         </div>
         <div class="text-[0.75rem] font-medium text-gray-500">
-          <strong>EAI Endorsed Trans AI Robotics</strong> [Internet]. 2026 Feb.
+          <strong>EAI Endorsed Transactions on
+AI and Robotics 2026.</strong> 
         </div>
       </div>
       <div class="shrink-0 mt-1 sm:mt-0">
@@ -58,7 +59,7 @@ date: 2024-01-01
           Krutarth Trivedi, <span class="font-semibold text-accent">Utsab Karan</span>, Advaith Sudarshan and Leena Vachhani.
         </div>
         <div class="text-[0.75rem] font-medium text-gray-500">
-          Presented at the <strong>IEEE Indian Control Conference (ICC)</strong>, Bangalore, Dec 2025.
+          <strong>IEEE Indian Control Conference (ICC)</strong>, Bangalore, Dec 2025.
         </div>
       </div>
       <div class="shrink-0 mt-1 sm:mt-0">
